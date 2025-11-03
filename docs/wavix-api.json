@@ -99,7 +99,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "A created SIP trunk details",
             "headers": {},
             "content": {
               "application/json": {
@@ -123,7 +123,7 @@
             "$ref": "#/components/responses/ForbiddenError"
           },
           "422": {
-            "description": "Caller ID must be a verified number in E.164 format",
+            "description": "Failed to create a SIP trunk",
             "content": {
               "application/json": {
                 "schema": {
@@ -170,7 +170,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "SIP trunk details",
             "headers": {},
             "content": {
               "application/json": {
@@ -210,7 +210,7 @@
           "SIP trunks"
         ],
         "summary": "Update a SIP trunk configuration",
-        "description": "Use this method to update configuration of a specific SIP trunk.",
+        "description": "Use this method to update the configuration of a specific SIP trunk.",
         "operationId": "UpdateaSIPtrunk",
         "parameters": [
           {
@@ -273,7 +273,7 @@
           "SIP trunks"
         ],
         "summary": "Delete a SIP trunk",
-        "description": "Use this method to delete a SIP trunk.",
+        "description": "Use this method to delete a SIP trunk from your account.",
         "operationId": "DeleteaSIPtrunk",
         "parameters": [
           {
@@ -298,7 +298,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/BuyCartCheckoutResponse"
+                      "$ref": "#/components/schemas/OperationSuccessfulRepose"
                     }
                   ]
                 }
@@ -324,23 +324,13 @@
           "Buy"
         ],
         "summary": "Get a list of countries",
-        "description": "Use this method to retrieve a list of countries where phone numbers are available for purchase.",
+        "description": "Use this method to retrieve a list of countries where phone numbers are available to purchase.",
         "operationId": "Getalistofcountries",
         "parameters": [
           {
-            "name": "type_filter",
-            "in": "query",
-            "description": "",
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "text_enabled_only",
             "in": "query",
-            "description": "Retrieve only countries with text-enabled numbers",
+            "description": "Retrieve countries with text-enabled phone numbers only",
             "style": "form",
             "explode": true,
             "schema": {
@@ -350,8 +340,8 @@
         ],
         "responses": {
           "200": {
-            "description": "",
             "headers": {},
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -413,7 +403,7 @@
           {
             "name": "country",
             "in": "path",
-            "description": "Country ID",
+            "description": "Country unique ID",
             "required": true,
             "style": "simple",
             "schema": {
@@ -423,19 +413,9 @@
             }
           },
           {
-            "name": "type_filter",
-            "in": "query",
-            "description": "",
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "text_enabled_only",
             "in": "query",
-            "description": "Retrieve only regions with text-enabled numbers",
+            "description": "Retrieves only regions that offer text-enabled numbers",
             "style": "form",
             "explode": true,
             "schema": {
@@ -520,7 +500,7 @@
           "Buy"
         ],
         "summary": "Get a list of cities in a country",
-        "description": "Use this method to retrieve a list of states or provinces for countries where `has_provinces_or_states` is `false`.",
+        "description": "Use this method to retrieve a list of cities for countries where `has_provinces_or_states` is `false`.",
         "operationId": "Getalistofcitiesinacountry",
         "parameters": [
           {
@@ -533,26 +513,6 @@
               "type": "integer",
               "format": "int32",
               "example": 1891
-            }
-          },
-          {
-            "name": "region_id",
-            "in": "query",
-            "description": "Region ID",
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "type_filter",
-            "in": "query",
-            "description": "",
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
             }
           },
           {
@@ -649,7 +609,7 @@
           "Buy"
         ],
         "summary": "Get a list of cities in a region",
-        "description": "Use this method to retrieve a list of cities where phone numbers are available for purchase. If the country has provinces or states, `has_provinces_or_states` is `true`, call this method after selecting a province or state.",
+        "description": "Use this method to retrieve a list of cities for countries where `has_provinces_or_states` is `true`.",
         "operationId": "Getalistofcitiesinaregion",
         "parameters": [
           {
@@ -674,16 +634,6 @@
               "type": "integer",
               "format": "int32",
               "example": 821
-            }
-          },
-          {
-            "name": "type_filter",
-            "in": "query",
-            "description": "",
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
             }
           },
           {
@@ -780,7 +730,7 @@
           "Buy"
         ],
         "summary": "Get numbers available for purchase",
-        "description": "Use this method to retrieve a paginated list of phone numbers available for purchase. You can additionally filter the results by phone number type and whether the number is text-enabled.",
+        "description": "Use this method to retrieve a paginated list of phone numbers available for purchase.",
         "operationId": "Getnumbersavailableforpurchase",
         "parameters": [
           {
@@ -813,16 +763,6 @@
             "explode": true,
             "schema": {
               "type": "boolean"
-            }
-          },
-          {
-            "name": "type_filter",
-            "in": "query",
-            "description": "",
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
             }
           },
           {
@@ -929,11 +869,11 @@
           "Cart"
         ],
         "summary": "Add phone numbers to the cart",
-        "description": "Use this method to add phone numbers (DIDs) to the cart in your account. After adding numbers, you can finalize the purchase by checking out the cart.\nThe response includes a list of phone numbers that were successfully added.",
+        "description": "Use this method to add phone numbers to the cart in your account. After adding numbers, you can complete the purchase by checking out the cart.",
         "operationId": "AddDIDnumberstothecart",
         "parameters": [],
         "requestBody": {
-          "description": "A comma-separated list of phone number to add to the cart.",
+          "description": "Array of phone numbers to add to the cart",
           "content": {
             "application/json": {
               "schema": {
@@ -945,7 +885,7 @@
                 "properties": {
                   "ids": {
                     "type": "array",
-                    "description": "A list of phone numbers to add to the cart.",
+                    "description": "Comma-separated list of phone numbers to add to the cart",
                     "items": {
                       "type": "string"
                     },
@@ -962,7 +902,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "A list of phone numbers added to the cart",
             "headers": {},
             "content": {
               "application/json": {
@@ -1170,7 +1110,7 @@
                     "items": {
                       "type": "string"
                     },
-                    "description": "An array of phone numbers to remove",
+                    "description": "Comma-separated list of phone numbers to remove",
                     "example": [
                       "541139862174",
                       "541139862175"
@@ -1241,11 +1181,11 @@
           "Cart"
         ],
         "summary": "Check out numbers",
-        "description": "Use this method to check out phone numbers currently in the cart. \n\n\nThe activation fee and monthly fee will be automatically deducted from your balance. Ensure you have sufficient funds on your account or a primary card linked with enough balance to complete the purchase.",
+        "description": "Use this method to check out phone numbers currently in the cart. \n\n\nThe activation and monthly fee will be automatically deducted from your balance. Ensure you have sufficient funds on your account or a primary card linked with enough balance to complete the purchase.",
         "operationId": "CheckoutDIDnumbers",
         "parameters": [],
         "requestBody": {
-          "description": "Array of phone numbers to checkout",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -1257,7 +1197,7 @@
                 "properties": {
                   "ids": {
                     "type": "array",
-                    "description": "A list of phone numbers to add to the cart.",
+                    "description": "List of phone numbers to check out from the cart",
                     "items": {
                       "type": "string"
                     },
@@ -1281,7 +1221,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/BuyCartCheckoutResponse"
+                      "$ref": "#/components/schemas/OperationSuccessfulRepose"
                     },
                     {
                       "example": {
@@ -1461,7 +1401,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/BuyCartCheckoutResponse"
+                      "$ref": "#/components/schemas/OperationSuccessfulRepose"
                     },
                     {
                       "example": {
@@ -1759,7 +1699,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/BuyCartCheckoutResponse"
+                      "$ref": "#/components/schemas/OperationSuccessfulRepose"
                     },
                     {
                       "example": {
@@ -5049,7 +4989,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/BuyCartCheckoutResponse"
+                      "$ref": "#/components/schemas/OperationSuccessfulRepose"
                     },
                     {
                       "example": {
@@ -5149,7 +5089,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/BuyCartCheckoutResponse"
+                      "$ref": "#/components/schemas/OperationSuccessfulRepose"
                     },
                     {
                       "example": {
@@ -6306,7 +6246,7 @@
           "10DLC"
         ],
         "summary": "Update a 10DLC Brand",
-        "description": "Use this method to update the details of a registered 10DLC Brand.\nPlease note that Brands in the 'REVIEW' status cannot be updated.\n\n**Important.** Updating any of the following parameters — `company_name`, `ein_taxid`, `ein_taxid_country`, or `entity_type` — will reset the Brand status to 'UNVERIFIED,' and the Brand will be automatically re-submitted for verification. These parameters cannot be updated for Brands with a 'VETTED_VERIFIED' identity status or Brands with active Campaigns.",
+        "description": "Use this method to update the details of a registered 10DLC Brand. Please note that Brands in the 'REVIEW' status cannot be updated.\n\n**Important.** Updating any of the following parameters — `company_name`, `ein_taxid`, `ein_taxid_country`, or `entity_type` — will reset the Brand status to 'UNVERIFIED,' and the Brand will be automatically re-submitted for verification. These parameters cannot be updated for Brands with a 'VETTED_VERIFIED' identity status or Brands with active Campaigns.",
         "operationId": "Updatea10DLCBrand",
         "parameters": [
           {
@@ -10521,12 +10461,58 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A list of 2FA Verification session",
             "headers": {},
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
+                  "items": {
+                    "type": "datetime",
+                    "properties": {
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when the 2FA Verification was created",
+                        "example": "2022-02-16T13:41:38.000Z"
+                      },
+                      "session_id": {
+                        "type": "string",
+                        "description": "Unique identifier of the 2FA Verification",
+                        "example": "2953d4308f2e11ecb75fcdafd6d2d687"
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "description": "Destination phone number for the 2FA Verification",
+                        "example": "447919433768"
+                      },
+                      "destination_country": {
+                        "type": "string",
+                        "description": "The phone number country of origin",
+                        "example": "GB"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status of the 2FA Verification",
+                        "example": "verified"
+                      },
+                      "charge": {
+                        "type": "string",
+                        "description": "Charge for the 2FA Verification",
+                        "example": "0.01"
+                      },
+                      "service_id": {
+                        "type": "string",
+                        "description": "Unique identifier of the Wavix 2FA Service",
+                        "example": "7204a030201211ee9fb47d093f2f127c"
+                      },
+                      "service_name": {
+                        "type": "string",
+                        "description": "Name of the Wavix 2FA Service",
+                        "example": "Wavix 2FA Service"
+                      }
+                    }
+                  },
                   "additionalProperties": false,
                   "example": [
                     {
@@ -12176,7 +12162,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Unique identifier of the city.",
+            "description": "City unique ID",
             "format": "int32",
             "example": 3213
           },
@@ -12271,7 +12257,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Unique identifier of the country.",
+            "description": "Country unique identifier",
             "format": "int32"
           },
           "name": {
@@ -12281,7 +12267,7 @@
           },
           "has_provinces_or_states": {
             "type": "boolean",
-            "description": "Indicates that the country divided by states or by provinces.",
+            "description": "Indicates whether the country has states or provinces",
             "example": false
           }
         }
@@ -12548,34 +12534,42 @@
           },
           "host_request": {
             "type": "object",
+            "description": "For SIP trunks with IP authentication, includes the SIP endpoint's public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.",
             "additionalProperties": false,
             "required": [
-              "host"
+              "host",
+              "status"
             ],
             "properties": {
               "host": {
                 "type": "string",
-                "description": "IP auth",
+                "description": "SIP endpoint's public static IP address",
                 "example": "127.0.0.1"
+              },
+              "status": {
+                "type": "string",
+                "description": "IP authentication request status",
+                "example": "pending"
               }
             }
           },
           "callerid": {
             "type": "string",
-            "description": "Caller ID for the SIP trunk. Must be an active or verified number on your account.",
+            "description": "Caller ID associated with the SIP trunk. Must be an active or verified number on your account.",
             "example": "13132847320"
           },
           "multiple_numbers": {
             "type": "boolean",
-            "description": "Indicates whether the Caller ID passthrough feature is enabled for the SIP trunk"
+            "description": "Indicates whether any active or verified phone number in your account can be used as the Caller ID for the SIP trunk"
           },
           "ip_restrict": {
             "type": "boolean",
-            "description": "Indicates whether IP restriction is required for the SIP trunk",
+            "description": "Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. When set to `true`, the `allowed_ips` parameter must be provided.",
             "example": false
           },
           "allowed_ips": {
             "type": "array",
+            "description": "A list of public static IP addresses allowed to register with the SIP trunk",
             "items": {
               "type": "object",
               "additionalProperties": false,
@@ -12589,17 +12583,16 @@
                 }
               }
             },
-            "description": "SIP trunk registration is allowed only from public static IP addresses listed here. The parameter is required when ip_restrict is `true`.",
             "nullable": true
           },
           "didinfo_enabled": {
             "type": "boolean",
-            "description": "Indicates whether inbound calls include dialed number information in the To header of SIP INVITE requests",
+            "description": "Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests",
             "example": true
           },
           "call_restrict": {
             "type": "boolean",
-            "description": "Indicates whether a maximum call duration limit is enforced for the SIP trunk.",
+            "description": "Indicates whether a maximum call duration limit is enforced for the SIP trunk",
             "example": true
           },
           "call_limit": {
@@ -12622,7 +12615,7 @@
           },
           "channels_restrict": {
             "type": "boolean",
-            "description": "Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk.",
+            "description": "Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk",
             "example": false
           },
           "max_channels": {
@@ -12633,26 +12626,26 @@
           },
           "rewrite_enabled": {
             "type": "boolean",
-            "description": "Indicates whether a custom dial plan is activated for the SIP trunk.",
+            "description": "Indicates whether a custom dial plan is activated for the SIP trunk",
             "example": true
           },
           "rewrite_prefix": {
             "type": "string",
-            "description": "Leading digits to prepend to dialed phone numbers",
+            "description": "Digits to automatically prepend to each dialed phone number",
             "example": "1"
           },
           "rewrite_cond": {
             "type": "string",
-            "description": "Leading digits to remove from dialed phone numbers."
+            "description": "Number of leading digits to automatically remove from each dialed phone number"
           },
           "call_recording_enabled": {
             "type": "boolean",
-            "description": "Indicates whether outbound call recording is enabled on the SIP trunk",
+            "description": "Indicates whether outbound call recording is enabled for the SIP trunk",
             "example": true
           },
           "transcription_enabled": {
             "type": "boolean",
-            "description": "Indicates whether automatic call transcription is enabled on the SIP trunk.\nAvailable for `Flex Pro` customers only.",
+            "description": "Indicates whether automatic call transcription is enabled for the SIP trunk.\nAvailable for `Flex Pro` customers only.",
             "example": true
           },
           "transcription_threshold": {
@@ -12663,7 +12656,7 @@
           },
           "machine_detection_enabled": {
             "type": "boolean",
-            "description": "Indicates whether automatic voicemail detection is enabled on the SIP trunk.\nAvailable for `Flex Pro` customers only.",
+            "description": "Indicates whether automatic voicemail detection is enabled for the SIP trunk.\nAvailable for `Flex Pro` customers only.",
             "example": true
           },
           "encrypted_media": {
@@ -12780,23 +12773,23 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Unique identifier of the phone number",
+            "description": "Phone number unique ID",
             "format": "int64",
             "example": 541139862174
           },
           "activation_fee": {
             "type": "string",
-            "description": "A one-time phone number activation fee",
+            "description": "One-time activation fee for a phone number, in USD",
             "example": "15.0"
           },
           "monthly_fee": {
             "type": "string",
-            "description": "A recurring phone number monthly fee",
+            "description": "Monthly recurring fee for a phone number, in USD.",
             "example": "10.0"
           },
           "per_min": {
             "type": "string",
-            "description": "Price per inbound minute",
+            "description": "Price per inbound minute, in USD",
             "example": "0.01"
           },
           "channels": {
@@ -12807,12 +12800,12 @@
           },
           "city": {
             "type": "string",
-            "description": "A city of a phone number",
+            "description": "A city the phone number originates from",
             "example": "Buenos Aires"
           },
           "country": {
             "type": "string",
-            "description": "County name the phone number originates from",
+            "description": "A county the phone number originates from",
             "example": "Argentina"
           },
           "country_short_name": {
@@ -12828,13 +12821,13 @@
           },
           "free_min": {
             "type": "integer",
-            "description": "Number of free inbound minutes for the phone number",
+            "description": "Number of free inbound minutes",
             "format": "int32",
             "example": 0
           },
           "number": {
             "type": "string",
-            "description": "The phone number itselft",
+            "description": "The phone number in E.164 format",
             "example": "541139862174"
           },
           "require_docs": {
@@ -12851,7 +12844,7 @@
           },
           "sms_enabled": {
             "type": "boolean",
-            "description": "Indicates in the phone number can receive inbound SMS and MMS messages",
+            "description": "Indicates whether the phone number can receive inbound SMS and MMS messages",
             "example": false
           },
           "sms_price": {
@@ -12862,7 +12855,8 @@
           },
           "domestic_cli": {
             "type": "boolean",
-            "example": true
+            "example": true,
+            "description": "Indicates whether the number can be used as the Caller ID for local calls"
           }
         },
         "description": "A phone number available for purchase"
@@ -13541,7 +13535,7 @@
           },
           "callerid": {
             "type": "string",
-            "description": "Caller ID configured on the SIP trunk. In cases when multiple Caller IDs are allowed on the SIP trunk, contains an empty string.",
+            "description": "Caller ID associated with the SIP trunk. Contains an empty string if multiple Caller IDs are allowed.",
             "example": "12345678900"
           },
           "label": {
@@ -13549,73 +13543,68 @@
             "description": "User-defined name of the SIP trunk",
             "example": "My trunk"
           },
-          "access_token": {
-            "type": "string",
-            "nullable": true,
-            "example": "twqesadrqw312"
-          },
           "auth_method": {
             "description": "SIP trunk authentication method. Can be either `Digest` or `IP auth`.",
             "type": "string"
           },
           "host_request": {
             "type": "string",
-            "description": "For SIP trunks with IP-based authentication contains  status of the IP Authentication request.",
+            "description": "For SIP trunks with IP-based authentication, contains the status of the IP authentication request.",
             "nullable": true
           },
           "passthrough": {
             "type": "boolean",
-            "description": "Indicates if Caller ID passthrough feature is active for the SIP trunk",
+            "description": "Indicates whether Caller ID passthrough is enabled for the SIP trunk",
             "example": false
           },
           "multiple_numbers": {
             "type": "boolean",
-            "description": "Indicates if the multiple Caller IDs are allowed for the SIP trunk",
+            "description": "Indicates whether multiple Caller IDs are enabled for the SIP trunk",
             "example": false
           },
           "status": {
             "type": "string",
-            "description": "Indicates the status of the SIP trunk. The value can be one of \n`active` - The SIP trunk is active and can be used to place outbound calls.\n`pending` - The IP authentication request is under review by the Wavix team.\n`rejected` - The IP authentication request was rejected by the Wavix team.\nSIP trunks with a pending or rejected status can't be used to place outbound calls."
+            "description": "Status of the SIP trunk. Possible values are:\n`active` - The SIP trunk is active and can be used to place outbound calls.\n`pending` - The IP authentication request is under review by the Wavix team.\n`rejected` - The IP authentication request was rejected by the Wavix team.\nSIP trunks with a `pending` or `rejected` status can't be used to place calls."
           },
           "talk_time": {
-            "description": "Total duration of all outbound calls placed via the SIP trunk in the current month, in seconds.",
+            "description": "Total duration of all outbound calls placed through the SIP trunk the current month, in seconds. Automatically resets at the beginning of each month.",
             "type": "integer",
             "format": "int32",
             "example": 65
           },
           "charge": {
-            "description": "Total cost of all outbound calls placed via the SIP trunk in the current month, in USD.",
+            "description": "Total cost of all outbound calls placed through the SIP trunk in the current month, in USD. Automatically resets at the beginning of each month.",
             "type": "string",
             "example": "24.637"
           },
           "call_recording_enabled": {
-            "description": "Indicates if outbound call recording is enabled on the SIP trunk.",
+            "description": "Indicates whether outbound call recording is enabled for the SIP trunk",
             "type": "boolean",
             "default": false
           },
           "machine_detection_enabled": {
-            "description": "Indicates if automatic voicemail detection is enabled on the SIP trunk.\nAvailable for `Flex Pro` customers only.",
+            "description": "Indicates whether automatic voicemail detection is enabled for the SIP trunk.\nAvailable for `Flex Pro` customers only.",
             "type": "boolean",
             "default": false
           },
           "transcription_enabled": {
-            "description": "Indicates if automatic call transcription is enabled on the SIP trunk.\nAvailable for `Flex Pro` customers only.",
+            "description": "Indicates whether automatic call transcription is enabled for the SIP trunk.\nAvailable for `Flex Pro` customers only.",
             "type": "boolean",
             "default": false
           },
           "transcription_threshold": {
-            "description": "Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.\nAvailable for `Flex Pro` customers only.",
+            "description": "Minimum call duration (in seconds) required to automatically generate a transcription. Transcriptions are created for calls that meet or exceed this value.\nAvailable to `Flex Pro` customers only.",
             "type": "integer",
             "format": "int32",
             "default": 6
           },
           "encrypted_media": {
             "type": "boolean",
-            "description": "Encrypted media",
+            "description": "Indicates whether media enecryption (SRTP) is enabled for the SIP trunk",
             "example": true
           }
         },
-        "description": "A SIP trunk on your account",
+        "description": "A SIP trunk associated with your account",
         "example": {
           "id": 3107,
           "label": "My trunk",
@@ -13682,13 +13671,13 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Unique identifier of a region",
+            "description": "State or province unique ID",
             "format": "int32",
             "example": 17
           },
           "name": {
             "type": "string",
-            "description": "Name of the region",
+            "description": "Name of the state or province",
             "example": "California"
           }
         },
@@ -13755,7 +13744,7 @@
             "items": {
               "$ref": "#/components/schemas/SIPTrunkShort"
             },
-            "description": "An array of SIP trunks in your account",
+            "description": "A list of SIP trunks associated with your account",
             "nullable": true
           },
           "pagination": {
@@ -13774,7 +13763,6 @@
                 "host": "127.0.0.1",
                 "status": "pending"
               },
-              "access_token": "3213rasjwqep3uuasdh",
               "encrypted_media": false,
               "passthrough": "false,",
               "multiple_numbers": true,
@@ -14018,7 +14006,7 @@
             "items": {
               "$ref": "#/components/schemas/City"
             },
-            "description": "A list of cities and rate centers with phone numbers available for purchase"
+            "description": "A list of cities and rate centers with phone numbers available to purchase"
           }
         }
       },
@@ -14752,7 +14740,7 @@
           },
           "event": {
             "type": "string",
-            "description": "Human readable event description. Can contain on of the following values: `Number lookup` for the Wavix platform checked if the destination phone number is valid. You’ll see the event only when the Number validation option is activated for your 2FA Service; `Code sent via SMS` indicates a code was sent via an SMS; `Code sent via voice` indicates a code was sent via a voice call; `Verification` indicates the code verification attempt",
+            "description": "Human readable event description. Can contain on of the following values: \n- `Number lookup` for the Wavix platform checked if the destination phone number is valid. You'll see the event only when the Number validation option is activated for your 2FA Service; - `Code sent via SMS` indicates a code was sent via an SMS; - `Code sent via voice` indicates a code was sent via a voice call; - `Verification` indicates the code verification attempt",
             "example": "Code sent via SMS"
           },
           "status": {
@@ -15232,94 +15220,7 @@
             "type": "array",
             "description": "A list of phone numbers in the cart",
             "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "description": "Unique identifier of the phone number",
-                  "format": "int64",
-                  "example": 541139862174
-                },
-                "activation_fee": {
-                  "type": "string",
-                  "description": "A one-time phone number activation fee",
-                  "example": "15.0"
-                },
-                "monthly_fee": {
-                  "type": "string",
-                  "description": "A recurring phone number monthly fee",
-                  "example": "10.0"
-                },
-                "per_min": {
-                  "type": "string",
-                  "description": "Price per inbound minute",
-                  "example": "0.01"
-                },
-                "channels": {
-                  "type": "integer",
-                  "description": "Number of inbound channels",
-                  "format": "int32",
-                  "example": 4
-                },
-                "city": {
-                  "type": "string",
-                  "description": "A city of a phone number",
-                  "example": "Buenos Aires"
-                },
-                "country": {
-                  "type": "string",
-                  "description": "Country name the phone number originates from",
-                  "example": "Argentina"
-                },
-                "country_short_name": {
-                  "type": "string",
-                  "description": "2-letter ISO code of the country the phone number originates from",
-                  "example": "AR"
-                },
-                "cnam": {
-                  "type": "boolean",
-                  "nullable": true,
-                  "description": "Indicates if CNAM can be activated on the phone number",
-                  "example": false
-                },
-                "free_min": {
-                  "type": "integer",
-                  "description": "Number of free inbound minutes for the phone number",
-                  "format": "int32",
-                  "example": 0
-                },
-                "number": {
-                  "type": "string",
-                  "description": "The phone number itself",
-                  "example": "541139862174"
-                },
-                "require_docs": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "description": "A list of documents required to activate the phone number, if any",
-                  "example": [
-                    1,
-                    3
-                  ]
-                },
-                "sms_enabled": {
-                  "type": "boolean",
-                  "description": "Indicates if the phone number can receive inbound SMS and MMS messages",
-                  "example": false
-                },
-                "sms_price": {
-                  "type": "string",
-                  "description": "Price per inbound SMS segment",
-                  "example": "0.25"
-                },
-                "domestic_cli": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
+              "$ref": "#/components/schemas/DIDAvailableforPurchase"
             }
           },
           "doc_types": {
@@ -15341,8 +15242,8 @@
         "type": "string",
         "description": "Phone number validation type"
       },
-      "BuyCartCheckoutResponse": {
-        "title": "BuyCartCheckoutResponse",
+      "OperationSuccessfulRepose": {
+        "title": "OperationSuccessfulRepose",
         "required": [
           "success"
         ],
@@ -15950,7 +15851,7 @@
             "items": {
               "$ref": "#/components/schemas/Region"
             },
-            "description": "A list of regions with cities containing phone numbers available for purchase"
+            "description": "A list of regions that match the search criteria"
           }
         }
       },
@@ -20199,10 +20100,6 @@
     },
     {
       "name": "Number Validator",
-      "description": ""
-    },
-    {
-      "name": "Voice campaigns",
       "description": ""
     },
     {
