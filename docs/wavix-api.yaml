@@ -1478,10 +1478,16 @@ paths:
         transcription.
 
 
-        The processing time depends on the call length and the number of recordings in the queue.  Most calls are transcribed within 10 minutes. To receive a notification when the transcription is completed, provide a webhook address in the `webhook_url` parameter. Wavix will send a status update to this address.
+        The processing time depends on the call length and the number
+         of recordings in the queue.  Most calls are transcribed within
+          10 minutes. To receive a notification when the transcription
+           completed, provide a webhook address in the `webhook_url` parameter.
+            Wavix will send a status update to this address.
 
 
-        The method responses with the `HTTP 200 OK` status code and no content. After the transcription is completed, the service sends a POST callback to the specified webhook:
+        The method responses with the `HTTP 200 OK` status code and no content.
+         After the transcription is completed, the service sends
+          a POST callback to the specified webhook:
 
         ```json
           {
@@ -1493,7 +1499,9 @@ paths:
         - uuid - the unique identifier of the recorded call
 
         - status - status of the operation. Can be either `completed`
-         indicating the recorded call was successfully transcribed or `failed` which indicates that there was an error while transcribing the call.
+         indicating the recorded call was successfully transcribed or
+          `failed` which indicates that there was an error
+           while transcribing the call.
       operationId: Transcribeasinglecall
       parameters:
         - name: cdr_uuid
@@ -1647,8 +1655,8 @@ paths:
             example: 2023-09-01
         - name: type
           in: query
-          description: Use `placed` to get CDRs for outbound calls or `received` for
-            inbound calls.
+          description: Use `placed` to get CDRs for outbound calls or `received`
+           for inbound calls.
           required: true
           style: form
           explode: true
@@ -8998,16 +9006,11 @@ components:
           additionalProperties: false
           required:
             - host
-            - status
           properties:
             host:
               type: string
               description: SIP endpoint's public static IP address
               example: 127.0.0.1
-            status:
-              type: string
-              description: IP authentication request status
-              example: pending
         callerid:
           type: string
           description: Caller ID associated with the SIP trunk. Must be an active or
