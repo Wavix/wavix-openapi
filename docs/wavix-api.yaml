@@ -10908,14 +10908,19 @@ components:
           example: 2022-02-16T13:41:38.000Z
         event:
           type: string
-          description: "Human readable event description. Can contain on of the following
-            values:
+          description: "Human readable event description. Can contain on of the
+           following values:
+
             - `Number lookup` for the Wavix platform checked if the
             destination phone number is valid. You'll see the event only when
             the Number validation option is activated for your 2FA Service;
+
             - `Code sent via SMS` indicates a code was sent via an SMS;
+
             - `Code sent via voice` indicates a code was sent via a voice call;
+
             - `Verification` indicates the code verification attempt"
+            
           example: Code sent via SMS
         status:
           type: string
