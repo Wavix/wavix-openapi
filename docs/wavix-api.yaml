@@ -8999,7 +8999,7 @@ components:
           example: 4r=h;EaCB85QNtr2
         host_request:
           type: object
-          description: For SIP trunks with IP authentication, includes the SIP endpoint's
+          description: For SIP trunks with IP authentication, includes the SIP endpoint
             public static IP address and the status of the authentication
             request. Wavix authenticates all SIP traffic originating from this
             IP address.
@@ -9009,7 +9009,7 @@ components:
           properties:
             host:
               type: string
-              description: SIP endpoint's public static IP address
+              description: SIP endpoint public static IP address
               example: 127.0.0.1
         callerid:
           type: string
@@ -9914,12 +9914,13 @@ components:
           description: User-defined name of the SIP trunk
           example: My trunk
         auth_method:
-          description: SIP trunk authentication method. Can be either `Digest` or `IP auth`.
+          description: SIP trunk authentication method. Can be either `Digest`
+           or `IP auth`.
           type: string
         host_request:
           type: string
-          description: For SIP trunks with IP-based authentication, contains the status of
-            the IP authentication request.
+          description: For SIP trunks with IP-based authentication, contains
+           the status of the IP authentication request.
           nullable: true
         passthrough:
           type: boolean
