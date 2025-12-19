@@ -23,7 +23,7 @@
     }
   ],
   "paths": {
-    "/api_keys": {
+    "/api-keys": {
       "get": {
         "summary": "List API keys",
         "description": "Use this method to get a list of API keys on the account. You can optionally filter the results by label using the label query parameter.",
@@ -161,7 +161,7 @@
         }
       }
     },
-    "/api_keys/{id}": {
+    "/api-keys/{id}": {
       "delete": {
         "summary": "Delete an API key",
         "description": "Use this method to delete an API key. The API key will be soft-deleted and can no longer be used for authentication. This action cannot be undone.",
@@ -206,7 +206,7 @@
         }
       }
     },
-    "/api_keys/{id}/activate": {
+    "/api-keys/{id}/activate": {
       "patch": {
         "summary": "Activate an API key",
         "description": "Use this method to activate a previously deactivated API key. Once activated, the API key can be used for authentication again.",
@@ -251,7 +251,7 @@
         }
       }
     },
-    "/api_keys/{id}/deactivate": {
+    "/api-keys/{id}/deactivate": {
       "patch": {
         "summary": "Deactivate an API key",
         "description": "Use this method to deactivate an API key. Once deactivated, the API key cannot be used for authentication until it is activated again.",
