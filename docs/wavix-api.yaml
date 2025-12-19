@@ -19,7 +19,7 @@ servers:
     description: https://api.wavix.com/v1
     variables: {}
 paths:
-  /api_keys:
+  /api-keys:
     get:
       summary: List API keys
       description: >-
@@ -115,7 +115,7 @@ paths:
                   message:
                     type: string
                     example: 'Ip has incorrect format'
-  /api_keys/{id}:
+  /api-keys/{id}:
     delete:
       summary: Delete an API key
       description: >-
@@ -146,7 +146,7 @@ paths:
           $ref: "#/components/schemas/ForbiddenErrorResponse"
         '404':
           $ref: "#/components/responses/NotFoundError"
-  /api_keys/{id}/activate:
+  /api-keys/{id}/activate:
     patch:
       summary: Activate an API key
       description: >-
@@ -177,7 +177,7 @@ paths:
           $ref: "#/components/schemas/ForbiddenErrorResponse"
         '404':
           $ref: "#/components/responses/NotFoundError"
-  /api_keys/{id}/deactivate:
+  /api-keys/{id}/deactivate:
     patch:
       summary: Deactivate an API key
       description: >-
