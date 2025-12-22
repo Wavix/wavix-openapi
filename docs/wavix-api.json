@@ -210,7 +210,7 @@
           "SIP trunks"
         ],
         "summary": "Update a SIP trunk configuration",
-        "description": "Use this method to update the configuration of a specific SIP trunk.",
+        "description": "Use this method to update a specific SIP trunk configuration.",
         "operationId": "UpdateaSIPtrunk",
         "parameters": [
           {
@@ -885,7 +885,7 @@
                 "properties": {
                   "ids": {
                     "type": "array",
-                    "description": "Comma-separated list of phone numbers to add to the cart",
+                    "description": "Comma-separated list of numbers to add to the cart",
                     "items": {
                       "type": "string"
                     },
@@ -1181,7 +1181,7 @@
           "Cart"
         ],
         "summary": "Check out numbers",
-        "description": "Use this method to check out phone numbers currently in the cart. \n\n\nThe activation and monthly fee will be automatically deducted from your balance. Ensure you have sufficient funds on your account or a primary card linked with enough balance to complete the purchase.",
+        "description": "Use this method to check out phone numbers currently in the cart.\n\nThe activation and monthly fee will be automatically\n deducted from your balance. Ensure you have sufficient\n  funds on your account or a primary card linked with\n   enough balance to complete the purchase.",
         "operationId": "CheckoutDIDnumbers",
         "parameters": [],
         "requestBody": {
@@ -1534,7 +1534,7 @@
                   },
                   "sms_relay_url": {
                     "type": "string",
-                    "description": "SMS relay URL for the number. Incoming  and MMS messages are sent to this URL as HTTP POST requests. If the number isn't SMS-enabled, setting the `sms_relay_url` returns the `HTTP 422 Unprocessable Content` error.\nTo remove inbound message routing for this number, set the value to `null`. Messages will then be forwarded only to the `sms_relay_url` configured on the account.",
+                    "description": "SMS relay URL for the number.\n Incoming SMS and MMS messages will be sent\n  to this URL as HTTP POST requests.\n  If the number isn't SMS-enabled,\n   setting the `sms_relay_url`\n   returns the `HTTP 422 Unprocessable Content` error.\n\nTo remove inbound message routing for this number,\n set the value to `null`.\n  Messages will then be forwarded only to\n  the `sms_relay_url` configured on the account.",
                     "example": "https://you-site.com/sms"
                   },
                   "call_status_url": {
@@ -1669,7 +1669,7 @@
           "My numbers"
         ],
         "summary": "Update inbound call destinations",
-        "description": "Use this method to update inbound call routing for phone numbers. You can route calls to a SIP URI, PSTN number, or SIP trunk on the platform. This method allows you to add multiple inbound call destinations for a phone number.\n\nDestinations for several phone numbers can be updated with a single request.",
+        "description": "Use this method to update inbound call routing for phone numbers. You can route calls to a SIP URI, PSTN number, or SIP trunk on the platform. This method allows you to add multiple inbound call destinations for a phone number.\n\nDestinations for several phone numbers can be updated\n with a single request.",
         "operationId": "UpdateDIDdestinations",
         "parameters": [],
         "requestBody": {
@@ -2072,7 +2072,7 @@
           "CDRs"
         ],
         "summary": "Transcribe a single call",
-        "description": "Use this method to submit a specific call recording for transcription.\n\nThe processing time depends on the call length and the number of recordings in the queue.  Most calls are transcribed within 10 minutes. To receive a notification when the transcription is completed, provide a webhook address in the `webhook_url` parameter. Wavix will send a status update to this address.\n\nThe method responses with the `HTTP 200 OK` status code and no content. After the transcription is completed, the service sends a POST callback to the specified webhook:\n```json\n  {\n   \"uuid\": \"123\",\n   \"status\": \"completed\"\n  }\n```\n- uuid - the unique identifier of the recorded call\n- status - status of the operation. Can be either `completed` indicating the recorded call was successfully transcribed or `failed` which indicates that there was an error while transcribing the call.",
+        "description": "Use this method to submit a specific call recording for transcription.\n\nThe processing time depends on the call length and the number\n of recordings in the queue.  Most calls are transcribed within\n  10 minutes. To receive a notification when the transcription\n   completed, provide a webhook address in the `webhook_url` parameter.\n    Wavix will send a status update to this address.\n\n\nThe method responses with the `HTTP 200 OK` status code and no content.\n After the transcription is completed, the service sends\n  a POST callback to the specified webhook:\n\n```json\n  {\n   \"uuid\": \"123\",\n   \"status\": \"completed\"\n  }\n```\n- uuid - the unique identifier of the recorded call\n- status - status of the operation. Can be either `completed`\n indicating the recorded call was successfully transcribed or\n  `failed` which indicates that there was an error\n   while transcribing the call.",
         "operationId": "Transcribeasinglecall",
         "parameters": [
           {
@@ -2148,7 +2148,7 @@
           "CDRs"
         ],
         "summary": "Request transcription for a specific call",
-        "description": "Use this method to retrieve transcription for a specific recorded call.\n\nThe response contains a JSON object with an array of `turn` objects.\nEach `turn` contains:\n- The text spoken by a particular speaker\n- The start and end times for that text, calculated from the moment the call was answered\n\nFor convenience, the response also provides the full text for each speaker.\n",
+        "description": "Use this method to retrieve transcription for a specific recorded call.\n\nThe response contains a JSON object with an array of `turn` objects.\nEach `turn` contains: - The text spoken by a particular speaker - The start and end times for that text,\n calculated from the moment the call was answered\n\n\nFor convenience, the response also provides\n the full text for each speaker.\n",
         "operationId": "Requesttranscriptionforaspecificcall",
         "parameters": [
           {
@@ -2256,7 +2256,7 @@
           {
             "name": "from",
             "in": "query",
-            "description": "Start date of your search time range, in `yyyy-mm-dd` format",
+            "description": "Start date of your search time range, in  `yyyy-mm-dd` format",
             "required": true,
             "style": "form",
             "explode": true,
@@ -3792,7 +3792,7 @@
           "Call control"
         ],
         "summary": "Start call streaming",
-        "description": "Use this method to start call streaming. Wavix Call Media Streaming allows you to stream inbound (to Wavix), outbound (from Wavix), or both channels. Wavix also supports unidirectional streaming when your WebSocket only receives media from the platform, and bi-directional streaming when your WebSocket can send back audio and commands to Wavix.\n\n**Note**. You can have up to 5 unidirectional streams for a call. Only one bi-directional stream can be created.",
+        "description": "Use this method to start call streaming.\n Wavix Call Media Streaming allows you to stream inbound (to Wavix),\n  outbound (from Wavix), or both channels.\n   Wavix also supports unidirectional streaming when your WebSocket\n    only receives media from the platform, and bi-directional\nstreaming when your WebSocket can send back audio and commands to Wavix.\n\n**Note**. You can have up to 5 unidirectional streams for a call.\n Only one bi-directional stream can be created.",
         "operationId": "StartCallStreaming",
         "parameters": [
           {
@@ -5337,7 +5337,7 @@
           "SMS and MMS"
         ],
         "summary": "Get messages on your account",
-        "description": "Use this method to retrieve outbound and inbound SMS or MMS. Messages can be filtered by date, originating (Sender ID), destination phone numbers, or message `tag`. \n\nBy default, the results are paginated with 25 records per page.",
+        "description": "Use this method to retrieve outbound and inbound SMS or MMS. Messages can be filtered by date, originating (Sender ID), destination phone numbers, or message `tag`.\n\nBy default, the results are paginated with 25 records per page.",
         "operationId": "Getmessagesonyouraccount",
         "parameters": [
           {
@@ -6497,7 +6497,7 @@
           "10DLC"
         ],
         "summary": "Appeal a 10DLC Brand Identity verification",
-        "description": "Use this method to appeal a 10DLC Brand Identity verification. \n\nYou may need to provide any additional documentation you have for the Brand. \n\nThe following appeal categories are allowed:\n - **VERIFY_TAX_ID** - Use this category if the Brand is UNVERIFIED due to an inability to match the tax ID. Private companies, public companies, non-profit organizations, and Government Brands may submit this appeal category. \n- **VERIFY_NON_PROFIT** - Use this category if the Brand was submitted as a Non-Profit Organization is UNVERIFIED or VERIFIED and is missing a “Tax Exempt Status”. \n - **VERIFY_GOVERNMENT** - Select this category if the record submitted as a Government entity type is UNVERIFIED or VERIFIED and is missing a “Government Entity” status.",
+        "description": "Use this method to appeal a 10DLC Brand Identity verification.\n\nYou may need to provide any additional documentation you have for the Brand.\n\nThe following appeal categories are allowed:\n - **VERIFY_TAX_ID** - Use this category if the Brand is UNVERIFIED due to an inability to match the tax ID. Private companies, public companies, non-profit organizations, and Government Brands may submit this appeal category.\n- **VERIFY_NON_PROFIT** - Use this category if the Brand was submitted as a Non-Profit Organization is UNVERIFIED or VERIFIED and is missing a “Tax Exempt Status”.\n - **VERIFY_GOVERNMENT** - Select this category if the record submitted as a Government entity type is UNVERIFIED or VERIFIED and is missing a “Government Entity” status.",
         "operationId": "Appeala10DLCBrandIdentityverification",
         "parameters": [
           {
@@ -7159,7 +7159,7 @@
           "10DLC"
         ],
         "summary": "Request external vetting for a 10DLC Brand",
-        "description": "Use this method to request external vetting for a 10DLC Brand.\n\nThe following external vetting providers' codes are supported:\n - **AEGIS** - The Aegis Mobile, the default external vetting provider. \n- **CV** - The Campaign Verify. \n - **WMC** - WMC Global.\n\nWavix supports the following vetting classes:\n - **STANDARD** \n- **STANDARD**\n - **ENHANCED**",
+        "description": "Use this method to request external vetting for a 10DLC Brand.\n\nThe following external vetting providers' codes are supported:\n - **AEGIS** - The Aegis Mobile, the default external vetting provider.\n- **CV** - The Campaign Verify.\n - **WMC** - WMC Global.\n\n\nWavix supports the following vetting classes:\n - **STANDARD**\n- **STANDARD**\n - **ENHANCED**",
         "operationId": "Requestexternalvettingfora10DLCBrand",
         "parameters": [
           {
@@ -7672,7 +7672,7 @@
           "10DLC"
         ],
         "summary": "Qualify a 10DLC Brand for a use case",
-        "description": "Use this method to qualify a 10DLC Brand for a use case. \n\nIf the Brand is qualified to run a Campaign across one or more MNOs, the API will return a list of MNO-specific attributes (e.g., AT&T message class), restrictions, and pre/post-approval validation requirements. Additionally, the response will provide the monthly fee associated with the use case.",
+        "description": "Use this method to qualify a 10DLC Brand for a use case.\n\nIf the Brand is qualified to run a Campaign across one or more MNOs, the API will return a list of MNO-specific attributes (e.g., AT&T message class), restrictions, and pre/post-approval validation requirements. Additionally, the response will provide the monthly fee associated with the use case.",
         "operationId": "Qualifya10DLCBrandforausecase",
         "parameters": [
           {
@@ -7860,7 +7860,7 @@
           "10DLC"
         ],
         "summary": "List all 10DLC Campaigns on your account",
-        "description": "Use this method to query all 10DLC Campaigns on your account. \n\nThe results are paginated with 25 records per page by default.",
+        "description": "Use this method to query all 10DLC Campaigns on your account.\nThe results are paginated with 25 records per page by default.",
         "operationId": "Listall10DLCCampaignsonyouraccount",
         "parameters": [
           {
@@ -7911,7 +7911,7 @@
           {
             "name": "created_before",
             "in": "query",
-            "description": "Filter results by specifying the end date for the Campaign creation date range in the `yyyy-mm-dd` format",
+            "description": "Filter results by specifying the end date of the Campaign creation date range in the `yyyy-mm-dd` format",
             "style": "form",
             "explode": true,
             "schema": {
@@ -8109,7 +8109,7 @@
           "10DLC"
         ],
         "summary": "List all 10DLC Campaigns associated with a Brand",
-        "description": "Use this method to query all 10DLC Campaigns associated with a Brand. \n\nThe results are paginated with 25 records per page by default.",
+        "description": "Use this method to query all 10DLC Campaigns associated with a Brand.\n\nThe results are paginated with 25 records per page by default.",
         "operationId": "Listall10DLCCampaignsassociatedwithaBrand",
         "parameters": [
           {
@@ -8922,7 +8922,7 @@
           "10DLC"
         ],
         "summary": "Delete a 10DLC Campaign",
-        "description": "Use this method to delete a 10DLC Campaign. \n\n**Note** You will not be able to use any phone number associated with the Campaign as a Sender IDs once it is deleted.",
+        "description": "Use this method to delete a 10DLC Campaign.\n\n**Note** You will not be able to use any phone number associated with the Campaign as a Sender IDs once it is deleted.",
         "operationId": "Deletea10DLCCampaign",
         "parameters": [
           {
@@ -9206,7 +9206,7 @@
           "10DLC"
         ],
         "summary": "Link a number to a 10DLC Campaign",
-        "description": "Use this method to link a phone number to a 10DLC Campaign. \n\nWavix will automatically create a Sender ID associated with the number, once it is successfully approved. The Sender ID will be allowed-listed for the U.S.",
+        "description": "Use this method to link a phone number to a 10DLC Campaign.\n\nWavix will automatically create a Sender ID associated with the number, once it is successfully approved. The Sender ID will be allowed-listed for the U.S.",
         "operationId": "Linkanumbertoa10DLCCampaign",
         "parameters": [
           {
@@ -9315,7 +9315,7 @@
           "10DLC"
         ],
         "summary": "Delete a number from a 10DLC Campaign",
-        "description": "Use this method to remove a number from a Campaign. \n\nAfter the phone number is deleted from the Campaign, the Sender ID associated with the number will also be automatically deleted.",
+        "description": "Use this method to remove a number from a Campaign.\n\nAfter the phone number is deleted from the Campaign,\n the Sender ID associated with the number will also be automatically deleted.",
         "operationId": "Deleteanumberfroma10DLCCampaign",
         "parameters": [
           {
@@ -10319,7 +10319,7 @@
           "2FA"
         ],
         "summary": "Create a new 2FA Verification",
-        "description": "Before sending and validating a one-time password (OTP), you must create a 2FA Service using the Wavix portal. The service must be created only once, you can use it to generate and validate as many OTPs as needed. \n\nIn order to send and verify an OTP, you must:\n1. Create a new 2FA Verification using this API. The Wavix platform will automatically generate a random code and send it to the phone number specified in the request.\n2. In cases when an end user requests a new OTP, you can reuse the same 2FA Verification to resend the code.\n3. Validate the OTP using the Wavix 2FA API.\n\nUse this method to create a new Wavix 2FA Verification. Once the Verification is created, Wavix will automatically generate a new random verification code and send it to the end user's phone number via the communication channel specified in the request.",
+        "description": "Before sending and validating a one-time password (OTP), you must create a 2FA Service using the Wavix portal. The service must be created only once, you can use it to generate and validate as many OTPs as needed.\n\nIn order to send and verify an OTP, you must:\n1. Create a new 2FA Verification using this API. The Wavix platform will automatically generate a random code and send it to the phone number specified in the request.\n2. In cases when an end user requests a new OTP, you can reuse the same 2FA Verification to resend the code.\n3. Validate the OTP using the Wavix 2FA API.\n\nUse this method to create a new Wavix 2FA Verification. Once the Verification is created, Wavix will automatically generate a new random verification code and send it to the end user's phone number via the communication channel specified in the request.",
         "operationId": "Createanew2FAVerification",
         "parameters": [],
         "requestBody": {
@@ -10468,7 +10468,8 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "datetime",
+                    "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                       "created_at": {
                         "type": "string",
@@ -10513,7 +10514,6 @@
                       }
                     }
                   },
-                  "additionalProperties": false,
                   "example": [
                     {
                       "created_at": "2022-02-16T13:41:38.000Z",
@@ -10700,7 +10700,7 @@
           "2FA"
         ],
         "summary": "Validate a code",
-        "description": "To validate an OTP, an end user must enter the received code into your service or application and submit it for validation. \n\nOnce the code is submitted, use this method to check whether the code is valid. Pass the entered code and the 2FA Verification ID to verify whether the entered code matches the latest one sent to the end user's phone number within the specified 2FA Verification.",
+        "description": "To validate an OTP, an end user must enter the received code into your service or application and submit it for validation.\n\nOnce the code is submitted, use this method to check whether the code is valid. Pass the entered code and the 2FA Verification ID to verify whether the entered code matches the latest one sent to the end user's phone number within the specified 2FA Verification.",
         "operationId": "Validateacode",
         "parameters": [
           {
@@ -12534,22 +12534,16 @@
           },
           "host_request": {
             "type": "object",
-            "description": "For SIP trunks with IP authentication, includes the SIP endpoint's public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.",
+            "description": "For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.",
             "additionalProperties": false,
             "required": [
-              "host",
-              "status"
+              "host"
             ],
             "properties": {
               "host": {
                 "type": "string",
-                "description": "SIP endpoint's public static IP address",
+                "description": "SIP endpoint public static IP address",
                 "example": "127.0.0.1"
-              },
-              "status": {
-                "type": "string",
-                "description": "IP authentication request status",
-                "example": "pending"
               }
             }
           },
@@ -14740,7 +14734,7 @@
           },
           "event": {
             "type": "string",
-            "description": "Human readable event description. Can contain on of the following values: \n- `Number lookup` for the Wavix platform checked if the destination phone number is valid. You'll see the event only when the Number validation option is activated for your 2FA Service; - `Code sent via SMS` indicates a code was sent via an SMS; - `Code sent via voice` indicates a code was sent via a voice call; - `Verification` indicates the code verification attempt",
+            "description": "Human readable event description. Can contain on of the following values:\n- `Number lookup` for the Wavix platform checked if the destination phone number is valid. You'll see the event only when the Number validation option is activated for your 2FA Service;\n- `Code sent via SMS` indicates a code was sent via an SMS;\n- `Code sent via voice` indicates a code was sent via a voice call;\n- `Verification` indicates the code verification attempt",
             "example": "Code sent via SMS"
           },
           "status": {
@@ -15353,9 +15347,132 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "agent": {},
-          "client": {},
-          "any": {}
+          "agent": {
+            "type": "object",
+            "description": "Search in an agent's spoken words and phrases",
+            "properties": {
+              "must": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Hello"
+                },
+                "example": [
+                  "Hello",
+                  "Thank you"
+                ],
+                "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND"
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nope"
+                },
+                "example": [
+                  "Nope",
+                  "Maybe"
+                ],
+                "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Richard"
+                },
+                "example": [
+                  "Richard",
+                  "Issue resolved"
+                ],
+                "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              }
+            }
+          },
+          "client": {
+            "type": "object",
+            "description": "Search in an customer's spoken words and phrases",
+            "properties": {
+              "must": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Hello"
+                },
+                "example": [
+                  "Hello",
+                  "Thank you"
+                ],
+                "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND"
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nope"
+                },
+                "example": [
+                  "Nope",
+                  "Maybe"
+                ],
+                "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Richard"
+                },
+                "example": [
+                  "Richard",
+                  "Issue resolved"
+                ],
+                "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              }
+            }
+          },
+          "any": {
+            "type": "object",
+            "description": "Search in both speakers' spoken words and phrases",
+            "properties": {
+              "must": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Hello"
+                },
+                "example": [
+                  "Hello",
+                  "Thank you"
+                ],
+                "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND"
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nope"
+                },
+                "example": [
+                  "Nope",
+                  "Maybe"
+                ],
+                "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Richard"
+                },
+                "example": [
+                  "Richard",
+                  "Issue resolved"
+                ],
+                "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              }
+            }
+          }
         }
       },
       "Turn": {
