@@ -1557,13 +1557,13 @@ paths:
         The response contains a JSON object with an array of `turn` objects.
 
         Each `turn` contains:
-
         - The text spoken by a particular speaker
+        - The start and end times for that text,
+         calculated from the moment the call was answered
 
-        - The start and end times for that text, calculated from the moment the call was answered
 
-
-        For convenience, the response also provides the full text for each speaker.
+        For convenience, the response also provides
+         the full text for each speaker.
       operationId: Requesttranscriptionforaspecificcall
       parameters:
         - name: cdr_uuid
@@ -1635,7 +1635,8 @@ paths:
       parameters:
         - name: from
           in: query
-          description: Start date of your search time range, in `yyyy-mm-dd` format
+          description: Start date of your search time range,
+           in  `yyyy-mm-dd` format
           required: true
           style: form
           explode: true
@@ -1645,7 +1646,8 @@ paths:
             example: 2023-01-01
         - name: to
           in: query
-          description: End date of your search time range, in `yyyy-mm-dd` format.
+          description: End date of your search time range,
+           in `yyyy-mm-dd` format.
           required: true
           style: form
           explode: true
@@ -5610,7 +5612,8 @@ paths:
             example: true
         - name: created_before
           in: query
-          description: Filter results by specifying the end date for the Campaign creation
+          description: Filter results by specifying the end date
+           of the Campaign creation
             date range in the `yyyy-mm-dd` format
           style: form
           explode: true
@@ -10806,8 +10809,8 @@ components:
       properties:
         type:
           type: string
-          description: Mandatory parameter. Use `placed` to search in the outbound call
-            transcriptions or `received` to search in the inbound call
+          description: Mandatory parameter. Use `placed` to search in the 
+            outbound call transcriptions or `received` to search in the inbound call
             transcriptions.
           example: placed
         from:
@@ -10826,18 +10829,18 @@ components:
           example: 2023-08-31
         from_search:
           type: string
-          description: Filter results by the originating phone number. The parameter can
-            be either a full phone number or a part of it.
+          description: Filter results by the originating phone number.
+           The parameter can be either a full phone number or a part of it.
           example: "4478012"
         to_search:
           type: string
-          description: Filter results by destination phone number. The parameter can be
-            either a full phone number or a part of it.
+          description: Filter results by destination phone number. 
+            The parameter can be either a full phone number or a part of it.
           example: "44206723"
         sip_trunk:
           type: string
-          description: Filter results by the unique SIP trunk ID used to place an outbound
-            call. For inbound calls the parameter is ignored.
+          description: Filter results by the unique SIP trunk ID used to place
+            an outbound call. For inbound calls the parameter is ignored.
           example: "87095"
         min_duration:
           type: integer
@@ -11433,9 +11436,135 @@ components:
       type: object
       additionalProperties: false
       properties:
-        agent: {}
-        client: {}
-        any: {}
+       agent:
+        type: object
+        description: Search in an agent's spoken words and phrases
+        properties:
+          must:
+            type: array
+            items:
+              type: string
+              example: Hello
+            example:
+                - Hello
+                - Thank you
+            description: >-
+              Only calls with transcription that includes all of
+              the specified keywords and phrases are returned. The
+              listed keywords and phrases are combined using
+              logical AND
+          match:
+            type: array
+            items:
+              type: string
+              example: Nope
+            example:
+              - Nope
+              - Maybe
+            description: >-
+             Only calls with transcription that includes any of
+             the specified keywords and phrases are returned. The
+             listed keywords and phrases are combined using
+             logical OR
+          exclude:
+            type: array
+            items:
+              type: string
+              example: Richard
+            example:
+              - Richard
+              - Issue resolved
+            description: >-
+                Only calls with transcription that does not include
+                any of the specified keywords and phrases are
+                returned. The listed keywords and phrases are
+                combined using logical OR
+       client:
+        type: object
+        description: Search in an customer's spoken words and phrases
+        properties:
+          must:
+            type: array
+            items:
+              type: string
+              example: Hello
+            example:
+                - Hello
+                - Thank you
+            description: >-
+              Only calls with transcription that includes all of
+              the specified keywords and phrases are returned. The
+              listed keywords and phrases are combined using
+              logical AND
+          match:
+            type: array
+            items:
+              type: string
+              example: Nope
+            example:
+              - Nope
+              - Maybe
+            description: >-
+             Only calls with transcription that includes any of
+             the specified keywords and phrases are returned. The
+             listed keywords and phrases are combined using
+             logical OR
+          exclude:
+            type: array
+            items:
+              type: string
+              example: Richard
+            example:
+              - Richard
+              - Issue resolved
+            description: >-
+                Only calls with transcription that does not include
+                any of the specified keywords and phrases are
+                returned. The listed keywords and phrases are
+                combined using logical OR
+       any:
+        type: object
+        description: Search in both speakers' spoken words and phrases
+        properties:
+          must:
+            type: array
+            items:
+              type: string
+              example: Hello
+            example:
+              - Hello
+              - Thank you
+            description: >-
+              Only calls with transcription that includes all of
+              the specified keywords and phrases are returned. The
+              listed keywords and phrases are combined using
+              logical AND
+          match:
+              type: array
+              items:
+                type: string
+                example: Nope
+              example:
+                - Nope
+                - Maybe
+              description: >-
+                Only calls with transcription that includes any of
+                the specified keywords and phrases are returned. The
+                listed keywords and phrases are combined using
+                logical OR
+          exclude:
+              type: array
+              items:
+                type: string
+                example: Richard
+              example:
+                - Richard
+                - Issue resolved
+              description: >-
+                  Only calls with transcription that does not include
+                  any of the specified keywords and phrases are
+                  returned. The listed keywords and phrases are
+                  combined using logical OR
     Turn:
       title: Turn
       type: object
