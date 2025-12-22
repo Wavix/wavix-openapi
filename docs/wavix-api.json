@@ -47,32 +47,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "api_keys": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ApiKey"
-                      }
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiKey"
                   }
                 },
-                "example": {
-                  "api_keys": [
-                    {
-                      "id": 123,
-                      "label": "Production API Key",
-                      "value": "abc123def456ghi789jkl012mno345pqr678stu901vwx234yz",
-                      "is_active": true,
-                      "is_restriction": false,
-                      "permitted_ips": [
-                        "192.168.1.1",
-                        "10.0.0.1"
-                      ],
-                      "created_at": "2024-01-15T10:30:00Z"
-                    }
-                  ]
-                }
+                "example": [
+                  {
+                    "id": 123,
+                    "label": "Production API Key",
+                    "value": "abc123def456ghi789jkl012mno345pqr678stu901vwx234yz",
+                    "is_active": true,
+                    "is_restriction": false,
+                    "permitted_ips": [
+                      "192.168.1.1",
+                      "10.0.0.1"
+                    ],
+                    "created_at": "2024-01-15T10:30:00Z"
+                  }
+                ]
               }
             }
           },
@@ -111,26 +104,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "api_key": {
-                      "$ref": "#/components/schemas/ApiKey"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ApiKey"
                 },
                 "example": {
-                  "api_key": {
-                    "id": 123,
-                    "label": "Production API Key",
-                    "value": "abc123def456ghi789jkl012mno345pqr678stu901vwx234yz",
-                    "is_active": true,
-                    "is_restriction": true,
-                    "permitted_ips": [
-                      "192.168.1.1",
-                      "10.0.0.1"
-                    ],
-                    "created_at": "2024-01-15T10:30:00Z"
-                  }
+                  "id": 123,
+                  "label": "Production API Key",
+                  "value": "abc123def456ghi789jkl012mno345pqr678stu901vwx234yz",
+                  "is_active": true,
+                  "is_restriction": true,
+                  "permitted_ips": [
+                    "192.168.1.1",
+                    "10.0.0.1"
+                  ],
+                  "created_at": "2024-01-15T10:30:00Z"
                 }
               }
             }
