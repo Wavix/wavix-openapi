@@ -2407,7 +2407,7 @@
           "CDRs"
         ],
         "summary": "Request transcription for a specific call",
-        "description": "Use this method to retrieve transcription for a specific recorded call.\n\nThe response contains a JSON object with an array of `turn` objects.\nEach `turn` contains:\n- The text spoken by a particular speaker\n- The start and end times for that text, calculated from the moment the call was answered\n\nFor convenience, the response also provides the full text for each speaker.\n",
+        "description": "Use this method to retrieve transcription for a specific recorded call.\n\nThe response contains a JSON object with an array of `turn` objects.\nEach `turn` contains: - The text spoken by a particular speaker - The start and end times for that text,\n calculated from the moment the call was answered\n\n\nFor convenience, the response also provides\n the full text for each speaker.\n",
         "operationId": "Requesttranscriptionforaspecificcall",
         "parameters": [
           {
@@ -2515,7 +2515,7 @@
           {
             "name": "from",
             "in": "query",
-            "description": "Start date of your search time range, in `yyyy-mm-dd` format",
+            "description": "Start date of your search time range, in  `yyyy-mm-dd` format",
             "required": true,
             "style": "form",
             "explode": true,
@@ -8170,7 +8170,7 @@
           {
             "name": "created_before",
             "in": "query",
-            "description": "Filter results by specifying the end date for the Campaign creation date range in the `yyyy-mm-dd` format",
+            "description": "Filter results by specifying the end date of the Campaign creation date range in the `yyyy-mm-dd` format",
             "style": "form",
             "explode": true,
             "schema": {
@@ -15703,9 +15703,132 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "agent": {},
-          "client": {},
-          "any": {}
+          "agent": {
+            "type": "object",
+            "description": "Search in an agent's spoken words and phrases",
+            "properties": {
+              "must": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Hello"
+                },
+                "example": [
+                  "Hello",
+                  "Thank you"
+                ],
+                "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND"
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nope"
+                },
+                "example": [
+                  "Nope",
+                  "Maybe"
+                ],
+                "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Richard"
+                },
+                "example": [
+                  "Richard",
+                  "Issue resolved"
+                ],
+                "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              }
+            }
+          },
+          "client": {
+            "type": "object",
+            "description": "Search in an customer's spoken words and phrases",
+            "properties": {
+              "must": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Hello"
+                },
+                "example": [
+                  "Hello",
+                  "Thank you"
+                ],
+                "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND"
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nope"
+                },
+                "example": [
+                  "Nope",
+                  "Maybe"
+                ],
+                "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Richard"
+                },
+                "example": [
+                  "Richard",
+                  "Issue resolved"
+                ],
+                "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              }
+            }
+          },
+          "any": {
+            "type": "object",
+            "description": "Search in both speakers' spoken words and phrases",
+            "properties": {
+              "must": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Hello"
+                },
+                "example": [
+                  "Hello",
+                  "Thank you"
+                ],
+                "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND"
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nope"
+                },
+                "example": [
+                  "Nope",
+                  "Maybe"
+                ],
+                "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Richard"
+                },
+                "example": [
+                  "Richard",
+                  "Issue resolved"
+                ],
+                "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR"
+              }
+            }
+          }
         }
       },
       "Turn": {

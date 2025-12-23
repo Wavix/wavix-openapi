@@ -1659,10 +1659,16 @@ paths:
         transcription.
 
 
-        The processing time depends on the call length and the number of recordings in the queue.  Most calls are transcribed within 10 minutes. To receive a notification when the transcription is completed, provide a webhook address in the `webhook_url` parameter. Wavix will send a status update to this address.
+        The processing time depends on the call length and the number
+         of recordings in the queue.  Most calls are transcribed within
+          10 minutes. To receive a notification when the transcription
+           completed, provide a webhook address in the `webhook_url` parameter.
+            Wavix will send a status update to this address.
 
 
-        The method responses with the `HTTP 200 OK` status code and no content. After the transcription is completed, the service sends a POST callback to the specified webhook:
+        The method responses with the `HTTP 200 OK` status code and no content.
+         After the transcription is completed, the service sends
+          a POST callback to the specified webhook:
 
         ```json
           {
@@ -1674,7 +1680,9 @@ paths:
         - uuid - the unique identifier of the recorded call
 
         - status - status of the operation. Can be either `completed`
-         indicating the recorded call was successfully transcribed or `failed` which indicates that there was an error while transcribing the call.
+         indicating the recorded call was successfully transcribed or
+          `failed` which indicates that there was an error
+           while transcribing the call.
       operationId: Transcribeasinglecall
       parameters:
         - name: cdr_uuid
@@ -1730,13 +1738,13 @@ paths:
         The response contains a JSON object with an array of `turn` objects.
 
         Each `turn` contains:
-
         - The text spoken by a particular speaker
+        - The start and end times for that text,
+         calculated from the moment the call was answered
 
-        - The start and end times for that text, calculated from the moment the call was answered
 
-
-        For convenience, the response also provides the full text for each speaker.
+        For convenience, the response also provides
+         the full text for each speaker.
       operationId: Requesttranscriptionforaspecificcall
       parameters:
         - name: cdr_uuid
@@ -1808,7 +1816,8 @@ paths:
       parameters:
         - name: from
           in: query
-          description: Start date of your search time range, in `yyyy-mm-dd` format
+          description: Start date of your search time range,
+           in  `yyyy-mm-dd` format
           required: true
           style: form
           explode: true
@@ -1818,7 +1827,8 @@ paths:
             example: 2023-01-01
         - name: to
           in: query
-          description: End date of your search time range, in `yyyy-mm-dd` format.
+          description: End date of your search time range,
+           in `yyyy-mm-dd` format.
           required: true
           style: form
           explode: true
@@ -1828,8 +1838,8 @@ paths:
             example: 2023-09-01
         - name: type
           in: query
-          description: Use `placed` to get CDRs for outbound calls or `received` for
-            inbound calls.
+          description: Use `placed` to get CDRs for outbound calls or `received`
+           for inbound calls.
           required: true
           style: form
           explode: true
@@ -5783,7 +5793,8 @@ paths:
             example: true
         - name: created_before
           in: query
-          description: Filter results by specifying the end date for the Campaign creation
+          description: Filter results by specifying the end date
+           of the Campaign creation
             date range in the `yyyy-mm-dd` format
           style: form
           explode: true
@@ -9254,23 +9265,18 @@ components:
           example: 4r=h;EaCB85QNtr2
         host_request:
           type: object
-          description: For SIP trunks with IP authentication, includes the SIP endpoint's
+          description: For SIP trunks with IP authentication, includes the SIP endpoint
             public static IP address and the status of the authentication
             request. Wavix authenticates all SIP traffic originating from this
             IP address.
           additionalProperties: false
           required:
             - host
-            - status
           properties:
             host:
               type: string
-              description: SIP endpoint's public static IP address
+              description: SIP endpoint public static IP address
               example: 127.0.0.1
-            status:
-              type: string
-              description: IP authentication request status
-              example: pending
         callerid:
           type: string
           description: Caller ID associated with the SIP trunk. Must be an active or
@@ -10174,12 +10180,13 @@ components:
           description: User-defined name of the SIP trunk
           example: My trunk
         auth_method:
-          description: SIP trunk authentication method. Can be either `Digest` or `IP auth`.
+          description: SIP trunk authentication method. Can be either `Digest`
+           or `IP auth`.
           type: string
         host_request:
           type: string
-          description: For SIP trunks with IP-based authentication, contains the status of
-            the IP authentication request.
+          description: For SIP trunks with IP-based authentication, contains
+           the status of the IP authentication request.
           nullable: true
         passthrough:
           type: boolean
@@ -11065,8 +11072,8 @@ components:
       properties:
         type:
           type: string
-          description: Mandatory parameter. Use `placed` to search in the outbound call
-            transcriptions or `received` to search in the inbound call
+          description: Mandatory parameter. Use `placed` to search in the 
+            outbound call transcriptions or `received` to search in the inbound call
             transcriptions.
           example: placed
         from:
@@ -11085,18 +11092,18 @@ components:
           example: 2023-08-31
         from_search:
           type: string
-          description: Filter results by the originating phone number. The parameter can
-            be either a full phone number or a part of it.
+          description: Filter results by the originating phone number.
+           The parameter can be either a full phone number or a part of it.
           example: "4478012"
         to_search:
           type: string
-          description: Filter results by destination phone number. The parameter can be
-            either a full phone number or a part of it.
+          description: Filter results by destination phone number. 
+            The parameter can be either a full phone number or a part of it.
           example: "44206723"
         sip_trunk:
           type: string
-          description: Filter results by the unique SIP trunk ID used to place an outbound
-            call. For inbound calls the parameter is ignored.
+          description: Filter results by the unique SIP trunk ID used to place
+            an outbound call. For inbound calls the parameter is ignored.
           example: "87095"
         min_duration:
           type: integer
@@ -11167,14 +11174,19 @@ components:
           example: 2022-02-16T13:41:38.000Z
         event:
           type: string
-          description: "Human readable event description. Can contain on of the following
-            values:
+          description: "Human readable event description. Can contain on of the
+           following values:
+
             - `Number lookup` for the Wavix platform checked if the
             destination phone number is valid. You'll see the event only when
             the Number validation option is activated for your 2FA Service;
+
             - `Code sent via SMS` indicates a code was sent via an SMS;
+
             - `Code sent via voice` indicates a code was sent via a voice call;
+
             - `Verification` indicates the code verification attempt"
+            
           example: Code sent via SMS
         status:
           type: string
@@ -11687,9 +11699,135 @@ components:
       type: object
       additionalProperties: false
       properties:
-        agent: {}
-        client: {}
-        any: {}
+       agent:
+        type: object
+        description: Search in an agent's spoken words and phrases
+        properties:
+          must:
+            type: array
+            items:
+              type: string
+              example: Hello
+            example:
+                - Hello
+                - Thank you
+            description: >-
+              Only calls with transcription that includes all of
+              the specified keywords and phrases are returned. The
+              listed keywords and phrases are combined using
+              logical AND
+          match:
+            type: array
+            items:
+              type: string
+              example: Nope
+            example:
+              - Nope
+              - Maybe
+            description: >-
+             Only calls with transcription that includes any of
+             the specified keywords and phrases are returned. The
+             listed keywords and phrases are combined using
+             logical OR
+          exclude:
+            type: array
+            items:
+              type: string
+              example: Richard
+            example:
+              - Richard
+              - Issue resolved
+            description: >-
+                Only calls with transcription that does not include
+                any of the specified keywords and phrases are
+                returned. The listed keywords and phrases are
+                combined using logical OR
+       client:
+        type: object
+        description: Search in an customer's spoken words and phrases
+        properties:
+          must:
+            type: array
+            items:
+              type: string
+              example: Hello
+            example:
+                - Hello
+                - Thank you
+            description: >-
+              Only calls with transcription that includes all of
+              the specified keywords and phrases are returned. The
+              listed keywords and phrases are combined using
+              logical AND
+          match:
+            type: array
+            items:
+              type: string
+              example: Nope
+            example:
+              - Nope
+              - Maybe
+            description: >-
+             Only calls with transcription that includes any of
+             the specified keywords and phrases are returned. The
+             listed keywords and phrases are combined using
+             logical OR
+          exclude:
+            type: array
+            items:
+              type: string
+              example: Richard
+            example:
+              - Richard
+              - Issue resolved
+            description: >-
+                Only calls with transcription that does not include
+                any of the specified keywords and phrases are
+                returned. The listed keywords and phrases are
+                combined using logical OR
+       any:
+        type: object
+        description: Search in both speakers' spoken words and phrases
+        properties:
+          must:
+            type: array
+            items:
+              type: string
+              example: Hello
+            example:
+              - Hello
+              - Thank you
+            description: >-
+              Only calls with transcription that includes all of
+              the specified keywords and phrases are returned. The
+              listed keywords and phrases are combined using
+              logical AND
+          match:
+              type: array
+              items:
+                type: string
+                example: Nope
+              example:
+                - Nope
+                - Maybe
+              description: >-
+                Only calls with transcription that includes any of
+                the specified keywords and phrases are returned. The
+                listed keywords and phrases are combined using
+                logical OR
+          exclude:
+              type: array
+              items:
+                type: string
+                example: Richard
+              example:
+                - Richard
+                - Issue resolved
+              description: >-
+                  Only calls with transcription that does not include
+                  any of the specified keywords and phrases are
+                  returned. The listed keywords and phrases are
+                  combined using logical OR
     Turn:
       title: Turn
       type: object
