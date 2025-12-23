@@ -26,7 +26,7 @@
     "/api-keys": {
       "get": {
         "summary": "List API keys",
-        "description": "Use this method to get a list of API keys on the account. You can optionally filter the results by label using the label query parameter.",
+        "description": "Returns a list of API keys on the account. You can optionally filter the results by label using the label query parameter.",
         "tags": [
           "API Keys"
         ],
@@ -76,7 +76,7 @@
       },
       "post": {
         "summary": "Create a new API key",
-        "description": "Use this method to create a new API key for your account. You can optionally specify IP restrictions by providing a list of permitted IP addresses. If IP restrictions are enabled, the API key will only work when requests are made from the specified IP addresses.",
+        "description": "Creates a new API key for your account. You can optionally specify IP restrictions by providing a list of permitted IP addresses. If IP restrictions are enabled, the API key will only work when requests are made from the specified IP addresses.",
         "tags": [
           "API Keys"
         ],
@@ -100,7 +100,7 @@
         },
         "responses": {
           "200": {
-            "description": "API key successfully created.",
+            "description": "The API key was created successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -125,7 +125,7 @@
             "$ref": "#/components/schemas/ForbiddenErrorResponse"
           },
           "422": {
-            "description": "Failed to create a Api key",
+            "description": "Failed to create an API key",
             "content": {
               "application/json": {
                 "schema": {
@@ -137,7 +137,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Ip has incorrect format"
+                      "example": "IP address has an incorrect format"
                     }
                   }
                 }
@@ -150,7 +150,7 @@
     "/api-keys/{id}": {
       "delete": {
         "summary": "Delete an API key",
-        "description": "Use this method to delete an API key. The API key will be soft-deleted and can no longer be used for authentication. This action cannot be undone.",
+        "description": "Deletes an API key. The API key will be soft-deleted and can no longer be used for authentication. This action cannot be undone.",
         "tags": [
           "API Keys"
         ],
@@ -162,13 +162,13 @@
               "type": "integer"
             },
             "required": true,
-            "description": "A unique ID of the API key on the Wavix platform",
+            "description": "The unique ID of the API key on the Wavix platform",
             "example": 123
           }
         ],
         "responses": {
           "200": {
-            "description": "API key successfully deleted.",
+            "description": "The API key was deleted successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -195,7 +195,7 @@
     "/api-keys/{id}/activate": {
       "patch": {
         "summary": "Activate an API key",
-        "description": "Use this method to activate a previously deactivated API key. Once activated, the API key can be used for authentication again.",
+        "description": "Activates a previously deactivated API key. Once activated, the API key can be used for authentication again.",
         "tags": [
           "API Keys"
         ],
@@ -207,13 +207,13 @@
               "type": "integer"
             },
             "required": true,
-            "description": "A unique ID of the API key on the Wavix platform",
+            "description": "The unique ID of the API key on the Wavix platform",
             "example": 123
           }
         ],
         "responses": {
           "200": {
-            "description": "API key successfully activated.",
+            "description": "The API key was activated successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -240,7 +240,7 @@
     "/api-keys/{id}/deactivate": {
       "patch": {
         "summary": "Deactivate an API key",
-        "description": "Use this method to deactivate an API key. Once deactivated, the API key cannot be used for authentication until it is activated again.",
+        "description": "Deactivates an API key. Once deactivated, the API key cannot be used for authentication until it is activated again.",
         "tags": [
           "API Keys"
         ],
@@ -252,13 +252,13 @@
               "type": "integer"
             },
             "required": true,
-            "description": "A unique ID of the API key on the Wavix platform",
+            "description": "The unique ID of the API key on the Wavix platform",
             "example": 123
           }
         ],
         "responses": {
           "200": {
-            "description": "API key successfully deactivated.",
+            "description": "The API key was deactivated successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -12501,7 +12501,7 @@
             "message": {
               "type": "string",
               "description": "Error message describing what went wrong",
-              "example": "Ip has incorrect format"
+              "example": "IP address has an incorrect format"
             }
           }
         }
