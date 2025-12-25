@@ -15076,11 +15076,6 @@
             },
             "description": "List of CDRs with links to call transcriptions"
           },
-          "prices_url": {
-            "type": "string",
-            "description": "Price url",
-            "example": "https://example.com"
-          },
           "pagination": {
             "$ref": "#/components/schemas/Pagination"
           }
