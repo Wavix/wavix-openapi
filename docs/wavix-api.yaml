@@ -2296,7 +2296,7 @@ paths:
                     type: string
                     example: Request failed. An object with the specified ID is not found.
       deprecated: false
-  /call/webhooks:
+  /calls/webhooks:
     get:
       tags:
         - Call webhooks
