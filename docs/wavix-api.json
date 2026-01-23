@@ -2982,7 +2982,7 @@
           "Speech Analytics"
         ],
         "summary": "Upload a file for transcription",
-        "description": "Use this method to upload a file and submit it for transcription. When the transcription is completed, Wavix sends a POST callback to the webhook specified in the request.\n\n Callback example:\n   ```json\n   {\n        \"request_id\": \"e865ea07-25af-4fdd-876e-04b0d41d5ebd\",\n        \"status\": \"completed\",\n        \"error\": null\n      }\n   ```\n  - request_id - the unique identifier of the transcription request\n  - status - status of the operation. Can be either `completed` indicating the file was successfully transcribed or `failed` which indicates that there was an error while transcribing the file.\n  - error - in case the transcription failed, this field contains a description of the error that occurred. If the transcription was successful, this field is null.\n",
+        "description": "Use this method to upload a file and submit it for transcription. When the transcription is completed, Wavix sends a POST callback to the webhook specified in the request.\n\n Callback example:\n   ```json\n   {\n        \"request_id\": \"e865ea07-25af-4fdd-876e-04b0d41d5ebd\",\n        \"status\": \"completed\",\n        \"error\": null\n      }\n   ```\n  - request_id - the unique identifier of the transcription request\n  - status - status of the operation. Can be either `completed` indicating the file was\nsuccessfully transcribed or `failed` which indicates that there was an error while transcribing the file.\n  - error - in case the transcription failed, this field contains a description of the error\nthat occurred. If the transcription was successful, this field is null.\n",
         "operationId": "Submitafilefortranscription",
         "parameters": [],
         "requestBody": {
@@ -6756,7 +6756,7 @@
           "10DLC"
         ],
         "summary": "Appeal a 10DLC Brand Identity verification",
-        "description": "Use this method to appeal a 10DLC Brand Identity verification.\n\nYou may need to provide any additional documentation you have for the Brand.\n\nThe following appeal categories are allowed:\n - **VERIFY_TAX_ID** - Use this category if the Brand is UNVERIFIED due to an inability to match the tax ID. Private companies, public companies, non-profit organizations, and Government Brands may submit this appeal category.\n- **VERIFY_NON_PROFIT** - Use this category if the Brand was submitted as a Non-Profit Organization is UNVERIFIED or VERIFIED and is missing a “Tax Exempt Status”.\n - **VERIFY_GOVERNMENT** - Select this category if the record submitted as a Government entity type is UNVERIFIED or VERIFIED and is missing a “Government Entity” status.",
+        "description": "Use this method to appeal a 10DLC Brand Identity verification.\n\nYou may need to provide any additional documentation you have for the Brand.\n\nThe following appeal categories are allowed:\n - **VERIFY_TAX_ID** - Use this category if the Brand is UNVERIFIED due to an inability to\nmatch the tax ID. Private companies, public companies, non-profit organizations, and Government Brands may submit this appeal category. - **VERIFY_NON_PROFIT** - Use this category if the Brand was submitted as a Non-Profit Organization is UNVERIFIED or VERIFIED and is missing a “Tax Exempt Status”.\n - **VERIFY_GOVERNMENT** - Select this category if the record submitted as a Government\nentity type is UNVERIFIED or VERIFIED and is missing a “Government Entity” status.",
         "operationId": "Appeala10DLCBrandIdentityverification",
         "parameters": [
           {
@@ -14059,13 +14059,13 @@
             "type": "string",
             "description": "Start of the billing period",
             "format": "date",
-            "example": "2023-07-01T00:00:00.000Z"
+            "example": "2023-07-01"
           },
           "to_date": {
             "type": "string",
             "description": "End of the billing period",
             "format": "date",
-            "example": "2023-07-31T00:00:00.000Z"
+            "example": "2023-07-31"
           }
         },
         "description": "An account financial statement"
