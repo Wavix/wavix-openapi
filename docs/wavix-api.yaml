@@ -3360,7 +3360,7 @@ paths:
                     items:
                       $ref: "#/components/schemas/WidgetTokenInfo"
                   pagination:
-                    $ref: "#/components/schemas/WebrtcPagination"
+                    $ref: '#/components/schemas/Pagination'
         "401":
           description: Unauthorized
           content:
@@ -10078,36 +10078,6 @@ components:
         doc_type_id: 1
         status: approved
         url: https://api.wavix.com/v1/mydids/24882/papers/1
-    WebrtcPagination:
-      title: Pagination
-      required:
-        - current_page
-        - limit
-        - total
-        - total_pages
-      type: object
-      additionalProperties: false
-      properties:
-        current_page:
-          type: integer
-          description: Current page number
-          format: int32
-          example: 2
-        limit:
-          type: integer
-          description: Number of records per page
-          format: int32
-          example: 25
-        total:
-          type: integer
-          description: Total number of records
-          format: int32
-          example: 101
-        total_pages:
-          type: integer
-          description: Total number of pages
-          format: int32
-          example: 5
     Pagination:
       title: Pagination
       required:
