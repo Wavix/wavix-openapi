@@ -1,0 +1,16 @@
+{
+  "name": "wavix-openapi",
+  "version": "1.0.0",
+  "description": "Wavix API OpenAPI specification in JSON and YAML formats",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write \"docs/**/*.{json,yaml,yml,md}\" \"*.md\"",
+    "format:check": "prettier --check \"docs/**/*.{json,yaml,yml,md}\" \"*.md\""
+  },
+  "keywords": ["openapi", "api", "wavix"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
+}
