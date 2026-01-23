@@ -29,7 +29,7 @@ jobs:
       - name: Run Prettier
         uses: creyD/prettier_action@v4.3
         with:
-          prettier_options: --write "docs/**/*.{yaml,yml,md}" "*.md"
+          prettier_options: --write docs/**/*.{yaml,yml,md} *.md
           commit_message: 'style: auto-format with Prettier'
           only_changed: true
 
