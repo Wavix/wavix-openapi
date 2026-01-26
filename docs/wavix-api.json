@@ -3425,7 +3425,7 @@
         "deprecated": false
       }
     },
-    "/call/webhooks": {
+    "/calls/webhooks": {
       "get": {
         "tags": [
           "Call webhooks"
