@@ -5308,7 +5308,163 @@
         ]
       }
     },
-    "/messages/opt_outs": {
+    "/messages/opt-outs": {
+      "get": {
+        "tags": [
+          "SMS and MMS"
+        ],
+        "summary": "List opt-outs",
+        "description": "Use this method to retrieve a list of phone numbers that have opted out of receiving SMS messages.",
+        "operationId": "ListOptOuts",
+        "parameters": [
+          {
+            "name": "sender_id",
+            "in": "query",
+            "description": "Filter opt-outs by Sender ID",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "example": "15072429497"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "Filter opt-outs by 10DLC Campaign ID",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "example": "C123456"
+            }
+          },
+          {
+            "name": "created_after",
+            "in": "query",
+            "description": "Filter results by specifying the start date for the opt-out creation date range in the `yyyy-mm-dd` format",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2024-01-01"
+            }
+          },
+          {
+            "name": "created_before",
+            "in": "query",
+            "description": "Filter results by specifying the end date for the opt-out creation date range in the `yyyy-mm-dd` format",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2024-12-31"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Requested page",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of records per page",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of opt-outs",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "description": "A list of opt-outs",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "phone_number": {
+                            "type": "string",
+                            "description": "The phone number that has opted out",
+                            "example": "15551234567"
+                          },
+                          "sender_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "The Sender ID the phone number opted out from",
+                            "example": "15072429497"
+                          },
+                          "campaign_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "Unique identifier of a Campaign the phone number opted out from",
+                            "example": "C123456"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date and time when the opt-out was created",
+                            "example": "2024-01-15T10:30:00Z"
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                },
+                "example": {
+                  "items": [
+                    {
+                      "phone_number": "15551234567",
+                      "sender_id": "15072429497",
+                      "campaign_id": null,
+                      "created_at": "2024-01-15T10:30:00Z"
+                    }
+                  ],
+                  "pagination": {
+                    "current_page": 1,
+                    "per_page": 25,
+                    "total": 1,
+                    "total_pages": 1
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationError"
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://api.wavix.com/v3",
+            "variables": {}
+          }
+        ]
+      },
       "post": {
         "tags": [
           "SMS and MMS"
@@ -14059,13 +14215,13 @@
             "type": "string",
             "description": "Start of the billing period",
             "format": "date",
-            "example": "2023-07-01T00:00:00.000Z"
+            "example": "2023-07-01"
           },
           "to_date": {
             "type": "string",
             "description": "End of the billing period",
             "format": "date",
-            "example": "2023-07-31T00:00:00.000Z"
+            "example": "2023-07-31"
           }
         },
         "description": "An account financial statement"
