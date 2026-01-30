@@ -3775,6 +3775,97 @@ paths:
         - url: https://api.wavix.com/v3
           variables: {}
   /messages/opt_outs:
+    get:
+      tags:
+        - SMS and MMS
+      summary: Get a list of opted-out phone numbers
+      description: Use this method to retrieve a list of phone numbers that opted out of receiving SMS and MMS messages. By default, the results are paginated, with 25 records per page.
+      operationId: ListOptOuts
+      parameters:
+        - in: query
+          name: sender_id
+          schema:
+            type: string
+          description: Return only the phone numbers that opted out of a specific Sender ID.
+          example: 'MySender'
+        - in: query
+          name: campaign_id
+          schema:
+            type: string
+          description: Return only the phone numbers that opted out of a specific 10DLC Campaign.
+          example: 'C123456'
+        - in: query
+          name: created_after
+          schema:
+            type: string
+            format: date
+          description: Start date of your search time range, in 'yyyy-mm-dd' format.
+          example: '2024-01-01'
+        - in: query
+          name: created_before
+          schema:
+            type: string
+            format: date
+          description: End date of your search time range, in 'yyyy-mm-dd' format.
+          example: '2024-12-31'
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: Requested page
+          example: 1
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          description: Number of records per page.
+          example: 25
+      responses:
+        "200":
+          description: A paginated list of opted-out phone numbers that match the filter criteria.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OptOutsListResponse"
+              example:
+                items:
+                  - phone_number: "15551234567"
+                    sender_id: "MySender"
+                    campaign_id: null
+                    created_at: "2024-01-15T10:30:00Z"
+                  - phone_number: "15559876543"
+                    sender_id: null
+                    campaign_id: "C123456"
+                    created_at: "2024-01-16T14:45:00Z"
+                pagination:
+                  current_page: 1
+                  per_page: 25
+                  total: 2
+                  total_pages: 1
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "422":
+          description: Invalid date range
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Invalid date range. The created_before must be later than created_after."
+      deprecated: false
+      servers:
+        - url: https://api.wavix.com/v3
+          variables: {}
     post:
       tags:
         - SMS and MMS
@@ -10599,6 +10690,39 @@ components:
       properties:
         opt_out:
           $ref: "#/components/schemas/Optout"
+    OptOutsListResponse:
+      title: OptOutsListResponse
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OptOutItem"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    OptOutItem:
+      title: OptOutItem
+      type: object
+      properties:
+        phone_number:
+          type: string
+          description: Opted out phone number
+          example: "15551234567"
+        sender_id:
+          type: string
+          nullable: true
+          description: The Sender ID the phone number opted out of. 'null' if the number opted out of all messages sent from your account.
+          example: "MySender"
+        campaign_id:
+          type: string
+          nullable: true
+          description: The 10DLC Campaign the phone number opted out of, if any.
+          example: "C123456"
+        created_at:
+          type: string
+          format: date-time
+          description: The date the phone number opted out, in 'yyyy-mm-dd' format.
+          example: "2024-01-15T10:30:00Z"
     Transcriptionlanguage:
       title: Transcriptionlanguage
       nullable: true
