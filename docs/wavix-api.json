@@ -5313,8 +5313,8 @@
         "tags": [
           "SMS and MMS"
         ],
-        "summary": "List opt-outs",
-        "description": "Use this method to get a list of phone numbers that have opted out of receiving SMS messages.",
+        "summary": "Get a list of opted-out phone numbers",
+        "description": "Use this method to retrieve a list of phone numbers that opted out of receiving SMS and MMS messages. By default, the results are paginated, with 25 records per page.",
         "operationId": "ListOptOuts",
         "parameters": [
           {
@@ -5323,7 +5323,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Filter opt-outs by a specific Sender ID",
+            "description": "Return only the phone numbers that opted out of a specific Sender ID.",
             "example": "MySender"
           },
           {
@@ -5332,7 +5332,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Filter opt-outs by a specific 10DLC Campaign ID",
+            "description": "Return only the phone numbers that opted out of a specific 10DLC Campaign.",
             "example": "C123456"
           },
           {
@@ -5342,7 +5342,7 @@
               "type": "string",
               "format": "date"
             },
-            "description": "Get opt-outs created after a particular date (format yyyy-mm-dd)",
+            "description": "Start date of your search time range, in yyyy-mm-dd format.",
             "example": "2024-01-01"
           },
           {
@@ -5352,7 +5352,7 @@
               "type": "string",
               "format": "date"
             },
-            "description": "Get opt-outs created before a particular date (format yyyy-mm-dd)",
+            "description": "End date of your search time range, in yyyy-mm-dd format.",
             "example": "2024-12-31"
           },
           {
@@ -14536,19 +14536,19 @@
           "sender_id": {
             "type": "string",
             "nullable": true,
-            "description": "The Sender ID associated with the opt-out (null if no specific Sender ID)",
+            "description": "The Sender ID the phone number opted out of. null if the number opted out of all messages sent from your account.",
             "example": "MySender"
           },
           "campaign_id": {
             "type": "string",
             "nullable": true,
-            "description": "The 10DLC Campaign ID associated with the opt-out (null if no campaign)",
+            "description": "The 10DLC Campaign the phone number opted out of, if any.",
             "example": "C123456"
           },
           "created": {
             "type": "string",
             "format": "date-time",
-            "description": "Date and time the opt-out was created, in ISO 8601 format",
+            "description": "The date the phone number opted out, in yyyy-mm-dd format.",
             "example": "2024-01-15T10:30:00Z"
           }
         }
