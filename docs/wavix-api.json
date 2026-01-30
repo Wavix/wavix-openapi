@@ -3425,7 +3425,7 @@
         "deprecated": false
       }
     },
-    "/call/webhooks": {
+    "/calls/webhooks": {
       "get": {
         "tags": [
           "Call webhooks"
@@ -3636,7 +3636,7 @@
         "deprecated": false
       }
     },
-    "/call": {
+    "/calls": {
       "post": {
         "tags": [
           "Call control"
@@ -3762,7 +3762,7 @@
         "deprecated": false
       }
     },
-    "/call/{uuid}": {
+    "/calls/{uuid}": {
       "get": {
         "tags": [
           "Call control"
@@ -3914,9 +3914,113 @@
           }
         },
         "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Call control"
+        ],
+        "summary": "Update a call",
+        "description": "Update properties of an active call (e.g., tag).",
+        "operationId": "UpdateCall",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Call ID.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Call update parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCallRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Call updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Validation error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Access Denied"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Call not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Call not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
       }
     },
-    "/call/{uuid}/answer": {
+    "/calls/{uuid}/answer": {
       "post": {
         "tags": [
           "Call control"
@@ -4045,7 +4149,7 @@
         "deprecated": false
       }
     },
-    "/call/{uuid}/streams": {
+    "/calls/{uuid}/streams": {
       "post": {
         "tags": [
           "Call control"
@@ -4148,7 +4252,7 @@
         "deprecated": false
       }
     },
-    "/call/{uuid}/streams/{stream_uuid}": {
+    "/calls/{uuid}/streams/{stream_uuid}": {
       "delete": {
         "tags": [
           "Call control"
@@ -4213,7 +4317,7 @@
         "deprecated": false
       }
     },
-    "/call/{uuid}/play": {
+    "/calls/{uuid}/play": {
       "post": {
         "tags": [
           "Call control"
@@ -4334,7 +4438,7 @@
         "deprecated": false
       }
     },
-    "/call/{uuid}/audio": {
+    "/calls/{uuid}/audio": {
       "delete": {
         "tags": [
           "Call control"
@@ -4415,7 +4519,7 @@
         "deprecated": false
       }
     },
-    "/call/{uuid}/collect": {
+    "/calls/{uuid}/collect": {
       "post": {
         "tags": [
           "Call control"
@@ -14059,13 +14163,13 @@
             "type": "string",
             "description": "Start of the billing period",
             "format": "date",
-            "example": "2023-07-01T00:00:00.000Z"
+            "example": "2023-07-01"
           },
           "to_date": {
             "type": "string",
             "description": "End of the billing period",
             "format": "date",
-            "example": "2023-07-31T00:00:00.000Z"
+            "example": "2023-07-31"
           }
         },
         "description": "An account financial statement"
@@ -19982,7 +20086,8 @@
         "additionalProperties": false,
         "required": [
           "from",
-          "to"
+          "to",
+          "callback_url"
         ],
         "properties": {
           "from": {
@@ -19995,17 +20100,17 @@
             "description": "Destination number in E.164 format",
             "example": "+1987654321"
           },
-          "status_callback": {
+          "callback_url": {
             "type": "string",
             "description": "Webhook URL to receive call status updates",
             "example": "https://examples.com/callback"
           },
-          "call_recording": {
+          "recording": {
             "type": "boolean",
             "description": "Specifies whether to record the call",
             "default": false
           },
-          "machine_detection": {
+          "voicemail_detection": {
             "type": "boolean",
             "description": "Specifies whether the AMD is turned on for the call",
             "default": false
@@ -20015,10 +20120,10 @@
             "description": "Call metadata",
             "example": "marketing-campaign"
           },
-          "max_duration": {
+          "timeout": {
             "type": "integer",
-            "description": "Maximum call duration, in seconds",
-            "example": 300
+            "description": "Call timeout in seconds",
+            "example": 60
           }
         }
       },
@@ -20049,6 +20154,9 @@
             "description": "Call ID",
             "example": "5dccb6b0-f35c-488c-867b-86fb012c4415"
           },
+          "direction": {
+            "$ref": "#/components/schemas/CallDirection"
+          },
           "event_type": {
             "type": "string",
             "description": "The latest call event",
@@ -20090,7 +20198,7 @@
             "description": "Date and time when the call was answered",
             "example": null
           },
-          "call_finished": {
+          "call_completed": {
             "type": "string",
             "format": "date-time",
             "nullable": true,
@@ -20119,6 +20227,9 @@
             "description": "Call ID",
             "example": "5dccb6b0-f35c-488c-867b-86fb012c4415"
           },
+          "direction": {
+            "$ref": "#/components/schemas/CallDirection"
+          },
           "event_type": {
             "type": "string",
             "description": "The latest call event",
@@ -20160,7 +20271,7 @@
             "description": "Date and time when the call was answered",
             "example": null
           },
-          "call_finished": {
+          "call_completed": {
             "type": "string",
             "format": "date-time",
             "nullable": true,
@@ -20211,13 +20322,6 @@
             "type": "string",
             "description": "URL of the audio file to play",
             "example": "https://examples.com/audio.wav"
-          },
-          "delay_before_playing": {
-            "type": "integer",
-            "description": "Delay before playing the audio, in milliseconds",
-            "minimum": 0,
-            "maximum": 10000,
-            "example": 1000
           }
         }
       },
@@ -20225,13 +20329,6 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "min_digits": {
-            "type": "integer",
-            "description": "Specifies the minimum number of digits to collect",
-            "minimum": 1,
-            "maximum": 20,
-            "example": 1
-          },
           "max_digits": {
             "type": "integer",
             "description": "Specifies the maximum number of digits to collect",
@@ -20251,32 +20348,42 @@
             "description": "Character that ends digit collection",
             "example": "#"
           },
-          "audio": {
-            "$ref": "#/components/schemas/CollectDtmfAudioRequest"
+          "max_attempts": {
+            "type": "integer",
+            "description": "Maximum number of attempts for digit collection",
+            "example": 3
           },
-          "callback_url": {
-            "type": "string",
-            "description": "URL to receive digit collection results",
-            "example": "https://examples.com/dtmf-callback"
-          }
-        }
-      },
-      "CollectDtmfAudioRequest": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "url"
-        ],
-        "properties": {
-          "url": {
-            "type": "string",
-            "description": "URL of the audio file to play before digit collection",
-            "example": "https://examples.com/prompt.wav"
-          },
-          "stop_on_keypress": {
-            "type": "boolean",
-            "description": "Stop audio playback when a digit is pressed",
-            "default": true
+          "prompt": {
+            "type": "object",
+            "description": "Prompt to play before digit collection",
+            "properties": {
+              "play": {
+                "type": "string",
+                "description": "URL of the audio file to play",
+                "example": "https://examples.com/prompt.wav"
+              },
+              "say": {
+                "type": "object",
+                "description": "Text-to-speech configuration",
+                "required": [
+                  "text",
+                  "voice"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Text to be spoken",
+                    "example": "Please enter your PIN"
+                  },
+                  "language": {
+                    "$ref": "#/components/schemas/TtsLanguage"
+                  },
+                  "voice": {
+                    "$ref": "#/components/schemas/TtsVoiceId"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -20301,22 +20408,19 @@
             "example": "wss://examples.com/stream"
           },
           "stream_type": {
-            "type": "string",
-            "enum": [
-              "oneway",
-              "twoway"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StreamType"
+              }
             ],
-            "description": "Specifies the streaming type. Can be either `oneway` for unidirectional or `twoway` for bidirectional streaming.",
             "example": "twoway"
           },
           "stream_channel": {
-            "type": "string",
-            "enum": [
-              "inbound",
-              "outbound",
-              "both"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StreamChannel"
+              }
             ],
-            "description": "Specifies which audio channel to stream.\nUse `inbound` to stream the incoming channel (to Wavix), `outbound` for the outbound channel (from Wavix), or `both` to stream both.\nFor bidirectional call streaming, this setting is ignored and the inbound channel is only streamed.",
             "example": "inbound"
           }
         }
@@ -20400,22 +20504,19 @@
             "example": "wss://examples.com/stream"
           },
           "stream_type": {
-            "type": "string",
-            "enum": [
-              "oneway",
-              "twoway"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StreamType"
+              }
             ],
-            "description": "Specifies the streaming type. Can be either `oneway` for unidirectional or `twoway` for bidirectional streaming.",
             "example": "twoway"
           },
           "stream_channel": {
-            "type": "string",
-            "enum": [
-              "inbound",
-              "outbound",
-              "both"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StreamChannel"
+              }
             ],
-            "description": "Specifies which audio channel to stream.\nUse `inbound` to stream the incoming channel (to Wavix), `outbound` for the outbound channel (from Wavix), or `both` to stream both.\nFor bidirectional call streaming, this setting is ignored and the inbound channel is only streamed.",
             "example": "inbound"
           }
         }
@@ -20445,6 +20546,87 @@
             "example": true
           }
         }
+      },
+      "UpdateCallRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tag"
+        ],
+        "properties": {
+          "tag": {
+            "type": "string",
+            "description": "Call metadata tag",
+            "example": "marketing-campaign"
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Indicates that the request was successful",
+            "example": true
+          }
+        }
+      },
+      "StreamType": {
+        "type": "string",
+        "enum": [
+          "oneway",
+          "twoway"
+        ],
+        "description": "Specifies the streaming type. Can be either `oneway` for unidirectional or `twoway` for bidirectional streaming."
+      },
+      "StreamChannel": {
+        "type": "string",
+        "enum": [
+          "inbound",
+          "outbound",
+          "both"
+        ],
+        "description": "Specifies which audio channel to stream. Use `inbound` to stream the incoming channel (to Wavix), `outbound` for the outbound channel (from Wavix), or `both` to stream both. For bidirectional call streaming, this setting is ignored and the inbound channel is only streamed."
+      },
+      "CallDirection": {
+        "type": "string",
+        "enum": [
+          "inbound",
+          "outbound"
+        ],
+        "description": "Call direction - inbound or outbound"
+      },
+      "TtsLanguage": {
+        "type": "string",
+        "enum": [
+          "ru",
+          "en",
+          "sp",
+          "ge"
+        ],
+        "description": "Language for text-to-speech"
+      },
+      "TtsVoiceId": {
+        "type": "string",
+        "enum": [
+          "Ivy",
+          "Joanna",
+          "Kendra",
+          "Kimberly",
+          "Salli",
+          "Joey",
+          "Justin",
+          "Matthew",
+          "Conchita",
+          "Lucia",
+          "Enrique",
+          "Marlene",
+          "Vicki",
+          "Hans",
+          "Tatyana",
+          "Maxim"
+        ],
+        "description": "Voice ID for text-to-speech"
       }
     },
     "securitySchemes": {
