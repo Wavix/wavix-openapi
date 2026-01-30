@@ -1515,7 +1515,7 @@ paths:
           schema:
             type: string
             format: date
-            example:" 2023-01-01"
+            example: "2023-01-01"
         - name: to
           in: query
           description: End date of your search time range, in `yyyy-mm-dd`
@@ -1950,13 +1950,14 @@ paths:
       tags:
         - Call recording
       summary: List call recordings
-      description: Use this method to retrieve a list of call recordings. By default,
-        the results are paginated, with 25 records per page.
+      description: Use this method to retrieve a list of call recordings. 
+        By default, the results are paginated, with 25 records per page.
       operationId: Getcallrecordings
       parameters:
         - name: from_date
           in: query
-          description: Start date of your search time range, in `yyyy-mm-dd` format.
+          description: Start date of your search time range, 
+            in `yyyy-mm-dd` format.
           required: false
           style: form
           explode: true
@@ -1966,7 +1967,8 @@ paths:
             example: "2023-01-01"
         - name: to_date
           in: query
-          description: End date of your search time range, in `yyyy-mm-dd` format.
+          description: End date of your search time range, 
+            in `yyyy-mm-dd` format.
           required: false
           style: form
           explode: true
