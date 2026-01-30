@@ -3799,14 +3799,14 @@ paths:
           schema:
             type: string
             format: date
-          description: Start date of your search time range, in yyyy-mm-dd format.
+          description: Start date of your search time range, in 'yyyy-mm-dd' format.
           example: '2024-01-01'
         - in: query
           name: created_before
           schema:
             type: string
             format: date
-          description: End date of your search time range, in yyyy-mm-dd format.
+          description: End date of your search time range, in 'yyyy-mm-dd' format.
           example: '2024-12-31'
         - in: query
           name: page
@@ -10711,7 +10711,7 @@ components:
         sender_id:
           type: string
           nullable: true
-          description: The Sender ID the phone number opted out of. null if the number opted out of all messages sent from your account.
+          description: The Sender ID the phone number opted out of. 'null' if the number opted out of all messages sent from your account.
           example: "MySender"
         campaign_id:
           type: string
@@ -10721,7 +10721,7 @@ components:
         created_at:
           type: string
           format: date-time
-          description: The date the phone number opted out, in yyyy-mm-dd format.
+          description: The date the phone number opted out, in 'yyyy-mm-dd' format.
           example: "2024-01-15T10:30:00Z"
     Transcriptionlanguage:
       title: Transcriptionlanguage
