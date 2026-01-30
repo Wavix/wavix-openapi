@@ -2858,44 +2858,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
         "400":
-          description: Validation error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Validation error
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Access denied
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Access Denied
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          description: Call not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Call not found
+          $ref: "#/components/responses/NotFoundError"
       deprecated: false
   "/calls/{uuid}/answer":
     post:
