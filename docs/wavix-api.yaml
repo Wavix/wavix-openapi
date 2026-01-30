@@ -3835,11 +3835,11 @@ paths:
                   - phone_number: "15551234567"
                     sender_id: "MySender"
                     campaign_id: null
-                    created: "2024-01-15T10:30:00Z"
+                    created_at: "2024-01-15T10:30:00Z"
                   - phone_number: "15559876543"
                     sender_id: null
                     campaign_id: "C123456"
-                    created: "2024-01-16T14:45:00Z"
+                    created_at: "2024-01-16T14:45:00Z"
                 pagination:
                   current_page: 1
                   per_page: 25
@@ -10718,7 +10718,7 @@ components:
           nullable: true
           description: The 10DLC Campaign the phone number opted out of, if any.
           example: "C123456"
-        created:
+        created_at:
           type: string
           format: date-time
           description: The date the phone number opted out, in yyyy-mm-dd format.
