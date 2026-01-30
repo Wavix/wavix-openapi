@@ -5362,7 +5362,7 @@
               "type": "integer",
               "minimum": 1
             },
-            "description": "Page number for pagination",
+            "description": "Requested page",
             "example": 1
           },
           {
@@ -5373,13 +5373,13 @@
               "minimum": 1,
               "maximum": 100
             },
-            "description": "Number of records per page (default 25)",
+            "description": "Number of records per page.",
             "example": 25
           }
         ],
         "responses": {
           "200": {
-            "description": "A paginated list of opt-outs",
+            "description": "A paginated list of opted-out phone numbers that match the filter criteria.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5391,13 +5391,13 @@
                       "phone_number": "15551234567",
                       "sender_id": "MySender",
                       "campaign_id": null,
-                      "created": "2024-01-15T10:30:00Z"
+                      "created_at": "2024-01-15T10:30:00Z"
                     },
                     {
                       "phone_number": "15559876543",
                       "sender_id": null,
                       "campaign_id": "C123456",
-                      "created": "2024-01-16T14:45:00Z"
+                      "created_at": "2024-01-16T14:45:00Z"
                     }
                   ],
                   "pagination": {
@@ -14530,8 +14530,8 @@
         "properties": {
           "phone_number": {
             "type": "string",
-            "description": "The unsubscribed phone number",
-            "example": "+15551234567"
+            "description": "Opted out phone number",
+            "example": "15551234567"
           },
           "sender_id": {
             "type": "string",
@@ -14545,7 +14545,7 @@
             "description": "The 10DLC Campaign the phone number opted out of, if any.",
             "example": "C123456"
           },
-          "created": {
+          "created_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date the phone number opted out, in yyyy-mm-dd format.",
