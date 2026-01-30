@@ -3813,7 +3813,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: Page number for pagination
+          description: Requested page
           example: 1
         - in: query
           name: per_page
@@ -3821,11 +3821,11 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
-          description: Number of records per page (default 25)
+          description: Number of records per page.
           example: 25
       responses:
         "200":
-          description: A paginated list of opt-outs
+          description: A paginated list of opted-out phone numbers that match the filter criteria.
           content:
             application/json:
               schema:
@@ -10706,8 +10706,8 @@ components:
       properties:
         phone_number:
           type: string
-          description: The unsubscribed phone number
-          example: "+15551234567"
+          description: Opted out phone number
+          example: "15551234567"
         sender_id:
           type: string
           nullable: true
