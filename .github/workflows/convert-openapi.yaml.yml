@@ -1,0 +1,38 @@
+name: Convert OpenAPI YAML to JSON
+
+on:
+  pull_request:
+    paths:
+      - "docs/wavix-api.yaml"
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Swagger CLI
+        run: npm install -g swagger-cli
+
+      - name: Convert YAML to JSON
+        run: swagger-cli bundle docs/wavix-api.yaml --outfile docs/wavix-api.json --type json
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git fetch origin ${{ github.event.pull_request.head.ref }}
+          git checkout -B ${{ github.event.pull_request.head.ref }} origin/${{ github.event.pull_request.head.ref }}
+          git add docs/wavix-api.json
+          git commit -m "Auto-update wavix-api.json from wavix-api.yaml" || echo "No changes to commit"
+          git pull --rebase origin ${{ github.event.pull_request.head.ref }}
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
