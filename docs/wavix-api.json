@@ -314,7 +314,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -486,7 +486,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -498,7 +498,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -550,7 +550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -600,7 +600,7 @@
         "responses": {
           "200": {
             "headers": {},
-            "description": "",
+            "description": "Request successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -684,7 +684,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -787,7 +787,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -908,7 +908,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1049,7 +1049,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1382,7 +1382,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1444,7 +1444,7 @@
         "operationId": "CheckoutDIDnumbers",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -1473,7 +1473,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1600,7 +1600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1653,7 +1653,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1729,7 +1729,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1809,7 +1809,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -1951,7 +1951,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -2266,7 +2266,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -2295,7 +2295,7 @@
         "operationId": "Searchforcallscontainingspecifickeywordsorphrases",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -2307,7 +2307,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -2424,7 +2424,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -3113,7 +3113,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -3379,7 +3379,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "content": {
               "audio/wav": {
                 "schema": {
@@ -5074,7 +5074,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -5109,7 +5109,7 @@
         "operationId": "ProvisionanewSenderID",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -5121,7 +5121,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -5190,7 +5190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -5241,7 +5241,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -5477,7 +5477,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -5803,7 +5803,7 @@
                   "$ref": "#/components/schemas/Messagedeliverystatus"
                 },
                 {
-                  "description": ""
+                  "description": "Filter messages by delivery status."
                 }
               ]
             }
@@ -5861,7 +5861,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -5949,7 +5949,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -6114,7 +6114,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {
               "Content-Type": {
                 "description": "application/x-ndjson",
@@ -6309,7 +6309,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -6428,7 +6428,7 @@
         "operationId": "Registera10DLCBrand",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -6440,7 +6440,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -6554,7 +6554,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -6657,7 +6657,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -6669,7 +6669,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -6823,7 +6823,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -6927,7 +6927,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7035,7 +7035,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7193,7 +7193,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7304,7 +7304,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7411,7 +7411,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/octet-stream": {
@@ -7485,7 +7485,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7570,7 +7570,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -7582,7 +7582,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7653,7 +7653,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -7665,7 +7665,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7765,7 +7765,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7841,7 +7841,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -7853,7 +7853,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -7958,7 +7958,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -8123,7 +8123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -8354,7 +8354,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -8614,7 +8614,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -8799,7 +8799,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -8811,7 +8811,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -8985,7 +8985,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9161,7 +9161,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -9173,7 +9173,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9345,7 +9345,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9418,7 +9418,7 @@
         "operationId": "SubscribetoWavix10DLCevents",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -9430,7 +9430,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "Resource created successfully.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9483,7 +9483,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9550,7 +9550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9640,7 +9640,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9749,7 +9749,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9849,7 +9849,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -9971,7 +9971,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -10099,7 +10099,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -10192,7 +10192,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -10273,7 +10273,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -10472,7 +10472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -10556,7 +10556,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -10718,7 +10718,7 @@
         "operationId": "Createanew2FAVerification",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -10730,7 +10730,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11013,7 +11013,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -11025,7 +11025,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11111,7 +11111,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Request body containing the required parameters.",
           "content": {
             "application/json": {
               "schema": {
@@ -11123,7 +11123,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11207,7 +11207,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11307,7 +11307,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11316,7 +11316,7 @@
                   "items": {
                     "$ref": "#/components/schemas/2FAVerificationEvent"
                   },
-                  "description": "",
+                  "description": "List of 2FA verification events.",
                   "example": [
                     {
                       "created_at": "2022-02-16T13:41:38.000Z",
@@ -11495,7 +11495,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11619,7 +11619,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11683,7 +11683,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/pdf": {
@@ -11733,7 +11733,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11763,7 +11763,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11792,7 +11792,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -12252,7 +12252,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Request successful.",
             "headers": {},
             "content": {
               "application/json": {
@@ -16628,7 +16628,7 @@
             "items": {
               "$ref": "#/components/schemas/DIDAvailableforPurchase"
             },
-            "description": ""
+            "description": "List of DIDs available for purchase."
           },
           "pagination": {
             "$ref": "#/components/schemas/Pagination"
@@ -17990,7 +17990,7 @@
             "example": "Find the company incorporation docs attached and please review the Brand Identity status."
           }
         },
-        "description": ""
+        "description": "Request to appeal a Brand Identity verification decision."
       },
       "10DLCBrandIdentityverificationappeal": {
         "title": "10DLCBrandIdentityverificationappeal",
@@ -18059,7 +18059,7 @@
             "example": "Dear partner, please review the uploaded company registration docs."
           }
         },
-        "description": "",
+        "description": "Brand Identity verification appeal details and status.",
         "example": {
           "categories": [
             "VERIFY_TAX_ID"
@@ -18096,7 +18096,7 @@
             "description": "A human-readable error description"
           }
         },
-        "description": "",
+        "description": "TCR error message structure.",
         "example": {
           "code": "TFTI01",
           "message": "The submitted US EIN is invalid."
@@ -18182,7 +18182,7 @@
             ]
           }
         },
-        "description": ""
+        "description": "TCR feedback object containing appeal outcome details."
       },
       "TCRFeedbackobject": {
         "title": "TCRFeedbackobject",
@@ -18200,7 +18200,7 @@
             "description": "The feedback category"
           }
         },
-        "description": ""
+        "description": "TCR feedback object with category and optional attributes."
       },
       "10DLCBrandappealevidence": {
         "title": "10DLCBrandappealevidence",
@@ -18234,7 +18234,7 @@
             "example": "191eb205-8357-4d71-b8da-160a25a000d7"
           }
         },
-        "description": "",
+        "description": "Evidence file attached to a 10DLC Brand appeal.",
         "example": {
           "file_name": "image.png",
           "mime_type": "image/png",
@@ -18322,7 +18322,7 @@
             "example": "Company size as reported by government or business sources resulted in a score deduction: size range 6-10"
           }
         },
-        "description": ""
+        "description": "External vetting feedback and score details."
       },
       "10DLCBrandexternalvettingrequest": {
         "title": "10DLCBrandexternalvettingrequest",
@@ -18344,7 +18344,7 @@
             "example": "STANDARD"
           }
         },
-        "description": ""
+        "description": "Request to initiate external vetting for a 10DLC Brand."
       },
       "Importa10DLCBrandexternalvettingrequest": {
         "title": "Importa10DLCBrandexternalvettingrequest",
@@ -18372,7 +18372,7 @@
             "example": "3oDcE1vq8OR43claMa6Thu/7V4vzZywAfKRgiJnXDjlw+08wpWbGqOssAXKgeZibHCLaGgXvU/yPb7kISeeb5qGdisGRLdhPnSNpvRR82RnCWYNpTp92orlJWjTJU8ZGmNxL5MwK0tt/9SxCha36iTtPV2+4vND8xCPe5suItuQTonG4A3Yi6F1LMqihgwdesRjxJnKqcE7Thcv9ug1NyNPYEZQvPugFj2F2DdU6jFZcOWgXsnE7ucZ+xNaNX9LkF9if3v0hrcviG9L8bUUrpPBGr02txP0i+cPBTLbj4Rq1Ox83R+WUx1gnoXHCIU1ByDGWvQq2Ef4qxGVOwPJHJbja1BovxKBk4YJxiz8OSO68QAIEfxuPTpj5eZz7KEFtFmBIVaVmxBDe4b8Tpl01C2rek7xgPzXaoURvh7CQVnVmJL00DTWKvyOmUOQQW901XEcgcJ7VWgfIvxhIMuXEXXtVDGNowmEc9JQXXYHVlGuN5QicSbApkwwqRZI7TQ4lsS66zCfqomIIJyBNRJpl+8sGwsa2J2h6fEkAD77J9zdUgIKXMFamHbvRadCKMZNIbMrkOC7PuOjZdSiWKh5A8FSjzkv3PlN2hRDqkaODEoodp5pTQeBtNe37+uAMOuHNfsZXlwvfMgCZjiZJ9HQNSLhJBUq7/IvT/EzszUk4HPTj/WFSbT1YrrkDi+zrB20ZDY9lZFWxN1hlYQoNcanDAAWPmw/yW1+8DroL5WIMGsXX3WFGOG7eWB1GHgFQsziAeRQl78u1qOvsRMN08+GrkASBJwqwy5l7xCesUKqbz3O0QA/dwzzsWIDvFPavZpjqMBSjRTurQLFahAaGmdY0BX/Ii+s2+OxfaHQIa1lgucm0P7GPKeZvLX/8boO01Onr/87ra+NX7ABvQb+SXvwsg+Bm5CziWB6DMKDKRD/KQjHxpjIY35UwSEW7G4ixux7ufizXttthHfPJWd/rWFhfYigFhVLgIPCR12smwFVuZwM7ujvY2CIM0X4E0dsX9uVHkgYmqRIdNf5vshpmRuIcHsXZpTJP/tD7zQM6m214c5xkJSfAVIaD7WzRYS4eVL+R3z4u+6n5p6FjuWSjSzuEffUai3HCWjes4JbtDSjIwoG0tOMtBukgPbreH+pjXcvnhU+1QhCV2aIdG6C3FmaI5Uoo/mthJyiFAThwtOpxQ5YkdsRunqVVEFYZfMNEn4Ig2clCFrLOm46JB2wPcLGP2MoH5RqajYzQ6IV8IXIFQVzG0C7HoHsBkVp+GrpnH6N0FCKR+fpbGjigM2lLf4pYBhChUY4ao9hvV1hd8ikS6QoasvDLPytBBa1YAwbSa8d7YdwO6fXfQqetfS8S9gbHD0zxazw5p9Lp5fXFmajDNkD2voYNMzOHJMMHG/49pWV2"
           }
         },
-        "description": ""
+        "description": "External vetting request for a 10DLC Brand."
       },
       "Brandexternalvettingappealrequest": {
         "title": "Brandexternalvettingappealrequest",
@@ -18419,7 +18419,7 @@
             "example": "48c0ffaa-4e51-4d44-3982-08dcb9856232"
           }
         },
-        "description": ""
+        "description": "Request to appeal an external vetting decision for a 10DLC Brand."
       },
       "10DLCBrandextvettingappealoutcome": {
         "title": "10DLCBrandextvettingappealoutcome",
@@ -18453,7 +18453,7 @@
             ]
           }
         },
-        "description": "",
+        "description": "Outcome of an external vetting appeal including status and score.",
         "example": {
           "vet_status": "ACTIVE",
           "vet_score": 80,
@@ -18483,7 +18483,7 @@
             ]
           }
         },
-        "description": "",
+        "description": "Human-readable feedback reasons from the external vetting provider.",
         "example": {
           "reasons": [
             "Company size as reported by government or business sources resulted in a score deduction: size range 6-10."
@@ -18587,7 +18587,7 @@
             "example": "48c0ffaa-4e51-4d44-3982-08dcb9856232"
           }
         },
-        "description": "",
+        "description": "External vetting appeal outcome with feedback details.",
         "example": {
           "appeal_outcome": {
             "vet_status": "ACTIVE",
@@ -18723,7 +18723,7 @@
             "nullable": true
           }
         },
-        "description": "",
+        "description": "10DLC campaign qualification result with MNO metadata.",
         "example": {
           "att_mms_tpm": null,
           "att_msg_class": null,
@@ -18771,7 +18771,7 @@
             "example": "2FA"
           }
         },
-        "description": "",
+        "description": "10DLC Brand use case qualification result.",
         "example": {
           "mno_metadata": [
             {
@@ -19039,7 +19039,7 @@
             ]
           }
         },
-        "description": "",
+        "description": "10DLC campaign details including associated numbers.",
         "example": {
           "affiliate_marketing": false,
           "age_gated": false,
@@ -19344,7 +19344,7 @@
             "example": "https://site.com/terms-and-conditions"
           }
         },
-        "description": "",
+        "description": "10DLC campaign registration or update request.",
         "example": {
           "affiliate_marketing": false,
           "age_gated": false,
@@ -19577,7 +19577,7 @@
             "example": "https://webhook.url"
           }
         },
-        "description": "",
+        "description": "10DLC event subscription configuration.",
         "example": {
           "subscription_category": "brand",
           "url": "https://webhook.url"
@@ -19603,7 +19603,7 @@
             "example": "APPROVED"
           }
         },
-        "description": ""
+        "description": "Phone numbers associated with a 10DLC campaign."
       },
       "10DLCCampaignNumbers": {
         "title": "10DLCCampaignNumbers",
@@ -20727,19 +20727,19 @@
     },
     {
       "name": "Billing",
-      "description": ""
+      "description": "Billing, transactions, and invoicing"
     },
     {
       "name": "Profile",
-      "description": ""
+      "description": "Account profile and customer information"
     },
     {
       "name": "CDRs",
-      "description": ""
+      "description": "Call detail records and call history"
     },
     {
       "name": "Speech Analytics",
-      "description": ""
+      "description": "Call transcription and speech analytics"
     },
     {
       "name": "SMS and MMS",
@@ -20747,15 +20747,15 @@
     },
     {
       "name": "Number Validator",
-      "description": ""
+      "description": "Phone number validation"
     },
     {
       "name": "Link shortener",
-      "description": ""
+      "description": "Short link creation and metrics"
     },
     {
       "name": "2FA",
-      "description": ""
+      "description": "Two-factor authentication verification"
     },
     {
       "name": "10DLC",
