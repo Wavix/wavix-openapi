@@ -54,7 +54,7 @@ paths:
                     - '10.0.0.1'
                   created_at: '2024-01-15T10:30:00Z'
         '403':
-          $ref: "#/components/schemas/ForbiddenErrorResponse"
+          $ref: "#/components/responses/ForbiddenError"
     post:
       summary: Create a new API key
       description: >-
@@ -93,7 +93,7 @@ paths:
                   - '10.0.0.1'
                 created_at: '2024-01-15T10:30:00Z'
         '403':
-          $ref: "#/components/schemas/ForbiddenErrorResponse"
+          $ref: "#/components/responses/ForbiddenError"
         "422":
           description: Failed to create an API key
           content:
@@ -135,7 +135,7 @@ paths:
                     type: boolean
                     example: true
         '403':
-          $ref: "#/components/schemas/ForbiddenErrorResponse"
+          $ref: "#/components/responses/ForbiddenError"
         '404':
           $ref: "#/components/responses/NotFoundError"
   /api-keys/{id}/activate:
@@ -166,7 +166,7 @@ paths:
                     type: boolean
                     example: true
         '403':
-          $ref: "#/components/schemas/ForbiddenErrorResponse"
+          $ref: "#/components/responses/ForbiddenError"
         '404':
           $ref: "#/components/responses/NotFoundError"
   /api-keys/{id}/deactivate:
@@ -197,7 +197,7 @@ paths:
                     type: boolean
                     example: true
         '403':
-          $ref: "#/components/schemas/ForbiddenErrorResponse"
+          $ref: "#/components/responses/ForbiddenError"
         '404':
           $ref: "#/components/responses/NotFoundError"
   /trunks:
@@ -3890,9 +3890,6 @@ paths:
                 - $ref: "#/components/schemas/MessagesOptOutsRequest"
                 - description: A request to opt out a phone number from receiving further
                     communications
-                  example:
-                    phone_number: "+15551234567"
-                    sender_id: fc34ba88-1eee-476e-b09e-dae63dc441e0
         required: true
       responses:
         "201":
