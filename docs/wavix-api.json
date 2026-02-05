@@ -5463,11 +5463,7 @@
                     "$ref": "#/components/schemas/MessagesOptOutsRequest"
                   },
                   {
-                    "description": "A request to opt out a phone number from receiving further communications",
-                    "example": {
-                      "phone_number": "+15551234567",
-                      "sender_id": "fc34ba88-1eee-476e-b09e-dae63dc441e0"
-                    }
+                    "description": "A request to opt out a phone number from receiving further communications"
                   }
                 ]
               }
