@@ -15,11 +15,11 @@ info:
     email: support@wavix.com
   version: "1.0"
 servers:
-  - url: https://api.wavix.com/v1
-    description: https://api.wavix.com/v1
+  - url: https://api.wavix.com
+    description: https://api.wavix.com
     variables: {}
 paths:
-  /api-keys:
+  /v1/api-keys:
     get:
       summary: List API keys
       description: >-
@@ -107,7 +107,7 @@ paths:
                   message:
                     type: string
                     example: 'IP address has an incorrect format'
-  /api-keys/{id}:
+  /v1/api-keys/{id}:
     delete:
       summary: Delete an API key
       description: >-
@@ -138,7 +138,7 @@ paths:
           $ref: "#/components/responses/ForbiddenError"
         '404':
           $ref: "#/components/responses/NotFoundError"
-  /api-keys/{id}/activate:
+  /v1/api-keys/{id}/activate:
     patch:
       summary: Activate an API key
       description: >-
@@ -169,7 +169,7 @@ paths:
           $ref: "#/components/responses/ForbiddenError"
         '404':
           $ref: "#/components/responses/NotFoundError"
-  /api-keys/{id}/deactivate:
+  /v1/api-keys/{id}/deactivate:
     patch:
       summary: Deactivate an API key
       description: >-
@@ -200,7 +200,7 @@ paths:
           $ref: "#/components/responses/ForbiddenError"
         '404':
           $ref: "#/components/responses/NotFoundError"
-  /trunks:
+  /v1/trunks:
     get:
       tags:
         - SIP trunks
@@ -280,7 +280,7 @@ paths:
                     type: string
                     example: Caller ID must be a verified number in E.164 format
       deprecated: false
-  "/trunks/{id}":
+  "/v1/trunks/{id}":
     get:
       tags:
         - SIP trunks
@@ -391,7 +391,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  /buy/countries:
+  /v1/buy/countries:
     get:
       tags:
         - Buy
@@ -435,7 +435,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-  "/buy/countries/{country}/regions":
+  "/v1/buy/countries/{country}/regions":
     get:
       tags:
         - Buy
@@ -499,7 +499,7 @@ paths:
         "422":
           $ref: "#/components/responses/CountryNoRegionsError"
       deprecated: false
-  "/buy/countries/{country}/cities":
+  "/v1/buy/countries/{country}/cities":
     get:
       tags:
         - Buy
@@ -568,7 +568,7 @@ paths:
                     type: string
                     example: An object with the specified ID is not found
       deprecated: false
-  "/buy/countries/{country}/regions/{region}/cities":
+  "/v1/buy/countries/{country}/regions/{region}/cities":
     get:
       tags:
         - Buy
@@ -646,7 +646,7 @@ paths:
                     type: string
                     example: An object with the specified ID is not found
       deprecated: false
-  "/buy/countries/{country}/cities/{city}/dids":
+  "/v1/buy/countries/{country}/cities/{city}/dids":
     get:
       tags:
         - Buy
@@ -743,7 +743,7 @@ paths:
                     type: string
                     example: An object with the specified ID is not found
       deprecated: false
-  /buy/cart:
+  /v1/buy/cart:
     put:
       tags:
         - Cart
@@ -964,7 +964,7 @@ paths:
                     example: At least one DID with ID specified
                      in the request was not found
       deprecated: false
-  /buy/cart/checkout:
+  /v1/buy/cart/checkout:
     post:
       tags:
         - Cart
@@ -1026,7 +1026,7 @@ paths:
                     example: At least one DID with ID specified
                      in the request was not found
       deprecated: false
-  /mydids:
+  /v1/mydids:
     get:
       tags:
         - My numbers
@@ -1160,7 +1160,7 @@ paths:
                     type: string
                     example: DID with id=1848 not found
       deprecated: false
-  "/mydids/{id}":
+  "/v1/mydids/{id}":
     get:
       tags:
         - My numbers
@@ -1263,7 +1263,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  /mydids/update-sms-enabled:
+  /v1/mydids/update-sms-enabled:
     put:
       tags:
         - My numbers
@@ -1332,7 +1332,7 @@ paths:
                     example: Inbound SMS can only be activated
                      on US and CA phone numbers
       deprecated: false
-  /mydids/update-destinations:
+  /v1/mydids/update-destinations:
     post:
       tags:
         - My numbers
@@ -1388,7 +1388,7 @@ paths:
                 message: Request failed. An object with the specified
                  ID is not found.
       deprecated: false
-  /mydids/papers:
+  /v1/mydids/papers:
     post:
       tags:
         - My numbers
@@ -1492,7 +1492,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-  /cdr:
+  /v1/cdr:
     get:
       tags:
         - CDRs
@@ -1649,7 +1649,7 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/CDRswithtranscription"
       deprecated: false
-  "/cdr/{cdr_uuid}/retranscribe":
+  "/v1/cdr/{cdr_uuid}/retranscribe":
     put:
       tags:
         - CDRs
@@ -1725,7 +1725,7 @@ paths:
         "422":
           $ref: "#/components/responses/ValidationError"
       deprecated: false
-  "/cdr/{cdr_uuid}/transcription":
+  "/v1/cdr/{cdr_uuid}/transcription":
     get:
       tags:
         - CDRs
@@ -1769,7 +1769,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  "/cdr/{uuid}":
+  "/v1/cdr/{uuid}":
     get:
       tags:
         - CDRs
@@ -1805,7 +1805,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  /cdr/all:
+  /v1/cdr/all:
     get:
       tags:
         - CDRs
@@ -1945,7 +1945,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-  /recordings:
+  /v1/recordings:
     get:
       tags:
         - Call recording
@@ -2054,7 +2054,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-  "/recordings/{cdr_uuid}":
+  "/v1/recordings/{cdr_uuid}":
     get:
       tags:
         - Call recording
@@ -2102,7 +2102,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  "/recordings/{id}":
+  "/v1/recordings/{id}":
     delete:
       tags:
         - Call recording
@@ -2156,7 +2156,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  /speech-analytics:
+  /v1/speech-analytics:
     post:
       tags:
         - Speech Analytics
@@ -2249,7 +2249,7 @@ paths:
                     type: string
                     example: The callback_url must be a valid URL address
       deprecated: false
-  "/speech-analytics/{uuid}":
+  "/v1/speech-analytics/{uuid}":
     get:
       tags:
         - Speech Analytics
@@ -2432,7 +2432,7 @@ paths:
                     type: string
                     example: The callback_url must be a valid URL address
       deprecated: false
-  "/speech-analytics/{uuid}/file":
+  "/v1/speech-analytics/{uuid}/file":
     get:
       tags:
         - Speech Analytics
@@ -2479,7 +2479,7 @@ paths:
                     type: string
                     example: Request failed. An object with the specified ID is not found.
       deprecated: false
-  /calls/webhooks:
+  /v1/calls/webhooks:
     get:
       tags:
         - Call webhooks
@@ -2645,7 +2645,7 @@ paths:
         "422":
           $ref: "#/components/responses/ValidationError"
       deprecated: false
-  /calls:
+  /v1/calls:
     post:
       tags:
         - Call control
@@ -2728,7 +2728,7 @@ paths:
                     type: string
                     example: Access Denied
       deprecated: false
-  "/calls/{uuid}":
+  "/v1/calls/{uuid}":
     get:
       tags:
         - Call control
@@ -2864,7 +2864,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  "/calls/{uuid}/answer":
+  "/v1/calls/{uuid}/answer":
     post:
       tags:
         - Call control
@@ -2967,7 +2967,7 @@ paths:
                     type: string
                     example: Call with ID=5dcb6b0-f35c-488c-867b-86fb012c4415 not found
       deprecated: false
-  "/calls/{uuid}/streams":
+  "/v1/calls/{uuid}/streams":
     post:
       tags:
         - Call control
@@ -3045,7 +3045,7 @@ paths:
                     type: string
                     example: Access Denied
       deprecated: false
-  "/calls/{uuid}/streams/{stream_uuid}":
+  "/v1/calls/{uuid}/streams/{stream_uuid}":
     delete:
       tags:
         - Call control
@@ -3088,7 +3088,7 @@ paths:
                     type: string
                     example: Access Denied
       deprecated: false
-  "/calls/{uuid}/play":
+  "/v1/calls/{uuid}/play":
     post:
       tags:
         - Call control
@@ -3167,7 +3167,7 @@ paths:
                     type: string
                     example: call not found
       deprecated: false
-  "/calls/{uuid}/audio":
+  "/v1/calls/{uuid}/audio":
     delete:
       tags:
         - Call control
@@ -3220,7 +3220,7 @@ paths:
                     type: string
                     example: Call not found
       deprecated: false
-  "/calls/{uuid}/collect":
+  "/v1/call/{uuid}/collect":
     post:
       tags:
         - Call control
@@ -3294,7 +3294,7 @@ paths:
                     type: string
                     example: Call not found
       deprecated: false
-  /webrtc/tokens:
+  /v2/webrtc/tokens:
     post:
       tags:
         - Wavix Embeddable
@@ -3369,9 +3369,6 @@ paths:
                   message:
                     type: string
                     example: Request failed. SIP trunk with ID sip_trunk is not found.
-      servers:
-        - url: https://api.wavix.com/v2
-          variables: {}
       deprecated: false
     get:
       tags:
@@ -3422,11 +3419,8 @@ paths:
                   message:
                     type: string
                     example: Request failed. The feature is disabled for the account.
-      servers:
-        - url: https://api.wavix.com/v2
-          variables: {}
       deprecated: false
-  "/webrtc/tokens/{uuid}":
+  "/v2/webrtc/tokens/{uuid}":
     get:
       tags:
         - Wavix Embeddable
@@ -3488,9 +3482,6 @@ paths:
                   message:
                     type: string
                     example: Request failed. Widget token with ID uuid is not found.
-      servers:
-        - url: https://api.wavix.com/v2
-          variables: {}
       deprecated: false
     put:
       tags:
@@ -3574,9 +3565,6 @@ paths:
                   message:
                     type: string
                     example: Request failed. Widget token with ID uuid is not found.
-      servers:
-        - url: https://api.wavix.com/v2
-          variables: {}
       deprecated: false
     delete:
       tags:
@@ -3644,11 +3632,8 @@ paths:
                   message:
                     type: string
                     example: Request failed. Widget token with ID uuid is not found.
-      servers:
-        - url: https://api.wavix.com/v2
-          variables: {}
       deprecated: false
-  /messages/sender_ids:
+  /v3/messages/sender_ids:
     get:
       tags:
         - SMS and MMS
@@ -3668,9 +3653,6 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     post:
       tags:
         - SMS and MMS
@@ -3717,10 +3699,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/messages/sender_ids/{id}":
+  "/v3/messages/sender_ids/{id}":
     get:
       tags:
         - SMS and MMS
@@ -3749,9 +3728,6 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     delete:
       tags:
         - SMS and MMS
@@ -3806,10 +3782,7 @@ paths:
                     type: string
                     example: Sender ID not found
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /messages/opt_outs:
+  /v3/messages/opt_outs:
     get:
       tags:
         - SMS and MMS
@@ -3898,9 +3871,6 @@ paths:
                     type: string
                     example: "Invalid date range. The created_before must be later than created_after."
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     post:
       tags:
         - SMS and MMS
@@ -3948,10 +3918,7 @@ paths:
         "422":
           $ref: "#/components/responses/ValidationError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /messages:
+  /v3/messages:
     post:
       tags:
         - SMS and MMS
@@ -4107,9 +4074,6 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     get:
       tags:
         - SMS and MMS
@@ -4256,10 +4220,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/messages/{id}":
+  "/v3/messages/{id}":
     get:
       tags:
         - SMS and MMS
@@ -4310,10 +4271,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /messages/all:
+  /v3/messages/all:
     get:
       tags:
         - SMS and MMS
@@ -4430,10 +4388,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /10dlc/brands:
+  /v3/10dlc/brands:
     get:
       tags:
         - 10DLC
@@ -4633,9 +4588,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountLevelException"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     post:
       tags:
         - 10DLC
@@ -4728,10 +4680,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountLevelException"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}":
+  "/v3/10dlc/brands/{brand_id}":
     get:
       tags:
         - 10DLC
@@ -4799,9 +4748,6 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     put:
       tags:
         - 10DLC
@@ -4920,9 +4866,6 @@ paths:
                       message: Invalid ein_taxid - ein_taxid is a nine-digit number. The format is
                         XX-XXXXXXX. The \"-\" symbol is also accepted.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     delete:
       tags:
         - 10DLC
@@ -4970,10 +4913,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/appeals":
+  "/v3/10dlc/brands/{brand_id}/appeals":
     post:
       tags:
         - 10DLC
@@ -5056,9 +4996,6 @@ paths:
                     example: The Brand appeal request is declined. The appeal is only allowed for
                       unverified Brands.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     get:
       tags:
         - 10DLC
@@ -5144,10 +5081,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/evidence":
+  "/v3/10dlc/brands/{brand_id}/evidence":
     post:
       tags:
         - 10DLC
@@ -5236,9 +5170,6 @@ paths:
                       success: false
                       message: File missing
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     get:
       tags:
         - 10DLC
@@ -5294,10 +5225,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/evidence/{uuid}":
+  "/v3/10dlc/brands/{brand_id}/evidence/{uuid}":
     get:
       tags:
         - 10DLC
@@ -5342,9 +5270,6 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     delete:
       tags:
         - 10DLC
@@ -5399,10 +5324,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/vettings":
+  "/v3/10dlc/brands/{brand_id}/vettings":
     post:
       tags:
         - 10DLC
@@ -5463,9 +5385,6 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     put:
       tags:
         - 10DLC
@@ -5532,9 +5451,6 @@ paths:
                     example: Request failed. The vetting record cannot be imported due to data
                       discrepancies between the vetting report and the brand.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     get:
       tags:
         - 10DLC
@@ -5578,10 +5494,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/vettings/appeals":
+  "/v3/10dlc/brands/{brand_id}/vettings/appeals":
     post:
       tags:
         - 10DLC
@@ -5646,9 +5559,6 @@ paths:
                       success: false
                       message: Invalid request by VETTED_VERIFIED entity for VERIFY_TAX_ID category
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     get:
       tags:
         - 10DLC
@@ -5731,10 +5641,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/usecases/{use_case}":
+  "/v3/10dlc/brands/{brand_id}/usecases/{use_case}":
     get:
       tags:
         - 10DLC
@@ -5870,10 +5777,7 @@ paths:
                         to completed or the Brand has not been submitted to TCR
                         yet
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /10dlc/brands/campaigns:
+  /v3/10dlc/brands/campaigns:
     get:
       tags:
         - 10DLC
@@ -6069,10 +5973,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountLevelException"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/campaigns":
+  "/v3/10dlc/brands/{brand_id}/campaigns":
     get:
       tags:
         - 10DLC
@@ -6287,9 +6188,6 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     post:
       tags:
         - 10DLC
@@ -6421,10 +6319,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/campaigns/{campaign_id}":
+  "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}":
     get:
       tags:
         - 10DLC
@@ -6561,9 +6456,6 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     put:
       tags:
         - 10DLC
@@ -6703,9 +6595,6 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     delete:
       tags:
         - 10DLC
@@ -6764,10 +6653,7 @@ paths:
                       success: false
                       message: Request failed. The Brand is not found.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /10dlc/subscriptions:
+  /v3/10dlc/subscriptions:
     post:
       tags:
         - 10DLC
@@ -6804,9 +6690,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountLevelException"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     get:
       tags:
         - 10DLC
@@ -6837,9 +6720,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountLevelException"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     delete:
       tags:
         - 10DLC
@@ -6879,10 +6759,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountLevelException"
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers/{number}":
+  "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers/{number}":
     post:
       tags:
         - 10DLC
@@ -6954,9 +6831,6 @@ paths:
                     type: string
                     example: Request failed. Only active phone numbers on your account are allowed.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
     delete:
       tags:
         - 10DLC
@@ -7029,10 +6903,7 @@ paths:
                     type: string
                     example: Request failed. The phone number is not associated with the Campaign.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers":
+  "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers":
     get:
       tags:
         - 10DLC
@@ -7095,10 +6966,7 @@ paths:
                     type: string
                     example: Request failed. The phone number is not associated with the Campaign.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  "/10dlc/brands/{brand_id}/campaigns/{campaign_id}/nudge":
+  "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/nudge":
     post:
       tags:
         - 10DLC
@@ -7192,10 +7060,7 @@ paths:
                 success: false
                 message: Request failed. The campaign should be older than 72 hours.
       deprecated: false
-      servers:
-        - url: https://api.wavix.com/v3
-          variables: {}
-  /validation:
+  /v1/validation:
     get:
       tags:
         - Number Validator
@@ -7341,7 +7206,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  "/validation/{uuid}":
+  "/v1/validation/{uuid}":
     get:
       tags:
         - Number Validator
@@ -7401,7 +7266,7 @@ paths:
                     type: string
                     example: "011"
       deprecated: false
-  /voice-campaigns:
+  /v1/voice-campaigns:
     post:
       tags:
         - Voice campaigns
@@ -7478,7 +7343,7 @@ paths:
                 success: false
                 message: Insufficient funds
       deprecated: false
-  "/voice-campaigns/{id}":
+  "/v1/voice-campaigns/{id}":
     get:
       tags:
         - Voice campaigns
@@ -7535,7 +7400,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  /short-links:
+  /v1/short-links:
     post:
       tags:
         - Link shortener
@@ -7590,7 +7455,7 @@ paths:
                 success: false
                 message: Expiration time can't be in the past
       deprecated: false
-  /short-links/metrics:
+  /v1/short-links/metrics:
     get:
       tags:
         - Link shortener
@@ -7668,7 +7533,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-  /two-fa/verification:
+  /v1/two-fa/verification:
     post:
       tags:
         - 2FA
@@ -7749,7 +7614,7 @@ paths:
                     type: string
                     example: "012"
       deprecated: false
-  "/two-fa/service/{service_uuid}/sessions":
+  "/v1/two-fa/service/{service_uuid}/sessions":
     get:
       tags:
         - 2FA
@@ -7888,7 +7753,7 @@ paths:
                 success: false
                 message: Sessions not found
       deprecated: false
-  "/two-fa/verification/{session_uuid}":
+  "/v1/two-fa/verification/{session_uuid}":
     post:
       tags:
         - 2FA
@@ -7956,7 +7821,7 @@ paths:
                     type: string
                     example: "012"
       deprecated: false
-  "/two-fa/verification/{session_uuid}/check":
+  "/v1/two-fa/verification/{session_uuid}/check":
     post:
       tags:
         - 2FA
@@ -8021,7 +7886,7 @@ paths:
                     type: string
                     example: "012"
       deprecated: false
-  "/two-fa/verification/{session_uuid}/cancel":
+  "/v1/two-fa/verification/{session_uuid}/cancel":
     patch:
       tags:
         - 2FA
@@ -8089,7 +7954,7 @@ paths:
                 success: false
                 message: Two FA session is not canceled
       deprecated: false
-  "/two-fa/session/{session_uuid}/events":
+  "/v1/two-fa/session/{session_uuid}/events":
     get:
       tags:
         - 2FA
@@ -8169,7 +8034,7 @@ paths:
                 message: 2FA verification session with ID=1c7d5259092eb11f083eed7e070f20a2b
                   cannot be found
       deprecated: false
-  /billing/transactions:
+  /v1/billing/transactions:
     get:
       tags:
         - Billing
@@ -8298,7 +8163,7 @@ paths:
                     type: string
                     example: Failed to load the transaction list. Please try again later
       deprecated: false
-  /billing/invoices:
+  /v1/billing/invoices:
     get:
       tags:
         - Billing
@@ -8350,7 +8215,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
       deprecated: false
-  "/billing/invoices/{id}":
+  "/v1/billing/invoices/{id}":
     get:
       tags:
         - Billing
@@ -8382,7 +8247,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
       deprecated: false
-  /profile:
+  /v1/profile:
     put:
       tags:
         - Profile
@@ -8434,7 +8299,7 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/ProfileResponse"
       deprecated: false
-  /profile/config:
+  /v1/profile/config:
     get:
       tags:
         - Profile
@@ -8467,7 +8332,7 @@ paths:
                   max_sip_channels: 8
                   max_call_rate: "99.0"
       deprecated: false
-  /sub-organizations:
+  /v1/sub-organizations:
     get:
       tags:
         - Sub-accounts
@@ -8587,7 +8452,7 @@ paths:
                     type: string
                     example: Company name is too long (maximum is 255 characters)
       deprecated: false
-  "/sub-organizations/{id}":
+  "/v1/sub-organizations/{id}":
     get:
       tags:
         - Sub-accounts
@@ -8711,7 +8576,7 @@ paths:
                     type: string
                     example: Company name is too long (maximum is 255 characters)
       deprecated: false
-  "/sub-organizations/{id}/billing/transactions":
+  "/v1/sub-organizations/{id}/billing/transactions":
     get:
       tags:
         - Sub-accounts

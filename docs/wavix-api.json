@@ -17,13 +17,13 @@
   },
   "servers": [
     {
-      "url": "https://api.wavix.com/v1",
-      "description": "https://api.wavix.com/v1",
+      "url": "https://api.wavix.com",
+      "description": "https://api.wavix.com",
       "variables": {}
     }
   ],
   "paths": {
-    "/api-keys": {
+    "/v1/api-keys": {
       "get": {
         "summary": "List API keys",
         "description": "Returns a list of API keys on the account. You can optionally filter the results by label using the label query parameter.",
@@ -147,7 +147,7 @@
         }
       }
     },
-    "/api-keys/{id}": {
+    "/v1/api-keys/{id}": {
       "delete": {
         "summary": "Delete an API key",
         "description": "Deletes an API key. The API key will be soft-deleted and can no longer be used for authentication. This action cannot be undone.",
@@ -192,7 +192,7 @@
         }
       }
     },
-    "/api-keys/{id}/activate": {
+    "/v1/api-keys/{id}/activate": {
       "patch": {
         "summary": "Activate an API key",
         "description": "Activates a previously deactivated API key. Once activated, the API key can be used for authentication again.",
@@ -237,7 +237,7 @@
         }
       }
     },
-    "/api-keys/{id}/deactivate": {
+    "/v1/api-keys/{id}/deactivate": {
       "patch": {
         "summary": "Deactivate an API key",
         "description": "Deactivates an API key. Once deactivated, the API key cannot be used for authentication until it is activated again.",
@@ -282,7 +282,7 @@
         }
       }
     },
-    "/trunks": {
+    "/v1/trunks": {
       "get": {
         "tags": [
           "SIP trunks"
@@ -405,7 +405,7 @@
         "deprecated": false
       }
     },
-    "/trunks/{id}": {
+    "/v1/trunks/{id}": {
       "get": {
         "tags": [
           "SIP trunks"
@@ -577,7 +577,7 @@
         "deprecated": false
       }
     },
-    "/buy/countries": {
+    "/v1/buy/countries": {
       "get": {
         "tags": [
           "Buy"
@@ -650,7 +650,7 @@
         "deprecated": false
       }
     },
-    "/buy/countries/{country}/regions": {
+    "/v1/buy/countries/{country}/regions": {
       "get": {
         "tags": [
           "Buy"
@@ -753,7 +753,7 @@
         "deprecated": false
       }
     },
-    "/buy/countries/{country}/cities": {
+    "/v1/buy/countries/{country}/cities": {
       "get": {
         "tags": [
           "Buy"
@@ -862,7 +862,7 @@
         "deprecated": false
       }
     },
-    "/buy/countries/{country}/regions/{region}/cities": {
+    "/v1/buy/countries/{country}/regions/{region}/cities": {
       "get": {
         "tags": [
           "Buy"
@@ -983,7 +983,7 @@
         "deprecated": false
       }
     },
-    "/buy/countries/{country}/cities/{city}/dids": {
+    "/v1/buy/countries/{country}/cities/{city}/dids": {
       "get": {
         "tags": [
           "Buy"
@@ -1122,7 +1122,7 @@
         "deprecated": false
       }
     },
-    "/buy/cart": {
+    "/v1/buy/cart": {
       "put": {
         "tags": [
           "Cart"
@@ -1434,7 +1434,7 @@
         "deprecated": false
       }
     },
-    "/buy/cart/checkout": {
+    "/v1/buy/cart/checkout": {
       "post": {
         "tags": [
           "Cart"
@@ -1519,7 +1519,7 @@
         "deprecated": false
       }
     },
-    "/mydids": {
+    "/v1/mydids": {
       "get": {
         "tags": [
           "My numbers"
@@ -1705,7 +1705,7 @@
         "deprecated": false
       }
     },
-    "/mydids/{id}": {
+    "/v1/mydids/{id}": {
       "get": {
         "tags": [
           "My numbers"
@@ -1832,7 +1832,7 @@
         "deprecated": false
       }
     },
-    "/mydids/update-sms-enabled": {
+    "/v1/mydids/update-sms-enabled": {
       "put": {
         "tags": [
           "My numbers"
@@ -1922,7 +1922,7 @@
         "deprecated": false
       }
     },
-    "/mydids/update-destinations": {
+    "/v1/mydids/update-destinations": {
       "post": {
         "tags": [
           "My numbers"
@@ -2002,7 +2002,7 @@
         "deprecated": false
       }
     },
-    "/mydids/papers": {
+    "/v1/mydids/papers": {
       "post": {
         "tags": [
           "My numbers"
@@ -2130,7 +2130,7 @@
         "deprecated": false
       }
     },
-    "/cdr": {
+    "/v1/cdr": {
       "get": {
         "tags": [
           "CDRs"
@@ -2325,7 +2325,7 @@
         "deprecated": false
       }
     },
-    "/cdr/{cdr_uuid}/retranscribe": {
+    "/v1/cdr/{cdr_uuid}/retranscribe": {
       "put": {
         "tags": [
           "CDRs"
@@ -2401,7 +2401,7 @@
         "deprecated": false
       }
     },
-    "/cdr/{cdr_uuid}/transcription": {
+    "/v1/cdr/{cdr_uuid}/transcription": {
       "get": {
         "tags": [
           "CDRs"
@@ -2448,7 +2448,7 @@
         "deprecated": false
       }
     },
-    "/cdr/{uuid}": {
+    "/v1/cdr/{uuid}": {
       "get": {
         "tags": [
           "CDRs"
@@ -2503,7 +2503,7 @@
         "deprecated": false
       }
     },
-    "/cdr/all": {
+    "/v1/cdr/all": {
       "get": {
         "tags": [
           "CDRs"
@@ -2680,7 +2680,7 @@
         "deprecated": false
       }
     },
-    "/recordings": {
+    "/v1/recordings": {
       "get": {
         "tags": [
           "Call recording"
@@ -2827,7 +2827,7 @@
         "deprecated": false
       }
     },
-    "/recordings/{cdr_uuid}": {
+    "/v1/recordings/{cdr_uuid}": {
       "get": {
         "tags": [
           "Call recording"
@@ -2897,7 +2897,7 @@
         "deprecated": false
       }
     },
-    "/recordings/{id}": {
+    "/v1/recordings/{id}": {
       "delete": {
         "tags": [
           "Call recording"
@@ -2976,7 +2976,7 @@
         "deprecated": false
       }
     },
-    "/speech-analytics": {
+    "/v1/speech-analytics": {
       "post": {
         "tags": [
           "Speech Analytics"
@@ -3090,7 +3090,7 @@
         "deprecated": false
       }
     },
-    "/speech-analytics/{uuid}": {
+    "/v1/speech-analytics/{uuid}": {
       "get": {
         "tags": [
           "Speech Analytics"
@@ -3356,7 +3356,7 @@
         "deprecated": false
       }
     },
-    "/speech-analytics/{uuid}/file": {
+    "/v1/speech-analytics/{uuid}/file": {
       "get": {
         "tags": [
           "Speech Analytics"
@@ -3425,7 +3425,7 @@
         "deprecated": false
       }
     },
-    "/calls/webhooks": {
+    "/v1/calls/webhooks": {
       "get": {
         "tags": [
           "Call webhooks"
@@ -3636,7 +3636,7 @@
         "deprecated": false
       }
     },
-    "/calls": {
+    "/v1/calls": {
       "post": {
         "tags": [
           "Call control"
@@ -3762,7 +3762,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}": {
+    "/v1/calls/{uuid}": {
       "get": {
         "tags": [
           "Call control"
@@ -3969,7 +3969,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}/answer": {
+    "/v1/calls/{uuid}/answer": {
       "post": {
         "tags": [
           "Call control"
@@ -4098,7 +4098,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}/streams": {
+    "/v1/calls/{uuid}/streams": {
       "post": {
         "tags": [
           "Call control"
@@ -4201,7 +4201,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}/streams/{stream_uuid}": {
+    "/v1/calls/{uuid}/streams/{stream_uuid}": {
       "delete": {
         "tags": [
           "Call control"
@@ -4266,7 +4266,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}/play": {
+    "/v1/calls/{uuid}/play": {
       "post": {
         "tags": [
           "Call control"
@@ -4387,7 +4387,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}/audio": {
+    "/v1/calls/{uuid}/audio": {
       "delete": {
         "tags": [
           "Call control"
@@ -4468,7 +4468,7 @@
         "deprecated": false
       }
     },
-    "/calls/{uuid}/collect": {
+    "/v1/call/{uuid}/collect": {
       "post": {
         "tags": [
           "Call control"
@@ -4580,7 +4580,7 @@
         "deprecated": false
       }
     },
-    "/webrtc/tokens": {
+    "/v2/webrtc/tokens": {
       "post": {
         "tags": [
           "Wavix Embeddable"
@@ -4692,12 +4692,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v2",
-            "variables": {}
-          }
-        ],
         "deprecated": false
       },
       "get": {
@@ -4771,16 +4765,10 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v2",
-            "variables": {}
-          }
-        ],
         "deprecated": false
       }
     },
-    "/webrtc/tokens/{uuid}": {
+    "/v2/webrtc/tokens/{uuid}": {
       "get": {
         "tags": [
           "Wavix Embeddable"
@@ -4872,12 +4860,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v2",
-            "variables": {}
-          }
-        ],
         "deprecated": false
       },
       "put": {
@@ -5002,12 +4984,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v2",
-            "variables": {}
-          }
-        ],
         "deprecated": false
       },
       "delete": {
@@ -5107,16 +5083,10 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v2",
-            "variables": {}
-          }
-        ],
         "deprecated": false
       }
     },
-    "/messages/sender_ids": {
+    "/v3/messages/sender_ids": {
       "get": {
         "tags": [
           "SMS and MMS"
@@ -5145,13 +5115,7 @@
             "$ref": "#/components/responses/ForbiddenError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "post": {
         "tags": [
@@ -5212,16 +5176,10 @@
             "$ref": "#/components/responses/ForbiddenError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/messages/sender_ids/{id}": {
+    "/v3/messages/sender_ids/{id}": {
       "get": {
         "tags": [
           "SMS and MMS"
@@ -5264,13 +5222,7 @@
             "$ref": "#/components/responses/NotFoundError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "delete": {
         "tags": [
@@ -5352,16 +5304,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/messages/opt_outs": {
+    "/v3/messages/opt_outs": {
       "get": {
         "tags": [
           "SMS and MMS"
@@ -5490,13 +5436,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "post": {
         "tags": [
@@ -5561,16 +5501,10 @@
             "$ref": "#/components/responses/ValidationError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/messages": {
+    "/v3/messages": {
       "post": {
         "tags": [
           "SMS and MMS"
@@ -5768,13 +5702,7 @@
             "$ref": "#/components/responses/ForbiddenError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "get": {
         "tags": [
@@ -5965,16 +5893,10 @@
             "$ref": "#/components/responses/ForbiddenError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/messages/{id}": {
+    "/v3/messages/{id}": {
       "get": {
         "tags": [
           "SMS and MMS"
@@ -6043,16 +5965,10 @@
             "$ref": "#/components/responses/NotFoundError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/messages/all": {
+    "/v3/messages/all": {
       "get": {
         "tags": [
           "SMS and MMS"
@@ -6201,16 +6117,10 @@
             "$ref": "#/components/responses/ForbiddenError"
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands": {
+    "/v3/10dlc/brands": {
       "get": {
         "tags": [
           "10DLC"
@@ -6460,13 +6370,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "post": {
         "tags": [
@@ -6571,16 +6475,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}": {
+    "/v3/10dlc/brands/{brand_id}": {
       "get": {
         "tags": [
           "10DLC"
@@ -6677,13 +6575,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "put": {
         "tags": [
@@ -6842,13 +6734,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "delete": {
         "tags": [
@@ -6926,16 +6812,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/appeals": {
+    "/v3/10dlc/brands/{brand_id}/appeals": {
       "post": {
         "tags": [
           "10DLC"
@@ -7054,13 +6934,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "get": {
         "tags": [
@@ -7188,16 +7062,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/evidence": {
+    "/v3/10dlc/brands/{brand_id}/evidence": {
       "post": {
         "tags": [
           "10DLC"
@@ -7323,13 +7191,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "get": {
         "tags": [
@@ -7417,16 +7279,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/evidence/{uuid}": {
+    "/v3/10dlc/brands/{brand_id}/evidence/{uuid}": {
       "get": {
         "tags": [
           "10DLC"
@@ -7493,13 +7349,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "delete": {
         "tags": [
@@ -7588,16 +7438,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/vettings": {
+    "/v3/10dlc/brands/{brand_id}/vettings": {
       "post": {
         "tags": [
           "10DLC"
@@ -7673,13 +7517,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "put": {
         "tags": [
@@ -7784,13 +7622,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "get": {
         "tags": [
@@ -7859,16 +7691,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/vettings/appeals": {
+    "/v3/10dlc/brands/{brand_id}/vettings/appeals": {
       "post": {
         "tags": [
           "10DLC"
@@ -7977,13 +7803,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "get": {
         "tags": [
@@ -8101,16 +7921,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/usecases/{use_case}": {
+    "/v3/10dlc/brands/{brand_id}/usecases/{use_case}": {
       "get": {
         "tags": [
           "10DLC"
@@ -8289,16 +8103,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/campaigns": {
+    "/v3/10dlc/brands/campaigns": {
       "get": {
         "tags": [
           "10DLC"
@@ -8538,16 +8346,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/campaigns": {
+    "/v3/10dlc/brands/{brand_id}/campaigns": {
       "get": {
         "tags": [
           "10DLC"
@@ -8819,13 +8621,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "post": {
         "tags": [
@@ -8991,16 +8787,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/campaigns/{campaign_id}": {
+    "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}": {
       "get": {
         "tags": [
           "10DLC"
@@ -9170,13 +8960,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "put": {
         "tags": [
@@ -9353,13 +9137,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "delete": {
         "tags": [
@@ -9448,16 +9226,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/subscriptions": {
+    "/v3/10dlc/subscriptions": {
       "post": {
         "tags": [
           "10DLC"
@@ -9514,13 +9286,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "get": {
         "tags": [
@@ -9568,13 +9334,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "delete": {
         "tags": [
@@ -9635,16 +9395,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers/{number}": {
+    "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers/{number}": {
       "post": {
         "tags": [
           "10DLC"
@@ -9746,13 +9500,7 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       },
       "delete": {
         "tags": [
@@ -9855,16 +9603,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers": {
+    "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers": {
       "get": {
         "tags": [
           "10DLC"
@@ -9959,16 +9701,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/10dlc/brands/{brand_id}/campaigns/{campaign_id}/nudge": {
+    "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/nudge": {
       "post": {
         "tags": [
           "10DLC"
@@ -10097,16 +9833,10 @@
             }
           }
         },
-        "deprecated": false,
-        "servers": [
-          {
-            "url": "https://api.wavix.com/v3",
-            "variables": {}
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/validation": {
+    "/v1/validation": {
       "get": {
         "tags": [
           "Number Validator"
@@ -10299,7 +10029,7 @@
         "deprecated": false
       }
     },
-    "/validation/{uuid}": {
+    "/v1/validation/{uuid}": {
       "get": {
         "tags": [
           "Number Validator"
@@ -10388,7 +10118,7 @@
         "deprecated": false
       }
     },
-    "/voice-campaigns": {
+    "/v1/voice-campaigns": {
       "post": {
         "tags": [
           "Voice campaigns"
@@ -10497,7 +10227,7 @@
         "deprecated": false
       }
     },
-    "/voice-campaigns/{id}": {
+    "/v1/voice-campaigns/{id}": {
       "get": {
         "tags": [
           "Voice campaigns"
@@ -10576,7 +10306,7 @@
         "deprecated": false
       }
     },
-    "/short-links": {
+    "/v1/short-links": {
       "post": {
         "tags": [
           "Link shortener"
@@ -10651,7 +10381,7 @@
         "deprecated": false
       }
     },
-    "/short-links/metrics": {
+    "/v1/short-links/metrics": {
       "get": {
         "tags": [
           "Link shortener"
@@ -10757,7 +10487,7 @@
         "deprecated": false
       }
     },
-    "/two-fa/verification": {
+    "/v1/two-fa/verification": {
       "post": {
         "tags": [
           "2FA"
@@ -10856,7 +10586,7 @@
         "deprecated": false
       }
     },
-    "/two-fa/service/{service_uuid}/sessions": {
+    "/v1/two-fa/service/{service_uuid}/sessions": {
       "get": {
         "tags": [
           "2FA"
@@ -11040,7 +10770,7 @@
         "deprecated": false
       }
     },
-    "/two-fa/verification/{session_uuid}": {
+    "/v1/two-fa/verification/{session_uuid}": {
       "post": {
         "tags": [
           "2FA"
@@ -11138,7 +10868,7 @@
         "deprecated": false
       }
     },
-    "/two-fa/verification/{session_uuid}/check": {
+    "/v1/two-fa/verification/{session_uuid}/check": {
       "post": {
         "tags": [
           "2FA"
@@ -11233,7 +10963,7 @@
         "deprecated": false
       }
     },
-    "/two-fa/verification/{session_uuid}/cancel": {
+    "/v1/two-fa/verification/{session_uuid}/cancel": {
       "patch": {
         "tags": [
           "2FA"
@@ -11333,7 +11063,7 @@
         "deprecated": false
       }
     },
-    "/two-fa/session/{session_uuid}/events": {
+    "/v1/two-fa/session/{session_uuid}/events": {
       "get": {
         "tags": [
           "2FA"
@@ -11449,7 +11179,7 @@
         "deprecated": false
       }
     },
-    "/billing/transactions": {
+    "/v1/billing/transactions": {
       "get": {
         "tags": [
           "Billing"
@@ -11632,7 +11362,7 @@
         "deprecated": false
       }
     },
-    "/billing/invoices": {
+    "/v1/billing/invoices": {
       "get": {
         "tags": [
           "Billing"
@@ -11708,7 +11438,7 @@
         "deprecated": false
       }
     },
-    "/billing/invoices/{id}": {
+    "/v1/billing/invoices/{id}": {
       "get": {
         "tags": [
           "Billing"
@@ -11753,7 +11483,7 @@
         "deprecated": false
       }
     },
-    "/profile": {
+    "/v1/profile": {
       "put": {
         "tags": [
           "Profile"
@@ -11830,7 +11560,7 @@
         "deprecated": false
       }
     },
-    "/profile/config": {
+    "/v1/profile/config": {
       "get": {
         "tags": [
           "Profile"
@@ -11877,7 +11607,7 @@
         "deprecated": false
       }
     },
-    "/sub-organizations": {
+    "/v1/sub-organizations": {
       "get": {
         "tags": [
           "Sub-accounts"
@@ -12048,7 +11778,7 @@
         "deprecated": false
       }
     },
-    "/sub-organizations/{id}": {
+    "/v1/sub-organizations/{id}": {
       "get": {
         "tags": [
           "Sub-accounts"
@@ -12221,7 +11951,7 @@
         "deprecated": false
       }
     },
-    "/sub-organizations/{id}/billing/transactions": {
+    "/v1/sub-organizations/{id}/billing/transactions": {
       "get": {
         "tags": [
           "Sub-accounts"
