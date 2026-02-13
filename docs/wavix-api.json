@@ -4468,7 +4468,7 @@
         "deprecated": false
       }
     },
-    "/v1/call/{uuid}/collect": {
+    "/v1/calls/{uuid}/collect": {
       "post": {
         "tags": [
           "Call control"
