@@ -8854,11 +8854,6 @@ webhooks:
       description: >-
         The webhook is triggered when the status of a phone number is
         updated.
-
-
-        - If the status changes to `APPROVED`, Wavix automatically creates a Sender ID for the number.
-
-        - If the status changes to `REJECTED`, Wavix blocks the associated Sender ID.
       tags:
         - 10DLC
       requestBody:
