@@ -1,0 +1,563 @@
+asyncapi: 3.0.0
+
+info:
+  title: Wavix Call Streaming API
+  version: 1.0.0
+  description: >
+    Stream call audio in real time over WebSocket. Wavix connects as a
+    WebSocket client to the external service URL that you provide in the
+    `stream_url` parameter when you create a stream through the HTTP API. The
+    external service receives audio from the call and can send audio back.
+
+    Audio format: PCM16, 24 kHz, mono, base64-encoded.
+
+    For documentation rendering, examples are defined on message payloads rather than under component schemas.
+
+servers:
+  externalService:
+    host: "{serviceHost}"
+    pathname: "{servicePath}"
+    protocol: wss
+    description: >
+      External WebSocket service endpoint. Wavix connects to the host and path
+      provided in the `stream_url` parameter when the stream starts.
+    variables:
+      serviceHost:
+        description: Hostname of the external WebSocket service.
+      servicePath:
+        description: Path of the external WebSocket service.
+
+channels:
+  callStreaming:
+    address: "{servicePath}"
+    description: >
+      Bidirectional WebSocket channel for call audio streaming. Wavix opens the
+      connection when a stream starts and closes it when the call ends.
+    messages:
+      ConnectedEvent:
+        $ref: "#/components/messages/ConnectedEvent"
+      StartEvent:
+        $ref: "#/components/messages/StartEvent"
+      OutgoingMediaEvent:
+        $ref: "#/components/messages/OutgoingMediaEvent"
+      OutgoingMarkEvent:
+        $ref: "#/components/messages/OutgoingMarkEvent"
+      StopEvent:
+        $ref: "#/components/messages/StopEvent"
+      IncomingMediaEvent:
+        $ref: "#/components/messages/IncomingMediaEvent"
+      IncomingMarkEvent:
+        $ref: "#/components/messages/IncomingMarkEvent"
+      ClearEvent:
+        $ref: "#/components/messages/ClearEvent"
+
+operations:
+  sendConnected:
+    action: send
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Send a connection event.
+    description: Sent immediately after the WebSocket connection is established.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/ConnectedEvent"
+
+  sendStart:
+    action: send
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Send a start event.
+    description: >
+      Sent when a call stream session starts. Contains stream metadata,
+      including the stream type and channel direction.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/StartEvent"
+
+  sendMedia:
+    action: send
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Send call audio.
+    description: Streams audio captured from the call.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/OutgoingMediaEvent"
+
+  sendMark:
+    action: send
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Send a playback acknowledgment.
+    description: >
+      Sent only for bidirectional streaming. Acknowledges that playback of the
+      preceding `media` message is complete.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/OutgoingMarkEvent"
+
+  sendStop:
+    action: send
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Send a stop event.
+    description: Sent when the call stream ends.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/StopEvent"
+
+  receiveMedia:
+    action: receive
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Receive audio for playback.
+    description: Receives audio that Wavix plays back into the call.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/IncomingMediaEvent"
+
+  receiveMark:
+    action: receive
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Receive a playback marker.
+    description: >
+      Receives a named marker after a `media` message so Wavix can confirm when
+      playback completes. Use this only for bidirectional streaming.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/IncomingMarkEvent"
+
+  receiveClear:
+    action: receive
+    channel:
+      $ref: "#/channels/callStreaming"
+    summary: Receive a clear event.
+    description: >
+      Instructs Wavix to clear buffered audio and stop current playback
+      immediately.
+    messages:
+      - $ref: "#/channels/callStreaming/messages/ClearEvent"
+
+components:
+  messages:
+    ConnectedEvent:
+      name: connected
+      title: connected
+      summary: Connection established.
+      payload:
+        $ref: "#/components/schemas/ConnectedEvent"
+      examples:
+        - name: connectedEvent
+          summary: Connected event example.
+          payload:
+            event: connected
+            event_time: "2024-01-15T10:30:00Z"
+
+    StartEvent:
+      name: start
+      title: start
+      summary: Stream started.
+      payload:
+        $ref: "#/components/schemas/StartEvent"
+      examples:
+        - name: startEvent
+          summary: Start event example.
+          payload:
+            event: start
+            event_time: "2024-01-15T10:30:00Z"
+            call_id: "abc-123"
+            stream_id: "str-456"
+            stream_type: twoway
+            channel: both
+            sequence_number: 1
+
+    OutgoingMediaEvent:
+      name: media
+      title: media
+      summary: Audio chunk captured from the call.
+      payload:
+        $ref: "#/components/schemas/OutgoingMediaEvent"
+      examples:
+        - name: outgoingMediaEvent
+          summary: Outgoing media event example.
+          payload:
+            event: media
+            event_time: "2024-01-15T10:30:01Z"
+            call_id: "abc-123"
+            stream_id: "str-456"
+            sequence_number: 2
+            media:
+              payload: "AAEC/f7..."
+              track: inbound
+              timestamp: 160
+              chunk: 1
+
+    OutgoingMarkEvent:
+      name: mark
+      title: mark
+      summary: Playback acknowledgment for the preceding media message.
+      payload:
+        $ref: "#/components/schemas/OutgoingMarkEvent"
+      examples:
+        - name: outgoingMarkEvent
+          summary: Outgoing mark acknowledgment example.
+          payload:
+            event: mark
+            event_time: "2024-01-15T10:30:02Z"
+            call_id: "abc-123"
+            stream_id: "str-456"
+            sequence_number: 10
+            mark:
+              name: "end-of-greeting"
+
+    StopEvent:
+      name: stop
+      title: stop
+      summary: Stream ended.
+      payload:
+        $ref: "#/components/schemas/StopEvent"
+      examples:
+        - name: stopEvent
+          summary: Stop event example.
+          payload:
+            event: stop
+            event_time: "2024-01-15T10:30:05Z"
+            call_id: "abc-123"
+            stream_id: "str-456"
+            sequence_number: 100
+
+    IncomingMediaEvent:
+      name: media
+      title: media
+      summary: Audio chunk to play back into the call.
+      payload:
+        $ref: "#/components/schemas/IncomingMediaEvent"
+      examples:
+        - name: incomingMediaEvent
+          summary: Incoming media event example.
+          payload:
+            event: media
+            stream_id: "str-456"
+            media:
+              payload: "AAEC/f7..."
+
+    IncomingMarkEvent:
+      name: mark
+      title: mark
+      summary: Marker used to track playback completion.
+      payload:
+        $ref: "#/components/schemas/IncomingMarkEvent"
+      examples:
+        - name: incomingMarkEvent
+          summary: Incoming mark event example.
+          payload:
+            event: mark
+            stream_id: "str-456"
+            mark:
+              name: "mark-1"
+
+    ClearEvent:
+      name: clear
+      title: clear
+      summary: Clear buffered audio.
+      payload:
+        $ref: "#/components/schemas/ClearEvent"
+      examples:
+        - name: clearEvent
+          summary: Clear event example.
+          payload:
+            event: clear
+            stream_id: "str-456"
+
+  schemas:
+    ConnectedEvent:
+      type: object
+      required:
+        - event
+        - event_time
+      properties:
+        event:
+          type: string
+          const: connected
+          description: Event type.
+        event_time:
+          $ref: "#/components/schemas/EventTime"
+
+    StartEvent:
+      type: object
+      required:
+        - event
+        - event_time
+        - call_id
+        - stream_id
+        - stream_type
+        - channel
+        - sequence_number
+      properties:
+        event:
+          type: string
+          const: start
+          description: Event type.
+        event_time:
+          $ref: "#/components/schemas/EventTime"
+        call_id:
+          type: string
+          description: Unique identifier for the call.
+        stream_id:
+          type: string
+          description: Unique identifier for the stream.
+        stream_type:
+          type: string
+          enum:
+            - oneway
+            - twoway
+          description: >
+            Direction of audio flow. `oneway` means audio flows from the call to
+            the external service. `twoway` means audio flows in both directions.
+        channel:
+          type: string
+          enum:
+            - inbound
+            - outbound
+            - both
+          description: Call leg from which Wavix captures audio.
+        sequence_number:
+          type: integer
+          format: int64
+          description: Sequential event counter for the stream, starting at 1.
+      example:
+        event: start
+        event_time: "2024-01-15T10:30:00Z"
+        call_id: "abc-123"
+        stream_id: "str-456"
+        stream_type: twoway
+        channel: both
+        sequence_number: 1
+
+    OutgoingMediaEvent:
+      type: object
+      required:
+        - event
+        - event_time
+        - call_id
+        - stream_id
+        - sequence_number
+        - media
+      properties:
+        event:
+          type: string
+          const: media
+          description: Event type.
+        event_time:
+          $ref: "#/components/schemas/EventTime"
+        call_id:
+          type: string
+          description: Unique identifier for the call.
+        stream_id:
+          type: string
+          description: Unique identifier for the stream.
+        sequence_number:
+          type: integer
+          format: int64
+          description: Sequential event counter for the stream, starting at 1.
+        media:
+          $ref: "#/components/schemas/OutgoingMediaPayload"
+      example:
+        event: media
+        event_time: "2024-01-15T10:30:01Z"
+        call_id: "abc-123"
+        stream_id: "str-456"
+        sequence_number: 2
+        media:
+          payload: "AAEC/f7..."
+          track: inbound
+          timestamp: 160
+          chunk: 1
+
+    OutgoingMarkEvent:
+      type: object
+      required:
+        - event
+        - event_time
+        - call_id
+        - stream_id
+        - sequence_number
+        - mark
+      properties:
+        event:
+          type: string
+          const: mark
+          description: Event type.
+        event_time:
+          $ref: "#/components/schemas/EventTime"
+        call_id:
+          type: string
+          description: Unique identifier for the call.
+        stream_id:
+          type: string
+          description: Unique identifier for the stream.
+        sequence_number:
+          type: integer
+          format: int64
+          description: Sequential event counter for the stream, starting at 1.
+        mark:
+          $ref: "#/components/schemas/OutgoingMarkPayload"
+      example:
+        event: mark
+        event_time: "2024-01-15T10:30:02Z"
+        call_id: "abc-123"
+        stream_id: "str-456"
+        sequence_number: 10
+        mark:
+          name: "end-of-greeting"
+
+    StopEvent:
+      type: object
+      required:
+        - event
+        - event_time
+        - call_id
+        - stream_id
+        - sequence_number
+      properties:
+        event:
+          type: string
+          const: stop
+          description: Event type.
+        event_time:
+          $ref: "#/components/schemas/EventTime"
+        call_id:
+          type: string
+          description: Unique identifier for the call.
+        stream_id:
+          type: string
+          description: Unique identifier for the stream.
+        sequence_number:
+          type: integer
+          format: int64
+          description: Sequential event counter for the stream, starting at 1.
+      example:
+        event: stop
+        event_time: "2024-01-15T10:30:05Z"
+        call_id: "abc-123"
+        stream_id: "str-456"
+        sequence_number: 100
+
+    OutgoingMediaPayload:
+      type: object
+      required:
+        - payload
+        - track
+        - timestamp
+        - chunk
+      properties:
+        payload:
+          type: string
+          description: Base64-encoded audio chunk.
+        track:
+          type: string
+          enum:
+            - inbound
+            - outbound
+          description: Call leg from which the audio was captured.
+        timestamp:
+          type: integer
+          format: int64
+          description: RTP timestamp of the audio chunk.
+        chunk:
+          type: integer
+          format: int64
+          description: Sequential chunk number within the stream, starting at 1.
+
+    OutgoingMarkPayload:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: >
+            Echo of the marker name from the original outgoing `mark` message.
+            Wavix sends this message when playback is complete.
+      example:
+        name: "end-of-greeting"
+
+    IncomingMediaEvent:
+      type: object
+      required:
+        - event
+        - media
+      properties:
+        event:
+          type: string
+          const: media
+          description: Event type.
+        stream_id:
+          $ref: "#/components/schemas/IncomingStreamId"
+        media:
+          $ref: "#/components/schemas/IncomingMediaPayload"
+      example:
+        event: media
+        stream_id: "str-456"
+        media:
+          payload: "BBCD/e..."
+
+    IncomingMarkEvent:
+      type: object
+      required:
+        - event
+        - mark
+      properties:
+        event:
+          type: string
+          const: mark
+          description: Event type.
+        stream_id:
+          $ref: "#/components/schemas/IncomingStreamId"
+        mark:
+          $ref: "#/components/schemas/IncomingMarkPayload"
+      example:
+        event: mark
+        stream_id: "str-456"
+        mark:
+          name: "end-of-greeting"
+
+    ClearEvent:
+      type: object
+      required:
+        - event
+      properties:
+        event:
+          type: string
+          const: clear
+          description: Event type.
+        stream_id:
+          $ref: "#/components/schemas/IncomingStreamId"
+      example:
+        event: clear
+        stream_id: "str-456"
+
+    EventTime:
+      type: string
+      format: date-time
+      description: ISO 8601 timestamp of the event.
+
+    IncomingStreamId:
+      type: string
+      description: >
+        If omitted, the event applies to the stream associated with the
+        connection that initiated the WebSocket session. Include `stream_id` to
+        enable server-side validation. Events with a mismatched `stream_id` are
+        silently dropped.
+
+    IncomingMediaPayload:
+      type: object
+      required:
+        - payload
+      properties:
+        payload:
+          type: string
+          description: Base64-encoded PCM16 audio to play into the call.
+
+    IncomingMarkPayload:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Marker name used to track playback completion.
