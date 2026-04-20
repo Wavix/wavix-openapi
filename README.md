@@ -9,6 +9,15 @@ The current list of Wavix HTTP REST API endpoints can be found here: [https://do
 
 - `docs/wavix-api.yaml` — OpenAPI specification in YAML format
 - `docs/wavix-api.json` — OpenAPI specification in JSON format
+- `docs/wavix-asyncapi.yaml` — AsyncAPI specification (WebSocket streaming protocol) in YAML format
+- `docs/wavix-asyncapi.json` — AsyncAPI specification in JSON format
+
+The bundled files are also served via GitHub Pages:
+
+- [https://wavix.github.io/wavix-openapi/wavix-api.yaml](https://wavix.github.io/wavix-openapi/wavix-api.yaml)
+- [https://wavix.github.io/wavix-openapi/wavix-api.json](https://wavix.github.io/wavix-openapi/wavix-api.json)
+- [https://wavix.github.io/wavix-openapi/wavix-asyncapi.yaml](https://wavix.github.io/wavix-openapi/wavix-asyncapi.yaml)
+- [https://wavix.github.io/wavix-openapi/wavix-asyncapi.json](https://wavix.github.io/wavix-openapi/wavix-asyncapi.json)
 
 ## Usage
 
