@@ -157,6 +157,47 @@
                           "192.168.1.1",
                           "10.0.0.1"
                         ],
+                        "is_scopes_enabled": true,
+                        "last_used_at": "2026-04-20T15:42:11Z",
+                        "numbers": {
+                          "allow": "read"
+                        },
+                        "trunks": {
+                          "allow": "none"
+                        },
+                        "calls": {
+                          "allow": "read"
+                        },
+                        "messages": {
+                          "allow": "write"
+                        },
+                        "recordings": {
+                          "allow": "read"
+                        },
+                        "campaigns": {
+                          "allow": "none"
+                        },
+                        "two_fa": {
+                          "allow": "write"
+                        },
+                        "validator": {
+                          "allow": "read"
+                        },
+                        "webhooks": {
+                          "allow": "none"
+                        },
+                        "embeddable": {
+                          "allow": "none"
+                        },
+                        "billing": {
+                          "allow": "read"
+                        },
+                        "account": {
+                          "allow": "read"
+                        },
+                        "subaccounts": {
+                          "allow": "none"
+                        },
                         "created_at": "2024-01-15T10:30:00Z"
                       }
                     ]
@@ -164,6 +205,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedErrorResponse"
           },
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
@@ -190,7 +234,23 @@
                 "permitted_ips": [
                   "192.168.1.1",
                   "10.0.0.1"
-                ]
+                ],
+                "is_scopes_enabled": true,
+                "numbers": {
+                  "allow": "read"
+                },
+                "calls": {
+                  "allow": "read"
+                },
+                "messages": {
+                  "allow": "write"
+                },
+                "two_fa": {
+                  "allow": "write"
+                },
+                "billing": {
+                  "allow": "read"
+                }
               }
             }
           }
@@ -215,6 +275,47 @@
                         "192.168.1.1",
                         "10.0.0.1"
                       ],
+                      "is_scopes_enabled": true,
+                      "last_used_at": null,
+                      "numbers": {
+                        "allow": "read"
+                      },
+                      "trunks": {
+                        "allow": "none"
+                      },
+                      "calls": {
+                        "allow": "read"
+                      },
+                      "messages": {
+                        "allow": "write"
+                      },
+                      "recordings": {
+                        "allow": "none"
+                      },
+                      "campaigns": {
+                        "allow": "none"
+                      },
+                      "two_fa": {
+                        "allow": "write"
+                      },
+                      "validator": {
+                        "allow": "none"
+                      },
+                      "webhooks": {
+                        "allow": "none"
+                      },
+                      "embeddable": {
+                        "allow": "none"
+                      },
+                      "billing": {
+                        "allow": "read"
+                      },
+                      "account": {
+                        "allow": "none"
+                      },
+                      "subaccounts": {
+                        "allow": "none"
+                      },
                       "created_at": "2024-01-15T10:30:00Z"
                     }
                   }
@@ -222,32 +323,50 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/BadRequestErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedErrorResponse"
+          },
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
           },
           "422": {
-            "description": "Request validation failed.",
+            "description": "Validation error",
+            "headers": {},
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "IP address has an incorrect format"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
                 },
                 "examples": {
-                  "success": {
-                    "summary": "Successful response",
+                  "ip_invalid": {
+                    "summary": "Invalid IP address",
                     "value": {
                       "success": false,
-                      "message": "IP address has an incorrect format"
+                      "message": "Ip has incorrect format"
+                    }
+                  },
+                  "scope_not_hash": {
+                    "summary": "Scope value is not an object",
+                    "value": {
+                      "success": false,
+                      "message": "API key scope numbers: must be a hash"
+                    }
+                  },
+                  "scope_extra_keys": {
+                    "summary": "Scope object has unexpected keys",
+                    "value": {
+                      "success": false,
+                      "message": "API key scope numbers: must have only \"allow\" key"
+                    }
+                  },
+                  "scope_invalid_allow": {
+                    "summary": "Unsupported allow value",
+                    "value": {
+                      "success": false,
+                      "message": "API key scope numbers: allow must be one of: none, read, write"
                     }
                   }
                 }
@@ -301,6 +420,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedErrorResponse"
           },
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
@@ -356,6 +478,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedErrorResponse"
+          },
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
           },
@@ -409,6 +534,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedErrorResponse"
           },
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
@@ -15921,9 +16049,67 @@
       }
     },
     "schemas": {
+      "ApiKeyScopePermission": {
+        "type": "object",
+        "description": "Permission level for an API key scope group.",
+        "properties": {
+          "allow": {
+            "type": "string",
+            "enum": [
+              "none",
+              "read",
+              "write"
+            ],
+            "default": "none",
+            "description": "Permission level:\n- `none`: no access\n- `read`: GET only\n- `write`: all methods (includes read)",
+            "example": "read"
+          }
+        }
+      },
+      "ApiKeyCallsScopePermission": {
+        "type": "object",
+        "description": "Permission level for the `calls` scope group.",
+        "properties": {
+          "allow": {
+            "type": "string",
+            "enum": [
+              "none",
+              "read",
+              "write"
+            ],
+            "default": "none",
+            "description": "Permission level:\n- `none`: no access\n- `read`: GET requests, `POST /v1/cdr`\n- `write`: all methods (includes read)",
+            "example": "read"
+          }
+        }
+      },
       "ApiKey": {
         "type": "object",
-        "description": "API key details including IP restrictions.",
+        "description": "API key details including IP restrictions and scope permissions.",
+        "required": [
+          "id",
+          "label",
+          "value",
+          "is_active",
+          "is_restriction",
+          "permitted_ips",
+          "is_scopes_enabled",
+          "last_used_at",
+          "numbers",
+          "trunks",
+          "calls",
+          "messages",
+          "recordings",
+          "campaigns",
+          "two_fa",
+          "validator",
+          "webhooks",
+          "embeddable",
+          "billing",
+          "account",
+          "subaccounts",
+          "created_at"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -15961,11 +16147,189 @@
               "10.0.0.1"
             ]
           },
+          "is_scopes_enabled": {
+            "type": "boolean",
+            "description": "When `true`, the key is restricted to the permissions defined in the\nscope fields below. When `false`, the key has full access.",
+            "example": true
+          },
+          "last_used_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "Timestamp of the most recent authenticated request made with this key.",
+            "example": "2026-04-20T15:42:11Z"
+          },
+          "numbers": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart."
+          },
+          "trunks": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View, create, update, and delete SIP trunks and their settings."
+          },
+          "calls": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyCallsScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests."
+          },
+          "messages": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs."
+          },
+          "recordings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "List, download, and delete call recordings."
+          },
+          "campaigns": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links."
+          },
+          "two_fa": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes."
+          },
+          "validator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests."
+          },
+          "webhooks": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "List, create, and delete webhooks."
+          },
+          "embeddable": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them."
+          },
+          "billing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Access invoices, balance, payment methods, usage reports, and billing settings, including payment method updates."
+          },
+          "account": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View and update account profile information and timezone."
+          },
+          "subaccounts": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Manage subaccounts: list and view them, create, update, and suspend them."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
             "description": "Creation date and time in ISO 8601 format.",
             "example": "2024-01-15T10:30:00Z"
+          }
+        }
+      },
+      "UnauthorizedErrorResponse": {
+        "title": "UnauthorizedErrorResponse",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success flag",
+            "example": false
+          },
+          "error": {
+            "type": "boolean",
+            "description": "Error flag",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Unauthorized",
+            "example": "Unauthorized"
           }
         }
       },
@@ -15987,6 +16351,9 @@
       },
       "ApiKeyCreateRequest": {
         "type": "object",
+        "required": [
+          "label"
+        ],
         "properties": {
           "label": {
             "type": "string",
@@ -16015,6 +16382,132 @@
               "192.168.1.1",
               "10.0.0.1"
             ]
+          },
+          "is_scopes_enabled": {
+            "type": "boolean",
+            "description": "When `true`, scope fields below are enforced. When `false` (default), the\nkey has full access. Omitted scope fields default to `{ allow: none }`,\nso with `is_scopes_enabled: true` and no scopes set the key has no access.",
+            "default": false,
+            "example": true
+          },
+          "numbers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart."
+          },
+          "trunks": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View, create, update, and delete SIP trunks and their settings."
+          },
+          "calls": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyCallsScopePermission"
+              }
+            ],
+            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests."
+          },
+          "messages": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs."
+          },
+          "recordings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "List, download, and delete call recordings."
+          },
+          "campaigns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links."
+          },
+          "two_fa": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes."
+          },
+          "validator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests."
+          },
+          "webhooks": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "List, create, and delete webhooks."
+          },
+          "embeddable": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them."
+          },
+          "billing": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "Access invoices, balance, payment methods, usage reports, and billing settings, including payment method updates."
+          },
+          "account": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View and update account profile information and timezone."
+          },
+          "subaccounts": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "Manage subaccounts: list and view them, create, update, and suspend them."
+          }
+        }
+      },
+      "ValidationErrorResponse": {
+        "title": "ValidationErrorResponse",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success flag",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "description": "Missing or invalid parameter <param_name>",
+            "example": "Missing or invalid parameter <param_name>"
           }
         }
       },
@@ -16255,27 +16748,6 @@
             "total": 1,
             "per_page": 25,
             "total_pages": 1
-          }
-        }
-      },
-      "UnauthorizedErrorResponse": {
-        "title": "UnauthorizedErrorResponse",
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "description": "Success flag",
-            "example": false
-          },
-          "error": {
-            "type": "boolean",
-            "description": "Error flag",
-            "example": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Unauthorized",
-            "example": "Unauthorized"
           }
         }
       },
@@ -16621,22 +17093,6 @@
           "access_token": {
             "type": "string",
             "example": "123easwqe321132"
-          }
-        }
-      },
-      "ValidationErrorResponse": {
-        "title": "ValidationErrorResponse",
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "description": "Success flag",
-            "example": false
-          },
-          "message": {
-            "type": "string",
-            "description": "Missing or invalid parameter <param_name>",
-            "example": "Missing or invalid parameter <param_name>"
           }
         }
       },
@@ -24169,6 +24625,17 @@
       }
     },
     "responses": {
+      "UnauthorizedErrorResponse": {
+        "description": "Unauthorized",
+        "headers": {},
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UnauthorizedErrorResponse"
+            }
+          }
+        }
+      },
       "ForbiddenErrorResponse": {
         "description": "Request failed. The feature is disabled for your account.",
         "headers": {},
@@ -24176,6 +24643,17 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ForbiddenErrorResponse"
+            }
+          }
+        }
+      },
+      "BadRequestErrorResponse": {
+        "description": "Request failed. Missing or invalid parameter <param_name>",
+        "headers": {},
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ValidationErrorResponse"
             }
           }
         }
@@ -24191,30 +24669,8 @@
           }
         }
       },
-      "UnauthorizedErrorResponse": {
-        "description": "Unauthorized",
-        "headers": {},
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/UnauthorizedErrorResponse"
-            }
-          }
-        }
-      },
       "ValidationErrorResponse": {
         "description": "Validation error",
-        "headers": {},
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ValidationErrorResponse"
-            }
-          }
-        }
-      },
-      "BadRequestErrorResponse": {
-        "description": "Request failed. Missing or invalid parameter <param_name>",
         "headers": {},
         "content": {
           "application/json": {
