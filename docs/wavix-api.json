@@ -119,9 +119,7 @@
         "operationId": "api_keys_list",
         "summary": "List API keys",
         "description": "Returns a list of API keys.",
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "parameters": [
           {
             "in": "query",
@@ -218,9 +216,7 @@
         "operationId": "api_keys_create",
         "summary": "Create an API key",
         "description": "Creates an API key. Optional IP restrictions can be configured to limit access.",
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -381,9 +377,7 @@
         "operationId": "api_keys_delete",
         "summary": "Delete an API key",
         "description": "Deletes an API key. This action is permanent.",
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "parameters": [
           {
             "in": "path",
@@ -438,9 +432,7 @@
         "operationId": "api_keys_activate",
         "summary": "Activate an API key",
         "description": "Activates an API key. Once activated, the API key can be used for authentication again.",
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "parameters": [
           {
             "in": "path",
@@ -495,9 +487,7 @@
         "operationId": "api_keys_deactivate",
         "summary": "Deactivate an API key",
         "description": "Deactivates an API key. Once deactivated, the API key cannot be used for authentication.",
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "parameters": [
           {
             "in": "path",
@@ -549,9 +539,7 @@
     },
     "/v1/trunks": {
       "get": {
-        "tags": [
-          "SIP trunks"
-        ],
+        "tags": ["SIP trunks"],
         "summary": "List SIP trunks",
         "description": "Returns a paginated list of SIP trunks. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sip_trunks_list",
@@ -640,9 +628,7 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "SIP trunks"
-        ],
+        "tags": ["SIP trunks"],
         "summary": "Create a SIP trunk",
         "description": "Creates a SIP trunk.",
         "operationId": "sip_trunks_create",
@@ -755,9 +741,7 @@
     },
     "/v1/trunks/{id}": {
       "get": {
-        "tags": [
-          "SIP trunks"
-        ],
+        "tags": ["SIP trunks"],
         "summary": "Retrieve a SIP trunk",
         "description": "Returns a SIP trunk configuration.",
         "operationId": "sip_trunks_get",
@@ -859,9 +843,7 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "SIP trunks"
-        ],
+        "tags": ["SIP trunks"],
         "summary": "Update a SIP trunk",
         "description": "Updates a SIP trunk configuration.",
         "operationId": "sip_trunks_update",
@@ -959,9 +941,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "SIP trunks"
-        ],
+        "tags": ["SIP trunks"],
         "summary": "Delete a SIP trunk",
         "description": "Deletes a SIP trunk.",
         "operationId": "sip_trunks_delete",
@@ -1018,16 +998,11 @@
     },
     "/v1/buy/countries": {
       "get": {
-        "tags": [
-          "Buy"
-        ],
+        "tags": ["Buy"],
         "summary": "List countries",
         "description": "Returns a list of countries where phone numbers are available.",
         "operationId": "buy_countries_list",
-        "x-fern-sdk-group-name": [
-          "buy",
-          "countries"
-        ],
+        "x-fern-sdk-group-name": ["buy", "countries"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -1100,16 +1075,11 @@
     },
     "/v1/buy/countries/{country}/regions": {
       "get": {
-        "tags": [
-          "Buy"
-        ],
+        "tags": ["Buy"],
         "summary": "List regions",
         "description": "Returns a list of regions (states or provinces) for countries where `has_provinces_or_states` is `true`.",
         "operationId": "buy_regions_list",
-        "x-fern-sdk-group-name": [
-          "buy",
-          "regions"
-        ],
+        "x-fern-sdk-group-name": ["buy", "regions"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -1242,16 +1212,11 @@
     },
     "/v1/buy/countries/{country}/cities": {
       "get": {
-        "tags": [
-          "Buy"
-        ],
+        "tags": ["Buy"],
         "summary": "List cities",
         "description": "Returns a list of cities for countries where\n `has_provinces_or_states` is `false`.",
         "operationId": "buy_cities_list",
-        "x-fern-sdk-group-name": [
-          "buy",
-          "cities"
-        ],
+        "x-fern-sdk-group-name": ["buy", "cities"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -1401,16 +1366,11 @@
     },
     "/v1/buy/countries/{country}/regions/{region}/cities": {
       "get": {
-        "tags": [
-          "Buy"
-        ],
+        "tags": ["Buy"],
         "summary": "List region cities",
         "description": "Returns a list of cities in the specified region for countries where `has_provinces_or_states` is `true`.",
         "operationId": "buy_region_cities_list",
-        "x-fern-sdk-group-name": [
-          "buy",
-          "regionCities"
-        ],
+        "x-fern-sdk-group-name": ["buy", "regionCities"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -1572,16 +1532,11 @@
     },
     "/v1/buy/countries/{country}/cities/{city}/dids": {
       "get": {
-        "tags": [
-          "Buy"
-        ],
+        "tags": ["Buy"],
         "summary": "List available numbers",
         "description": "Returns a paginated list of phone numbers available for purchase.",
         "operationId": "buy_numbers_list",
-        "x-fern-sdk-group-name": [
-          "buy",
-          "numbers"
-        ],
+        "x-fern-sdk-group-name": ["buy", "numbers"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -1759,9 +1714,7 @@
     },
     "/v1/buy/cart": {
       "put": {
-        "tags": [
-          "Cart"
-        ],
+        "tags": ["Cart"],
         "summary": "Add to cart",
         "description": "Adds phone numbers to the cart.",
         "operationId": "cart_add",
@@ -1773,9 +1726,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "ids"
-                ],
+                "required": ["ids"],
                 "properties": {
                   "ids": {
                     "type": "array",
@@ -1783,10 +1734,7 @@
                     "items": {
                       "type": "string"
                     },
-                    "example": [
-                      "541139862174",
-                      "541139862175"
-                    ]
+                    "example": ["541139862174", "541139862175"]
                   }
                 }
               }
@@ -1890,9 +1838,7 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "Cart"
-        ],
+        "tags": ["Cart"],
         "summary": "Retrieve cart",
         "description": "Returns the cart.",
         "operationId": "cart_get",
@@ -2005,9 +1951,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Cart"
-        ],
+        "tags": ["Cart"],
         "summary": "Remove from cart",
         "description": "Removes phone numbers from the cart.",
         "operationId": "cart_remove",
@@ -2028,10 +1972,7 @@
                       "type": "string"
                     },
                     "description": "List of phone numbers to remove.",
-                    "example": [
-                      "541139862174",
-                      "541139862175"
-                    ]
+                    "example": ["541139862174", "541139862175"]
                   }
                 }
               }
@@ -2107,9 +2048,7 @@
     },
     "/v1/buy/cart/checkout": {
       "post": {
-        "tags": [
-          "Cart"
-        ],
+        "tags": ["Cart"],
         "summary": "Checkout",
         "description": "Checks out the cart. Activation and monthly fees are deducted from the account balance.",
         "operationId": "cart_checkout",
@@ -2121,9 +2060,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "ids"
-                ],
+                "required": ["ids"],
                 "properties": {
                   "ids": {
                     "type": "array",
@@ -2131,10 +2068,7 @@
                     "items": {
                       "type": "string"
                     },
-                    "example": [
-                      "541139862174",
-                      "541139862175"
-                    ]
+                    "example": ["541139862174", "541139862175"]
                   }
                 }
               }
@@ -2211,9 +2145,7 @@
     },
     "/v1/mydids": {
       "get": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "List numbers",
         "description": "Returns a paginated list of phone numbers on the account. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "my_numbers_list",
@@ -2324,9 +2256,7 @@
                             }
                           ],
                           "channels": 24,
-                          "require_docs": [
-                            "1"
-                          ],
+                          "require_docs": ["1"],
                           "documents": [
                             {
                               "id": 423,
@@ -2382,9 +2312,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "Release numbers",
         "description": "Releases phone numbers back to stock.",
         "operationId": "my_numbers_delete",
@@ -2399,11 +2327,7 @@
               "items": {
                 "type": "integer"
               },
-              "example": [
-                47832123321,
-                47832123324,
-                478321233215
-              ]
+              "example": [47832123321, 47832123324, 478321233215]
             },
             "style": "form",
             "explode": true
@@ -2488,9 +2412,7 @@
     },
     "/v1/mydids/{id}": {
       "get": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "Retrieve number",
         "description": "Returns a phone number.",
         "operationId": "my_numbers_get",
@@ -2542,9 +2464,7 @@
                         }
                       ],
                       "channels": 24,
-                      "require_docs": [
-                        "1"
-                      ],
+                      "require_docs": ["1"],
                       "documents": [
                         {
                           "id": 423,
@@ -2588,9 +2508,7 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "Update number",
         "description": "Updates a phone number.",
         "operationId": "my_numbers_update",
@@ -2680,9 +2598,7 @@
                         }
                       ],
                       "channels": 24,
-                      "require_docs": [
-                        "1"
-                      ],
+                      "require_docs": ["1"],
                       "documents": [
                         {
                           "id": 423,
@@ -2731,9 +2647,7 @@
     },
     "/v1/mydids/update-sms-enabled": {
       "put": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "Update SMS status",
         "description": "Enables or disables inbound SMS support for a phone number.",
         "operationId": "my_numbers_sms_update",
@@ -2743,10 +2657,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "sms_enabled",
-                  "id"
-                ],
+                "required": ["sms_enabled", "id"],
                 "properties": {
                   "sms_enabled": {
                     "type": "boolean",
@@ -2837,9 +2748,7 @@
     },
     "/v1/mydids/update-destinations": {
       "post": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "Update destinations",
         "description": "Updates inbound call routing for phone numbers.",
         "operationId": "my_numbers_destinations_update",
@@ -2925,9 +2834,7 @@
     },
     "/v1/mydids/papers": {
       "post": {
-        "tags": [
-          "My numbers"
-        ],
+        "tags": ["My numbers"],
         "summary": "Upload document",
         "description": "Uploads a document for one or more phone numbers.\nUploaded files must meet the following requirements:\n- Allowed formats: PNG, JPG, JPEG, TIFF, BMP, or PDF\n- Maximum file size: 10 MB\n- Files can't be password protected\n- PDF files must not contain digital signatures",
         "operationId": "my_numbers_papers_upload",
@@ -2937,11 +2844,7 @@
             "multipart/form-data": {
               "encoding": {},
               "schema": {
-                "required": [
-                  "did_ids",
-                  "doc_attachment",
-                  "doc_id"
-                ],
+                "required": ["did_ids", "doc_attachment", "doc_id"],
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
@@ -3057,9 +2960,7 @@
     },
     "/v1/cdr": {
       "get": {
-        "tags": [
-          "CDRs"
-        ],
+        "tags": ["CDRs"],
         "summary": "List CDRs",
         "description": "Returns a paginated list of CDRs.",
         "operationId": "cdrs_list",
@@ -3239,9 +3140,7 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "CDRs"
-        ],
+        "tags": ["CDRs"],
         "summary": "Search transcriptions",
         "description": "Searches call transcriptions for specific keywords or phrases.",
         "operationId": "cdrs_search",
@@ -3318,9 +3217,7 @@
     },
     "/v1/cdr/{uuid}/retranscribe": {
       "put": {
-        "tags": [
-          "CDRs"
-        ],
+        "tags": ["CDRs"],
         "summary": "Transcribe call recording",
         "description": "Transcribes a recorded call.",
         "operationId": "cdrs_retranscribe",
@@ -3367,9 +3264,7 @@
                       "example": true
                     }
                   },
-                  "required": [
-                    "success"
-                  ]
+                  "required": ["success"]
                 },
                 "examples": {
                   "default": {
@@ -3396,9 +3291,7 @@
     },
     "/v1/cdr/{uuid}/transcription": {
       "get": {
-        "tags": [
-          "CDRs"
-        ],
+        "tags": ["CDRs"],
         "summary": "Retrieve transcription",
         "description": "Returns a recorded call transcription.",
         "operationId": "cdrs_transcription_get",
@@ -3478,9 +3371,7 @@
     },
     "/v1/cdr/{uuid}": {
       "get": {
-        "tags": [
-          "CDRs"
-        ],
+        "tags": ["CDRs"],
         "summary": "Retrieve CDR",
         "description": "Returns call details.",
         "operationId": "cdrs_get",
@@ -3554,9 +3445,7 @@
     },
     "/v1/cdr/all": {
       "get": {
-        "tags": [
-          "CDRs"
-        ],
+        "tags": ["CDRs"],
         "summary": "Export CDRs",
         "description": "Returns CDRs in NDJSON format for bulk export.",
         "operationId": "cdrs_list_all",
@@ -3728,9 +3617,7 @@
     },
     "/v1/recordings": {
       "get": {
-        "tags": [
-          "Call recording"
-        ],
+        "tags": ["Call recording"],
         "summary": "List call recordings",
         "description": "Returns a paginated list of call recordings.",
         "operationId": "call_recording_list",
@@ -3809,10 +3696,7 @@
               "items": {
                 "type": "string"
               },
-              "example": [
-                "123",
-                "456"
-              ]
+              "example": ["123", "456"]
             }
           },
           {
@@ -3881,14 +3765,8 @@
                         }
                       ],
                       "invalid": {
-                        "dids": [
-                          "invalid_did_1",
-                          "invalid_did_2"
-                        ],
-                        "sip_trunks": [
-                          "invalid_trunk_1",
-                          "invalid_trunk_2"
-                        ]
+                        "dids": ["invalid_did_1", "invalid_did_2"],
+                        "sip_trunks": ["invalid_trunk_1", "invalid_trunk_2"]
                       },
                       "pagination": {
                         "current_page": 2,
@@ -3914,9 +3792,7 @@
     },
     "/v1/recordings/{call_uuid}": {
       "get": {
-        "tags": [
-          "Call recording"
-        ],
+        "tags": ["Call recording"],
         "summary": "Retrieve a call recording",
         "description": "Returns a call recording.",
         "operationId": "call_recording_get",
@@ -3994,9 +3870,7 @@
     },
     "/v1/recordings/{id}": {
       "delete": {
-        "tags": [
-          "Call recording"
-        ],
+        "tags": ["Call recording"],
         "summary": "Delete a call recording",
         "description": "Deletes a call recording.",
         "operationId": "call_recording_delete",
@@ -4089,9 +3963,7 @@
     },
     "/v1/speech-analytics": {
       "post": {
-        "tags": [
-          "Speech Analytics"
-        ],
+        "tags": ["Speech Analytics"],
         "summary": "Upload a file",
         "description": "Uploads an audio file for transcription. Wavix sends a POST callback to the specified callback URL when the transcription is complete.\n\nCallback body:\n```json\n   {\n        \"request_id\": \"e865ea07-25af-4fdd-876e-04b0d41d5ebd\",\n        \"status\": \"completed\",\n        \"error\": null\n   }\n```\n\n- `request_id`: Transcription request ID.\n- `status`: Operation status. Possible values are `completed`, `failed`. `completed` indicates successful transcription; `failed` indicates an error. - `error`: Error description. Value is `null` if the transcription was successful.",
         "operationId": "speech_analytics_create",
@@ -4101,10 +3973,7 @@
             "multipart/form-data": {
               "encoding": {},
               "schema": {
-                "required": [
-                  "file",
-                  "callback_url"
-                ],
+                "required": ["file", "callback_url"],
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
@@ -4225,9 +4094,7 @@
     },
     "/v1/speech-analytics/{uuid}": {
       "get": {
-        "tags": [
-          "Speech Analytics"
-        ],
+        "tags": ["Speech Analytics"],
         "summary": "Retrieve a transcription",
         "description": "Returns a transcription.",
         "operationId": "speech_analytics_get",
@@ -4381,9 +4248,7 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "Speech Analytics"
-        ],
+        "tags": ["Speech Analytics"],
         "summary": "Retranscribe a file",
         "description": "Retranscribes an uploaded file.",
         "operationId": "speech_analytics_retranscribe",
@@ -4406,9 +4271,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "callback_url"
-                ],
+                "required": ["callback_url"],
                 "properties": {
                   "callback_url": {
                     "type": "string",
@@ -4551,9 +4414,7 @@
     },
     "/v1/speech-analytics/{uuid}/file": {
       "get": {
-        "tags": [
-          "Speech Analytics"
-        ],
+        "tags": ["Speech Analytics"],
         "summary": "Retrieve original file",
         "description": "Returns the original file submitted for transcription.",
         "operationId": "speech_analytics_file_get",
@@ -4631,9 +4492,7 @@
     },
     "/v1/calls/webhooks": {
       "get": {
-        "tags": [
-          "Call webhooks"
-        ],
+        "tags": ["Call webhooks"],
         "summary": "List call webhooks",
         "description": "Returns a list of configured call webhooks. Wavix sends POST callbacks for `on-call` and `post-call` events.",
         "operationId": "call_webhooks_list",
@@ -4674,9 +4533,7 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "Call webhooks"
-        ],
+        "tags": ["Call webhooks"],
         "summary": "Create a call webhook",
         "description": "Creates a call webhook. Wavix sends POST callbacks for `on-call` and `post-call` events.",
         "operationId": "call_webhooks_create",
@@ -4688,10 +4545,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "url",
-                  "event_type"
-                ],
+                "required": ["url", "event_type"],
                 "properties": {
                   "url": {
                     "type": "string",
@@ -4702,10 +4556,7 @@
                   "event_type": {
                     "type": "string",
                     "description": "Allowed values: `on-call`, `post-call`.\n - `on-call`: Sends real-time status updates\n  when a call starts, is answered, and ends.\n\n - `post-call`: Sends a callback after the call ends\n  with disposition, duration, and cost.",
-                    "enum": [
-                      "post-call",
-                      "on-call"
-                    ]
+                    "enum": ["post-call", "on-call"]
                   }
                 }
               }
@@ -4768,9 +4619,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Call webhooks"
-        ],
+        "tags": ["Call webhooks"],
         "summary": "Delete a call webhook",
         "description": "Deletes a call webhook.",
         "operationId": "call_webhooks_delete",
@@ -4784,10 +4633,7 @@
             "explode": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "post-call",
-                "on-call"
-              ],
+              "enum": ["post-call", "on-call"],
               "description": "Use `post-call` to stop receiving post-call callbacks.\nUse `on-call` to stop receiving real-time call status updates.",
               "example": "post-call"
             }
@@ -4857,9 +4703,7 @@
     },
     "/v1/calls": {
       "post": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Start a call",
         "description": "Starts an outbound call.",
         "operationId": "call_control_create",
@@ -4983,9 +4827,7 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "List active calls",
         "description": "Returns a list of active calls.",
         "operationId": "call_control_list",
@@ -5060,9 +4902,7 @@
     },
     "/v1/calls/{uuid}": {
       "get": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Retrieve a call",
         "description": "Returns a call.",
         "operationId": "call_control_get",
@@ -5175,9 +5015,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "End a call",
         "description": "Ends an active call.",
         "operationId": "call_control_delete",
@@ -5285,9 +5123,7 @@
         "deprecated": false
       },
       "patch": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Update a call",
         "description": "Updates an active call. Only the `tag` field can be modified.",
         "operationId": "call_control_update",
@@ -5321,9 +5157,7 @@
               "application/json": {
                 "schema": {
                   "title": "SuccessResponse",
-                  "required": [
-                    "success"
-                  ],
+                  "required": ["success"],
                   "type": "object",
                   "properties": {
                     "success": {
@@ -5359,9 +5193,7 @@
     },
     "/v1/calls/{uuid}/answer": {
       "post": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Answer a call",
         "description": "Answers an inbound call. Optionally initiate media streaming upon answering.",
         "operationId": "call_control_answer",
@@ -5535,16 +5367,11 @@
     },
     "/v1/calls/{uuid}/streams": {
       "post": {
-        "tags": [
-          "Call streaming"
-        ],
+        "tags": ["Call streaming"],
         "summary": "Start call streaming",
         "description": "Starts call media streaming.",
         "operationId": "call_control_streams_create",
-        "x-fern-sdk-group-name": [
-          "callControl",
-          "streams"
-        ],
+        "x-fern-sdk-group-name": ["callControl", "streams"],
         "x-fern-sdk-method-name": "create",
         "parameters": [
           {
@@ -5679,16 +5506,11 @@
     },
     "/v1/calls/{uuid}/streams/{stream_uuid}": {
       "delete": {
-        "tags": [
-          "Call streaming"
-        ],
+        "tags": ["Call streaming"],
         "summary": "Stop call streaming",
         "description": "Stops call media streaming.",
         "operationId": "call_control_streams_delete",
-        "x-fern-sdk-group-name": [
-          "callControl",
-          "streams"
-        ],
+        "x-fern-sdk-group-name": ["callControl", "streams"],
         "x-fern-sdk-method-name": "delete",
         "parameters": [
           {
@@ -5768,16 +5590,11 @@
     },
     "/v1/calls/{uuid}/play": {
       "post": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Play audio",
         "description": "Plays audio in an active call.",
         "operationId": "call_control_audio_play",
-        "x-fern-sdk-group-name": [
-          "callControl",
-          "audio"
-        ],
+        "x-fern-sdk-group-name": ["callControl", "audio"],
         "x-fern-sdk-method-name": "play",
         "parameters": [
           {
@@ -5939,16 +5756,11 @@
     },
     "/v1/calls/{uuid}/audio": {
       "delete": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Stop audio playback",
         "description": "Stops audio playback in an active call.",
         "operationId": "call_control_audio_stop",
-        "x-fern-sdk-group-name": [
-          "callControl",
-          "audio"
-        ],
+        "x-fern-sdk-group-name": ["callControl", "audio"],
         "x-fern-sdk-method-name": "stop",
         "parameters": [
           {
@@ -6056,9 +5868,7 @@
     },
     "/v1/calls/{uuid}/collect": {
       "post": {
-        "tags": [
-          "Call control"
-        ],
+        "tags": ["Call control"],
         "summary": "Collect DTMF input",
         "description": "Collects DTMF input in an active call.",
         "operationId": "call_control_collect",
@@ -6210,9 +6020,7 @@
     },
     "/v2/webrtc/tokens": {
       "post": {
-        "tags": [
-          "Wavix Embeddable"
-        ],
+        "tags": ["Wavix Embeddable"],
         "summary": "Create a widget token",
         "description": "Creates a Wavix Embeddable widget token.",
         "operationId": "webrtc_tokens_create",
@@ -6378,9 +6186,7 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "Wavix Embeddable"
-        ],
+        "tags": ["Wavix Embeddable"],
         "summary": "List widget tokens",
         "description": "Returns a paginated list of active Wavix Embeddable widget tokens. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "webrtc_tokens_list",
@@ -6492,9 +6298,7 @@
     },
     "/v2/webrtc/tokens/{uuid}": {
       "get": {
-        "tags": [
-          "Wavix Embeddable"
-        ],
+        "tags": ["Wavix Embeddable"],
         "summary": "Retrieve a widget token",
         "description": "Returns a Wavix Embeddable widget token configuration.",
         "operationId": "webrtc_tokens_get",
@@ -6623,9 +6427,7 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "Wavix Embeddable"
-        ],
+        "tags": ["Wavix Embeddable"],
         "summary": "Update a widget token",
         "description": "Updates the payload for a Wavix Embeddable widget token.",
         "operationId": "webrtc_tokens_update",
@@ -6794,9 +6596,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Wavix Embeddable"
-        ],
+        "tags": ["Wavix Embeddable"],
         "summary": "Delete a widget token",
         "description": "Deletes a Wavix Embeddable widget token. After deletion, the token can't be used to authenticate widget sessions, and any active session associated with it is terminated.",
         "operationId": "webrtc_tokens_delete",
@@ -6930,16 +6730,11 @@
     },
     "/v3/messages/sender-ids": {
       "get": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "List Sender IDs",
         "description": "Returns a list of Sender IDs.",
         "operationId": "sms_and_mms_sender_ids_list",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "senderIds"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "senderIds"],
         "x-fern-sdk-method-name": "list",
         "parameters": [],
         "responses": {
@@ -6964,13 +6759,9 @@
                           "id": "3c7a5a90-43e0-43e0-b006-fdfea30c5a7c",
                           "sender_id": "org_123",
                           "type": "numeric",
-                          "allowlisted_in": [
-                            "allowlisted in"
-                          ],
+                          "allowlisted_in": ["allowlisted in"],
                           "usecase": "usecase",
-                          "samples": [
-                            "samples"
-                          ]
+                          "samples": ["samples"]
                         }
                       ]
                     }
@@ -6986,16 +6777,11 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "Create a Sender ID",
         "description": "Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US.",
         "operationId": "sms_and_mms_sender_ids_create",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "senderIds"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "senderIds"],
         "x-fern-sdk-method-name": "create",
         "parameters": [],
         "requestBody": {
@@ -7028,13 +6814,9 @@
                       "id": "3c7a5a90-43e0-43e0-b006-fdfea30c5a7c",
                       "sender_id": "Wavix",
                       "type": "numeric",
-                      "allowlisted_in": [
-                        "example"
-                      ],
+                      "allowlisted_in": ["example"],
                       "usecase": "example",
-                      "samples": [
-                        "example"
-                      ]
+                      "samples": ["example"]
                     }
                   }
                 }
@@ -7079,16 +6861,11 @@
     },
     "/v3/messages/sender-ids/{id}": {
       "get": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "Retrieve a Sender ID",
         "description": "Returns a Sender ID.",
         "operationId": "sms_and_mms_sender_ids_get",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "senderIds"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "senderIds"],
         "x-fern-sdk-method-name": "get",
         "parameters": [
           {
@@ -7123,12 +6900,8 @@
                       "sender_id": "Wavix",
                       "type": "alphanumeric",
                       "usecase": "promo",
-                      "samples": [
-                        "Sample"
-                      ],
-                      "allowlisted_in": [
-                        "GB"
-                      ]
+                      "samples": ["Sample"],
+                      "allowlisted_in": ["GB"]
                     }
                   }
                 }
@@ -7145,16 +6918,11 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "Delete a Sender ID",
         "description": "Deletes a Sender ID.",
         "operationId": "sms_and_mms_sender_ids_delete",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "senderIds"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "senderIds"],
         "x-fern-sdk-method-name": "delete",
         "parameters": [
           {
@@ -7262,16 +7030,11 @@
     },
     "/v3/messages/opt-outs": {
       "get": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "List opted-out phone numbers",
         "description": "Returns a paginated list of opted-out phone numbers. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sms_and_mms_opt_outs_list",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "optOuts"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "optOuts"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -7412,16 +7175,11 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "Create an opt-out",
         "description": "Creates an opt-out for a Sender ID, 10DLC campaign,\n or all outbound messages.",
         "operationId": "sms_and_mms_opt_outs_create",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "optOuts"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "optOuts"],
         "x-fern-sdk-method-name": "create",
         "parameters": [],
         "requestBody": {
@@ -7485,16 +7243,11 @@
     },
     "/v3/messages": {
       "post": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "Send message",
         "description": "Sends SMS or MMS messages. MMS is supported for U.S. numbers only.\n**Rate limit**: 20 messages per phone number in 24 hours.",
         "operationId": "sms_and_mms_messages_send",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "messages"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "messages"],
         "x-fern-sdk-method-name": "send",
         "parameters": [],
         "requestBody": {
@@ -7575,10 +7328,7 @@
                       "example": "2024-05-28T12:34:56Z"
                     },
                     "error_message": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": ["string", "null"],
                       "description": "Error message."
                     },
                     "from": {
@@ -7713,16 +7463,11 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "List messages",
         "description": "Returns a paginated list of SMS and MMS messages.",
         "operationId": "sms_and_mms_messages_list",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "messages"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "messages"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -7814,10 +7559,7 @@
             "explode": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "sms",
-                "mms"
-              ],
+              "enum": ["sms", "mms"],
               "example": "sms"
             }
           },
@@ -7945,16 +7687,11 @@
     },
     "/v3/messages/{id}": {
       "get": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "Retrieve a message",
         "description": "Returns a message.",
         "operationId": "sms_and_mms_messages_get",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "messages"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "messages"],
         "x-fern-sdk-method-name": "get",
         "parameters": [
           {
@@ -8049,16 +7786,11 @@
     },
     "/v3/messages/all": {
       "get": {
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "summary": "List all messages",
         "description": "Returns SMS and MMS messages in newline-delimited JSON (NDJSON) format.",
         "operationId": "sms_and_mms_messages_list_all",
-        "x-fern-sdk-group-name": [
-          "smsAndMms",
-          "messages"
-        ],
+        "x-fern-sdk-group-name": ["smsAndMms", "messages"],
         "x-fern-sdk-method-name": "listAll",
         "parameters": [
           {
@@ -8150,10 +7882,7 @@
             "explode": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "sms",
-                "mms"
-              ],
+              "enum": ["sms", "mms"],
               "example": "sms"
             }
           }
@@ -8203,16 +7932,11 @@
     },
     "/v3/10dlc/brands": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List 10DLC Brands",
         "description": "Returns a paginated list of 10DLC brands. Filter results by date, name, legal name, and status. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "ten_dlc_brands_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brands"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brands"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -8472,16 +8196,11 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Register a 10DLC Brand",
         "description": "Registers a 10DLC Brand. TCR automatically verifies the brand identity. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.",
         "operationId": "ten_dlc_brands_create",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brands"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brands"],
         "x-fern-sdk-method-name": "create",
         "parameters": [],
         "requestBody": {
@@ -8597,16 +8316,11 @@
     },
     "/v3/10dlc/brands/{brand_id}": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Retrieve a 10DLC Brand",
         "description": "Returns a 10DLC Brand.",
         "operationId": "ten_dlc_brands_get",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brands"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brands"],
         "x-fern-sdk-method-name": "get",
         "parameters": [
           {
@@ -8749,16 +8463,11 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Update a 10DLC Brand",
         "description": "Updates a 10DLC brand. Updating identity-related parameters, including  `ein_taxid`, `ein_taxid_country`, and `entity_type`, resets the Brand status to `UNVERIFIED` and triggers automatic re-submission. Brands in `VETTED_VERIFIED` status or with active Campaigns cannot be updated.",
         "operationId": "ten_dlc_brands_update",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brands"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brands"],
         "x-fern-sdk-method-name": "update",
         "parameters": [
           {
@@ -8944,16 +8653,11 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Delete a 10DLC Brand",
         "description": "Deletes a 10DLC Brand. Brands with active campaigns cannot be deleted.",
         "operationId": "ten_dlc_brands_delete",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brands"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brands"],
         "x-fern-sdk-method-name": "delete",
         "parameters": [
           {
@@ -9051,16 +8755,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/appeals": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Appeal a 10DLC Brand identity verification",
         "description": "Submits an appeal for 10DLC brand identity verification. Provide any additional documentation to support the appeal. Use `appeal_category` to specify the appeal type:\n- `VERIFY_TAX_ID` — Use if the brand is UNVERIFIED due to a tax ID mismatch. Applies to private companies, public companies, non-profits, and government entities.\n- `VERIFY_NON_PROFIT` — Use if a non-profit brand is UNVERIFIED or VERIFIED but missing tax-exempt status.\n- `VERIFY_GOVERNMENT` — Use if a government brand is UNVERIFIED or VERIFIED but missing government entity status.      ",
         "operationId": "ten_dlc_brand_appeals_create",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandAppeals"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandAppeals"],
         "x-fern-sdk-method-name": "create",
         "parameters": [
           {
@@ -9176,10 +8875,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "message"
-                  ],
+                  "required": ["success", "message"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -9207,16 +8903,11 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List a 10DLC Brand Identity verification appeals",
         "description": "Returns a list of brand identity verification appeals.",
         "operationId": "ten_dlc_brand_appeals_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandAppeals"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandAppeals"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -9244,9 +8935,7 @@
                   },
                   "example": [
                     {
-                      "categories": [
-                        "VERIFY_TAX_ID"
-                      ],
+                      "categories": ["VERIFY_TAX_ID"],
                       "created_at": "2024-08-01T14:09:43Z",
                       "evidence": [],
                       "explanation": "Dear partner, please review the registration docs",
@@ -9266,9 +8955,7 @@
                   "default": {
                     "value": [
                       {
-                        "categories": [
-                          "VERIFY_TAX_ID"
-                        ],
+                        "categories": ["VERIFY_TAX_ID"],
                         "created_at": "2024-08-01T14:09:43Z",
                         "evidence": [],
                         "explanation": "Dear partner, please review the registration docs",
@@ -9373,16 +9060,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/evidence": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Upload a 10DLC Brand evidence",
         "description": "Uploads 10DLC Brand evidence. Supported formats include .jpg, .png, .pdf, and more. File size must be under 10MB.",
         "operationId": "ten_dlc_brand_evidence_upload",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandEvidence"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandEvidence"],
         "x-fern-sdk-method-name": "upload",
         "parameters": [
           {
@@ -9402,9 +9084,7 @@
             "multipart/form-data": {
               "encoding": {},
               "schema": {
-                "required": [
-                  "file"
-                ],
+                "required": ["file"],
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
@@ -9536,16 +9216,11 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List a 10DLC Brand appeal evidence",
         "description": "Use this method to list previously uploaded Brand appeal evidence.",
         "operationId": "ten_dlc_brand_evidence_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandEvidence"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandEvidence"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -9568,9 +9243,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "items"
-                  ],
+                  "required": ["items"],
                   "properties": {
                     "items": {
                       "type": "array",
@@ -9664,16 +9337,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/evidence/{uuid}": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Download a 10DLC Brand evidence",
         "description": "Returns a 10DLC Brand evidence file.",
         "operationId": "ten_dlc_brand_evidence_get",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandEvidence"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandEvidence"],
         "x-fern-sdk-method-name": "get",
         "parameters": [
           {
@@ -9746,16 +9414,11 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Delete a 10DLC Brand evidence",
         "description": "Deletes a 10DLC Brand evidence file.",
         "operationId": "ten_dlc_brand_evidence_delete",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandEvidence"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandEvidence"],
         "x-fern-sdk-method-name": "delete",
         "parameters": [
           {
@@ -9864,16 +9527,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/vettings": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Request external vetting",
         "description": "Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`.",
         "operationId": "ten_dlc_brand_vettings_create",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandVettings"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandVettings"],
         "x-fern-sdk-method-name": "create",
         "parameters": [
           {
@@ -9987,16 +9645,11 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Import external vetting",
         "description": "Imports an existing external vetting for a 10DLC Brand.",
         "operationId": "ten_dlc_brand_vettings_import",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandVettings"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandVettings"],
         "x-fern-sdk-method-name": "import",
         "parameters": [
           {
@@ -10116,10 +9769,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "message"
-                  ],
+                  "required": ["success", "message"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -10147,16 +9797,11 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List external vettings",
         "description": "Returns a list of external vettings for a 10DLC Brand.",
         "operationId": "ten_dlc_brand_vettings_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandVettings"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandVettings"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -10266,16 +9911,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/vettings/appeals": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Appeal external vetting",
         "description": "Submits an appeal for a 10DLC Brand external vetting.",
         "operationId": "ten_dlc_brand_vetting_appeals_create",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandVettingAppeals"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandVettingAppeals"],
         "x-fern-sdk-method-name": "create",
         "parameters": [
           {
@@ -10412,16 +10052,11 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List external vetting appeals",
         "description": "Returns a list of external vetting appeals for a 10DLC Brand.",
         "operationId": "ten_dlc_brand_vetting_appeals_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brandVettingAppeals"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brandVettingAppeals"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -10462,9 +10097,7 @@
                       "appeal_status_update_date": "2024-08-15T08:42:31Z",
                       "attachment_uuid_list": [],
                       "brand_id": "BMQFB7X",
-                      "category_list": [
-                        "LOW_SCORE"
-                      ],
+                      "category_list": ["LOW_SCORE"],
                       "create_date": "2024-08-15T08:41:05",
                       "evp_id": "AEGIS",
                       "explanation": "This is an API test",
@@ -10560,16 +10193,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/usecases/{use_case}": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Qualify a 10DLC Brand for a use case",
         "description": "Returns the qualification results for a 10DLC Brand use case. Includes MNO-specific attributes, restrictions, and fees.",
         "operationId": "ten_dlc_brand_usecase_qualify",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "brands"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "brands"],
         "x-fern-sdk-method-name": "qualifyUsecase",
         "parameters": [
           {
@@ -10778,16 +10406,11 @@
     },
     "/v3/10dlc/brands/campaigns": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List 10DLC Campaigns",
         "description": "Returns a paginated list of 10DLC Campaigns. Filter results by date, status, and use case. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "ten_dlc_campaigns_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaigns"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaigns"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -11039,16 +10662,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/campaigns": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List 10DLC Campaigns associated with a Brand",
         "description": "Returns 10DLC Campaigns associated with a Brand.\n Results are limited to 25 records per page by default.\n  Use `page` and `per_page` to navigate results.",
         "operationId": "ten_dlc_brand_campaigns_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaigns"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaigns"],
         "x-fern-sdk-method-name": "listByBrand",
         "parameters": [
           {
@@ -11339,16 +10957,11 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Register a 10DLC Campaign",
         "description": "Registers a 10DLC Campaign.",
         "operationId": "ten_dlc_brand_campaigns_create",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaigns"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaigns"],
         "x-fern-sdk-method-name": "create",
         "parameters": [
           {
@@ -11534,16 +11147,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Retrieve a 10DLC Campaign",
         "description": "Returns a 10DLC Campaign.",
         "operationId": "ten_dlc_brand_campaigns_get",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaigns"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaigns"],
         "x-fern-sdk-method-name": "get",
         "parameters": [
           {
@@ -11732,16 +11340,11 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Update a 10DLC Campaign",
         "description": "Updates a 10DLC Campaign.",
         "operationId": "ten_dlc_brand_campaigns_update",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaigns"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaigns"],
         "x-fern-sdk-method-name": "update",
         "parameters": [
           {
@@ -11936,9 +11539,7 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Delete a 10DLC Campaign",
         "description": "Deletes a 10DLC Campaign. Associated phone numbers cannot be used as Sender IDs once the Campaign is deleted.",
         "operationId": "ten_dlc_brand_campaigns_delete",
@@ -12054,16 +11655,11 @@
     },
     "/v3/10dlc/subscriptions": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Subscribe to 10DLC events",
         "description": "Subscribes to Wavix 10DLC event callbacks.",
         "operationId": "ten_dlc_subscriptions_create",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "subscriptions"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "subscriptions"],
         "x-fern-sdk-method-name": "create",
         "parameters": [],
         "requestBody": {
@@ -12130,16 +11726,11 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List event subscriptions",
         "description": "Returns a list of 10DLC event subscriptions.",
         "operationId": "ten_dlc_subscriptions_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "subscriptions"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "subscriptions"],
         "x-fern-sdk-method-name": "list",
         "parameters": [],
         "responses": {
@@ -12196,16 +11787,11 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Delete event subscription",
         "description": "Deletes a 10DLC event subscription.",
         "operationId": "ten_dlc_subscriptions_delete",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "subscriptions"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "subscriptions"],
         "x-fern-sdk-method-name": "delete",
         "parameters": [
           {
@@ -12277,16 +11863,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers/{number}": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Link a number to a 10DLC Campaign",
         "description": "Links a phone number to a 10DLC Campaign. Wavix automatically creates a Sender ID once the number is approved.",
         "operationId": "ten_dlc_campaign_numbers_link",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaignNumbers"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaignNumbers"],
         "x-fern-sdk-method-name": "link",
         "parameters": [
           {
@@ -12376,10 +11957,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "message"
-                  ],
+                  "required": ["success", "message"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -12407,16 +11985,11 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Unlink phone number",
         "description": "Unlinks a phone number from a 10DLC Campaign. The associated Sender ID is also deleted.",
         "operationId": "ten_dlc_campaign_numbers_unlink",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaignNumbers"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaignNumbers"],
         "x-fern-sdk-method-name": "unlink",
         "parameters": [
           {
@@ -12506,10 +12079,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "message"
-                  ],
+                  "required": ["success", "message"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -12539,16 +12109,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/numbers": {
       "get": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "List Campaign phone numbers",
         "description": "Returns a list of phone numbers associated with a 10DLC Campaign.",
         "operationId": "ten_dlc_campaign_numbers_list",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaignNumbers"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaignNumbers"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -12642,10 +12207,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "message"
-                  ],
+                  "required": ["success", "message"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -12675,16 +12237,11 @@
     },
     "/v3/10dlc/brands/{brand_id}/campaigns/{campaign_id}/nudge": {
       "post": {
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "summary": "Nudge a 10DLC Campaign review",
         "description": "Requests action on a pending or rejected 10DLC Campaign. Use `nudge_intent` to specify the action: \n- `REVIEW`: Request review for a pending Campaign. - `APPEAL_REJECTION`: Appeal a rejected Campaign.\nNote:\n- The Campaign must be at least 72 hours old.\n- Only one nudge request per Campaign is allowed every 24 hours.",
         "operationId": "ten_dlc_campaigns_nudge",
-        "x-fern-sdk-group-name": [
-          "tenDlc",
-          "campaigns"
-        ],
+        "x-fern-sdk-group-name": ["tenDlc", "campaigns"],
         "x-fern-sdk-method-name": "nudge",
         "parameters": [
           {
@@ -12810,10 +12367,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "message"
-                  ],
+                  "required": ["success", "message"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -12842,9 +12396,7 @@
     },
     "/v1/validation": {
       "get": {
-        "tags": [
-          "Number validator"
-        ],
+        "tags": ["Number validator"],
         "summary": "Validate a number",
         "description": "Returns details for a phone number.",
         "operationId": "number_validator_get",
@@ -12981,9 +12533,7 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "Number validator"
-        ],
+        "tags": ["Number validator"],
         "summary": "Validate multiple numbers",
         "description": "Returns details for multiple phone numbers. If `async` is true, returns a token to poll for results.",
         "operationId": "number_validator_create_bulk",
@@ -13106,9 +12656,7 @@
     },
     "/v1/validation/{request_id}": {
       "get": {
-        "tags": [
-          "Number validator"
-        ],
+        "tags": ["Number validator"],
         "summary": "Retrieve validation results",
         "description": "Returns asynchronous validation results.",
         "operationId": "number_validator_results_get",
@@ -13265,9 +12813,7 @@
     },
     "/v1/voice-campaigns": {
       "post": {
-        "tags": [
-          "Voice campaigns"
-        ],
+        "tags": ["Voice campaigns"],
         "summary": "Trigger a scenario",
         "description": "Triggers an outbound call based on a pre-configured scenario.",
         "operationId": "voice_campaigns_create",
@@ -13392,9 +12938,7 @@
     },
     "/v1/voice-campaigns/{id}": {
       "get": {
-        "tags": [
-          "Voice campaigns"
-        ],
+        "tags": ["Voice campaigns"],
         "summary": "Retrieve a voice campaign",
         "description": "Returns a specific voice campaign.",
         "operationId": "voice_campaigns_get",
@@ -13485,9 +13029,7 @@
     },
     "/v1/short-links": {
       "post": {
-        "tags": [
-          "Link shortener"
-        ],
+        "tags": ["Link shortener"],
         "summary": "Create a short link",
         "description": "Creates a short link.",
         "operationId": "link_shortener_create",
@@ -13569,9 +13111,7 @@
     },
     "/v1/short-links/metrics": {
       "get": {
-        "tags": [
-          "Link shortener"
-        ],
+        "tags": ["Link shortener"],
         "summary": "List short link metrics",
         "description": "Returns short link metrics.",
         "operationId": "link_shortener_metrics_list",
@@ -13704,16 +13244,11 @@
     },
     "/v1/two-fa/verification": {
       "post": {
-        "tags": [
-          "2FA"
-        ],
+        "tags": ["2FA"],
         "summary": "Create a 2FA Verification",
         "description": "Creates a new 2FA Verification and sends a one-time password (OTP) to the destination phone number.\nBefore using this endpoint, create a 2FA Service in the Wavix portal. The service is created once and reused to generate and validate OTPs.\nOTP flow:\n1. Create a Verification to generate and send an OTP.\n2. Reuse the same Verification to resend the OTP if needed.\n3. Validate the OTP using the 2FA API\n\nWhen a Verification is created, Wavix generates a random code and sends it to the destination phone number via the selected channel.",
         "operationId": "two_fa_verification_create",
-        "x-fern-sdk-group-name": [
-          "twoFa",
-          "verification"
-        ],
+        "x-fern-sdk-group-name": ["twoFa", "verification"],
         "x-fern-sdk-method-name": "create",
         "parameters": [],
         "requestBody": {
@@ -13845,16 +13380,11 @@
     },
     "/v1/two-fa/service/{service_id}/sessions": {
       "get": {
-        "tags": [
-          "2FA"
-        ],
+        "tags": ["2FA"],
         "summary": "List 2FA Verifications",
         "description": "Returns a list of 2FA verifications. Filter by service or date.",
         "operationId": "two_fa_sessions_list",
-        "x-fern-sdk-group-name": [
-          "twoFa",
-          "sessions"
-        ],
+        "x-fern-sdk-group-name": ["twoFa", "sessions"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -14079,16 +13609,11 @@
     },
     "/v1/two-fa/verification/{session_id}": {
       "post": {
-        "tags": [
-          "2FA"
-        ],
+        "tags": ["2FA"],
         "summary": "Resend a code",
         "description": "Resends the verification code using the specified channel. Previously sent codes are invalidated.",
         "operationId": "two_fa_verification_resend",
-        "x-fern-sdk-group-name": [
-          "twoFa",
-          "verification"
-        ],
+        "x-fern-sdk-group-name": ["twoFa", "verification"],
         "x-fern-sdk-method-name": "resend",
         "parameters": [
           {
@@ -14207,16 +13732,11 @@
     },
     "/v1/two-fa/verification/{session_id}/check": {
       "post": {
-        "tags": [
-          "2FA"
-        ],
+        "tags": ["2FA"],
         "summary": "Validate a code",
         "description": "Validates the verification code.",
         "operationId": "two_fa_verification_check",
-        "x-fern-sdk-group-name": [
-          "twoFa",
-          "verification"
-        ],
+        "x-fern-sdk-group-name": ["twoFa", "verification"],
         "x-fern-sdk-method-name": "check",
         "parameters": [
           {
@@ -14329,16 +13849,11 @@
     },
     "/v1/two-fa/verification/{session_id}/cancel": {
       "patch": {
-        "tags": [
-          "2FA"
-        ],
+        "tags": ["2FA"],
         "summary": "Cancel a 2FA Verification",
         "description": "Cancels a 2FA verification. After cancellation, no additional codes are sent, and previously sent codes can no longer be validated. You must create a new verification to send another code.",
         "operationId": "two_fa_verification_cancel",
-        "x-fern-sdk-group-name": [
-          "twoFa",
-          "verification"
-        ],
+        "x-fern-sdk-group-name": ["twoFa", "verification"],
         "x-fern-sdk-method-name": "cancel",
         "parameters": [
           {
@@ -14460,16 +13975,11 @@
     },
     "/v1/two-fa/session/{session_id}/events": {
       "get": {
-        "tags": [
-          "2FA"
-        ],
+        "tags": ["2FA"],
         "summary": "List 2FA Verification events",
         "description": "Returns a list of events for a specific 2FA Verification.",
         "operationId": "two_fa_events_list",
-        "x-fern-sdk-group-name": [
-          "twoFa",
-          "events"
-        ],
+        "x-fern-sdk-group-name": ["twoFa", "events"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -14598,16 +14108,11 @@
     },
     "/v1/billing/transactions": {
       "get": {
-        "tags": [
-          "Billing"
-        ],
+        "tags": ["Billing"],
         "summary": "List transactions",
         "description": "Returns a paginated list of financial transactions.",
         "operationId": "billing_transactions_list",
-        "x-fern-sdk-group-name": [
-          "billing",
-          "transactions"
-        ],
+        "x-fern-sdk-group-name": ["billing", "transactions"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -14800,16 +14305,11 @@
     },
     "/v1/billing/invoices": {
       "get": {
-        "tags": [
-          "Billing"
-        ],
+        "tags": ["Billing"],
         "summary": "List financial statements",
         "description": "Returns a paginated list of financial statements.",
         "operationId": "billing_invoices_list",
-        "x-fern-sdk-group-name": [
-          "billing",
-          "invoices"
-        ],
+        "x-fern-sdk-group-name": ["billing", "invoices"],
         "x-fern-sdk-method-name": "list",
         "parameters": [
           {
@@ -14903,16 +14403,11 @@
     },
     "/v1/billing/invoices/{id}": {
       "get": {
-        "tags": [
-          "Billing"
-        ],
+        "tags": ["Billing"],
         "summary": "Download statement",
         "description": "Returns a financial statement in PDF format.",
         "operationId": "billing_invoices_download",
-        "x-fern-sdk-group-name": [
-          "billing",
-          "invoices"
-        ],
+        "x-fern-sdk-group-name": ["billing", "invoices"],
         "x-fern-sdk-method-name": "download",
         "parameters": [
           {
@@ -14953,9 +14448,7 @@
     },
     "/v1/profile": {
       "put": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Update a profile",
         "description": "Updates the account profile and billing details.",
         "operationId": "profile_update",
@@ -15032,9 +14525,7 @@
         "deprecated": false
       },
       "get": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Retrieve a profile",
         "description": "Returns the account profile and billing details.",
         "operationId": "profile_get",
@@ -15098,9 +14589,7 @@
     },
     "/v1/profile/config": {
       "get": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Retrieve account settings",
         "description": "Returns the account balance and configuration details.",
         "operationId": "profile_config_get",
@@ -15152,9 +14641,7 @@
     },
     "/v1/sub-organizations": {
       "get": {
-        "tags": [
-          "Sub-accounts"
-        ],
+        "tags": ["Sub-accounts"],
         "summary": "List sub-accounts",
         "description": "Returns a paginated list of sub-accounts. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sub_accounts_list",
@@ -15168,10 +14655,7 @@
             "explode": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "enabled",
-                "disabled"
-              ],
+              "enum": ["enabled", "disabled"],
               "example": "enabled"
             }
           }
@@ -15237,9 +14721,7 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "Sub-accounts"
-        ],
+        "tags": ["Sub-accounts"],
         "summary": "Create a sub-account",
         "description": "Creates a sub-account.",
         "operationId": "sub_accounts_create",
@@ -15251,9 +14733,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -15376,9 +14856,7 @@
     },
     "/v1/sub-organizations/{id}": {
       "get": {
-        "tags": [
-          "Sub-accounts"
-        ],
+        "tags": ["Sub-accounts"],
         "summary": "Retrieve a sub-account",
         "description": "Returns a specific sub-account. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sub_accounts_get",
@@ -15439,9 +14917,7 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "Sub-accounts"
-        ],
+        "tags": ["Sub-accounts"],
         "summary": "Update sub-account",
         "description": "Updates a sub-account's configuration.",
         "operationId": "sub_accounts_update",
@@ -15467,9 +14943,7 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -15480,10 +14954,7 @@
                   "status": {
                     "type": "string",
                     "description": "Sub-account status.",
-                    "enum": [
-                      "enabled",
-                      "disabled"
-                    ],
+                    "enum": ["enabled", "disabled"],
                     "example": "enabled"
                   },
                   "default_destinations": {
@@ -15591,9 +15062,7 @@
     },
     "/v1/sub-organizations/{id}/billing/transactions": {
       "get": {
-        "tags": [
-          "Sub-accounts"
-        ],
+        "tags": ["Sub-accounts"],
         "summary": "List sub-account transactions",
         "description": "Returns a paginated list of transactions for a specific sub-account. Filter by date range and type. Results are paginated with 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sub_accounts_transactions_list",
@@ -15657,11 +15126,7 @@
                     "type": "integer",
                     "format": "int32"
                   },
-                  "example": [
-                    1,
-                    2,
-                    3
-                  ]
+                  "example": [1, 2, 3]
                 }
               ]
             }
@@ -15844,9 +15309,7 @@
         "operationId": "on_call_event",
         "security": [],
         "description": "Sends a notification to track the lifecycle of an active call.status updates. It's triggered when a call is initiated, answered, and ends.",
-        "tags": [
-          "Call webhooks"
-        ],
+        "tags": ["Call webhooks"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -15870,9 +15333,7 @@
         "operationId": "post_call_event",
         "security": [],
         "description": "The `post-call` callback includes details such as call disposition, duration, and cost. It's triggered after the call ends.",
-        "tags": [
-          "Call webhooks"
-        ],
+        "tags": ["Call webhooks"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -15896,9 +15357,7 @@
         "operationId": "audio_file_transcription_completed",
         "security": [],
         "description": "Sends a notification when an audio file transcription is complete.",
-        "tags": [
-          "Speech Analytics"
-        ],
+        "tags": ["Speech Analytics"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -15922,9 +15381,7 @@
         "operationId": "call_transcription_completed",
         "security": [],
         "description": "Sends a notification when a call transcription is complete.",
-        "tags": [
-          "Speech Analytics"
-        ],
+        "tags": ["Speech Analytics"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -15948,9 +15405,7 @@
         "operationId": "delivery_report",
         "security": [],
         "description": "Sends a notification when an outbound message delivery status changes.",
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -15973,9 +15428,7 @@
         "operationId": "inbound_message",
         "security": [],
         "description": "Sends a notification when a message is received by an SMS-enabled phone number.",
-        "tags": [
-          "SMS and MMS"
-        ],
+        "tags": ["SMS and MMS"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -15999,9 +15452,7 @@
         "operationId": "brand_status_changed",
         "security": [],
         "description": "Sends a notification when a 10DLC Brand status is updated.",
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -16025,9 +15476,7 @@
         "operationId": "campaign_status_changed",
         "security": [],
         "description": "Sends a notification when a 10DLC Campaign status is updated in TCR.",
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -16050,9 +15499,7 @@
         "operationId": "number_status_changed",
         "security": [],
         "description": "Sends a notification when a phone number status is updated.",
-        "tags": [
-          "10DLC"
-        ],
+        "tags": ["10DLC"],
         "requestBody": {
           "description": "Callback payload.",
           "content": {
@@ -16173,10 +15620,161 @@
               "type": "string"
             },
             "description": "List of permitted IP addresses. If `is_restriction` is false,\n an empty list means no IP restrictions. If `is_restriction` is true,\n  an empty list prevents all requests.",
-            "example": [
-              "192.168.1.1",
-              "10.0.0.1"
-            ]
+            "example": ["192.168.1.1", "10.0.0.1"]
+          },
+          "is_scopes_enabled": {
+            "type": "boolean",
+            "description": "When `true`, the key is restricted to the permissions defined in the\nscope fields below. When `false`, the key has full access.",
+            "example": true
+          },
+          "last_used_at": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "Timestamp of the most recent authenticated request made with this key.",
+            "example": "2026-04-20T15:42:11Z"
+          },
+          "numbers": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart."
+          },
+          "trunks": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View, create, update, and delete SIP trunks and their settings."
+          },
+          "calls": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyCallsScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests."
+          },
+          "messages": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs."
+          },
+          "recordings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "List, download, and delete call recordings."
+          },
+          "campaigns": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links."
+          },
+          "two_fa": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes."
+          },
+          "validator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests."
+          },
+          "webhooks": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "List, create, and delete webhooks."
+          },
+          "embeddable": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them."
+          },
+          "billing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Access invoices, balance, payment methods, usage reports, and billing settings, including payment method updates."
+          },
+          "account": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "View and update account profile information and timezone."
+          },
+          "subaccounts": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Manage subaccounts: list and view them, create, update, and suspend them."
           },
           "is_scopes_enabled": {
             "type": "boolean",
@@ -16582,10 +16180,13 @@
             "format": "int32",
             "example": 293
           },
-          "name": {
-            "type": "string",
-            "description": "System-generated login name of the SIP trunk",
-            "example": "67758"
+          "numbers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyScopePermission"
+              }
+            ],
+            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart."
           },
           "callerid": {
             "type": [
@@ -16605,10 +16206,7 @@
             "type": "string"
           },
           "host_request": {
-            "type": [
-              "object",
-              "null"
-            ],
+            "type": ["object", "null"],
             "description": "For SIP trunks with IP-based authentication, contains the status of the IP authentication request.",
             "properties": {
               "host": {
@@ -16705,12 +16303,7 @@
       },
       "Pagination": {
         "title": "Pagination",
-        "required": [
-          "current_page",
-          "per_page",
-          "total",
-          "total_pages"
-        ],
+        "required": ["current_page", "per_page", "total", "total_pages"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -16742,18 +16335,12 @@
       },
       "SipTrunkListResponse": {
         "title": "SipTrunkListResponse",
-        "required": [
-          "sip_trunks",
-          "pagination"
-        ],
+        "required": ["sip_trunks", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "sip_trunks": {
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": ["array", "null"],
             "items": {
               "$ref": "#/components/schemas/SipTrunkSummary"
             },
@@ -16828,9 +16415,7 @@
             "type": "object",
             "description": "For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.",
             "additionalProperties": false,
-            "required": [
-              "host"
-            ],
+            "required": ["host"],
             "properties": {
               "host": {
                 "type": "string",
@@ -16854,17 +16439,12 @@
             "example": false
           },
           "allowed_ips": {
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": ["array", "null"],
             "description": "A list of public static IP addresses allowed to register with the SIP trunk",
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "ip"
-              ],
+              "required": ["ip"],
               "properties": {
                 "ip": {
                   "type": "string",
@@ -16959,10 +16539,7 @@
         "items": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "id",
-            "ip"
-          ],
+          "required": ["id", "ip"],
           "properties": {
             "id": {
               "type": "integer",
@@ -17031,10 +16608,7 @@
             "example": false
           },
           "max_channels": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "A maximum number of concurrent outbound calls placed via the SIP trunk. Cannot be higher than the outbound channel capacity configured on the account.",
             "format": "int32",
             "example": 2
@@ -17046,27 +16620,18 @@
             "example": true
           },
           "max_call_cost": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "A maximum cost of an outbound call, in USD.",
             "example": "0.18"
           },
           "call_restrict": {
-            "type": [
-              "boolean",
-              "null"
-            ],
+            "type": ["boolean", "null"],
             "description": "Indicates if maximum call duration limit is activated for the SIP trunk.",
             "default": false,
             "example": false
           },
           "call_limit": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "A maximum call duration for the SIP trunk, in seconds. Cannot be higher than the max call duration set for the account.",
             "format": "int32",
             "example": 3600
@@ -17155,9 +16720,7 @@
       },
       "SuccessResponse": {
         "title": "SuccessResponse",
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "type": "object",
         "properties": {
           "success": {
@@ -17168,11 +16731,7 @@
       },
       "Country": {
         "title": "Country",
-        "required": [
-          "id",
-          "name",
-          "has_provinces_or_states"
-        ],
+        "required": ["id", "name", "has_provinces_or_states"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17196,9 +16755,7 @@
       },
       "CountryListResponse": {
         "title": "CountryListResponse",
-        "required": [
-          "countries"
-        ],
+        "required": ["countries"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17212,10 +16769,7 @@
       },
       "Region": {
         "title": "Region",
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17235,9 +16789,7 @@
       },
       "RegionListResponse": {
         "title": "RegionListResponse",
-        "required": [
-          "regions"
-        ],
+        "required": ["regions"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17267,11 +16819,7 @@
       },
       "City": {
         "title": "City",
-        "required": [
-          "id",
-          "name",
-          "area_code"
-        ],
+        "required": ["id", "name", "area_code"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17294,9 +16842,7 @@
       },
       "CityListResponse": {
         "title": "CityListResponse",
-        "required": [
-          "cities"
-        ],
+        "required": ["cities"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17372,10 +16918,7 @@
             "example": "AR"
           },
           "cnam": {
-            "type": [
-              "boolean",
-              "null"
-            ],
+            "type": ["boolean", "null"],
             "description": "Indicates whether CNAM can be activated.",
             "example": false
           },
@@ -17397,10 +16940,7 @@
               "format": "int32"
             },
             "description": "Documents required to activate the phone number.",
-            "example": [
-              1,
-              3
-            ]
+            "example": [1, 3]
           },
           "sms_enabled": {
             "type": "boolean",
@@ -17423,10 +16963,7 @@
       },
       "AvailableNumberListResponse": {
         "title": "AvailableNumberListResponse",
-        "required": [
-          "dids",
-          "pagination"
-        ],
+        "required": ["dids", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17443,11 +16980,7 @@
       },
       "DocumentType": {
         "title": "DocumentType",
-        "required": [
-          "id",
-          "name",
-          "title"
-        ],
+        "required": ["id", "name", "title"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17471,10 +17004,7 @@
       },
       "CartResponse": {
         "title": "CartResponse",
-        "required": [
-          "dids",
-          "doc_types"
-        ],
+        "required": ["dids", "doc_types"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17496,11 +17026,7 @@
       },
       "InboundCallTransport": {
         "title": "InboundCallTransport",
-        "enum": [
-          1,
-          4,
-          5
-        ],
+        "enum": [1, 4, 5],
         "type": "integer",
         "description": "Inbound call transport"
       },
@@ -17538,10 +17064,7 @@
             "$ref": "#/components/schemas/InboundCallTransport"
           },
           "trunk_id": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "Unique identified of a SIP trunk on the platform. In cases when `transport:5`, otherwise, `null`",
             "format": "int32",
             "example": 23123
@@ -17551,10 +17074,7 @@
             "example": false
           },
           "trunk_label": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "A user-defined name of a SIP trunk on the platform. In cases when `transport:5`, otherwise, `null`",
             "example": "My trunk"
           }
@@ -17563,11 +17083,7 @@
       },
       "DocumentTypeId": {
         "title": "DocumentTypeId",
-        "enum": [
-          1,
-          2,
-          3
-        ],
+        "enum": [1, 2, 3],
         "type": "integer",
         "description": "Specifies the type of document required to activate the phone number.\nPossible values are: `1` - Proof of identity, `2` - Proof of address, `3` - Proof of business registration."
       },
@@ -17732,9 +17248,7 @@
               "type": "string"
             },
             "description": "Documents required to activate the phone number.",
-            "example": [
-              "1"
-            ]
+            "example": ["1"]
           },
           "documents": {
             "type": "array",
@@ -17756,10 +17270,7 @@
             "description": "Indicates whether usage is unlimited."
           },
           "label": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Label assigned to the phone number."
           },
           "status": {
@@ -17788,18 +17299,12 @@
             "example": false
           },
           "sms_relay_url": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Callback URL for inbound SMS and MMS messages.",
             "example": "https://your-website.com/webhook"
           },
           "cnam": {
-            "type": [
-              "boolean",
-              "null"
-            ],
+            "type": ["boolean", "null"],
             "description": "Indicates whether CNAM is enabled.",
             "example": true
           },
@@ -17820,10 +17325,7 @@
             "example": 6
           },
           "call_status_url": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Callback URL for call status updates.",
             "example": "https://example.com"
           }
@@ -17831,11 +17333,7 @@
       },
       "NumberListResponse": {
         "title": "NumberListResponse",
-        "required": [
-          "items",
-          "doc_types",
-          "pagination"
-        ],
+        "required": ["items", "doc_types", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17860,11 +17358,7 @@
       },
       "NumberDestination": {
         "title": "NumberDestination",
-        "required": [
-          "destination",
-          "priority",
-          "transport"
-        ],
+        "required": ["destination", "priority", "transport"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17883,10 +17377,7 @@
             "$ref": "#/components/schemas/InboundCallTransport"
           },
           "trunk_id": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "format": "int32",
             "description": "SIP trunk ID when `transport` is 5, otherwise null.",
             "example": 23123
@@ -17902,11 +17393,7 @@
       },
       "NumberDestinationsUpdateRequest": {
         "title": "NumberDestinationsUpdateRequest",
-        "required": [
-          "ids",
-          "destinations",
-          "sms_relay_url"
-        ],
+        "required": ["ids", "destinations", "sms_relay_url"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -17917,11 +17404,7 @@
               "format": "int32"
             },
             "description": "List of phone number IDs to update.",
-            "example": [
-              1,
-              2,
-              3
-            ]
+            "example": [1, 2, 3]
           },
           "destinations": {
             "type": "array",
@@ -17940,10 +17423,7 @@
       },
       "RecordNotFoundErrorResponse": {
         "title": "RecordNotFoundErrorResponse",
-        "required": [
-          "success",
-          "message"
-        ],
+        "required": ["success", "message"],
         "type": "object",
         "properties": {
           "success": {
@@ -17964,13 +17444,7 @@
       },
       "CallDisposition": {
         "title": "CallDisposition",
-        "enum": [
-          "answered",
-          "noanswer",
-          "busy",
-          "failed",
-          "all"
-        ],
+        "enum": ["answered", "noanswer", "busy", "failed", "all"],
         "type": "string",
         "description": "Call disposition."
       },
@@ -18047,18 +17521,12 @@
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "parent_uuid": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Parent call ID.",
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "answered_by": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Who answered the call. Possible values are `human`, `machine`.",
             "example": "human"
           }
@@ -18066,10 +17534,7 @@
       },
       "CdrListResponse": {
         "title": "CdrListResponse",
-        "required": [
-          "items",
-          "pagination"
-        ],
+        "required": ["items", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -18087,11 +17552,7 @@
       },
       "TranscriptionFilter": {
         "title": "TranscriptionFilter",
-        "required": [
-          "agent",
-          "client",
-          "any"
-        ],
+        "required": ["agent", "client", "any"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -18106,10 +17567,7 @@
                   "example": "Hello"
                 },
                 "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND",
-                "example": [
-                  "Hello",
-                  "Thank you"
-                ]
+                "example": ["Hello", "Thank you"]
               },
               "match": {
                 "type": "array",
@@ -18118,10 +17576,7 @@
                   "example": "Nope"
                 },
                 "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR",
-                "example": [
-                  "Nope",
-                  "Maybe"
-                ]
+                "example": ["Nope", "Maybe"]
               },
               "exclude": {
                 "type": "array",
@@ -18130,10 +17585,7 @@
                   "example": "Richard"
                 },
                 "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR",
-                "example": [
-                  "Richard",
-                  "Issue resolved"
-                ]
+                "example": ["Richard", "Issue resolved"]
               }
             }
           },
@@ -18148,10 +17600,7 @@
                   "example": "Hello"
                 },
                 "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND",
-                "example": [
-                  "Hello",
-                  "Thank you"
-                ]
+                "example": ["Hello", "Thank you"]
               },
               "match": {
                 "type": "array",
@@ -18160,10 +17609,7 @@
                   "example": "Nope"
                 },
                 "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR",
-                "example": [
-                  "Nope",
-                  "Maybe"
-                ]
+                "example": ["Nope", "Maybe"]
               },
               "exclude": {
                 "type": "array",
@@ -18172,10 +17618,7 @@
                   "example": "Richard"
                 },
                 "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR",
-                "example": [
-                  "Richard",
-                  "Issue resolved"
-                ]
+                "example": ["Richard", "Issue resolved"]
               }
             }
           },
@@ -18190,10 +17633,7 @@
                   "example": "Hello"
                 },
                 "description": "Only calls with transcription that includes all of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical AND",
-                "example": [
-                  "Hello",
-                  "Thank you"
-                ]
+                "example": ["Hello", "Thank you"]
               },
               "match": {
                 "type": "array",
@@ -18202,10 +17642,7 @@
                   "example": "Nope"
                 },
                 "description": "Only calls with transcription that includes any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR",
-                "example": [
-                  "Nope",
-                  "Maybe"
-                ]
+                "example": ["Nope", "Maybe"]
               },
               "exclude": {
                 "type": "array",
@@ -18214,10 +17651,7 @@
                   "example": "Richard"
                 },
                 "description": "Only calls with transcription that does not include any of the specified keywords and phrases are returned. The listed keywords and phrases are combined using logical OR",
-                "example": [
-                  "Richard",
-                  "Issue resolved"
-                ]
+                "example": ["Richard", "Issue resolved"]
               }
             }
           }
@@ -18225,22 +17659,13 @@
       },
       "CdrSearchRequest": {
         "title": "CdrSearchRequest",
-        "required": [
-          "type",
-          "from",
-          "to",
-          "page",
-          "per_page"
-        ],
+        "required": ["type", "from", "to", "page", "per_page"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "placed",
-              "received"
-            ],
+            "enum": ["placed", "received"],
             "description": "Search transcriptions by call type.",
             "example": "placed"
           },
@@ -18311,14 +17736,8 @@
       },
       "TranscriptionReference": {
         "title": "TranscriptionReference",
-        "required": [
-          "uuid",
-          "url"
-        ],
-        "type": [
-          "object",
-          "null"
-        ],
+        "required": ["uuid", "url"],
+        "type": ["object", "null"],
         "additionalProperties": false,
         "properties": {
           "uuid": {
@@ -18351,10 +17770,7 @@
         "additionalProperties": false,
         "properties": {
           "answered_by": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Who answered the call. Allowed values are `human`, `machine`.",
             "example": "human"
           },
@@ -18413,10 +17829,7 @@
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "parent_uuid": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Parent UUID",
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
@@ -18428,10 +17841,7 @@
       },
       "CdrTranscriptionSearchResponse": {
         "title": "CdrTranscriptionSearchResponse",
-        "required": [
-          "items",
-          "pagination"
-        ],
+        "required": ["items", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -18449,18 +17859,8 @@
       },
       "TranscriptionLanguage": {
         "title": "TranscriptionLanguage",
-        "enum": [
-          "en",
-          "de",
-          "es",
-          "fr",
-          "it",
-          null
-        ],
-        "type": [
-          "string",
-          "null"
-        ],
+        "enum": ["en", "de", "es", "fr", "it", null],
+        "type": ["string", "null"],
         "description": "Language."
       },
       "CdrRetranscriptionRequest": {
@@ -18514,10 +17914,7 @@
       },
       "TranscriptionStatus": {
         "title": "TranscriptionStatus",
-        "enum": [
-          "completed",
-          "failed"
-        ],
+        "enum": ["completed", "failed"],
         "type": "string",
         "description": "Transcription status."
       },
@@ -18712,18 +18109,12 @@
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "parent_uuid": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Parent call ID.",
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "answered_by": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Who answered the call. Possible values are `human`, `machine`.",
             "example": "human"
           }
@@ -18795,10 +18186,7 @@
               "type": "string"
             },
             "description": "Invalid DID IDs",
-            "example": [
-              "invalid_did_1",
-              "invalid_did_2"
-            ]
+            "example": ["invalid_did_1", "invalid_did_2"]
           },
           "sip_trunks": {
             "type": "array",
@@ -18806,21 +18194,14 @@
               "type": "string"
             },
             "description": "Invalid SIP trunk IDs",
-            "example": [
-              "invalid_trunk_1",
-              "invalid_trunk_2"
-            ]
+            "example": ["invalid_trunk_1", "invalid_trunk_2"]
           }
         },
         "description": "An invalid recording filter response"
       },
       "SubmitFileTranscriptionResponse": {
         "title": "SubmitFileTranscriptionResponse",
-        "required": [
-          "file",
-          "request_id",
-          "success"
-        ],
+        "required": ["file", "request_id", "success"],
         "type": "object",
         "properties": {
           "file": {
@@ -18847,10 +18228,7 @@
       },
       "FileTranscriptResponse": {
         "title": "FileTranscriptResponse",
-        "required": [
-          "channel_1",
-          "channel_2"
-        ],
+        "required": ["channel_1", "channel_2"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -18868,13 +18246,7 @@
       },
       "FileTranscriptTurn": {
         "title": "FileTranscriptTurn",
-        "required": [
-          "speaker",
-          "s",
-          "e",
-          "text",
-          "sentiment"
-        ],
+        "required": ["speaker", "s", "e", "text", "sentiment"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -18945,10 +18317,7 @@
             ]
           },
           "turns": {
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": ["array", "null"],
             "items": {
               "$ref": "#/components/schemas/FileTranscriptTurn"
             },
@@ -18980,10 +18349,7 @@
             ]
           },
           "duration": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "File duration in seconds.",
             "format": "int32",
             "example": 102
@@ -19011,18 +18377,12 @@
             "example": "2023-01-09T10:04:39.734Z"
           },
           "transcription_score": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Conversation sentiment score. Scores from 1.0 to 3.0 are negative; scores from 4.0 to 5.0 are positive.",
             "example": "3.8"
           },
           "transcription_summary": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Transcription summary.",
             "example": "The agent and client discussed call recording and call transcription"
           },
@@ -19040,18 +18400,12 @@
         "items": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "event_type",
-            "url"
-          ],
+          "required": ["event_type", "url"],
           "properties": {
             "event_type": {
               "type": "string",
               "description": "Call event type.",
-              "enum": [
-                "post-call",
-                "on-call"
-              ],
+              "enum": ["post-call", "on-call"],
               "example": "post-call"
             },
             "url": {
@@ -19065,11 +18419,7 @@
       },
       "CallWebhook": {
         "title": "CallWebhook",
-        "required": [
-          "success",
-          "event_type",
-          "url"
-        ],
+        "required": ["success", "event_type", "url"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -19080,10 +18430,7 @@
           "event_type": {
             "type": "string",
             "description": "Type of call events",
-            "enum": [
-              "post-call",
-              "on-call"
-            ],
+            "enum": ["post-call", "on-call"],
             "example": "post-call"
           },
           "url": {
@@ -19097,33 +18444,22 @@
       },
       "CallDirection": {
         "type": "string",
-        "enum": [
-          "inbound",
-          "outbound"
-        ],
+        "enum": ["inbound", "outbound"],
         "description": "Call direction - inbound or outbound"
       },
       "OnCallEventPayload": {
         "type": "object",
         "description": "Payload for the `on_call_event` event type.",
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
         "properties": {
           "type": {
             "type": "string",
             "description": "Type of the on-call sub-event",
-            "enum": [
-              "audio",
-              "collect"
-            ],
+            "enum": ["audio", "collect"],
             "example": "audio"
           },
           "payload": {
-            "type": [
-              "object",
-              "null"
-            ],
+            "type": ["object", "null"],
             "description": "Sub-event-specific data. Structure depends on the `type` field:\n- `audio`: `{ \"status\": \"started\" | \"completed\", \"playback_id\": \"<uuid>\" }`\n- `collect`: `{ \"digits\": \"<digits>\", \"status\": \"started\" | \"completed\" | \"failed\" }`",
             "example": {
               "status": "completed",
@@ -19215,18 +18551,12 @@
             "example": "2025-09-22T12:56:38.547Z"
           },
           "call_answered": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time",
             "description": "Date and time when the call was answered in ISO 8601 format."
           },
           "call_completed": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time",
             "description": "Date and time when the call ended in ISO 8601 format."
           },
@@ -19258,19 +18588,12 @@
             "example": true
           }
         },
-        "required": [
-          "calls",
-          "success"
-        ]
+        "required": ["calls", "success"]
       },
       "CallRequest": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "from",
-          "to",
-          "callback_url"
-        ],
+        "required": ["from", "to", "callback_url"],
         "properties": {
           "from": {
             "type": "string",
@@ -19379,18 +18702,12 @@
             "example": "2025-09-22T12:56:38.547Z"
           },
           "call_answered": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time",
             "description": "Date and time when the call was answered"
           },
           "call_completed": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time",
             "description": "Date and time when the call ended"
           },
@@ -19418,17 +18735,12 @@
             "example": true
           }
         },
-        "required": [
-          "call",
-          "success"
-        ]
+        "required": ["call", "success"]
       },
       "UpdateCallRequest": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "tag"
-        ],
+        "required": ["tag"],
         "properties": {
           "tag": {
             "type": "string",
@@ -19439,19 +18751,12 @@
       },
       "CallStreamType": {
         "type": "string",
-        "enum": [
-          "oneway",
-          "twoway"
-        ],
+        "enum": ["oneway", "twoway"],
         "description": "Specifies the streaming type. Can be either `oneway` for unidirectional or `twoway` for bidirectional streaming."
       },
       "CallStreamChannel": {
         "type": "string",
-        "enum": [
-          "inbound",
-          "outbound",
-          "both"
-        ],
+        "enum": ["inbound", "outbound", "both"],
         "description": "Specifies which audio channel to stream. Use `inbound` to stream the incoming channel (to Wavix), `outbound` for the outbound channel (from Wavix), or `both` to stream both. For bidirectional call streaming, this setting is ignored and the inbound channel is only streamed."
       },
       "CallAnswerRequest": {
@@ -19495,11 +18800,7 @@
       "CallStreamCreateRequest": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "stream_url",
-          "stream_type",
-          "stream_channel"
-        ],
+        "required": ["stream_url", "stream_type", "stream_channel"],
         "properties": {
           "stream_url": {
             "type": "string",
@@ -19554,9 +18855,7 @@
       "CallAudioPlayRequest": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "audio_file"
-        ],
+        "required": ["audio_file"],
         "properties": {
           "audio_file": {
             "type": "string",
@@ -19567,12 +18866,7 @@
       },
       "TTSLanguage": {
         "type": "string",
-        "enum": [
-          "ru",
-          "en",
-          "sp",
-          "ge"
-        ],
+        "enum": ["ru", "en", "sp", "ge"],
         "description": "Language"
       },
       "TTSVoiceId": {
@@ -19637,10 +18931,7 @@
               "say": {
                 "type": "object",
                 "description": "Text to speak and voice to use.",
-                "required": [
-                  "text",
-                  "voice"
-                ],
+                "required": ["text", "voice"],
                 "properties": {
                   "text": {
                     "type": "string",
@@ -19663,10 +18954,7 @@
         "title": "WebRtcToken",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "uuid",
-          "sip_trunk"
-        ],
+        "required": ["uuid", "sip_trunk"],
         "properties": {
           "uuid": {
             "type": "string",
@@ -19679,10 +18967,7 @@
             "example": "my-sip-trunk"
           },
           "payload": {
-            "type": [
-              "object",
-              "null"
-            ],
+            "type": ["object", "null"],
             "description": "Arbitrary data associated with the token",
             "example": {}
           },
@@ -19712,10 +18997,7 @@
             "example": "my-sip-trunk"
           },
           "payload": {
-            "type": [
-              "object",
-              "null"
-            ],
+            "type": ["object", "null"],
             "description": "Arbitrary data to be associated with the token",
             "example": {}
           },
@@ -19734,11 +19016,7 @@
         "title": "WebRtcTokenResponse",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "token",
-          "uuid",
-          "sip_trunk"
-        ],
+        "required": ["token", "uuid", "sip_trunk"],
         "properties": {
           "token": {
             "type": "string",
@@ -19756,18 +19034,12 @@
             "example": "my-sip-trunk"
           },
           "payload": {
-            "type": [
-              "object",
-              "null"
-            ],
+            "type": ["object", "null"],
             "description": "Arbitrary data associated with the token",
             "example": {}
           },
           "ttl": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "Time to live, in seconds",
             "example": 3600
           }
@@ -19777,9 +19049,7 @@
         "title": "WebRtcTokenUpdateRequest",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "payload"
-        ],
+        "required": ["payload"],
         "properties": {
           "payload": {
             "type": "object",
@@ -19790,21 +19060,13 @@
       },
       "SenderIDType": {
         "title": "SenderIdType",
-        "enum": [
-          "numeric",
-          "alphanumeric"
-        ],
+        "enum": ["numeric", "alphanumeric"],
         "type": "string",
         "description": "Sender ID type."
       },
       "SenderID": {
         "title": "SenderID",
-        "required": [
-          "id",
-          "sender_id",
-          "type",
-          "allowlisted_in"
-        ],
+        "required": ["id", "sender_id", "type", "allowlisted_in"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -19845,9 +19107,7 @@
       },
       "SenderIdListResponse": {
         "title": "SenderIdListResponse",
-        "required": [
-          "items"
-        ],
+        "required": ["items"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -19862,12 +19122,7 @@
       },
       "SenderIdCreateRequest": {
         "title": "SenderIdCreateRequest",
-        "required": [
-          "sender_id",
-          "type",
-          "countries",
-          "usecase"
-        ],
+        "required": ["sender_id", "type", "countries", "usecase"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -19889,11 +19144,7 @@
           "usecase": {
             "type": "string",
             "description": "Use case for the Sender ID",
-            "enum": [
-              "transactional",
-              "promo",
-              "authentication"
-            ],
+            "enum": ["transactional", "promo", "authentication"],
             "example": "transactional"
           },
           "monthly_volume": {
@@ -19914,21 +19165,13 @@
               "type": "string"
             },
             "description": "Message samples.",
-            "example": [
-              "Sample message 1",
-              "Sample message 2"
-            ]
+            "example": ["Sample message 1", "Sample message 2"]
           }
         }
       },
       "SenderIDDetails": {
         "title": "SenderIDDetails",
-        "required": [
-          "id",
-          "sender_id",
-          "type",
-          "allowlisted_in"
-        ],
+        "required": ["id", "sender_id", "type", "allowlisted_in"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -19962,10 +19205,7 @@
               "type": "string"
             },
             "description": "Message samples.",
-            "example": [
-              "Sample message 1",
-              "Sample message 2"
-            ]
+            "example": ["Sample message 1", "Sample message 2"]
           }
         }
       },
@@ -19987,11 +19227,7 @@
           "type": {
             "type": "string",
             "description": "Sender ID type.",
-            "enum": [
-              "alphanumeric",
-              "numeric",
-              "shortcode"
-            ],
+            "enum": ["alphanumeric", "numeric", "shortcode"],
             "example": "alphanumeric"
           },
           "usecase": {
@@ -20016,11 +19252,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "sender_id",
-          "type"
-        ]
+        "required": ["id", "sender_id", "type"]
       },
       "OptOutItem": {
         "title": "OptOutItem",
@@ -20032,18 +19264,12 @@
             "example": "15551234567"
           },
           "sender_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Sender ID. Contains `null` if the phone number opted out of all messages.",
             "example": "MySender"
           },
           "campaign_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "10DLC campaign ID, if any.",
             "example": "C123456"
           },
@@ -20072,9 +19298,7 @@
       },
       "OptOut": {
         "title": "OptOut",
-        "required": [
-          "number"
-        ],
+        "required": ["number"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -20096,9 +19320,7 @@
       },
       "OptOutCreateRequest": {
         "title": "OptOutCreateRequest",
-        "required": [
-          "opt_out"
-        ],
+        "required": ["opt_out"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -20124,10 +19346,7 @@
       },
       "MessageBody": {
         "title": "MessageBody",
-        "required": [
-          "text",
-          "media"
-        ],
+        "required": ["text", "media"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -20139,17 +19358,12 @@
           "media": {
             "maxItems": 5,
             "minItems": 0,
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": ["array", "null"],
             "items": {
               "type": "string"
             },
             "description": "List of media URLs.\n If provided, the message is sent as an MMS;\n  otherwise, it is sent as an SMS.",
-            "example": [
-              "https://you-site.com/media"
-            ]
+            "example": ["https://you-site.com/media"]
           }
         }
       },
@@ -20208,18 +19422,12 @@
             "example": "outbound"
           },
           "mcc": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Mobile country code.",
             "example": "301"
           },
           "mnc": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Mobile network code.",
             "example": "204"
           },
@@ -20227,10 +19435,7 @@
             "$ref": "#/components/schemas/MessageBody"
           },
           "tag": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Tag to group messages, such as for a specific campaign.",
             "example": "Fall sale"
           },
@@ -20254,26 +19459,17 @@
             "example": "2022-04-14T13:51:16.096Z"
           },
           "sent_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Date and time the message was sent in ISO 8601 format. For mobile terminated messages only.",
             "example": "2022-04-14T13:51:16.096Z"
           },
           "delivered_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Date and time the message was delivered in ISO 8601 format. Refers to DLR reception for mobile-terminated messages\n or webhook relay for mobile-originated messages.",
             "example": "2022-04-14T13:51:16.096Z"
           },
           "error_message": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "A human-readable error description."
           }
         },
@@ -20302,10 +19498,7 @@
       },
       "MessageListResponse": {
         "title": "MessageListResponse",
-        "required": [
-          "items",
-          "pagination"
-        ],
+        "required": ["items", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -20322,11 +19515,7 @@
       },
       "MessageCreateRequest": {
         "title": "MessageCreateRequest",
-        "required": [
-          "from",
-          "to",
-          "message_body"
-        ],
+        "required": ["from", "to", "message_body"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -20410,18 +19599,12 @@
             "example": "outbound"
           },
           "mcc": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Mobile country code.",
             "example": "301"
           },
           "mnc": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Mobile network code.",
             "example": "204"
           },
@@ -20429,10 +19612,7 @@
             "$ref": "#/components/schemas/MessageBody"
           },
           "tag": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Tag to group messages, such as for a specific campaign.",
             "example": "Fall sale"
           },
@@ -20456,33 +19636,21 @@
             "example": "2022-04-14T13:51:16.096Z"
           },
           "sent_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Date and time the message was sent in ISO 8601 format. For mobile-terminated messages only.",
             "example": "2022-04-14T13:51:16.096Z"
           },
           "delivered_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Date and time the message was delivered in ISO 8601 format. Refers to DLR reception for mobile-terminated messages\n or webhook relay for mobile-originated messages.",
             "example": "2022-04-14T13:51:16.096Z"
           },
           "error_message": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Human-readable error message."
           },
           "carrier_fees": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Mobile carrier fees in USD.",
             "example": "0.0"
           }
@@ -20490,12 +19658,7 @@
       },
       "TenDLCBrandEntityType": {
         "title": "TenDlcBrandEntityType",
-        "enum": [
-          "PRIVATE_PROFIT",
-          "PUBLIC_PROFIT",
-          "NON_PROFIT",
-          "GOVERNMENT"
-        ],
+        "enum": ["PRIVATE_PROFIT", "PUBLIC_PROFIT", "NON_PROFIT", "GOVERNMENT"],
         "type": "string",
         "description": "Brand entity type",
         "example": "PRIVATE_PROFIT"
@@ -20599,17 +19762,11 @@
             "example": "https://brand.com"
           },
           "stock_symbol": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Stock symbol. Required for public companies."
           },
           "stock_exchange": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Stock exchange code. Required for public companies."
           },
           "first_name": {
@@ -20643,10 +19800,7 @@
             "example": "Miami"
           },
           "state_or_province": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "State or province.",
             "example": "FL"
           },
@@ -20661,10 +19815,7 @@
             "example": "12345"
           },
           "feedback": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Brand identity verification feedback."
           },
           "mock": {
@@ -20714,10 +19865,7 @@
       },
       "TenDlcBrandListResponse": {
         "title": "TenDlcBrandListResponse",
-        "required": [
-          "items",
-          "pagination"
-        ],
+        "required": ["items", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -20779,10 +19927,7 @@
       },
       "AccountErrorResponse": {
         "title": "AccountErrorResponse",
-        "required": [
-          "success",
-          "message"
-        ],
+        "required": ["success", "message"],
         "type": "object",
         "properties": {
           "success": {
@@ -20880,18 +20025,12 @@
             "example": "Tess.com"
           },
           "stock_symbol": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The stock symbol of the Brand. For PUBLIC_PROFIT Brands only.",
             "maxLength": 10
           },
           "stock_exchange": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The stock exchange code. For PUBLIC_PROFIT Brands only.",
             "maxLength": 10,
             "example": "NASDAQ"
@@ -20934,10 +20073,7 @@
             "example": "Miami"
           },
           "state_or_province": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "State or province. For the United States, use 2 character codes.",
             "maxLength": 20,
             "example": "AL"
@@ -20970,20 +20106,13 @@
                 "const": "PUBLIC_PROFIT"
               }
             },
-            "required": [
-              "stock_symbol",
-              "stock_exchange"
-            ]
+            "required": ["stock_symbol", "stock_exchange"]
           },
           {
             "description": "Non-PUBLIC_PROFIT brands must not include stock_symbol or stock_exchange.",
             "properties": {
               "entity_type": {
-                "enum": [
-                  "PRIVATE_PROFIT",
-                  "NON_PROFIT",
-                  "GOVERNMENT"
-                ]
+                "enum": ["PRIVATE_PROFIT", "NON_PROFIT", "GOVERNMENT"]
               },
               "stock_symbol": {
                 "type": "null"
@@ -21081,18 +20210,12 @@
             "example": "https://brand.com"
           },
           "stock_symbol": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The stock symbol of the Brand. For PUBLIC_PROFIT Brands only.",
             "maxLength": 10
           },
           "stock_exchange": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The stock exchange code. For PUBLIC_PROFIT Brands only.",
             "maxLength": 10
           },
@@ -21134,10 +20257,7 @@
             "example": "Miami"
           },
           "state_or_province": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "State or province. For the United States, use 2 character codes.",
             "maxLength": 20,
             "example": "FL"
@@ -21165,10 +20285,7 @@
       },
       "TCRErrorMessage": {
         "title": "TcrErrorMessage",
-        "required": [
-          "code",
-          "message"
-        ],
+        "required": ["code", "message"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21188,13 +20305,7 @@
       },
       "TCRFeedbackCategory": {
         "title": "TcrFeedbackCategory",
-        "required": [
-          "id",
-          "display_name",
-          "description",
-          "fields",
-          "errors"
-        ],
+        "required": ["id", "display_name", "description", "fields", "errors"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21214,17 +20325,11 @@
             "example": "Select this category if the record is UNVERIFIED due to an inability to match the tax ID."
           },
           "fields": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "An array of Brand attributes"
           },
           "errors": {
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": ["array", "null"],
             "items": {
               "$ref": "#/components/schemas/TCRErrorMessage"
             },
@@ -21235,9 +20340,7 @@
       },
       "TcrFeedback": {
         "title": "TcrFeedback",
-        "required": [
-          "category"
-        ],
+        "required": ["category"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21252,11 +20355,7 @@
       },
       "TenDlcBrandAppealOutcome": {
         "title": "TenDlcBrandAppealOutcome",
-        "required": [
-          "optional_attributes",
-          "vetting_status",
-          "feedback"
-        ],
+        "required": ["optional_attributes", "vetting_status", "feedback"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21308,9 +20407,7 @@
               "type": "string"
             },
             "description": "A list of Brand Identity status appeal categories associated with the original request",
-            "example": [
-              "VERIFY_TAX_ID"
-            ]
+            "example": ["VERIFY_TAX_ID"]
           },
           "created_at": {
             "type": "string",
@@ -21324,9 +20421,7 @@
               "type": "string"
             },
             "description": "A list of evidence UUIDs to be associated with the appeal",
-            "example": [
-              "13d8e00c-3cb4-4dc0-9e26-d5057fa938d9"
-            ]
+            "example": ["13d8e00c-3cb4-4dc0-9e26-d5057fa938d9"]
           },
           "outcome": {
             "allOf": [
@@ -21356,9 +20451,7 @@
           }
         },
         "example": {
-          "categories": [
-            "VERIFY_TAX_ID"
-          ],
+          "categories": ["VERIFY_TAX_ID"],
           "created_at": "2024-08-01T14:09:43Z",
           "evidence": [],
           "explanation": "Dear partner, please review the registration docs",
@@ -21375,10 +20468,7 @@
       },
       "TenDlcBrandAppealCreateRequest": {
         "title": "TenDlcBrandAppealCreateRequest",
-        "required": [
-          "appeal_categories",
-          "evidence"
-        ],
+        "required": ["appeal_categories", "evidence"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21388,9 +20478,7 @@
               "type": "string"
             },
             "description": "List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`",
-            "example": [
-              "VERIFY_TAX_ID"
-            ]
+            "example": ["VERIFY_TAX_ID"]
           },
           "evidence": {
             "type": "array",
@@ -21398,9 +20486,7 @@
               "type": "string"
             },
             "description": "List of evidence IDs associated with the appeal.",
-            "example": [
-              "855dff49-c097-4645-3983-08dcb9856232"
-            ]
+            "example": ["855dff49-c097-4645-3983-08dcb9856232"]
           },
           "explanation": {
             "type": "string",
@@ -21412,12 +20498,7 @@
       },
       "TenDlcBrandEvidence": {
         "title": "TenDlcBrandEvidence",
-        "required": [
-          "file_name",
-          "mime_type",
-          "url",
-          "uuid"
-        ],
+        "required": ["file_name", "mime_type", "url", "uuid"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21486,10 +20567,7 @@
             }
           },
           "vetted_date": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The date and time the vetting request is competed",
             "example": "2024-08-01T14:09:43"
           },
@@ -21499,18 +20577,12 @@
             "example": "13d8e00c-3cb4-4dc0-9e26-d5057fa938d9"
           },
           "vetting_token": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Unique vetting token",
             "example": "3oDcE1vq8OR43claMa6Thu/7V4vzZywAfKRgiJnXDjlw+08wpWbGqOssAXKgeZibHCLaGgXvU/yPb7kISeeb5qGdisGRLdhPnSNpvRR82RnCWYNpTp92orlJWjTJU8ZGmNxL5MwK0tt/9SxCha36iTtPV2+4vND8xCPe5suItuQTonG4A3Yi6F1LMqihgwdesRjxJnKqcE7Thcv9ug1NyNPYEZQvPugFj2F2DdU6jFZcOWgXsnE7ucZ+xNaNX9LkF9if3v0hrcviG9L8bUUrpPBGr02txP0i+cPBTLbj4Rq1Ox83R+WUx1gnoXHCIU1ByDGWvQq2Ef4qxGVOwPJHJbja1BovxKBk4YJxiz8OSO68QAIEfxuPTpj5eZz7KEFtFmBIVaVmxBDe4b8Tpl01C2rek7xgPzXaoURvh7CQVnVmJL00DTWKvyOmUOQQW901XEcgcJ7VWgfIvxhIMuXEXXtVDGNowmEc9JQXXYHVlGuN5QicSbApkwwqRZI7TQ4lsS66zCfqomIIJyBNRJpl+8sGwsa2J2h6fEkAD77J9zdUgIKXMFamHbvRadCKMZNIbMrkOC7PuOjZdSiWKh5A8FSjzkv3PlN2hRDqkaODEoodp5pTQeBtNe37+uAMOuHNfsZXlwvfMgCZjiZJ9HQNSLhJBUq7/IvT/EzszUk4HPTj/WFSbT1YrrkDi+zrB20ZDY9lZFWxN1hlYQoNcanDAAWPmw/yW1+8DroL5WIMGsXX3WFGOG7eWB1GHgFQsziAeRQl78u1qOvsRMN08+GrkASBJwqwy5l7xCesUKqbz3O0QA/dwzzsWIDvFPavZpjqMBSjRTurQLFahAaGmdY0BX/Ii+s2+OxfaHQIa1lgucm0P7GPKeZvLX/8boO01Onr/87ra+NX7ABvQb+SXvwsg+Bm5CziWB6DMKDKRD/KQjHxpjIY35UwSEW7G4ixux7ufizXttthHfPJWd/rWFhfYigFhVLgIPCR12smwFVuZwM7ujvY2CIM0X4E0dsX9uVHkgYmqRIdNf5vshpmRuIcHsXZpTJP/tD7zQM6m214c5xkJSfAVIaD7WzRYS4eVL+R3z4u+6n5p6FjuWSjSzuEffUai3HCWjes4JbtDSjIwoG0tOMtBukgPbreH+pjXcvnhU+1QhCV2aIdG6C3FmaI5Uoo/mthJyiFAThwtOpxQ5YkdsRunqVVEFYZfMNEn4Ig2clCFrLOm46JB2wPcLGP2MoH5RqajYzQ6IV8IXIFQVzG0C7HoHsBkVp+GrpnH6N0FCKR+fpbGjigM2lLf4pYBhChUY4ao9hvV1hd8ikS6QoasvDLPytBBa1YAwbSa8d7YdwO6fXfQqetfS8S9gbHD0zxazw5p9Lp5fXFmajDNkD2voYNMzOHJMMHG/49pWV2"
           },
           "vetting_score": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "The assigned Brand vetting score",
             "format": "int32",
             "example": 80
@@ -21526,10 +20598,7 @@
             "example": "PENDING"
           },
           "reasons": {
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": ["array", "null"],
             "description": "Reason",
             "items": {
               "type": "string"
@@ -21542,11 +20611,7 @@
       },
       "TenDlcBrandVettingImportRequest": {
         "title": "TenDlcBrandVettingImportRequest",
-        "required": [
-          "evp_id",
-          "vetting_id",
-          "vetting_token"
-        ],
+        "required": ["evp_id", "vetting_id", "vetting_token"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21569,10 +20634,7 @@
       },
       "TenDlcBrandVettingCreateRequest": {
         "title": "TenDlcBrandVettingCreateRequest",
-        "required": [
-          "evp_id",
-          "vetting_class"
-        ],
+        "required": ["evp_id", "vetting_class"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21590,9 +20652,7 @@
       },
       "TenDlcBrandVettingAppealOutcomeReason": {
         "title": "TenDlcBrandVettingAppealOutcomeReason",
-        "required": [
-          "reasons"
-        ],
+        "required": ["reasons"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21615,11 +20675,7 @@
       },
       "TenDlcBrandVettingAppealOutcome": {
         "title": "TenDlcBrandVettingAppealOutcome",
-        "required": [
-          "vet_status",
-          "vet_score",
-          "feedback"
-        ],
+        "required": ["vet_status", "vet_score", "feedback"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21722,9 +20778,7 @@
               "type": "string"
             },
             "description": "A list of appeal categories",
-            "example": [
-              "LOW_SCORE"
-            ]
+            "example": ["LOW_SCORE"]
           },
           "create_date": {
             "type": "string",
@@ -21766,9 +20820,7 @@
           "appeal_status_update_date": "2024-08-15T08:42:31Z",
           "attachment_uuid_list": [],
           "brand_id": "BMQFB7X",
-          "category_list": [
-            "LOW_SCORE"
-          ],
+          "category_list": ["LOW_SCORE"],
           "create_date": "2024-08-15T08:41:05",
           "evp_id": "AEGIS",
           "explanation": "Please review the Brand score",
@@ -21778,10 +20830,7 @@
       },
       "TenDlcBrandVettingAppealCreateRequest": {
         "title": "TenDlcBrandVettingAppealCreateRequest",
-        "required": [
-          "appeal_categories",
-          "evidence"
-        ],
+        "required": ["appeal_categories", "evidence"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -21791,9 +20840,7 @@
               "type": "string"
             },
             "description": "List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`, `LOW_SCORE`.",
-            "example": [
-              "VERIFY_TAX_ID"
-            ]
+            "example": ["VERIFY_TAX_ID"]
           },
           "evidence": {
             "type": "array",
@@ -21801,9 +20848,7 @@
               "type": "string"
             },
             "description": "List of evidence IDs associated with the appeal.",
-            "example": [
-              "855dff49-c097-4645-3983-08dcb9856232"
-            ]
+            "example": ["855dff49-c097-4645-3983-08dcb9856232"]
           },
           "explanation": {
             "type": "string",
@@ -21847,33 +20892,21 @@
         "additionalProperties": false,
         "properties": {
           "att_mms_tpm": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "MMS message throughput on the AT&T mobile networks",
             "format": "int32"
           },
           "att_msg_class": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The message class assigned by AT&T"
           },
           "att_sms_tpm": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "MMS message throughput on the AT&T mobile networks",
             "format": "int32"
           },
           "att_tpm_scope": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The message throughput score on the AT&T mobile networks",
             "format": "int32"
           },
@@ -21929,19 +20962,13 @@
             "example": false
           },
           "tmobile_brand_dcap": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "description": "Message daily cap on the T-Mobile mobile networks",
             "format": "int32",
             "example": 2000
           },
           "tmobile_brand_tier": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The Brand tier for the T-Mobile mobile networks",
             "example": "LOW"
           }
@@ -21967,11 +20994,7 @@
       },
       "TenDLCBrandQualificationResult": {
         "title": "TenDlcBrandQualificationResult",
-        "required": [
-          "mno_metadata",
-          "monthly_fee",
-          "usecase"
-        ],
+        "required": ["mno_metadata", "monthly_fee", "usecase"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22110,10 +21133,7 @@
             "example": true
           },
           "embedded_link_sample": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Embedded link sample."
           },
           "brand_id": {
@@ -22143,10 +21163,7 @@
             "example": "Our SMS ..."
           },
           "feedback": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Campaign feedback."
           },
           "help": {
@@ -22222,31 +21239,19 @@
             "example": "Your verification code is XXXXXX"
           },
           "sample2": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample."
           },
           "sample3": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample."
           },
           "sample4": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample."
           },
           "sample5": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample."
           },
           "updated_at": {
@@ -22296,11 +21301,7 @@
               "type": "string"
             },
             "description": "List of phone numbers associated with the campaign.",
-            "example": [
-              "14358684439",
-              "13193337776",
-              "12673296046"
-            ]
+            "example": ["14358684439", "13193337776", "12673296046"]
           }
         },
         "description": "10DLC campaign details.",
@@ -22342,19 +21343,12 @@
           "terms_conditions": "https://site.com/terms-and-conditions",
           "updated_at": "2024-08-14T11:57:47",
           "usecase": "2FA",
-          "phone_numbers": [
-            "14358684439",
-            "13193337776",
-            "12673296046"
-          ]
+          "phone_numbers": ["14358684439", "13193337776", "12673296046"]
         }
       },
       "TenDlcCampaignListResponse": {
         "title": "TenDlcCampaignListResponse",
-        "required": [
-          "items",
-          "pagination"
-        ],
+        "required": ["items", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22417,11 +21411,7 @@
               "terms_conditions": "https://site.com/terms-and-conditions",
               "updated_at": "2024-08-14T11:57:47",
               "usecase": "2FA",
-              "phone_numbers": [
-                "14358684439",
-                "13193337776",
-                "12673296046"
-              ]
+              "phone_numbers": ["14358684439", "13193337776", "12673296046"]
             }
           ],
           "pagination": {
@@ -22492,18 +21482,12 @@
             "example": true
           },
           "embedded_phones": {
-            "type": [
-              "boolean",
-              "null"
-            ],
+            "type": ["boolean", "null"],
             "description": "Indicates whether the Campaign messages contain embedded phone numbers",
             "example": true
           },
           "embedded_link_sample": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "An embedded link sample"
           },
           "description": {
@@ -22572,31 +21556,19 @@
             "example": "Your verification code is XXXXXX"
           },
           "sample2": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample"
           },
           "sample3": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample"
           },
           "sample4": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample"
           },
           "sample5": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Message sample"
           },
           "mock": {
@@ -22834,10 +21806,7 @@
       },
       "TenDlcEventSubscription": {
         "title": "TenDlcEventSubscription",
-        "required": [
-          "subscription_category",
-          "url"
-        ],
+        "required": ["subscription_category", "url"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22860,10 +21829,7 @@
       },
       "TenDlcCampaignNumber": {
         "title": "TenDlcCampaignNumber",
-        "required": [
-          "number",
-          "status"
-        ],
+        "required": ["number", "status"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22881,11 +21847,7 @@
       },
       "TenDlcCampaignNumberListResponse": {
         "title": "TenDlcCampaignNumberListResponse",
-        "required": [
-          "brand_id",
-          "campaign_id",
-          "numbers"
-        ],
+        "required": ["brand_id", "campaign_id", "numbers"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22908,10 +21870,7 @@
       },
       "TenDlcCampaignNudgeRequest": {
         "title": "TenDlcCampaignNudgeRequest",
-        "required": [
-          "nudge_intent",
-          "description"
-        ],
+        "required": ["nudge_intent", "description"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22930,11 +21889,7 @@
       },
       "PhoneNumberValidationType": {
         "title": "PhoneNumberValidationType",
-        "enum": [
-          "format",
-          "analysis",
-          "validation"
-        ],
+        "enum": ["format", "analysis", "validation"],
         "type": "string"
       },
       "PhoneValidationResponse": {
@@ -23083,12 +22038,7 @@
       },
       "PhoneValidationRequest": {
         "title": "PhoneValidationRequest",
-        "required": [
-          "phone_numbers",
-          "type",
-          "async",
-          "force"
-        ],
+        "required": ["phone_numbers", "type", "async", "force"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23098,10 +22048,7 @@
               "type": "string"
             },
             "description": "List of phone numbers to get detailed information about.",
-            "example": [
-              "971501390098",
-              "971504359195"
-            ]
+            "example": ["971501390098", "971504359195"]
           },
           "type": {
             "$ref": "#/components/schemas/PhoneNumberValidationType"
@@ -23203,18 +22150,12 @@
             "example": false
           },
           "reachable": {
-            "type": [
-              "boolean",
-              "null"
-            ],
+            "type": ["boolean", "null"],
             "description": "Indicates whether the number is registered in a mobile network. Applies to mobile numbers only.  `null` if the phone number is invalid.",
             "example": true
           },
           "roaming": {
-            "type": [
-              "boolean",
-              "null"
-            ],
+            "type": ["boolean", "null"],
             "description": "Indicates whether the number is roaming. Applies to mobile numbers only.\n `null` if the phone number is invalid.",
             "example": false
           },
@@ -23238,12 +22179,7 @@
       },
       "PhoneValidationBatchResponse": {
         "title": "PhoneValidationBatchResponse",
-        "required": [
-          "count",
-          "items",
-          "status",
-          "pending"
-        ],
+        "required": ["count", "items", "status", "pending"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23274,12 +22210,7 @@
       },
       "PhoneValidationBatchResultResponse": {
         "title": "PhoneValidationBatchResultResponse",
-        "required": [
-          "status",
-          "pending",
-          "count",
-          "items"
-        ],
+        "required": ["status", "pending", "count", "items"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23351,11 +22282,7 @@
       },
       "VoiceCampaignResponse": {
         "title": "VoiceCampaignResponse",
-        "required": [
-          "callflow_id",
-          "caller_id",
-          "contact"
-        ],
+        "required": ["callflow_id", "caller_id", "contact"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23384,9 +22311,7 @@
       },
       "VoiceCampaignCreateRequest": {
         "title": "VoiceCampaignCreateRequest",
-        "required": [
-          "voice_campaign"
-        ],
+        "required": ["voice_campaign"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23397,9 +22322,7 @@
       },
       "ShortLinkCreateRequest": {
         "title": "ShortLinkCreateRequest",
-        "required": [
-          "link"
-        ],
+        "required": ["link"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23433,9 +22356,7 @@
       },
       "ShortLinkResponse": {
         "title": "ShortLinkResponse",
-        "required": [
-          "short_link"
-        ],
+        "required": ["short_link"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23464,18 +22385,12 @@
         "additionalProperties": false,
         "properties": {
           "latitude": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "description": "Latitude of the location derived from the IP address\n used to open the short link.",
             "example": 59.3247
           },
           "longitude": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "description": "Longitude of the location derived from the IP address\n used to open the short link.",
             "example": 18.056
           },
@@ -23538,10 +22453,7 @@
       },
       "ShortLinkMetricsResponse": {
         "title": "ShortLinkMetricsResponse",
-        "required": [
-          "metrics",
-          "pagination"
-        ],
+        "required": ["metrics", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23559,11 +22471,7 @@
       },
       "TwoFactorVerificationCreateRequest": {
         "title": "TwoFactorVerificationCreateRequest",
-        "required": [
-          "service_id",
-          "to",
-          "channel"
-        ],
+        "required": ["service_id", "to", "channel"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23586,11 +22494,7 @@
       },
       "PhoneLookupDetails": {
         "title": "PhoneLookupDetails",
-        "required": [
-          "number_type",
-          "country",
-          "current_carrier"
-        ],
+        "required": ["number_type", "country", "current_carrier"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23663,31 +22567,21 @@
       },
       "TwoFactorVerificationResendRequest": {
         "title": "TwoFactorVerificationResendRequest",
-        "required": [
-          "channel"
-        ],
+        "required": ["channel"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "channel": {
             "type": "string",
             "description": "The communication channel you want to use. Can be either `sms` or `voice`.",
-            "enum": [
-              "sms",
-              "voice"
-            ],
+            "enum": ["sms", "voice"],
             "example": "voice"
           }
         }
       },
       "TwoFactorVerificationResendResponse": {
         "title": "TwoFactorVerificationResendResponse",
-        "required": [
-          "success",
-          "channel",
-          "destination",
-          "created_at"
-        ],
+        "required": ["success", "channel", "destination", "created_at"],
         "type": "object",
         "properties": {
           "success": {
@@ -23715,9 +22609,7 @@
       },
       "TwoFactorVerificationCheckRequest": {
         "title": "TwoFactorVerificationCheckRequest",
-        "required": [
-          "code"
-        ],
+        "required": ["code"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23730,9 +22622,7 @@
       },
       "TwoFactorVerificationCheckResponse": {
         "title": "TwoFactorVerificationCheckResponse",
-        "required": [
-          "is_valid"
-        ],
+        "required": ["is_valid"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23745,13 +22635,7 @@
       },
       "TwoFactorVerificationEvent": {
         "title": "TwoFactorVerificationEvent",
-        "required": [
-          "created_at",
-          "event",
-          "status",
-          "charge",
-          "error"
-        ],
+        "required": ["created_at", "event", "status", "charge", "error"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23777,10 +22661,7 @@
             "example": "0.005"
           },
           "error": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Error description, if any"
           }
         }
@@ -23788,63 +22669,16 @@
       "TransactionType": {
         "title": "TransactionType",
         "enum": [
-          0,
-          2,
-          3,
-          6,
-          11,
-          14,
-          15,
-          19,
-          20,
-          23,
-          24,
-          25,
-          26,
-          29,
-          30,
-          31,
-          32,
-          33,
-          34,
-          35,
-          36,
-          37,
-          38,
-          39,
-          40,
-          41,
-          42,
-          43,
-          44,
-          45,
-          46,
-          47,
-          48,
-          49,
-          50,
-          51,
-          52,
-          53,
-          54,
-          55,
-          56,
-          57,
-          58,
-          59,
-          60
+          0, 2, 3, 6, 11, 14, 15, 19, 20, 23, 24, 25, 26, 29, 30, 31, 32, 33,
+          34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+          51, 52, 53, 54, 55, 56, 57, 58, 59, 60
         ],
         "type": "integer",
         "description": "Transaction type:\n  * 0   - Payment adjustment\n  * 2   - DID activation fee\n  * 3   - DID monthly fees\n  * 6   - DID forwarding\n  * 11  - PSTN forwarding fee\n  * 14  - Outbound call\n  * 15  - Outbound SMS\n  * 19  - Credit card payment\n  * 20  - Payment fee\n  * 23  - Porting fee\n  * 24  - Inbound SMS\n  * 25  - Admin payment\n  * 26  - Subscription payment\n  * 29  - Number validator\n  * 30  - Call recording\n  * 31  - Storage charge\n  * 32  - Campaign builder\n  * 33  - Voicemail detection\n  * 34  - Sender ID registration\n  * 35  - Sender ID monthly fee\n  * 36  - 2FA\n  * 37  - IVR\n  * 38  - E911 activation\n  * 39  - Outbound MMS\n  * 40  - Inbound MMS\n  * 41  - Call transcription\n  * 42  - 10DLC Brand registration\n  * 43  - 10DLC Campaign registration\n  * 44  - DID order\n  * 45  - Adjustment in\n  * 46  - URL shortener\n  * 47  - 10DLC Brand update\n  * 48  - 10DLC Brand appeal\n  * 49  - Audio transcription\n  * 50  - 10DLC Brand vetting\n  * 51  - 10DLC Brand vetting appeal\n  * 52  - Outbound SMS carrier fee\n  * 53  - Inbound SMS carrier fee\n  * 54  - Outbound MMS carrier fee\n  * 55  - Inbound MMS carrier fee\n  * 57  - Outbound SMS segment\n  * 58  - Inbound SMS segment\n  * 59  - Outbound MMS segment\n  * 60  - Inbound MMS segment"
       },
       "TransactionStatus": {
         "title": "TransactionStatus",
-        "enum": [
-          "Created",
-          "Pending",
-          "Committed",
-          "Reverted"
-        ],
+        "enum": ["Created", "Pending", "Committed", "Reverted"],
         "type": "string",
         "description": "Transaction status."
       },
@@ -23918,11 +22752,7 @@
       },
       "BillingTransactionListResponse": {
         "title": "BillingTransactionListResponse",
-        "required": [
-          "is_empty",
-          "transactions",
-          "pagination"
-        ],
+        "required": ["is_empty", "transactions", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23957,12 +22787,7 @@
       },
       "Invoice": {
         "title": "Invoice",
-        "required": [
-          "id",
-          "amount",
-          "from_date",
-          "to_date"
-        ],
+        "required": ["id", "amount", "from_date", "to_date"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23994,11 +22819,7 @@
       },
       "InvoiceListResponse": {
         "title": "InvoiceListResponse",
-        "required": [
-          "is_empty",
-          "invoices",
-          "pagination"
-        ],
+        "required": ["is_empty", "invoices", "pagination"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -24276,11 +23097,7 @@
       },
       "AccountLimits": {
         "title": "AccountLimits",
-        "required": [
-          "max_call_duration",
-          "max_sip_channels",
-          "max_call_rate"
-        ],
+        "required": ["max_call_duration", "max_sip_channels", "max_call_rate"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -24305,10 +23122,7 @@
       },
       "ProfileConfigResponse": {
         "title": "ProfileConfigResponse",
-        "required": [
-          "balance",
-          "global_limits"
-        ],
+        "required": ["balance", "global_limits"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -24368,20 +23182,14 @@
           "status": {
             "type": "string",
             "description": "Sub-account status.",
-            "enum": [
-              "enabled",
-              "disabled"
-            ],
+            "enum": ["enabled", "disabled"],
             "example": "enabled"
           },
           "default_destinations": {
             "type": "object",
             "additionalProperties": false,
             "description": "Default webhook URLs for inbound messages and delivery reports.",
-            "required": [
-              "sms_endpoint",
-              "dlr_endpoint"
-            ],
+            "required": ["sms_endpoint", "dlr_endpoint"],
             "properties": {
               "sms_endpoint": {
                 "type": "string",
@@ -24431,10 +23239,7 @@
           "direction": {
             "type": "string",
             "description": "Call direction",
-            "enum": [
-              "inbound",
-              "outbound"
-            ],
+            "enum": ["inbound", "outbound"],
             "example": "outbound"
           },
           "uuid": {
@@ -24443,10 +23248,7 @@
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "destination": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Destination of the call. For outbound calls, it contains the country name and, optionally, a mobile carrier or city name. For inbound calls, the destination includes the user-defined SIP trunk name, SIP URI, or PSTN number that the call is forwarded to.",
             "example": "France"
           },
@@ -24471,18 +23273,12 @@
             "$ref": "#/components/schemas/CallDisposition"
           },
           "from": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "ANI/From attribute of the call",
             "example": "14302287001"
           },
           "to": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "DNIS/To attribute of the call",
             "example": "33170363950"
           },
@@ -24496,11 +23292,7 @@
       },
       "FileTranscriptionCompletedWebhook": {
         "title": "FileTranscriptionCompletedWebhook",
-        "required": [
-          "request_id",
-          "status",
-          "error"
-        ],
+        "required": ["request_id", "status", "error"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -24515,20 +23307,14 @@
             "example": "completed"
           },
           "error": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "A human-readable error description, if any"
           }
         }
       },
       "CdrTranscriptionCompletedWebhook": {
         "title": "CdrTranscriptionCompletedWebhook",
-        "required": [
-          "uuid",
-          "status"
-        ],
+        "required": ["uuid", "status"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -24540,10 +23326,7 @@
           "status": {
             "type": "string",
             "description": "The status of the transcription, can be one of `completed` or `failed`",
-            "enum": [
-              "completed",
-              "failed"
-            ],
+            "enum": ["completed", "failed"],
             "example": "completed"
           }
         }
@@ -24586,10 +23369,7 @@
             "example": "+447537151866"
           },
           "tag": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Tag to identify a group of messages, such as those associated with a campaign.",
             "example": "Fall sale"
           },
@@ -24603,28 +23383,19 @@
             "example": 1
           },
           "sent": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Date and time the message was accepted in ISO 8601 format.",
             "format": "date-time",
             "example": "2024-05-28T12:34:54Z"
           },
           "delivered": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Date and time when the final status was received in ISO 8601 format.",
             "format": "date-time",
             "example": "2024-05-28T12:34:56Z"
           },
           "error": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Human-readable error description."
           },
           "charge": {
@@ -24641,13 +23412,7 @@
       },
       "InboundMessage": {
         "title": "SMSorMMSmessage",
-        "required": [
-          "message_id",
-          "from",
-          "to",
-          "message_body",
-          "received_at"
-        ],
+        "required": ["message_id", "from", "to", "message_body", "received_at"],
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -24681,10 +23446,7 @@
       "BrandStatusUpdatedWebhook": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "brand_id",
-          "status"
-        ],
+        "required": ["brand_id", "status"],
         "properties": {
           "brand_id": {
             "type": "string",
@@ -24709,11 +23471,7 @@
       "CampaignStatusUpdatedWebhook": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "campaign_id",
-          "brand_id",
-          "status"
-        ],
+        "required": ["campaign_id", "brand_id", "status"],
         "properties": {
           "brand_id": {
             "type": "string",
@@ -24744,12 +23502,7 @@
       "NumberStatusUpdatedWebhook": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "number",
-          "campaign_id",
-          "brand_id",
-          "status"
-        ],
+        "required": ["number", "campaign_id", "brand_id", "status"],
         "properties": {
           "brand_id": {
             "type": "string",
@@ -24769,11 +23522,7 @@
           "status": {
             "type": "string",
             "description": "Number status.",
-            "enum": [
-              "APPROVED",
-              "PENDING",
-              "REJECTED"
-            ],
+            "enum": ["APPROVED", "PENDING", "REJECTED"],
             "example": "APPROVED"
           }
         }
