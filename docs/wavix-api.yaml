@@ -96,7 +96,7 @@ paths:
                         - 192.168.1.1
                         - 10.0.0.1
                       is_scopes_enabled: true
-                      last_used_at: "2026-04-20T15:42:11Z"
+                      last_used_at: '2026-04-20T15:42:11Z'
                       numbers:
                         allow: read
                       trunks:
@@ -123,11 +123,11 @@ paths:
                         allow: read
                       subaccounts:
                         allow: none
-                      created_at: "2024-01-15T10:30:00Z"
-        "401":
-          $ref: "#/components/responses/UnauthorizedErrorResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenErrorResponse"
+                      created_at: '2024-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
     post:
       operationId: api_keys_create
       summary: Create an API key
@@ -203,20 +203,20 @@ paths:
                       allow: none
                     subaccounts:
                       allow: none
-                    created_at: "2024-01-15T10:30:00Z"
-        "400":
-          $ref: "#/components/responses/BadRequestErrorResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedErrorResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenErrorResponse"
-        "422":
+                    created_at: '2024-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '422':
           description: Validation error
           headers: {}
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ValidationErrorResponse"
+                $ref: '#/components/schemas/ValidationErrorResponse'
               examples:
                 ip_invalid:
                   summary: Invalid IP address
@@ -227,7 +227,7 @@ paths:
                   summary: Scope value is not an object
                   value:
                     success: false
-                    message: "API key scope numbers: must be a hash"
+                    message: 'API key scope numbers: must be a hash'
                 scope_extra_keys:
                   summary: Scope object has unexpected keys
                   value:
@@ -237,7 +237,7 @@ paths:
                   summary: Unsupported allow value
                   value:
                     success: false
-                    message: "API key scope numbers: allow must be one of: none, read, write"
+                    message: 'API key scope numbers: allow must be one of: none, read, write'
   /v1/api-keys/{id}:
     delete:
       operationId: api_keys_delete
@@ -269,12 +269,12 @@ paths:
                   summary: Successful response
                   value:
                     success: true
-        "401":
-          $ref: "#/components/responses/UnauthorizedErrorResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenErrorResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundErrorResponse"
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
   /v1/api-keys/{id}/activate:
     patch:
       operationId: api_keys_activate
@@ -306,12 +306,12 @@ paths:
                   summary: Successful response
                   value:
                     success: true
-        "401":
-          $ref: "#/components/responses/UnauthorizedErrorResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenErrorResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundErrorResponse"
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
   /v1/api-keys/{id}/deactivate:
     patch:
       operationId: api_keys_deactivate
@@ -343,12 +343,12 @@ paths:
                   summary: Successful response
                   value:
                     success: true
-        "401":
-          $ref: "#/components/responses/UnauthorizedErrorResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenErrorResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundErrorResponse"
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
   /v1/trunks:
     get:
       tags:
@@ -403,6 +403,7 @@ paths:
                         call_recording_enabled: true
                         transcription_enabled: true
                         transcription_threshold: 6
+                        access_token: siped7a3f5c1b9e042d6f8a4c2e7b9d1f3a5c8e0b2d4f6a8c0e2d4b6f8a1c3e5d7
                     pagination:
                       current_page: 1
                       total: 1
@@ -466,14 +467,14 @@ paths:
                     host: example
                     multiple_numbers: true
                     encrypted_media: true
-                    access_token: example
-        "400":
-          $ref: "#/components/responses/ValidationErrorResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedErrorResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenErrorResponse"
-        "422":
+                    access_token: siped7a3f5c1b9e042d6f8a4c2e7b9d1f3a5c8e0b2d4f6a8c0e2d4b6f8a1c3e5d7
+        '400':
+          $ref: '#/components/responses/ValidationErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '422':
           description: Request validation failed.
           content:
             application/json:
@@ -1340,6 +1341,9 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
+              required:
+                - ids
               properties:
                 ids:
                   type: array
@@ -3356,13 +3360,13 @@ paths:
                     uuid: 5dccb6b0-f35c-488c-867b-86fb012c4415
                     direction: inbound
                     event_type: call_setup
-                    event_time: "2025-09-22T12:56:38.547Z"
-                    event_payload: {}
-                    from: "+18045961058"
-                    to: "17653889567"
-                    call_started: "2025-09-22T12:56:38.547Z"
-                    call_answered: "2023-06-15T10:30:00Z"
-                    call_completed: "2023-06-15T10:30:00Z"
+                    event_time: '2025-09-22T12:56:38.547Z'
+                    event_payload: null
+                    from: '+18045961058'
+                    to: '17653889567'
+                    call_started: '2025-09-22T12:56:38.547Z'
+                    call_answered: '2023-06-15T10:30:00Z'
+                    call_completed: '2023-06-15T10:30:00Z'
                     machine_detected: false
                     tag: ""
         "400":
@@ -3438,13 +3442,13 @@ paths:
                       - uuid: 5dccb6b0-f35c-488c-867b-86fb012c4415
                         direction: inbound
                         event_type: call_setup
-                        event_time: "2025-09-22T12:56:38.547Z"
-                        event_payload: {}
-                        from: "+18045961058"
-                        to: "17653889567"
-                        call_started: "2025-09-22T12:56:38.547Z"
-                        call_answered: "2023-06-15T10:30:00Z"
-                        call_completed: "2023-06-15T10:30:00Z"
+                        event_time: '2025-09-22T12:56:38.547Z'
+                        event_payload: null
+                        from: '+18045961058'
+                        to: '17653889567'
+                        call_started: '2025-09-22T12:56:38.547Z'
+                        call_answered: '2023-06-15T10:30:00Z'
+                        call_completed: '2023-06-15T10:30:00Z'
                         machine_detected: false
                         tag: marketing-campaign
                     success: true
@@ -3498,13 +3502,13 @@ paths:
                       uuid: 5dccb6b0-f35c-488c-867b-86fb012c4415
                       direction: inbound
                       event_type: call_setup
-                      event_time: "2025-09-22T12:56:38.547Z"
-                      event_payload: {}
-                      from: "+18045961058"
-                      to: "17653889567"
-                      call_started: "2025-09-22T12:56:38.547Z"
-                      call_answered: "2023-06-15T10:30:00Z"
-                      call_completed: "2023-06-15T10:30:00Z"
+                      event_time: '2025-09-22T12:56:38.547Z'
+                      event_payload: null
+                      from: '+18045961058'
+                      to: '17653889567'
+                      call_started: '2025-09-22T12:56:38.547Z'
+                      call_answered: '2023-06-15T10:30:00Z'
+                      call_completed: '2023-06-15T10:30:00Z'
                       machine_detected: false
                       tag: marketing-campaign
                     success: true
@@ -4258,7 +4262,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebRtcTokenCreateRequest"
+              $ref: '#/components/schemas/WebRtcTokenCreateRequest'
+            example:
+              sip_trunk: my-sip-trunk
+              ttl: 3600
+              payload:
+                user_id: '42'
         required: true
       responses:
         "201":
@@ -5131,7 +5140,9 @@ paths:
                 additionalProperties: false
                 properties:
                   carrier_fees:
-                    type: string
+                    type:
+                      - string
+                      - 'null'
                     description: Mobile carrier fees in USD.
                     example: "0.0"
                   charge:
@@ -5143,7 +5154,9 @@ paths:
                     description: Message direction. Possible values are `outbound`, `inbound`.
                     example: outbound
                   delivered_at:
-                    type: string
+                    type:
+                      - string
+                      - 'null'
                     description: Date and time the message was delivered in ISO 8601 format.
                     format: date-time
                     example: "2024-05-28T12:34:56Z"
@@ -5157,11 +5170,15 @@ paths:
                     description: Sender ID.
                     example: Sender ID.
                   mcc:
-                    type: string
+                    type:
+                      - string
+                      - 'null'
                     description: Mobile country code.
                     example: "310"
                   mnc:
-                    type: string
+                    type:
+                      - string
+                      - 'null'
                     description: Mobile network code.
                     example: "260"
                   message_body:
@@ -5192,7 +5209,9 @@ paths:
                     description: Number of SMS segments. Always 1 for MMS.
                     example: 1
                   sent_at:
-                    type: string
+                    type:
+                      - string
+                      - 'null'
                     description: Date and time the message was sent in ISO 8601 format.
                     format: date-time
                     example: "2024-05-28T12:34:54Z"
@@ -5205,7 +5224,9 @@ paths:
                     description: Date and time the message was submitted in ISO 8601 format.
                     example: "2025-09-22T09:07:53Z"
                   tag:
-                    type: string
+                    type:
+                      - string
+                      - 'null'
                     description: Message tag.
                     example: campaign_test
                   to:
@@ -7110,30 +7131,11 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: "#/components/schemas/TenDlcBrandVettingAppeal"
-                  - example:
-                      appeal_outcome:
-                        vet_status: ACTIVE
-                        vet_score: 80
-                        feedback:
-                          reasons:
-                            - "Company size as reported by government or business sources resulted in a score deduction: size range 6-10."
-                      appeal_status: COMPLETE
-                      appeal_status_update_date: "2024-08-15T08:42:31Z"
-                      attachment_uuid_list: []
-                      brand_id: BMQFB7X
-                      category_list:
-                        - LOW_SCORE
-                      create_date: "2024-08-15T08:41:05"
-                      evp_id: AEGIS
-                      explanation: This is an API test
-                      vetting_class: STANDARD
-                      vetting_id: 48c0ffaa-4e51-4d44-3982-08dcb9856232
-              examples:
-                default:
-                  value:
-                    appeal_outcome:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenDlcBrandVettingAppeal'
+                example:
+                  - appeal_outcome:
                       vet_status: ACTIVE
                       vet_score: 80
                       feedback:
@@ -7150,7 +7152,27 @@ paths:
                     explanation: This is an API test
                     vetting_class: STANDARD
                     vetting_id: 48c0ffaa-4e51-4d44-3982-08dcb9856232
-        "403":
+              examples:
+                default:
+                  value:
+                    - appeal_outcome:
+                        vet_status: ACTIVE
+                        vet_score: 80
+                        feedback:
+                          reasons:
+                            - 'Company size as reported by government or business sources resulted in a score deduction: size range 6-10.'
+                      appeal_status: COMPLETE
+                      appeal_status_update_date: '2024-08-15T08:42:31Z'
+                      attachment_uuid_list: []
+                      brand_id: BMQFB7X
+                      category_list:
+                        - LOW_SCORE
+                      create_date: '2024-08-15T08:41:05'
+                      evp_id: AEGIS
+                      explanation: This is an API test
+                      vetting_class: STANDARD
+                      vetting_id: 48c0ffaa-4e51-4d44-3982-08dcb9856232
+        '403':
           description: Request failed. The feature is disabled for the account.
           content:
             application/json:
@@ -8223,7 +8245,7 @@ paths:
         - 10DLC
       summary: Delete a 10DLC Campaign
       description: Deletes a 10DLC Campaign. Associated phone numbers cannot be used as Sender IDs once the Campaign is deleted.
-      operationId: ten_dlc_brand_campaigns_deleteand_campaigns_delete
+      operationId: ten_dlc_brand_campaigns_delete
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -11128,80 +11150,80 @@ components:
         last_used_at:
           type:
             - string
-            - "null"
+            - 'null'
           format: date-time
           description: Timestamp of the most recent authenticated request made with this key.
-          example: "2026-04-20T15:42:11Z"
+          example: '2026-04-20T15:42:11Z'
         numbers:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
         trunks:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: View, create, update, and delete SIP trunks and their settings.
         calls:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyCallsScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyCallsScopePermission'
+            - type: 'null'
           description: Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
         messages:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
         recordings:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: List, download, and delete call recordings.
         campaigns:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
         two_fa:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
         validator:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: View number validation results and trigger single or bulk validation or HLR lookup requests.
         webhooks:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: List, create, and delete webhooks.
         embeddable:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
         billing:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: Access invoices, balance, payment methods, usage reports, and billing settings, including payment method updates.
         account:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
           description: View and update account profile information and timezone.
         subaccounts:
           anyOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-            - type: "null"
-          description: "Manage subaccounts: list and view them, create, update, and suspend them."
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+            - type: 'null'
+          description: 'Manage subaccounts: list and view them, create, update, and suspend them.'
         created_at:
           type: string
           format: date-time
           description: Creation date and time in ISO 8601 format.
-          example: "2024-01-15T10:30:00Z"
+          example: '2024-01-15T10:30:00Z'
     UnauthorizedErrorResponse:
       title: UnauthorizedErrorResponse
       type: object
@@ -11267,56 +11289,56 @@ components:
           example: true
         numbers:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
         trunks:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View, create, update, and delete SIP trunks and their settings.
         calls:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyCallsScopePermission"
+            - $ref: '#/components/schemas/ApiKeyCallsScopePermission'
           description: Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
         messages:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
         recordings:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: List, download, and delete call recordings.
         campaigns:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
         two_fa:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
         validator:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View number validation results and trigger single or bulk validation or HLR lookup requests.
         webhooks:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: List, create, and delete webhooks.
         embeddable:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
         billing:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Access invoices, balance, payment methods, usage reports, and billing settings, including payment method updates.
         account:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View and update account profile information and timezone.
         subaccounts:
           allOf:
-            - $ref: "#/components/schemas/ApiKeyScopePermission"
-          description: "Manage subaccounts: list and view them, create, update, and suspend them."
+            - $ref: '#/components/schemas/ApiKeyScopePermission'
+          description: 'Manage subaccounts: list and view them, create, update, and suspend them.'
     ValidationErrorResponse:
       title: ValidationErrorResponse
       type: object
@@ -11354,6 +11376,7 @@ components:
         - status
         - talk_time
         - charge
+        - access_token
       type: object
       additionalProperties: false
       properties:
@@ -11367,9 +11390,11 @@ components:
           description: System-generated login name of the SIP trunk
           example: "67758"
         callerid:
-          type: string
-          description: Caller ID associated with the SIP trunk. Contains an empty string if multiple Caller IDs are allowed.
-          example: "12345678900"
+          type:
+            - string
+            - 'null'
+          description: Caller ID associated with the SIP trunk. Contains `null` if no Caller ID is set, or an empty string if multiple Caller IDs are allowed.
+          example: '12345678900'
         label:
           type: string
           description: User-defined name of the SIP trunk
@@ -11443,6 +11468,12 @@ components:
           type: boolean
           description: Indicates whether media enecryption (SRTP) is enabled for the SIP trunk
           example: true
+        access_token:
+          type:
+            - string
+            - 'null'
+          description: Static authentication token for the SIP trunk.
+          example: siped7a3f5c1b9e042d6f8a4c2e7b9d1f3a5c8e0b2d4f6a8c0e2d4b6f8a1c3e5d7
       description: A SIP trunk associated with your account
       example:
         id: 3107
@@ -11460,6 +11491,7 @@ components:
         call_recording_enabled: true
         transcription_enabled: true
         transcription_threshold: 6
+        access_token: siped7a3f5c1b9e042d6f8a4c2e7b9d1f3a5c8e0b2d4f6a8c0e2d4b6f8a1c3e5d7
     Pagination:
       title: Pagination
       required:
@@ -11527,6 +11559,7 @@ components:
             call_recording_enabled: true
             transcription_enabled: true
             transcription_threshold: 6
+            access_token: siped7a3f5c1b9e042d6f8a4c2e7b9d1f3a5c8e0b2d4f6a8c0e2d4b6f8a1c3e5d7
         pagination:
           current_page: 1
           total: 1
@@ -11703,9 +11736,11 @@ components:
           description: System-generated login name of the SIP trunk
           example: "67758"
         callerid:
-          type: string
-          description: Caller ID configured on the SIP trunk. In cases when multiple Caller IDs are allowed on the SIP trunk, contains an empty string.
-          example: "12345678900"
+          type:
+            - string
+            - 'null'
+          description: Caller ID configured on the SIP trunk. Contains `null` if no Caller ID is set, or an empty string if multiple Caller IDs are allowed.
+          example: '12345678900'
         label:
           type: string
           description: User-defined name of the SIP trunk
@@ -11809,8 +11844,15 @@ components:
           type: boolean
           description: Encrypted media
           example: true
+        passthrough:
+          type: boolean
+          description: Indicates whether Caller ID passthrough is enabled.
+          example: true
         access_token:
-          type: string
+          type:
+            - string
+            - 'null'
+          description: Static authentication token for the SIP trunk.
           example: 123easwqe321132
     SuccessResponse:
       title: SuccessResponse
@@ -12980,7 +13022,9 @@ components:
       additionalProperties: false
       properties:
         date:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Call date and time in ISO 8601 format.
           format: date-time
           example: "2023-08-21T06:43:36.000Z"
@@ -13000,7 +13044,9 @@ components:
           format: int32
           example: 6
         destination:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             Destination of the call. For outbound calls,
              contains the country name and, optionally, a mobile carrier
@@ -13008,7 +13054,9 @@ components:
                SIP URI, or PSTN number the call is forwarded to.
           example: France
         per_minute:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Price per minute in USD.
           example: "0.027"
         recording_url:
@@ -13019,7 +13067,9 @@ components:
               a phone number for inbound calls.
           example: https://api.wavix.com/v1/recordings/recording_id
         charge:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Total charge for the call in USD.
           example: "0.162"
         sip_trunk:
@@ -13775,8 +13825,9 @@ components:
         ttl:
           type:
             - integer
-            - "null"
-          description: Time to live, in seconds
+            - 'null'
+          minimum: 1
+          description: Time to live, in seconds. `null` means no expiration.
           example: 3600
     WebRtcTokenCreateRequest:
       title: WebRtcTokenCreateRequest
@@ -13784,6 +13835,7 @@ components:
       additionalProperties: false
       required:
         - sip_trunk
+        - ttl
       properties:
         sip_trunk:
           type: string
@@ -13798,8 +13850,9 @@ components:
         ttl:
           type:
             - integer
-            - "null"
-          description: Time to live in seconds
+            - 'null'
+          minimum: 1
+          description: Time to live in seconds. Pass `null` for no expiration.
           example: 3600
     WebRtcTokenResponse:
       title: WebRtcTokenResponse
@@ -14410,6 +14463,7 @@ components:
         - VERIFIED
         - UNVERIFIED
         - VETTED_VERIFIED
+        - SUSPENDED
       type: string
       description: 10DLC Brand Identity verification status
     TenDLCBrand:
@@ -14472,7 +14526,9 @@ components:
             - description: Brand identity verification status.
               example: VERIFIED
         website:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Business website URL.
           example: https://brand.com
         stock_symbol:
@@ -15612,6 +15668,7 @@ components:
         - usecase
         - monthly_fee
         - terms_conditions
+        - privacy_policy
         - status
         - phone_numbers
       type: object
@@ -15630,13 +15687,17 @@ components:
           description: Indicates whether the Campaign should be automatically renewed.
           example: true
         last_bill_date:
-          type: string
-          description: Date and time the Campaign was last billed in ISO 8601 format.
-          example: "2024-08-14T11:57:42"
+          type:
+            - string
+            - 'null'
+          description: Date and time the Campaign was last billed in ISO 8601 format. `null` if the Campaign has never been billed.
+          example: '2024-08-14T11:57:42'
         next_bill_date:
-          type: string
-          description: Date and time the Campaign will be billed next in ISO 8601 format.
-          example: "2024-08-14T11:57:42"
+          type:
+            - string
+            - 'null'
+          description: Date and time the Campaign will be billed next in ISO 8601 format. `null` if the next billing date is not scheduled.
+          example: '2024-08-14T11:57:42'
         direct_lending:
           type: boolean
           description: Indicates whether the Campaign messages contain direct lending content.
@@ -15663,11 +15724,15 @@ components:
           description: Campaign ID.
           example: CKLCK95
         description:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Campaign description.
           example: Our campaign aims to …
         optin_workflow:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Opt-in workflow description.
           example: Our SMS ...
         feedback:
@@ -15684,7 +15749,9 @@ components:
           description: Comma-separated list of help keywords. Keywords are case-insensitive.
           example: help
         help_message:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Help message sent upon receiving a help keyword.
           example: For help, please visit www.site.com. To opt out, reply STOP.
         optin:
@@ -15696,7 +15763,9 @@ components:
           description: Comma-separated list of opt-in keywords. Keywords are case-insensitive.
           example: begin,start
         optin_message:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Opt-in message sent upon receiving an opt-in keyword.
           example: You are now opted-in for help please reply HELP, to stop please reply STOP
         optout:
@@ -15708,7 +15777,9 @@ components:
           description: Comma-separated list of opt-out keywords. Keywords are case-insensitive.
           example: stop,quit,unsubscribe
         optout_message:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Opt-out message sent upon receiving an opt-out keyword.
           example: You are now opted out and will receive no further messages
         name:
@@ -15720,7 +15791,9 @@ components:
           description: Date and time the Campaign was created in ISO 8601 format.
           example: "2024-08-14T11:57:41"
         sample1:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Message sample.
           example: Your verification code is XXXXXX
         sample2:
@@ -15760,11 +15833,15 @@ components:
           description: Campaign monthly fee.
           example: "10.0"
         privacy_policy:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Privacy policy URL.
           example: https://site.com/privacy-policy
         terms_conditions:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Terms and conditions URL.
           example: https://site.com/terms-and-conditions
         status:
@@ -16336,7 +16413,9 @@ components:
           description: Indicates whether the phone number is valid.
           example: true
         country_code:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             ISO 3166-1 alpha-2 country code of the phone number.
              `null` if the number is invalid.
@@ -16350,43 +16429,63 @@ components:
           description: Phone number in the national format of the identified country.
           example: 056 948 3322
         ported:
-          type: boolean
+          type:
+            - boolean
+            - 'null'
           description: Indicates whether the phone number was ported or not. `null` if the phone number is invalid.
           example: false
         mcc:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Mobile Country Code of the phone number carrier. For mobile phone numbers only. `null` if the phone number is invalid.
           example: "424"
         mnc:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Mobile Network Code of the phone number carrier. For mobile phone numbers only. `null` if the phone number is invalid
           example: "004"
         number_type:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Number type. Possible values are `mobile`, `landline`, or `toll-free`. `null` if the phone number is invalid.
           example: mobile
         carrier_name:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Name of the phone number carrier. `null` if the phone number is invalid.
           example: Etisalat
         risky_destination:
-          type: boolean
+          type:
+            - boolean
+            - 'null'
           description: Indicates whether the phone number belongs to a number range associated with traffic pumping. `null` if the number is invalid.
           example: false
         unallocated_range:
-          type: boolean
+          type:
+            - boolean
+            - 'null'
           description: Indicates whether the phone number belongs to an unallocated number range. `null` if the number is invalid
           example: false
         reachable:
-          type: boolean
+          type:
+            - boolean
+            - 'null'
           description: Indicates whether the number is registered in a mobile network. For mobile phone numbers only. `null` if the number is invalid
           example: true
         roaming:
-          type: boolean
+          type:
+            - boolean
+            - 'null'
           description: Indicates whether the number is roaming. For mobile phone numbers only. `null` if the number is invalid
           example: false
         timezone:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             Time zone based on the phone number's country and area code.
              `null` if the number is invalid.
@@ -16399,7 +16498,7 @@ components:
           type: string
           description: |-
             Error code for the request. `000` indicates success.
-            Possible values: 
+            Possible values:
             - `013`: — Internal service error
             - `021`: — Invalid phone number length or format
             - `041`: — Request timeout
@@ -16738,23 +16837,33 @@ components:
              used to open the short link.
           example: 18.056
         operating_system:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Operating system of the device that opened the short link.
           example: Mac OS X 10.15
         browser:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Browser used to open the short link.
           example: Firefox
         language:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Browser language preference.
           example: English
         phone:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Phone number associated with the short link.
           example: "12762025555"
         utm_campaign:
-          type: string
+          type:
+            - string
+            - 'null'
           description: UTM campaign name associated with the short link.
           example: summer
         created_at:
@@ -17813,35 +17922,35 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UnauthorizedErrorResponse"
+            $ref: '#/components/schemas/UnauthorizedErrorResponse'
     ForbiddenErrorResponse:
       description: Request failed. The feature is disabled for your account.
       headers: {}
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ForbiddenErrorResponse"
+            $ref: '#/components/schemas/ForbiddenErrorResponse'
     BadRequestErrorResponse:
       description: Request failed. Missing or invalid parameter <param_name>
       headers: {}
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ValidationErrorResponse"
+            $ref: '#/components/schemas/ValidationErrorResponse'
     NotFoundErrorResponse:
       description: Request failed. An object with the specified ID is not found.
       headers: {}
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotFoundErrorResponse"
+            $ref: '#/components/schemas/NotFoundErrorResponse'
     ValidationErrorResponse:
       description: Validation error
       headers: {}
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ValidationErrorResponse"
+            $ref: '#/components/schemas/ValidationErrorResponse'
     CountryHasNoRegionsErrorResponse:
       description: Country has no states or provinces
       headers: {}
