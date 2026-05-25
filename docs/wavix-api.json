@@ -24,7 +24,7 @@
   ],
   "security": [
     {
-      "appid": []
+      "bearerAuth": []
     }
   ],
   "tags": [
@@ -555,6 +555,13 @@
         "summary": "List SIP trunks",
         "description": "Returns a paginated list of SIP trunks. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sip_trunks_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "trunks:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "page",
@@ -646,6 +653,13 @@
         "summary": "Create a SIP trunk",
         "description": "Creates a SIP trunk.",
         "operationId": "sip_trunks_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "trunks:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "SIP trunk configuration.",
@@ -761,6 +775,13 @@
         "summary": "Retrieve a SIP trunk",
         "description": "Returns a SIP trunk configuration.",
         "operationId": "sip_trunks_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "trunks:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -865,6 +886,13 @@
         "summary": "Update a SIP trunk",
         "description": "Updates a SIP trunk configuration.",
         "operationId": "sip_trunks_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "trunks:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -965,6 +993,13 @@
         "summary": "Delete a SIP trunk",
         "description": "Deletes a SIP trunk.",
         "operationId": "sip_trunks_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "trunks:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1024,6 +1059,13 @@
         "summary": "List countries",
         "description": "Returns a list of countries where phone numbers are available.",
         "operationId": "buy_countries_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "buy",
           "countries"
@@ -1106,6 +1148,13 @@
         "summary": "List regions",
         "description": "Returns a list of regions (states or provinces) for countries where `has_provinces_or_states` is `true`.",
         "operationId": "buy_regions_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "buy",
           "regions"
@@ -1248,6 +1297,13 @@
         "summary": "List cities",
         "description": "Returns a list of cities for countries where\n `has_provinces_or_states` is `false`.",
         "operationId": "buy_cities_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "buy",
           "cities"
@@ -1407,6 +1463,13 @@
         "summary": "List region cities",
         "description": "Returns a list of cities in the specified region for countries where `has_provinces_or_states` is `true`.",
         "operationId": "buy_region_cities_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "buy",
           "regionCities"
@@ -1578,6 +1641,13 @@
         "summary": "List available numbers",
         "description": "Returns a paginated list of phone numbers available for purchase.",
         "operationId": "buy_numbers_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "buy",
           "numbers"
@@ -1765,6 +1835,13 @@
         "summary": "Add to cart",
         "description": "Adds phone numbers to the cart.",
         "operationId": "cart_add",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Phone numbers to add.",
@@ -1896,6 +1973,13 @@
         "summary": "Retrieve cart",
         "description": "Returns the cart.",
         "operationId": "cart_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -2011,6 +2095,13 @@
         "summary": "Remove from cart",
         "description": "Removes phone numbers from the cart.",
         "operationId": "cart_remove",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2113,6 +2204,13 @@
         "summary": "Checkout",
         "description": "Checks out the cart. Activation and monthly fees are deducted from the account balance.",
         "operationId": "cart_checkout",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Checkout details.",
@@ -2217,6 +2315,13 @@
         "summary": "List numbers",
         "description": "Returns a paginated list of phone numbers on the account. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "my_numbers_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "city_id",
@@ -2388,6 +2493,13 @@
         "summary": "Release numbers",
         "description": "Releases phone numbers back to stock.",
         "operationId": "my_numbers_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "ids",
@@ -2494,6 +2606,13 @@
         "summary": "Retrieve number",
         "description": "Returns a phone number.",
         "operationId": "my_numbers_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2594,6 +2713,13 @@
         "summary": "Update number",
         "description": "Updates a phone number.",
         "operationId": "my_numbers_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2737,6 +2863,13 @@
         "summary": "Update SMS status",
         "description": "Enables or disables inbound SMS support for a phone number.",
         "operationId": "my_numbers_sms_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2843,6 +2976,13 @@
         "summary": "Update destinations",
         "description": "Updates inbound call routing for phone numbers.",
         "operationId": "my_numbers_destinations_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Inbound call routing configuration.",
@@ -2931,6 +3071,13 @@
         "summary": "Upload document",
         "description": "Uploads a document for one or more phone numbers.\nUploaded files must meet the following requirements:\n- Allowed formats: PNG, JPG, JPEG, TIFF, BMP, or PDF\n- Maximum file size: 10 MB\n- Files can't be password protected\n- PDF files must not contain digital signatures",
         "operationId": "my_numbers_papers_upload",
+        "security": [
+          {
+            "bearerAuth": [
+              "numbers:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "content": {
@@ -3063,6 +3210,13 @@
         "summary": "List CDRs",
         "description": "Returns a paginated list of CDRs.",
         "operationId": "cdrs_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "from",
@@ -3245,6 +3399,13 @@
         "summary": "Search transcriptions",
         "description": "Searches call transcriptions for specific keywords or phrases.",
         "operationId": "cdrs_search",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "content": {
@@ -3324,6 +3485,13 @@
         "summary": "Transcribe call recording",
         "description": "Transcribes a recorded call.",
         "operationId": "cdrs_retranscribe",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -3402,6 +3570,13 @@
         "summary": "Retrieve transcription",
         "description": "Returns a recorded call transcription.",
         "operationId": "cdrs_transcription_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -3484,6 +3659,13 @@
         "summary": "Retrieve CDR",
         "description": "Returns call details.",
         "operationId": "cdrs_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -3560,6 +3742,13 @@
         "summary": "Export CDRs",
         "description": "Returns CDRs in NDJSON format for bulk export.",
         "operationId": "cdrs_list_all",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "from",
@@ -3734,6 +3923,13 @@
         "summary": "List call recordings",
         "description": "Returns a paginated list of call recordings.",
         "operationId": "call_recording_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "recordings:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "from_date",
@@ -3920,6 +4116,13 @@
         "summary": "Retrieve a call recording",
         "description": "Returns a call recording.",
         "operationId": "call_recording_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "recordings:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "call_uuid",
@@ -4000,6 +4203,13 @@
         "summary": "Delete a call recording",
         "description": "Deletes a call recording.",
         "operationId": "call_recording_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "recordings:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4095,6 +4305,13 @@
         "summary": "Upload a file",
         "description": "Uploads an audio file for transcription. Wavix sends a POST callback to the specified callback URL when the transcription is complete.\n\nCallback body:\n```json\n   {\n        \"request_id\": \"e865ea07-25af-4fdd-876e-04b0d41d5ebd\",\n        \"status\": \"completed\",\n        \"error\": null\n   }\n```\n\n- `request_id`: Transcription request ID.\n- `status`: Operation status. Possible values are `completed`, `failed`. `completed` indicates successful transcription; `failed` indicates an error. - `error`: Error description. Value is `null` if the transcription was successful.",
         "operationId": "speech_analytics_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "content": {
@@ -4231,6 +4448,13 @@
         "summary": "Retrieve a transcription",
         "description": "Returns a transcription.",
         "operationId": "speech_analytics_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -4387,6 +4611,13 @@
         "summary": "Retranscribe a file",
         "description": "Retranscribes an uploaded file.",
         "operationId": "speech_analytics_retranscribe",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -4557,6 +4788,13 @@
         "summary": "Retrieve original file",
         "description": "Returns the original file submitted for transcription.",
         "operationId": "speech_analytics_file_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -4637,6 +4875,13 @@
         "summary": "List call webhooks",
         "description": "Returns a list of configured call webhooks. Wavix sends POST callbacks for `on-call` and `post-call` events.",
         "operationId": "call_webhooks_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "webhooks:read"
+            ]
+          }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -4680,6 +4925,13 @@
         "summary": "Create a call webhook",
         "description": "Creates a call webhook. Wavix sends POST callbacks for `on-call` and `post-call` events.",
         "operationId": "call_webhooks_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "webhooks:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Webhook configuration.",
@@ -4774,6 +5026,13 @@
         "summary": "Delete a call webhook",
         "description": "Deletes a call webhook.",
         "operationId": "call_webhooks_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "webhooks:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "event_type",
@@ -4863,6 +5122,13 @@
         "summary": "Start a call",
         "description": "Starts an outbound call.",
         "operationId": "call_control_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Call configuration.",
@@ -4989,6 +5255,13 @@
         "summary": "List active calls",
         "description": "Returns a list of active calls.",
         "operationId": "call_control_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -5066,6 +5339,13 @@
         "summary": "Retrieve a call",
         "description": "Returns a call.",
         "operationId": "call_control_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -5181,6 +5461,13 @@
         "summary": "End a call",
         "description": "Ends an active call.",
         "operationId": "call_control_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -5291,6 +5578,13 @@
         "summary": "Update a call",
         "description": "Updates an active call. Only the `tag` field can be modified.",
         "operationId": "call_control_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -5365,6 +5659,13 @@
         "summary": "Answer a call",
         "description": "Answers an inbound call. Optionally initiate media streaming upon answering.",
         "operationId": "call_control_answer",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -5541,6 +5842,13 @@
         "summary": "Start call streaming",
         "description": "Starts call media streaming.",
         "operationId": "call_control_streams_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "callControl",
           "streams"
@@ -5685,6 +5993,13 @@
         "summary": "Stop call streaming",
         "description": "Stops call media streaming.",
         "operationId": "call_control_streams_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "callControl",
           "streams"
@@ -5774,6 +6089,13 @@
         "summary": "Play audio",
         "description": "Plays audio in an active call.",
         "operationId": "call_control_audio_play",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "callControl",
           "audio"
@@ -5945,6 +6267,13 @@
         "summary": "Stop audio playback",
         "description": "Stops audio playback in an active call.",
         "operationId": "call_control_audio_stop",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "callControl",
           "audio"
@@ -6062,6 +6391,13 @@
         "summary": "Collect DTMF input",
         "description": "Collects DTMF input in an active call.",
         "operationId": "call_control_collect",
+        "security": [
+          {
+            "bearerAuth": [
+              "calls:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -6216,6 +6552,13 @@
         "summary": "Create a widget token",
         "description": "Creates a Wavix Embeddable widget token.",
         "operationId": "webrtc_tokens_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "embeddable:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Widget token configuration.",
@@ -6384,6 +6727,13 @@
         "summary": "List widget tokens",
         "description": "Returns a paginated list of active Wavix Embeddable widget tokens. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "webrtc_tokens_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "embeddable:read"
+            ]
+          }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -6498,6 +6848,13 @@
         "summary": "Retrieve a widget token",
         "description": "Returns a Wavix Embeddable widget token configuration.",
         "operationId": "webrtc_tokens_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "embeddable:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -6629,6 +6986,13 @@
         "summary": "Update a widget token",
         "description": "Updates the payload for a Wavix Embeddable widget token.",
         "operationId": "webrtc_tokens_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "embeddable:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -6800,6 +7164,13 @@
         "summary": "Delete a widget token",
         "description": "Deletes a Wavix Embeddable widget token. After deletion, the token can't be used to authenticate widget sessions, and any active session associated with it is terminated.",
         "operationId": "webrtc_tokens_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "embeddable:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "uuid",
@@ -6936,6 +7307,13 @@
         "summary": "List Sender IDs",
         "description": "Returns a list of Sender IDs.",
         "operationId": "sms_and_mms_sender_ids_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "senderIds"
@@ -6992,6 +7370,13 @@
         "summary": "Create a Sender ID",
         "description": "Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US.",
         "operationId": "sms_and_mms_sender_ids_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "senderIds"
@@ -7085,6 +7470,13 @@
         "summary": "Retrieve a Sender ID",
         "description": "Returns a Sender ID.",
         "operationId": "sms_and_mms_sender_ids_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "senderIds"
@@ -7151,6 +7543,13 @@
         "summary": "Delete a Sender ID",
         "description": "Deletes a Sender ID.",
         "operationId": "sms_and_mms_sender_ids_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "senderIds"
@@ -7268,6 +7667,13 @@
         "summary": "List opted-out phone numbers",
         "description": "Returns a paginated list of opted-out phone numbers. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sms_and_mms_opt_outs_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "optOuts"
@@ -7418,6 +7824,13 @@
         "summary": "Create an opt-out",
         "description": "Creates an opt-out for a Sender ID, 10DLC campaign,\n or all outbound messages.",
         "operationId": "sms_and_mms_opt_outs_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "optOuts"
@@ -7491,6 +7904,13 @@
         "summary": "Send message",
         "description": "Sends SMS or MMS messages. MMS is supported for U.S. numbers only.\n**Rate limit**: 20 messages per phone number in 24 hours.",
         "operationId": "sms_and_mms_messages_send",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "messages"
@@ -7719,6 +8139,13 @@
         "summary": "List messages",
         "description": "Returns a paginated list of SMS and MMS messages.",
         "operationId": "sms_and_mms_messages_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "messages"
@@ -7951,6 +8378,13 @@
         "summary": "Retrieve a message",
         "description": "Returns a message.",
         "operationId": "sms_and_mms_messages_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "messages"
@@ -8055,6 +8489,13 @@
         "summary": "List all messages",
         "description": "Returns SMS and MMS messages in newline-delimited JSON (NDJSON) format.",
         "operationId": "sms_and_mms_messages_list_all",
+        "security": [
+          {
+            "bearerAuth": [
+              "messages:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "smsAndMms",
           "messages"
@@ -8209,6 +8650,13 @@
         "summary": "List 10DLC Brands",
         "description": "Returns a paginated list of 10DLC brands. Filter results by date, name, legal name, and status. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "ten_dlc_brands_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brands"
@@ -8478,6 +8926,13 @@
         "summary": "Register a 10DLC Brand",
         "description": "Registers a 10DLC Brand. TCR automatically verifies the brand identity. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.",
         "operationId": "ten_dlc_brands_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brands"
@@ -8603,6 +9058,13 @@
         "summary": "Retrieve a 10DLC Brand",
         "description": "Returns a 10DLC Brand.",
         "operationId": "ten_dlc_brands_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brands"
@@ -8755,6 +9217,13 @@
         "summary": "Update a 10DLC Brand",
         "description": "Updates a 10DLC brand. Updating identity-related parameters, including  `ein_taxid`, `ein_taxid_country`, and `entity_type`, resets the Brand status to `UNVERIFIED` and triggers automatic re-submission. Brands in `VETTED_VERIFIED` status or with active Campaigns cannot be updated.",
         "operationId": "ten_dlc_brands_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brands"
@@ -8950,6 +9419,13 @@
         "summary": "Delete a 10DLC Brand",
         "description": "Deletes a 10DLC Brand. Brands with active campaigns cannot be deleted.",
         "operationId": "ten_dlc_brands_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brands"
@@ -9057,6 +9533,13 @@
         "summary": "Appeal a 10DLC Brand identity verification",
         "description": "Submits an appeal for 10DLC brand identity verification. Provide any additional documentation to support the appeal. Use `appeal_category` to specify the appeal type:\n- `VERIFY_TAX_ID` — Use if the brand is UNVERIFIED due to a tax ID mismatch. Applies to private companies, public companies, non-profits, and government entities.\n- `VERIFY_NON_PROFIT` — Use if a non-profit brand is UNVERIFIED or VERIFIED but missing tax-exempt status.\n- `VERIFY_GOVERNMENT` — Use if a government brand is UNVERIFIED or VERIFIED but missing government entity status.      ",
         "operationId": "ten_dlc_brand_appeals_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandAppeals"
@@ -9213,6 +9696,13 @@
         "summary": "List a 10DLC Brand Identity verification appeals",
         "description": "Returns a list of brand identity verification appeals.",
         "operationId": "ten_dlc_brand_appeals_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandAppeals"
@@ -9379,6 +9869,13 @@
         "summary": "Upload a 10DLC Brand evidence",
         "description": "Uploads 10DLC Brand evidence. Supported formats include .jpg, .png, .pdf, and more. File size must be under 10MB.",
         "operationId": "ten_dlc_brand_evidence_upload",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandEvidence"
@@ -9542,6 +10039,13 @@
         "summary": "List a 10DLC Brand appeal evidence",
         "description": "Use this method to list previously uploaded Brand appeal evidence.",
         "operationId": "ten_dlc_brand_evidence_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandEvidence"
@@ -9670,6 +10174,13 @@
         "summary": "Download a 10DLC Brand evidence",
         "description": "Returns a 10DLC Brand evidence file.",
         "operationId": "ten_dlc_brand_evidence_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandEvidence"
@@ -9752,6 +10263,13 @@
         "summary": "Delete a 10DLC Brand evidence",
         "description": "Deletes a 10DLC Brand evidence file.",
         "operationId": "ten_dlc_brand_evidence_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandEvidence"
@@ -9870,6 +10388,13 @@
         "summary": "Request external vetting",
         "description": "Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`.",
         "operationId": "ten_dlc_brand_vettings_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandVettings"
@@ -9993,6 +10518,13 @@
         "summary": "Import external vetting",
         "description": "Imports an existing external vetting for a 10DLC Brand.",
         "operationId": "ten_dlc_brand_vettings_import",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandVettings"
@@ -10153,6 +10685,13 @@
         "summary": "List external vettings",
         "description": "Returns a list of external vettings for a 10DLC Brand.",
         "operationId": "ten_dlc_brand_vettings_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandVettings"
@@ -10272,6 +10811,13 @@
         "summary": "Appeal external vetting",
         "description": "Submits an appeal for a 10DLC Brand external vetting.",
         "operationId": "ten_dlc_brand_vetting_appeals_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandVettingAppeals"
@@ -10418,6 +10964,13 @@
         "summary": "List external vetting appeals",
         "description": "Returns a list of external vetting appeals for a 10DLC Brand.",
         "operationId": "ten_dlc_brand_vetting_appeals_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brandVettingAppeals"
@@ -10566,6 +11119,13 @@
         "summary": "Qualify a 10DLC Brand for a use case",
         "description": "Returns the qualification results for a 10DLC Brand use case. Includes MNO-specific attributes, restrictions, and fees.",
         "operationId": "ten_dlc_brand_usecase_qualify",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "brands"
@@ -10784,6 +11344,13 @@
         "summary": "List 10DLC Campaigns",
         "description": "Returns a paginated list of 10DLC Campaigns. Filter results by date, status, and use case. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "ten_dlc_campaigns_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -11045,6 +11612,13 @@
         "summary": "List 10DLC Campaigns associated with a Brand",
         "description": "Returns 10DLC Campaigns associated with a Brand.\n Results are limited to 25 records per page by default.\n  Use `page` and `per_page` to navigate results.",
         "operationId": "ten_dlc_brand_campaigns_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -11345,6 +11919,13 @@
         "summary": "Register a 10DLC Campaign",
         "description": "Registers a 10DLC Campaign.",
         "operationId": "ten_dlc_brand_campaigns_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -11540,6 +12121,13 @@
         "summary": "Retrieve a 10DLC Campaign",
         "description": "Returns a 10DLC Campaign.",
         "operationId": "ten_dlc_brand_campaigns_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -11738,6 +12326,13 @@
         "summary": "Update a 10DLC Campaign",
         "description": "Updates a 10DLC Campaign.",
         "operationId": "ten_dlc_brand_campaigns_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -11942,6 +12537,13 @@
         "summary": "Delete a 10DLC Campaign",
         "description": "Deletes a 10DLC Campaign. Associated phone numbers cannot be used as Sender IDs once the Campaign is deleted.",
         "operationId": "ten_dlc_brand_campaigns_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -12060,6 +12662,13 @@
         "summary": "Subscribe to 10DLC events",
         "description": "Subscribes to Wavix 10DLC event callbacks.",
         "operationId": "ten_dlc_subscriptions_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "subscriptions"
@@ -12136,6 +12745,13 @@
         "summary": "List event subscriptions",
         "description": "Returns a list of 10DLC event subscriptions.",
         "operationId": "ten_dlc_subscriptions_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "subscriptions"
@@ -12202,6 +12818,13 @@
         "summary": "Delete event subscription",
         "description": "Deletes a 10DLC event subscription.",
         "operationId": "ten_dlc_subscriptions_delete",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "subscriptions"
@@ -12283,6 +12906,13 @@
         "summary": "Link a number to a 10DLC Campaign",
         "description": "Links a phone number to a 10DLC Campaign. Wavix automatically creates a Sender ID once the number is approved.",
         "operationId": "ten_dlc_campaign_numbers_link",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaignNumbers"
@@ -12413,6 +13043,13 @@
         "summary": "Unlink phone number",
         "description": "Unlinks a phone number from a 10DLC Campaign. The associated Sender ID is also deleted.",
         "operationId": "ten_dlc_campaign_numbers_unlink",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaignNumbers"
@@ -12545,6 +13182,13 @@
         "summary": "List Campaign phone numbers",
         "description": "Returns a list of phone numbers associated with a 10DLC Campaign.",
         "operationId": "ten_dlc_campaign_numbers_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaignNumbers"
@@ -12681,6 +13325,13 @@
         "summary": "Nudge a 10DLC Campaign review",
         "description": "Requests action on a pending or rejected 10DLC Campaign. Use `nudge_intent` to specify the action: \n- `REVIEW`: Request review for a pending Campaign. - `APPEAL_REJECTION`: Appeal a rejected Campaign.\nNote:\n- The Campaign must be at least 72 hours old.\n- Only one nudge request per Campaign is allowed every 24 hours.",
         "operationId": "ten_dlc_campaigns_nudge",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "tenDlc",
           "campaigns"
@@ -12848,6 +13499,13 @@
         "summary": "Validate a number",
         "description": "Returns details for a phone number.",
         "operationId": "number_validator_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "validator:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "phone_number",
@@ -12987,6 +13645,13 @@
         "summary": "Validate multiple numbers",
         "description": "Returns details for multiple phone numbers. If `async` is true, returns a token to poll for results.",
         "operationId": "number_validator_create_bulk",
+        "security": [
+          {
+            "bearerAuth": [
+              "validator:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Validation configuration.",
@@ -13112,6 +13777,13 @@
         "summary": "Retrieve validation results",
         "description": "Returns asynchronous validation results.",
         "operationId": "number_validator_results_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "validator:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "request_id",
@@ -13271,6 +13943,13 @@
         "summary": "Trigger a scenario",
         "description": "Triggers an outbound call based on a pre-configured scenario.",
         "operationId": "voice_campaigns_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Scenario configuration.",
@@ -13398,6 +14077,13 @@
         "summary": "Retrieve a voice campaign",
         "description": "Returns a specific voice campaign.",
         "operationId": "voice_campaigns_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -13491,6 +14177,13 @@
         "summary": "Create a short link",
         "description": "Creates a short link.",
         "operationId": "link_shortener_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Short link configuration.",
@@ -13575,6 +14268,13 @@
         "summary": "List short link metrics",
         "description": "Returns short link metrics.",
         "operationId": "link_shortener_metrics_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "campaigns:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "from",
@@ -13710,6 +14410,13 @@
         "summary": "Create a 2FA Verification",
         "description": "Creates a new 2FA Verification and sends a one-time password (OTP) to the destination phone number.\nBefore using this endpoint, create a 2FA Service in the Wavix portal. The service is created once and reused to generate and validate OTPs.\nOTP flow:\n1. Create a Verification to generate and send an OTP.\n2. Reuse the same Verification to resend the OTP if needed.\n3. Validate the OTP using the 2FA API\n\nWhen a Verification is created, Wavix generates a random code and sends it to the destination phone number via the selected channel.",
         "operationId": "two_fa_verification_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "two_fa:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "twoFa",
           "verification"
@@ -13851,6 +14558,13 @@
         "summary": "List 2FA Verifications",
         "description": "Returns a list of 2FA verifications. Filter by service or date.",
         "operationId": "two_fa_sessions_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "two_fa:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "twoFa",
           "sessions"
@@ -14085,6 +14799,13 @@
         "summary": "Resend a code",
         "description": "Resends the verification code using the specified channel. Previously sent codes are invalidated.",
         "operationId": "two_fa_verification_resend",
+        "security": [
+          {
+            "bearerAuth": [
+              "two_fa:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "twoFa",
           "verification"
@@ -14213,6 +14934,13 @@
         "summary": "Validate a code",
         "description": "Validates the verification code.",
         "operationId": "two_fa_verification_check",
+        "security": [
+          {
+            "bearerAuth": [
+              "two_fa:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "twoFa",
           "verification"
@@ -14335,6 +15063,13 @@
         "summary": "Cancel a 2FA Verification",
         "description": "Cancels a 2FA verification. After cancellation, no additional codes are sent, and previously sent codes can no longer be validated. You must create a new verification to send another code.",
         "operationId": "two_fa_verification_cancel",
+        "security": [
+          {
+            "bearerAuth": [
+              "two_fa:write"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "twoFa",
           "verification"
@@ -14466,6 +15201,13 @@
         "summary": "List 2FA Verification events",
         "description": "Returns a list of events for a specific 2FA Verification.",
         "operationId": "two_fa_events_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "two_fa:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "twoFa",
           "events"
@@ -14604,6 +15346,13 @@
         "summary": "List transactions",
         "description": "Returns a paginated list of financial transactions.",
         "operationId": "billing_transactions_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "billing:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "billing",
           "transactions"
@@ -14806,6 +15555,13 @@
         "summary": "List financial statements",
         "description": "Returns a paginated list of financial statements.",
         "operationId": "billing_invoices_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "billing:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "billing",
           "invoices"
@@ -14909,6 +15665,13 @@
         "summary": "Download statement",
         "description": "Returns a financial statement in PDF format.",
         "operationId": "billing_invoices_download",
+        "security": [
+          {
+            "bearerAuth": [
+              "billing:read"
+            ]
+          }
+        ],
         "x-fern-sdk-group-name": [
           "billing",
           "invoices"
@@ -14959,6 +15722,13 @@
         "summary": "Update a profile",
         "description": "Updates the account profile and billing details.",
         "operationId": "profile_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "account:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Profile configuration.",
@@ -15038,6 +15808,13 @@
         "summary": "Retrieve a profile",
         "description": "Returns the account profile and billing details.",
         "operationId": "profile_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "account:read"
+            ]
+          }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -15104,6 +15881,13 @@
         "summary": "Retrieve account settings",
         "description": "Returns the account balance and configuration details.",
         "operationId": "profile_config_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "account:read"
+            ]
+          }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -15158,6 +15942,13 @@
         "summary": "List sub-accounts",
         "description": "Returns a paginated list of sub-accounts. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sub_accounts_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "subaccounts:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "status",
@@ -15243,6 +16034,13 @@
         "summary": "Create a sub-account",
         "description": "Creates a sub-account.",
         "operationId": "sub_accounts_create",
+        "security": [
+          {
+            "bearerAuth": [
+              "subaccounts:write"
+            ]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "description": "Sub-account configuration.",
@@ -15382,6 +16180,13 @@
         "summary": "Retrieve a sub-account",
         "description": "Returns a specific sub-account. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sub_accounts_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "subaccounts:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -15445,6 +16250,13 @@
         "summary": "Update sub-account",
         "description": "Updates a sub-account's configuration.",
         "operationId": "sub_accounts_update",
+        "security": [
+          {
+            "bearerAuth": [
+              "subaccounts:write"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -15597,6 +16409,13 @@
         "summary": "List sub-account transactions",
         "description": "Returns a paginated list of transactions for a specific sub-account. Filter by date range and type. Results are paginated with 25 records per page by default. Use `page` and `per_page` to navigate results.",
         "operationId": "sub_accounts_transactions_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "subaccounts:read"
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -16073,10 +16892,10 @@
   },
   "components": {
     "securitySchemes": {
-      "appid": {
+      "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Bearer token using appid (Authorization: Bearer <appid>)"
+        "description": "Wavix API key. Pass as `Authorization: Bearer <api_key>`. Keys support per-resource scopes (none / read / write). See [Restricted keys and scopes](https://docs.wavix.com/api-reference/authentication#restricted-keys-and-scopes).\n"
       }
     },
     "schemas": {
@@ -17700,7 +18519,10 @@
             "example": "DETROIT, MI"
           },
           "state": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "State where the phone number originates. For non-US numbers, this field may be null."
           },
           "country": {
@@ -18690,7 +19512,10 @@
             "example": "0.027"
           },
           "recording_url": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "URL of the recorded call file. Call recording can be enabled\n on a SIP trunk for outbound calls and on\n  a phone number for inbound calls.",
             "example": "https://api.wavix.com/v1/recordings/recording_id"
           },
@@ -24065,27 +24890,42 @@
             "example": "info@awesome.com"
           },
           "first_name": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Account owner's first name.",
             "example": "Jason"
           },
           "last_name": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Account owner's last name.",
             "example": "Androux"
           },
           "phone": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Account owner's phone number.",
             "example": "13291019312"
           },
           "additional_info": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Additional info associated with the account.",
             "example": "Additional info"
           },
           "contact_email": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Additional email address for billing notifications.",
             "example": "billing@awesome.com"
           },
@@ -24095,12 +24935,18 @@
             "example": "Pacific/Wallis"
           },
           "job_title": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Account owner's job title.",
             "example": "Manager"
           },
           "default_short_link_endpoint": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Default short link endpoint.",
             "example": "https://short.examples.com"
           },
@@ -24131,17 +24977,26 @@
             ]
           },
           "company_info": {
-            "type": "object",
+            "type": [
+              "object",
+              "null"
+            ],
             "additionalProperties": false,
             "description": "Company details.",
             "properties": {
               "name": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Company name.",
                 "example": "Awesome company"
               },
               "industry": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "enum": [
                   "telecommunications",
                   "information technology and services",
@@ -24155,23 +25010,33 @@
                   "travel and hospitality",
                   "non-profit and charity organizations",
                   "manufacturing and industrial goods",
-                  "other"
+                  "other",
+                  null
                 ],
                 "description": "Company industry.",
                 "example": "telecommunications"
               },
               "address": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Company address.",
                 "example": "Baker street"
               },
               "attn_contact_name": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Billing contact name.",
                 "example": "James Scott"
               },
               "vat_number": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "VAT number.",
                 "example": "VAT123456789"
               },
@@ -24181,12 +25046,18 @@
                 "description": "Country.",
                 "properties": {
                   "country_name": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "description": "Country name.",
                     "example": "United States"
                   },
                   "country_id": {
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "description": "Country ID.",
                     "example": 1
                   }

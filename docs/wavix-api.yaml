@@ -16,7 +16,7 @@ servers:
     description: https://api.wavix.com
     variables: {}
 security:
-  - appid: []
+  - bearerAuth: []
 tags:
   - name: SIP trunks
     description: SIP trunks
@@ -356,6 +356,9 @@ paths:
       summary: List SIP trunks
       description: Returns a paginated list of SIP trunks. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: sip_trunks_list
+      security:
+        - bearerAuth:
+            - trunks:read
       parameters:
         - name: page
           in: query
@@ -420,6 +423,9 @@ paths:
       summary: Create a SIP trunk
       description: Creates a SIP trunk.
       operationId: sip_trunks_create
+      security:
+        - bearerAuth:
+            - trunks:write
       parameters: []
       requestBody:
         description: SIP trunk configuration.
@@ -501,6 +507,9 @@ paths:
       summary: Retrieve a SIP trunk
       description: Returns a SIP trunk configuration.
       operationId: sip_trunks_get
+      security:
+        - bearerAuth:
+            - trunks:read
       parameters:
         - name: id
           in: path
@@ -574,6 +583,9 @@ paths:
       summary: Update a SIP trunk
       description: Updates a SIP trunk configuration.
       operationId: sip_trunks_update
+      security:
+        - bearerAuth:
+            - trunks:write
       parameters:
         - name: id
           in: path
@@ -646,6 +658,9 @@ paths:
       summary: Delete a SIP trunk
       description: Deletes a SIP trunk.
       operationId: sip_trunks_delete
+      security:
+        - bearerAuth:
+            - trunks:write
       parameters:
         - name: id
           in: path
@@ -684,6 +699,9 @@ paths:
       summary: List countries
       description: Returns a list of countries where phone numbers are available.
       operationId: buy_countries_list
+      security:
+        - bearerAuth:
+            - numbers:read
       x-fern-sdk-group-name:
         - buy
         - countries
@@ -733,6 +751,9 @@ paths:
       summary: List regions
       description: Returns a list of regions (states or provinces) for countries where `has_provinces_or_states` is `true`.
       operationId: buy_regions_list
+      security:
+        - bearerAuth:
+            - numbers:read
       x-fern-sdk-group-name:
         - buy
         - regions
@@ -821,6 +842,9 @@ paths:
         Returns a list of cities for countries where
          `has_provinces_or_states` is `false`.
       operationId: buy_cities_list
+      security:
+        - bearerAuth:
+            - numbers:read
       x-fern-sdk-group-name:
         - buy
         - cities
@@ -921,6 +945,9 @@ paths:
       summary: List region cities
       description: Returns a list of cities in the specified region for countries where `has_provinces_or_states` is `true`.
       operationId: buy_region_cities_list
+      security:
+        - bearerAuth:
+            - numbers:read
       x-fern-sdk-group-name:
         - buy
         - regionCities
@@ -1030,6 +1057,9 @@ paths:
       summary: List available numbers
       description: Returns a paginated list of phone numbers available for purchase.
       operationId: buy_numbers_list
+      security:
+        - bearerAuth:
+            - numbers:read
       x-fern-sdk-group-name:
         - buy
         - numbers
@@ -1163,6 +1193,9 @@ paths:
       summary: Add to cart
       description: Adds phone numbers to the cart.
       operationId: cart_add
+      security:
+        - bearerAuth:
+            - numbers:write
       parameters: []
       requestBody:
         description: Phone numbers to add.
@@ -1258,6 +1291,9 @@ paths:
       summary: Retrieve cart
       description: Returns the cart.
       operationId: cart_get
+      security:
+        - bearerAuth:
+            - numbers:read
       parameters: []
       responses:
         '200':
@@ -1335,6 +1371,9 @@ paths:
       summary: Remove from cart
       description: Removes phone numbers from the cart.
       operationId: cart_remove
+      security:
+        - bearerAuth:
+            - numbers:write
       requestBody:
         required: true
         content:
@@ -1399,6 +1438,9 @@ paths:
       summary: Checkout
       description: Checks out the cart. Activation and monthly fees are deducted from the account balance.
       operationId: cart_checkout
+      security:
+        - bearerAuth:
+            - numbers:write
       parameters: []
       requestBody:
         description: Checkout details.
@@ -1466,6 +1508,9 @@ paths:
       summary: List numbers
       description: Returns a paginated list of phone numbers on the account. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: my_numbers_list
+      security:
+        - bearerAuth:
+            - numbers:read
       parameters:
         - name: city_id
           in: query
@@ -1593,6 +1638,9 @@ paths:
       summary: Release numbers
       description: Releases phone numbers back to stock.
       operationId: my_numbers_delete
+      security:
+        - bearerAuth:
+            - numbers:write
       parameters:
         - name: ids
           in: query
@@ -1661,6 +1709,9 @@ paths:
       summary: Retrieve number
       description: Returns a phone number.
       operationId: my_numbers_get
+      security:
+        - bearerAuth:
+            - numbers:read
       parameters:
         - name: id
           in: path
@@ -1738,6 +1789,9 @@ paths:
       summary: Update number
       description: Updates a phone number.
       operationId: my_numbers_update
+      security:
+        - bearerAuth:
+            - numbers:write
       parameters:
         - name: id
           in: path
@@ -1848,6 +1902,9 @@ paths:
       summary: Update SMS status
       description: Enables or disables inbound SMS support for a phone number.
       operationId: my_numbers_sms_update
+      security:
+        - bearerAuth:
+            - numbers:write
       requestBody:
         content:
           application/json:
@@ -1920,6 +1977,9 @@ paths:
       summary: Update destinations
       description: Updates inbound call routing for phone numbers.
       operationId: my_numbers_destinations_update
+      security:
+        - bearerAuth:
+            - numbers:write
       parameters: []
       requestBody:
         description: Inbound call routing configuration.
@@ -1976,6 +2036,9 @@ paths:
         - Files can't be password protected
         - PDF files must not contain digital signatures
       operationId: my_numbers_papers_upload
+      security:
+        - bearerAuth:
+            - numbers:write
       parameters: []
       requestBody:
         content:
@@ -2072,6 +2135,9 @@ paths:
       summary: List CDRs
       description: Returns a paginated list of CDRs.
       operationId: cdrs_list
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: from
           in: query
@@ -2204,6 +2270,9 @@ paths:
       summary: Search transcriptions
       description: Searches call transcriptions for specific keywords or phrases.
       operationId: cdrs_search
+      security:
+        - bearerAuth:
+            - calls:read
       parameters: []
       requestBody:
         content:
@@ -2258,6 +2327,9 @@ paths:
       summary: Transcribe call recording
       description: Transcribes a recorded call.
       operationId: cdrs_retranscribe
+      security:
+        - bearerAuth:
+            - calls:write
       parameters:
         - name: uuid
           in: path
@@ -2308,6 +2380,9 @@ paths:
       summary: Retrieve transcription
       description: Returns a recorded call transcription.
       operationId: cdrs_transcription_get
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: uuid
           in: path
@@ -2364,6 +2439,9 @@ paths:
       summary: Retrieve CDR
       description: Returns call details.
       operationId: cdrs_get
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: uuid
           in: path
@@ -2418,6 +2496,9 @@ paths:
       summary: Export CDRs
       description: Returns CDRs in NDJSON format for bulk export.
       operationId: cdrs_list_all
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: from
           in: query
@@ -2546,6 +2627,9 @@ paths:
       summary: List call recordings
       description: Returns a paginated list of call recordings.
       operationId: call_recording_list
+      security:
+        - bearerAuth:
+            - recordings:read
       parameters:
         - name: from_date
           in: query
@@ -2680,6 +2764,9 @@ paths:
       summary: Retrieve a call recording
       description: Returns a call recording.
       operationId: call_recording_get
+      security:
+        - bearerAuth:
+            - recordings:read
       parameters:
         - name: call_uuid
           in: path
@@ -2735,6 +2822,9 @@ paths:
       summary: Delete a call recording
       description: Deletes a call recording.
       operationId: call_recording_delete
+      security:
+        - bearerAuth:
+            - recordings:write
       parameters:
         - name: id
           in: path
@@ -2813,6 +2903,9 @@ paths:
         - `request_id`: Transcription request ID.
         - `status`: Operation status. Possible values are `completed`, `failed`. `completed` indicates successful transcription; `failed` indicates an error. - `error`: Error description. Value is `null` if the transcription was successful.
       operationId: speech_analytics_create
+      security:
+        - bearerAuth:
+            - calls:write
       parameters: []
       requestBody:
         content:
@@ -2903,6 +2996,9 @@ paths:
       summary: Retrieve a transcription
       description: Returns a transcription.
       operationId: speech_analytics_get
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: uuid
           in: path
@@ -3011,6 +3107,9 @@ paths:
       summary: Retranscribe a file
       description: Retranscribes an uploaded file.
       operationId: speech_analytics_retranscribe
+      security:
+        - bearerAuth:
+            - calls:write
       parameters:
         - name: uuid
           in: path
@@ -3126,6 +3225,9 @@ paths:
       summary: Retrieve original file
       description: Returns the original file submitted for transcription.
       operationId: speech_analytics_file_get
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: uuid
           in: path
@@ -3180,6 +3282,9 @@ paths:
       summary: List call webhooks
       description: Returns a list of configured call webhooks. Wavix sends POST callbacks for `on-call` and `post-call` events.
       operationId: call_webhooks_list
+      security:
+        - bearerAuth:
+            - webhooks:read
       parameters: []
       responses:
         '200':
@@ -3207,6 +3312,9 @@ paths:
       summary: Create a call webhook
       description: Creates a call webhook. Wavix sends POST callbacks for `on-call` and `post-call` events.
       operationId: call_webhooks_create
+      security:
+        - bearerAuth:
+            - webhooks:write
       parameters: []
       requestBody:
         description: Webhook configuration.
@@ -3277,6 +3385,9 @@ paths:
       summary: Delete a call webhook
       description: Deletes a call webhook.
       operationId: call_webhooks_delete
+      security:
+        - bearerAuth:
+            - webhooks:write
       parameters:
         - name: event_type
           in: query
@@ -3338,6 +3449,9 @@ paths:
       summary: Start a call
       description: Starts an outbound call.
       operationId: call_control_create
+      security:
+        - bearerAuth:
+            - calls:write
       parameters: []
       requestBody:
         description: Call configuration.
@@ -3426,6 +3540,9 @@ paths:
       summary: List active calls
       description: Returns a list of active calls.
       operationId: call_control_list
+      security:
+        - bearerAuth:
+            - calls:read
       parameters: []
       responses:
         '200':
@@ -3479,6 +3596,9 @@ paths:
       summary: Retrieve a call
       description: Returns a call.
       operationId: call_control_get
+      security:
+        - bearerAuth:
+            - calls:read
       parameters:
         - name: uuid
           in: path
@@ -3559,6 +3679,9 @@ paths:
       summary: End a call
       description: Ends an active call.
       operationId: call_control_delete
+      security:
+        - bearerAuth:
+            - calls:write
       parameters:
         - name: uuid
           in: path
@@ -3633,6 +3756,9 @@ paths:
       summary: Update a call
       description: Updates an active call. Only the `tag` field can be modified.
       operationId: call_control_update
+      security:
+        - bearerAuth:
+            - calls:write
       parameters:
         - name: uuid
           in: path
@@ -3682,6 +3808,9 @@ paths:
       summary: Answer a call
       description: Answers an inbound call. Optionally initiate media streaming upon answering.
       operationId: call_control_answer
+      security:
+        - bearerAuth:
+            - calls:write
       parameters:
         - name: uuid
           in: path
@@ -3801,6 +3930,9 @@ paths:
       summary: Start call streaming
       description: Starts call media streaming.
       operationId: call_control_streams_create
+      security:
+        - bearerAuth:
+            - calls:write
       x-fern-sdk-group-name:
         - callControl
         - streams
@@ -3899,6 +4031,9 @@ paths:
       summary: Stop call streaming
       description: Stops call media streaming.
       operationId: call_control_streams_delete
+      security:
+        - bearerAuth:
+            - calls:write
       x-fern-sdk-group-name:
         - callControl
         - streams
@@ -3959,6 +4094,9 @@ paths:
       summary: Play audio
       description: Plays audio in an active call.
       operationId: call_control_audio_play
+      security:
+        - bearerAuth:
+            - calls:write
       x-fern-sdk-group-name:
         - callControl
         - audio
@@ -4074,6 +4212,9 @@ paths:
       summary: Stop audio playback
       description: Stops audio playback in an active call.
       operationId: call_control_audio_stop
+      security:
+        - bearerAuth:
+            - calls:write
       x-fern-sdk-group-name:
         - callControl
         - audio
@@ -4153,6 +4294,9 @@ paths:
       summary: Collect DTMF input
       description: Collects DTMF input in an active call.
       operationId: call_control_collect
+      security:
+        - bearerAuth:
+            - calls:write
       parameters:
         - name: uuid
           in: path
@@ -4256,6 +4400,9 @@ paths:
       summary: Create a widget token
       description: Creates a Wavix Embeddable widget token.
       operationId: webrtc_tokens_create
+      security:
+        - bearerAuth:
+            - embeddable:write
       parameters: []
       requestBody:
         description: Widget token configuration.
@@ -4368,6 +4515,9 @@ paths:
       summary: List widget tokens
       description: Returns a paginated list of active Wavix Embeddable widget tokens. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: webrtc_tokens_list
+      security:
+        - bearerAuth:
+            - embeddable:read
       parameters: []
       responses:
         '200':
@@ -4443,6 +4593,9 @@ paths:
       summary: Retrieve a widget token
       description: Returns a Wavix Embeddable widget token configuration.
       operationId: webrtc_tokens_get
+      security:
+        - bearerAuth:
+            - embeddable:read
       parameters:
         - name: uuid
           in: path
@@ -4530,6 +4683,9 @@ paths:
       summary: Update a widget token
       description: Updates the payload for a Wavix Embeddable widget token.
       operationId: webrtc_tokens_update
+      security:
+        - bearerAuth:
+            - embeddable:write
       parameters:
         - name: uuid
           in: path
@@ -4643,6 +4799,9 @@ paths:
       summary: Delete a widget token
       description: Deletes a Wavix Embeddable widget token. After deletion, the token can't be used to authenticate widget sessions, and any active session associated with it is terminated.
       operationId: webrtc_tokens_delete
+      security:
+        - bearerAuth:
+            - embeddable:write
       parameters:
         - name: uuid
           in: path
@@ -4732,6 +4891,9 @@ paths:
       summary: List Sender IDs
       description: Returns a list of Sender IDs.
       operationId: sms_and_mms_sender_ids_list
+      security:
+        - bearerAuth:
+            - messages:read
       x-fern-sdk-group-name:
         - smsAndMms
         - senderIds
@@ -4768,6 +4930,9 @@ paths:
       summary: Create a Sender ID
       description: Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US.
       operationId: sms_and_mms_sender_ids_create
+      security:
+        - bearerAuth:
+            - messages:write
       x-fern-sdk-group-name:
         - smsAndMms
         - senderIds
@@ -4829,6 +4994,9 @@ paths:
       summary: Retrieve a Sender ID
       description: Returns a Sender ID.
       operationId: sms_and_mms_sender_ids_get
+      security:
+        - bearerAuth:
+            - messages:read
       x-fern-sdk-group-name:
         - smsAndMms
         - senderIds
@@ -4873,6 +5041,9 @@ paths:
       summary: Delete a Sender ID
       description: Deletes a Sender ID.
       operationId: sms_and_mms_sender_ids_delete
+      security:
+        - bearerAuth:
+            - messages:write
       x-fern-sdk-group-name:
         - smsAndMms
         - senderIds
@@ -4947,6 +5118,9 @@ paths:
       summary: List opted-out phone numbers
       description: Returns a paginated list of opted-out phone numbers. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: sms_and_mms_opt_outs_list
+      security:
+        - bearerAuth:
+            - messages:read
       x-fern-sdk-group-name:
         - smsAndMms
         - optOuts
@@ -5051,6 +5225,9 @@ paths:
         Creates an opt-out for a Sender ID, 10DLC campaign,
          or all outbound messages.
       operationId: sms_and_mms_opt_outs_create
+      security:
+        - bearerAuth:
+            - messages:write
       x-fern-sdk-group-name:
         - smsAndMms
         - optOuts
@@ -5097,6 +5274,9 @@ paths:
         Sends SMS or MMS messages. MMS is supported for U.S. numbers only.
         **Rate limit**: 20 messages per phone number in 24 hours.
       operationId: sms_and_mms_messages_send
+      security:
+        - bearerAuth:
+            - messages:write
       x-fern-sdk-group-name:
         - smsAndMms
         - messages
@@ -5268,6 +5448,9 @@ paths:
       summary: List messages
       description: Returns a paginated list of SMS and MMS messages.
       operationId: sms_and_mms_messages_list
+      security:
+        - bearerAuth:
+            - messages:read
       x-fern-sdk-group-name:
         - smsAndMms
         - messages
@@ -5441,6 +5624,9 @@ paths:
       summary: Retrieve a message
       description: Returns a message.
       operationId: sms_and_mms_messages_get
+      security:
+        - bearerAuth:
+            - messages:read
       x-fern-sdk-group-name:
         - smsAndMms
         - messages
@@ -5519,6 +5705,9 @@ paths:
       summary: List all messages
       description: Returns SMS and MMS messages in newline-delimited JSON (NDJSON) format.
       operationId: sms_and_mms_messages_list_all
+      security:
+        - bearerAuth:
+            - messages:read
       x-fern-sdk-group-name:
         - smsAndMms
         - messages
@@ -5638,6 +5827,9 @@ paths:
       summary: List 10DLC Brands
       description: Returns a paginated list of 10DLC brands. Filter results by date, name, legal name, and status. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: ten_dlc_brands_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brands
@@ -5837,6 +6029,9 @@ paths:
       summary: Register a 10DLC Brand
       description: Registers a 10DLC Brand. TCR automatically verifies the brand identity. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.
       operationId: ten_dlc_brands_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brands
@@ -5932,6 +6127,9 @@ paths:
       summary: Retrieve a 10DLC Brand
       description: Returns a 10DLC Brand.
       operationId: ten_dlc_brands_get
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brands
@@ -6043,6 +6241,9 @@ paths:
       summary: Update a 10DLC Brand
       description: Updates a 10DLC brand. Updating identity-related parameters, including  `ein_taxid`, `ein_taxid_country`, and `entity_type`, resets the Brand status to `UNVERIFIED` and triggers automatic re-submission. Brands in `VETTED_VERIFIED` status or with active Campaigns cannot be updated.
       operationId: ten_dlc_brands_update
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brands
@@ -6179,6 +6380,9 @@ paths:
       summary: Delete a 10DLC Brand
       description: Deletes a 10DLC Brand. Brands with active campaigns cannot be deleted.
       operationId: ten_dlc_brands_delete
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brands
@@ -6248,6 +6452,9 @@ paths:
         - `VERIFY_NON_PROFIT` — Use if a non-profit brand is UNVERIFIED or VERIFIED but missing tax-exempt status.
         - `VERIFY_GOVERNMENT` — Use if a government brand is UNVERIFIED or VERIFIED but missing government entity status.      
       operationId: ten_dlc_brand_appeals_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brandAppeals
@@ -6343,6 +6550,9 @@ paths:
       summary: List a 10DLC Brand Identity verification appeals
       description: Returns a list of brand identity verification appeals.
       operationId: ten_dlc_brand_appeals_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brandAppeals
@@ -6448,6 +6658,9 @@ paths:
       summary: Upload a 10DLC Brand evidence
       description: Uploads 10DLC Brand evidence. Supported formats include .jpg, .png, .pdf, and more. File size must be under 10MB.
       operationId: ten_dlc_brand_evidence_upload
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brandEvidence
@@ -6550,6 +6763,9 @@ paths:
       summary: List a 10DLC Brand appeal evidence
       description: Use this method to list previously uploaded Brand appeal evidence.
       operationId: ten_dlc_brand_evidence_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brandEvidence
@@ -6631,6 +6847,9 @@ paths:
       summary: Download a 10DLC Brand evidence
       description: Returns a 10DLC Brand evidence file.
       operationId: ten_dlc_brand_evidence_get
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brandEvidence
@@ -6685,6 +6904,9 @@ paths:
       summary: Delete a 10DLC Brand evidence
       description: Deletes a 10DLC Brand evidence file.
       operationId: ten_dlc_brand_evidence_delete
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brandEvidence
@@ -6758,6 +6980,9 @@ paths:
       summary: Request external vetting
       description: 'Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`.'
       operationId: ten_dlc_brand_vettings_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brandVettings
@@ -6840,6 +7065,9 @@ paths:
       summary: Import external vetting
       description: Imports an existing external vetting for a 10DLC Brand.
       operationId: ten_dlc_brand_vettings_import
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brandVettings
@@ -6945,6 +7173,9 @@ paths:
       summary: List external vettings
       description: Returns a list of external vettings for a 10DLC Brand.
       operationId: ten_dlc_brand_vettings_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brandVettings
@@ -7023,6 +7254,9 @@ paths:
       summary: Appeal external vetting
       description: Submits an appeal for a 10DLC Brand external vetting.
       operationId: ten_dlc_brand_vetting_appeals_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - brandVettingAppeals
@@ -7111,6 +7345,9 @@ paths:
       summary: List external vetting appeals
       description: Returns a list of external vetting appeals for a 10DLC Brand.
       operationId: ten_dlc_brand_vetting_appeals_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brandVettingAppeals
@@ -7209,6 +7446,9 @@ paths:
       summary: Qualify a 10DLC Brand for a use case
       description: Returns the qualification results for a 10DLC Brand use case. Includes MNO-specific attributes, restrictions, and fees.
       operationId: ten_dlc_brand_usecase_qualify
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - brands
@@ -7362,6 +7602,9 @@ paths:
       summary: List 10DLC Campaigns
       description: Returns a paginated list of 10DLC Campaigns. Filter results by date, status, and use case. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: ten_dlc_campaigns_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -7566,6 +7809,9 @@ paths:
          Results are limited to 25 records per page by default.
           Use `page` and `per_page` to navigate results.
       operationId: ten_dlc_brand_campaigns_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -7791,6 +8037,9 @@ paths:
       summary: Register a 10DLC Campaign
       description: Registers a 10DLC Campaign.
       operationId: ten_dlc_brand_campaigns_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -7939,6 +8188,9 @@ paths:
       summary: Retrieve a 10DLC Campaign
       description: Returns a 10DLC Campaign.
       operationId: ten_dlc_brand_campaigns_get
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -8091,6 +8343,9 @@ paths:
       summary: Update a 10DLC Campaign
       description: Updates a 10DLC Campaign.
       operationId: ten_dlc_brand_campaigns_update
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -8246,6 +8501,9 @@ paths:
       summary: Delete a 10DLC Campaign
       description: Deletes a 10DLC Campaign. Associated phone numbers cannot be used as Sender IDs once the Campaign is deleted.
       operationId: ten_dlc_brand_campaigns_delete
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -8319,6 +8577,9 @@ paths:
       summary: Subscribe to 10DLC events
       description: Subscribes to Wavix 10DLC event callbacks.
       operationId: ten_dlc_subscriptions_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - subscriptions
@@ -8367,6 +8628,9 @@ paths:
       summary: List event subscriptions
       description: Returns a list of 10DLC event subscriptions.
       operationId: ten_dlc_subscriptions_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - subscriptions
@@ -8409,6 +8673,9 @@ paths:
       summary: Delete event subscription
       description: Deletes a 10DLC event subscription.
       operationId: ten_dlc_subscriptions_delete
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - subscriptions
@@ -8460,6 +8727,9 @@ paths:
       summary: Link a number to a 10DLC Campaign
       description: Links a phone number to a 10DLC Campaign. Wavix automatically creates a Sender ID once the number is approved.
       operationId: ten_dlc_campaign_numbers_link
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - campaignNumbers
@@ -8545,6 +8815,9 @@ paths:
       summary: Unlink phone number
       description: Unlinks a phone number from a 10DLC Campaign. The associated Sender ID is also deleted.
       operationId: ten_dlc_campaign_numbers_unlink
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - campaignNumbers
@@ -8631,6 +8904,9 @@ paths:
       summary: List Campaign phone numbers
       description: Returns a list of phone numbers associated with a 10DLC Campaign.
       operationId: ten_dlc_campaign_numbers_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       x-fern-sdk-group-name:
         - tenDlc
         - campaignNumbers
@@ -8723,6 +8999,9 @@ paths:
         - The Campaign must be at least 72 hours old.
         - Only one nudge request per Campaign is allowed every 24 hours.
       operationId: ten_dlc_campaigns_nudge
+      security:
+        - bearerAuth:
+            - campaigns:write
       x-fern-sdk-group-name:
         - tenDlc
         - campaigns
@@ -8827,6 +9106,9 @@ paths:
       summary: Validate a number
       description: Returns details for a phone number.
       operationId: number_validator_get
+      security:
+        - bearerAuth:
+            - validator:read
       parameters:
         - name: phone_number
           in: query
@@ -8928,6 +9210,9 @@ paths:
       summary: Validate multiple numbers
       description: Returns details for multiple phone numbers. If `async` is true, returns a token to poll for results.
       operationId: number_validator_create_bulk
+      security:
+        - bearerAuth:
+            - validator:write
       parameters: []
       requestBody:
         description: Validation configuration.
@@ -9012,6 +9297,9 @@ paths:
       summary: Retrieve validation results
       description: Returns asynchronous validation results.
       operationId: number_validator_results_get
+      security:
+        - bearerAuth:
+            - validator:read
       parameters:
         - name: request_id
           in: path
@@ -9126,6 +9414,9 @@ paths:
       summary: Trigger a scenario
       description: Triggers an outbound call based on a pre-configured scenario.
       operationId: voice_campaigns_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       parameters: []
       requestBody:
         description: Scenario configuration.
@@ -9209,6 +9500,9 @@ paths:
       summary: Retrieve a voice campaign
       description: Returns a specific voice campaign.
       operationId: voice_campaigns_get
+      security:
+        - bearerAuth:
+            - campaigns:read
       parameters:
         - name: id
           in: path
@@ -9276,6 +9570,9 @@ paths:
       summary: Create a short link
       description: Creates a short link.
       operationId: link_shortener_create
+      security:
+        - bearerAuth:
+            - campaigns:write
       parameters: []
       requestBody:
         description: Short link configuration.
@@ -9326,6 +9623,9 @@ paths:
       summary: List short link metrics
       description: Returns short link metrics.
       operationId: link_shortener_metrics_list
+      security:
+        - bearerAuth:
+            - campaigns:read
       parameters:
         - name: from
           in: query
@@ -9430,6 +9730,9 @@ paths:
 
         When a Verification is created, Wavix generates a random code and sends it to the destination phone number via the selected channel.
       operationId: two_fa_verification_create
+      security:
+        - bearerAuth:
+            - two_fa:write
       x-fern-sdk-group-name:
         - twoFa
         - verification
@@ -9526,6 +9829,9 @@ paths:
       summary: List 2FA Verifications
       description: Returns a list of 2FA verifications. Filter by service or date.
       operationId: two_fa_sessions_list
+      security:
+        - bearerAuth:
+            - two_fa:read
       x-fern-sdk-group-name:
         - twoFa
         - sessions
@@ -9694,6 +10000,9 @@ paths:
       summary: Resend a code
       description: Resends the verification code using the specified channel. Previously sent codes are invalidated.
       operationId: two_fa_verification_resend
+      security:
+        - bearerAuth:
+            - two_fa:write
       x-fern-sdk-group-name:
         - twoFa
         - verification
@@ -9778,6 +10087,9 @@ paths:
       summary: Validate a code
       description: Validates the verification code.
       operationId: two_fa_verification_check
+      security:
+        - bearerAuth:
+            - two_fa:write
       x-fern-sdk-group-name:
         - twoFa
         - verification
@@ -9856,6 +10168,9 @@ paths:
       summary: Cancel a 2FA Verification
       description: Cancels a 2FA verification. After cancellation, no additional codes are sent, and previously sent codes can no longer be validated. You must create a new verification to send another code.
       operationId: two_fa_verification_cancel
+      security:
+        - bearerAuth:
+            - two_fa:write
       x-fern-sdk-group-name:
         - twoFa
         - verification
@@ -9941,6 +10256,9 @@ paths:
       summary: List 2FA Verification events
       description: Returns a list of events for a specific 2FA Verification.
       operationId: two_fa_events_list
+      security:
+        - bearerAuth:
+            - two_fa:read
       x-fern-sdk-group-name:
         - twoFa
         - events
@@ -10032,6 +10350,9 @@ paths:
       summary: List transactions
       description: Returns a paginated list of financial transactions.
       operationId: billing_transactions_list
+      security:
+        - bearerAuth:
+            - billing:read
       x-fern-sdk-group-name:
         - billing
         - transactions
@@ -10171,6 +10492,9 @@ paths:
       summary: List financial statements
       description: Returns a paginated list of financial statements.
       operationId: billing_invoices_list
+      security:
+        - bearerAuth:
+            - billing:read
       x-fern-sdk-group-name:
         - billing
         - invoices
@@ -10240,6 +10564,9 @@ paths:
       summary: Download statement
       description: Returns a financial statement in PDF format.
       operationId: billing_invoices_download
+      security:
+        - bearerAuth:
+            - billing:read
       x-fern-sdk-group-name:
         - billing
         - invoices
@@ -10275,6 +10602,9 @@ paths:
       summary: Update a profile
       description: Updates the account profile and billing details.
       operationId: profile_update
+      security:
+        - bearerAuth:
+            - account:write
       parameters: []
       requestBody:
         description: Profile configuration.
@@ -10328,6 +10658,9 @@ paths:
       summary: Retrieve a profile
       description: Returns the account profile and billing details.
       operationId: profile_get
+      security:
+        - bearerAuth:
+            - account:read
       parameters: []
       responses:
         '200':
@@ -10374,6 +10707,9 @@ paths:
       summary: Retrieve account settings
       description: Returns the account balance and configuration details.
       operationId: profile_config_get
+      security:
+        - bearerAuth:
+            - account:read
       parameters: []
       responses:
         '200':
@@ -10408,6 +10744,9 @@ paths:
       summary: List sub-accounts
       description: Returns a paginated list of sub-accounts. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: sub_accounts_list
+      security:
+        - bearerAuth:
+            - subaccounts:read
       parameters:
         - name: status
           in: query
@@ -10467,6 +10806,9 @@ paths:
       summary: Create a sub-account
       description: Creates a sub-account.
       operationId: sub_accounts_create
+      security:
+        - bearerAuth:
+            - subaccounts:write
       parameters: []
       requestBody:
         description: Sub-account configuration.
@@ -10564,6 +10906,9 @@ paths:
       summary: Retrieve a sub-account
       description: Returns a specific sub-account. Results are limited to 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: sub_accounts_get
+      security:
+        - bearerAuth:
+            - subaccounts:read
       parameters:
         - name: id
           in: path
@@ -10609,6 +10954,9 @@ paths:
       summary: Update sub-account
       description: Updates a sub-account's configuration.
       operationId: sub_accounts_update
+      security:
+        - bearerAuth:
+            - subaccounts:write
       parameters:
         - name: id
           in: path
@@ -10717,6 +11065,9 @@ paths:
       summary: List sub-account transactions
       description: Returns a paginated list of transactions for a specific sub-account. Filter by date range and type. Results are paginated with 25 records per page by default. Use `page` and `per_page` to navigate results.
       operationId: sub_accounts_transactions_list
+      security:
+        - bearerAuth:
+            - subaccounts:read
       parameters:
         - name: id
           in: path
@@ -11042,10 +11393,11 @@ webhooks:
           description: Return a 200 status to indicate that the data was received.
 components:
   securitySchemes:
-    appid:
+    bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token using appid (Authorization: Bearer <appid>)'
+      description: |
+        Wavix API key. Pass as `Authorization: Bearer <api_key>`. Keys support per-resource scopes (none / read / write). See [Restricted keys and scopes](https://docs.wavix.com/api-reference/authentication#restricted-keys-and-scopes).
   schemas:
     ApiKeyScopePermission:
       type: object
@@ -12290,7 +12642,9 @@ components:
           description: City or rate center where the phone number originates.
           example: DETROIT, MI
         state:
-          type: string
+          type:
+            - string
+            - 'null'
           description: State where the phone number originates. For non-US numbers, this field may be null.
         country:
           type: string
@@ -13064,7 +13418,9 @@ components:
           description: Price per minute in USD.
           example: '0.027'
         recording_url:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             URL of the recorded call file. Call recording can be enabled
              on a SIP trunk for outbound calls and on
@@ -17347,23 +17703,33 @@ components:
           description: Email associated with the account.
           example: info@awesome.com
         first_name:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Account owner's first name.
           example: Jason
         last_name:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Account owner's last name.
           example: Androux
         phone:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Account owner's phone number.
           example: '13291019312'
         additional_info:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Additional info associated with the account.
           example: Additional info
         contact_email:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Additional email address for billing notifications.
           example: billing@awesome.com
         timezone:
@@ -17371,11 +17737,15 @@ components:
           description: Timezone configured on the account.
           example: Pacific/Wallis
         job_title:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Account owner's job title.
           example: Manager
         default_short_link_endpoint:
-          type: string
+          type:
+            - string
+            - 'null'
           description: Default short link endpoint.
           example: https://short.examples.com
         default_destinations:
@@ -17397,16 +17767,22 @@ components:
             - transport: sms
               value: https://webhook.address.com/inboundSMS
         company_info:
-          type: object
+          type:
+            - object
+            - 'null'
           additionalProperties: false
           description: Company details.
           properties:
             name:
-              type: string
+              type:
+                - string
+                - 'null'
               description: Company name.
               example: Awesome company
             industry:
-              type: string
+              type:
+                - string
+                - 'null'
               enum:
                 - telecommunications
                 - information technology and services
@@ -17421,18 +17797,25 @@ components:
                 - non-profit and charity organizations
                 - manufacturing and industrial goods
                 - other
+                - null
               description: Company industry.
               example: telecommunications
             address:
-              type: string
+              type:
+                - string
+                - 'null'
               description: Company address.
               example: Baker street
             attn_contact_name:
-              type: string
+              type:
+                - string
+                - 'null'
               description: Billing contact name.
               example: James Scott
             vat_number:
-              type: string
+              type:
+                - string
+                - 'null'
               description: VAT number.
               example: VAT123456789
             country:
@@ -17441,11 +17824,15 @@ components:
               description: Country.
               properties:
                 country_name:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   description: Country name.
                   example: United States
                 country_id:
-                  type: integer
+                  type:
+                    - integer
+                    - 'null'
                   description: Country ID.
                   example: 1
     ProfileUpdateRequest:
