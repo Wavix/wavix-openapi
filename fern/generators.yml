@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
+api:
+  specs:
+    - openapi: ../docs/wavix-api.yaml
+default-group: local
+groups:
+  local:
+    generators:
+      - name: fern-typescript-sdk
+        version: 3.71.5
+        output:
+          location: local-file-system
+          path: ../sdks/typescript
+      - name: fern-ruby-sdk
+        version: 1.13.1
+        output:
+          location: local-file-system
+          path: ../sdks/ruby
+      - name: fern-python-sdk
+        version: 5.14.12
+        output:
+          location: local-file-system
+          path: ../sdks/python
+      - name: fern-go-sdk
+        version: 1.44.5
+        output:
+          location: local-file-system
+          path: ../sdks/go
+  publish:
+    generators:
+      - name: fern-typescript-sdk
+        version: 3.71.5
+        output:
+          location: npm
+          package-name: "@wavix/sdk"
+          token: OIDC
+        github:
+          repository: wavix/wavix-typescript
+          mode: pull-request
+      - name: fern-ruby-sdk
+        version: 1.13.1
+        output:
+          location: rubygems
+          package-name: wavix
+          api-key: ${RUBYGEMS_API_KEY}
+        github:
+          repository: wavix/wavix-ruby
+          mode: pull-request
+      - name: fern-python-sdk
+        version: 5.14.12
+        output:
+          location: pypi
+          package-name: wavix
+          token: ${PYPI_TOKEN}
+        github:
+          repository: wavix/wavix-python
+          mode: pull-request
+      - name: fern-go-sdk
+        version: 1.44.5
+        github:
+          repository: wavix/wavix-go
+          mode: pull-request
+        config:
+          module:
+            path: github.com/wavix/wavix-go
