@@ -7,7 +7,7 @@ groups:
   local:
     generators:
       - name: fern-typescript-sdk
-        version: 3.71.5
+        version: 3.72.3
         output:
           location: local-file-system
           path: ../sdks/typescript
@@ -17,19 +17,19 @@ groups:
           location: local-file-system
           path: ../sdks/ruby
       - name: fern-python-sdk
-        version: 5.14.12
+        version: 5.14.18
         output:
           location: local-file-system
           path: ../sdks/python
       - name: fern-go-sdk
-        version: 1.44.5
+        version: 1.45.4
         output:
           location: local-file-system
           path: ../sdks/go
   publish:
     generators:
       - name: fern-typescript-sdk
-        version: 3.71.5
+        version: 3.72.3
         output:
           location: npm
           package-name: "@wavix/sdk"
@@ -47,7 +47,7 @@ groups:
           repository: wavix/wavix-ruby
           mode: pull-request
       - name: fern-python-sdk
-        version: 5.14.12
+        version: 5.14.18
         output:
           location: pypi
           package-name: wavix
@@ -56,7 +56,7 @@ groups:
           repository: wavix/wavix-python
           mode: pull-request
       - name: fern-go-sdk
-        version: 1.44.5
+        version: 1.45.4
         github:
           repository: wavix/wavix-go
           mode: pull-request

@@ -15091,7 +15091,7 @@ components:
         auto_renewal: false
         description: Our campaign aims to …
         direct_lending: false
-        embedded_link_sample: null
+        embedded_link_sample: https://site.com/verify
         embedded_links: false
         embedded_phones: false
         help: true
@@ -15109,9 +15109,9 @@ components:
         privacy_policy: https://site.com/privacy-policy
         sample1: Your verification code is XXXXXX
         sample2: XXXX is your verification code
-        sample3: null
-        sample4: null
-        sample5: null
+        sample3: Your code is XXXXXX, valid for 10 minutes
+        sample4: Use code XXXXXX to confirm your login
+        sample5: XXXXXX is your one-time passcode
         terms_conditions: https://site.com/terms-and-conditions
         usecase: 2FA
     TenDLCCampaignUpdateRequest:
