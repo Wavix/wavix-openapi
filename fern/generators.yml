@@ -1,65 +1,201 @@
-# yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
 api:
   specs:
     - openapi: ../docs/wavix-api.yaml
+readme:
+  apiName: Wavix
+  apiReferenceLink: https://docs.wavix.com
+  introduction: |
+    The official Wavix SDK provides convenient access to the [Wavix API](https://wavix.com)
+    for SMS/MMS messaging, programmable voice, phone numbers, and account management.
+
+    Use the SDK to:
+
+    - Send SMS and MMS messages
+    - Place and control outbound calls
+    - Search, buy, and manage phone numbers
+    - Validate numbers, manage SIP trunks, and read CDRs
+  defaultEndpoint:
+    method: POST
+    path: /v3/messages
+  customSections:
+    - title: Authentication
+      language: typescript
+      content: |
+        Create an API key in the [Wavix portal](https://wavix.com) and provide it
+        through an environment variable rather than hardcoding it.
+
+        ```shell
+        export WAVIX_API_KEY="your-api-key"
+        ```
+
+        ```typescript
+        import { WavixClient } from "@wavix/sdk";
+
+        const client = new WavixClient({ token: process.env.WAVIX_API_KEY });
+        ```
+
+        > [!CAUTION]
+        > Never commit API keys or tokens to source control. Use environment
+        > variables or a secrets manager in deployed applications.
+    - title: Authentication
+      language: python
+      content: |
+        Create an API key in the [Wavix portal](https://wavix.com) and provide it
+        through an environment variable rather than hardcoding it.
+
+        ```shell
+        export WAVIX_API_KEY="your-api-key"
+        ```
+
+        ```python
+        import os
+
+        from wavix import WavixApi
+
+        client = WavixApi(token=os.environ["WAVIX_API_KEY"])
+        ```
+
+        > [!CAUTION]
+        > Never commit API keys or tokens to source control. Use environment
+        > variables or a secrets manager in deployed applications.
+    - title: Authentication
+      language: ruby
+      content: |
+        Create an API key in the [Wavix portal](https://wavix.com) and provide it
+        through an environment variable rather than hardcoding it.
+
+        ```shell
+        export WAVIX_API_KEY="your-api-key"
+        ```
+
+        ```ruby
+        require "wavix"
+
+        client = Wavix::Client.new(token: ENV.fetch("WAVIX_API_KEY"))
+        ```
+
+        > [!CAUTION]
+        > Never commit API keys or tokens to source control. Use environment
+        > variables or a secrets manager in deployed applications.
+    - title: Authentication
+      language: go
+      content: |
+        Create an API key in the [Wavix portal](https://wavix.com) and provide it
+        through an environment variable rather than hardcoding it.
+
+        ```shell
+        export WAVIX_API_KEY="your-api-key"
+        ```
+
+        ```go
+        import (
+            "os"
+
+            client "github.com/wavix/wavix-go/client"
+            option "github.com/wavix/wavix-go/option"
+        )
+
+        c := client.NewClient(option.WithToken(os.Getenv("WAVIX_API_KEY")))
+        ```
+
+        > [!CAUTION]
+        > Never commit API keys or tokens to source control. Use environment
+        > variables or a secrets manager in deployed applications.
+    - title: Resources and support
+      language: typescript
+      content: &resources-support |
+        - **Versioning** — this SDK follows [Semantic Versioning](https://semver.org); breaking changes ship only in major releases.
+        - **Security** — report vulnerabilities privately via [SECURITY.md](./SECURITY.md), never in public issues.
+        - **Getting help** — product and API questions: [support@wavix.com](mailto:support@wavix.com); SDK bugs and feature requests: open a GitHub issue.
+    - title: Resources and support
+      language: python
+      content: *resources-support
+    - title: Resources and support
+      language: ruby
+      content: *resources-support
+    - title: Resources and support
+      language: go
+      content: *resources-support
 default-group: local
 groups:
   local:
     generators:
       - name: fern-typescript-sdk
-        version: 3.72.3
+        version: &typescript-version 3.72.3
         output:
           location: local-file-system
           path: ../sdks/typescript
       - name: fern-ruby-sdk
-        version: 1.13.1
+        version: &ruby-version 1.13.1
         output:
           location: local-file-system
           path: ../sdks/ruby
       - name: fern-python-sdk
-        version: 5.14.18
+        version: &python-version 5.14.18
         output:
           location: local-file-system
           path: ../sdks/python
       - name: fern-go-sdk
-        version: 1.45.4
+        version: &go-version 1.45.4
         output:
           location: local-file-system
           path: ../sdks/go
   publish:
     generators:
-      - name: fern-typescript-sdk
-        version: 3.72.3
+      - &typescript-sdk
+        name: fern-typescript-sdk
+        version: *typescript-version
         output:
           location: npm
           package-name: "@wavix/sdk"
           token: OIDC
+        config:
+          namespaceExport: Wavix
         github:
           repository: wavix/wavix-typescript
           mode: pull-request
-      - name: fern-ruby-sdk
-        version: 1.13.1
+      - &ruby-sdk
+        name: fern-ruby-sdk
+        version: *ruby-version
         output:
           location: rubygems
           package-name: wavix
           api-key: ${RUBYGEMS_API_KEY}
+        config:
+          clientModuleName: Wavix
         github:
           repository: wavix/wavix-ruby
           mode: pull-request
-      - name: fern-python-sdk
-        version: 5.14.18
+      - &python-sdk
+        name: fern-python-sdk
+        version: *python-version
         output:
           location: pypi
           package-name: wavix
-          token: ${PYPI_TOKEN}
+          token: OIDC
+        config:
+          client_class_name: Wavix
         github:
           repository: wavix/wavix-python
           mode: pull-request
-      - name: fern-go-sdk
-        version: 1.45.4
+      - &go-sdk
+        name: fern-go-sdk
+        version: *go-version
         github:
           repository: wavix/wavix-go
           mode: pull-request
         config:
           module:
             path: github.com/wavix/wavix-go
+  typescript-sdk:
+    generators:
+      - *typescript-sdk
+  ruby-sdk:
+    generators:
+      - *ruby-sdk
+  python-sdk:
+    generators:
+      - *python-sdk
+  go-sdk:
+    generators:
+      - *go-sdk
