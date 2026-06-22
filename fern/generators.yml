@@ -107,6 +107,7 @@ readme:
         - **Versioning** — this SDK follows [Semantic Versioning](https://semver.org); breaking changes ship only in major releases.
         - **Security** — report vulnerabilities privately via [SECURITY.md](./SECURITY.md), never in public issues.
         - **Getting help** — product and API questions: [support@wavix.com](mailto:support@wavix.com); SDK bugs and feature requests: open a GitHub issue.
+        - **License** — released under the [MIT License](./LICENSE).
     - title: Resources and support
       language: python
       content: *resources-support
