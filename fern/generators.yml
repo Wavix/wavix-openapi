@@ -162,8 +162,6 @@ groups:
           location: rubygems
           package-name: wavix
           api-key: ${RUBYGEMS_API_KEY}
-        config:
-          clientModuleName: Wavix
         github:
           repository: wavix/wavix-ruby
           mode: pull-request
