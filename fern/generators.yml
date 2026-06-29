@@ -32,44 +32,44 @@ groups:
         version: *typescript-version
         output:
           location: npm
-          package-name: "@wavix/sdk"
+          package-name: wavix-node-sdk
           token: OIDC
         config:
           namespaceExport: Wavix
         github:
-          repository: wavix/wavix-typescript
+          repository: wavix/wavix-node-sdk
           mode: pull-request
       - &ruby-sdk
         name: fern-ruby-sdk
         version: *ruby-version
         output:
           location: rubygems
-          package-name: wavix
+          package-name: wavix-ruby-sdk
           api-key: ${RUBYGEMS_API_KEY}
         github:
-          repository: wavix/wavix-ruby
+          repository: wavix/wavix-ruby-sdk
           mode: pull-request
       - &python-sdk
         name: fern-python-sdk
         version: *python-version
         output:
           location: pypi
-          package-name: wavix
+          package-name: wavix-python-sdk
           token: OIDC
         config:
           client_class_name: Wavix
         github:
-          repository: wavix/wavix-python
+          repository: wavix/wavix-python-sdk
           mode: pull-request
       - &go-sdk
         name: fern-go-sdk
         version: *go-version
         github:
-          repository: wavix/wavix-go
+          repository: wavix/wavix-go-sdk
           mode: pull-request
         config:
           module:
-            path: github.com/wavix/wavix-go
+            path: github.com/wavix/wavix-go-sdk
   typescript-sdk:
     generators:
       - *typescript-sdk
