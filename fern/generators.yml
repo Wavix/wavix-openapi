@@ -45,7 +45,6 @@ groups:
         output:
           location: rubygems
           package-name: wavix-ruby-sdk
-          api-key: ${RUBYGEMS_API_KEY}
         github:
           repository: wavix/wavix-ruby-sdk
           mode: pull-request
