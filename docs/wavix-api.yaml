@@ -1916,8 +1916,8 @@ paths:
           style: form
           explode: true
           schema:
-            allOf:
-              - $ref: '#/components/schemas/CallDisposition'
+            $ref: '#/components/schemas/CallDisposition'
+            type: string
         - name: from_search
           in: query
           description: Filters CDRs by originating phone number. Accepts a full or partial number.
@@ -2112,6 +2112,7 @@ paths:
             schema:
               allOf:
                 - $ref: '#/components/schemas/CDRRetranscriptionRequest'
+              type: object
         required: true
       responses:
         '200':
@@ -4442,6 +4443,7 @@ paths:
             schema:
               allOf:
                 - $ref: '#/components/schemas/OptOutCreateRequest'
+              type: object
         required: true
       responses:
         '201':
@@ -4503,6 +4505,7 @@ paths:
                     callback_url: https://you-site.com/webhook
                     validity: 3600
                     tag: Fall sale
+              type: object
             example:
               from: Wavix
               to: '+447537151866'
@@ -5493,6 +5496,7 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/TenDLCBrandAppealCreateRequest'
                 - description: The appeal request
+              type: object
         required: true
       responses:
         '200':
@@ -7828,6 +7832,7 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/TenDLCCampaignNudgeRequest'
                 - description: The nudge request
+              type: object
         required: true
       responses:
         '200':
@@ -7920,8 +7925,8 @@ paths:
           style: form
           explode: true
           schema:
-            allOf:
-              - $ref: '#/components/schemas/PhoneNumberValidationType'
+            $ref: '#/components/schemas/PhoneNumberValidationType'
+            type: string
       responses:
         '200':
           description: Returns the phone number validation details.
@@ -7985,6 +7990,7 @@ paths:
             schema:
               allOf:
                 - $ref: '#/components/schemas/PhoneValidationRequest'
+              type: object
         required: true
       responses:
         '200':
@@ -8144,6 +8150,7 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/VoiceCampaignCreateRequest'
                 - description: Scenario and contact details for the campaign.
+              type: object
         required: true
       responses:
         '201':
@@ -8265,6 +8272,7 @@ paths:
             schema:
               allOf:
                 - $ref: '#/components/schemas/ShortLinkCreateRequest'
+              type: object
         required: true
       responses:
         '200':
@@ -8934,8 +8942,8 @@ paths:
           style: form
           explode: true
           schema:
-            allOf:
-              - $ref: '#/components/schemas/TransactionType'
+            $ref: '#/components/schemas/TransactionType'
+            type: integer
         - name: details_contains
           in: query
           description: Filters transactions whose `details` contain the given substring.
@@ -9150,6 +9158,7 @@ paths:
             schema:
               allOf:
                 - $ref: '#/components/schemas/ProfileUpdateRequest'
+              type: object
         required: true
       responses:
         '200':
@@ -10114,60 +10123,74 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
+          type: object
         trunks:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View, create, update, and delete SIP trunks and their settings.
+          type: object
         calls:
           allOf:
             - $ref: '#/components/schemas/ApiKeyCallsScopePermission'
           description: Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
+          type: object
         messages:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
+          type: object
         recordings:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: List, download, and delete call recordings.
+          type: object
         campaigns:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
+          type: object
         two_fa:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
+          type: object
         validator:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View number validation results and trigger single or bulk validation or HLR lookup requests.
+          type: object
         webhooks:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: List, create, and delete webhooks.
+          type: object
         embeddable:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
+          type: object
         billing:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
+          type: object
         account:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View and update account profile information and timezone.
+          type: object
         subaccounts:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: 'Manage subaccounts: list and view them, create, update, and suspend them.'
+          type: object
     ApiKeyWithSecret:
       description: |-
         API key details, including the secret `value`. Returned only at creation time —
         store it securely, it cannot be retrieved again.
       allOf:
         - $ref: '#/components/schemas/ApiKey'
+      type: object
     ValidationErrorResponse:
       title: ValidationErrorResponse
       type: object
@@ -10236,54 +10259,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
+          type: object
         trunks:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View, create, update, and delete SIP trunks and their settings.
+          type: object
         calls:
           allOf:
             - $ref: '#/components/schemas/ApiKeyCallsScopePermission'
           description: Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
+          type: object
         messages:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
+          type: object
         recordings:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: List, download, and delete call recordings.
+          type: object
         campaigns:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
+          type: object
         two_fa:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
+          type: object
         validator:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View number validation results and trigger single or bulk validation or HLR lookup requests.
+          type: object
         webhooks:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: List, create, and delete webhooks.
+          type: object
         embeddable:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
+          type: object
         billing:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
+          type: object
         account:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: View and update account profile information and timezone.
+          type: object
         subaccounts:
           allOf:
             - $ref: '#/components/schemas/ApiKeyScopePermission'
           description: 'Manage subaccounts: list and view them, create, update, and suspend them.'
+          type: object
     SIPTrunkSummary:
       title: SIPTrunkSummary
       required:
@@ -11719,13 +11755,13 @@ components:
           description: Call ID.
           example: 99df5ffd-962a-410f-bcce-d08f1f7f328c
         disposition:
-          allOf:
-            - $ref: '#/components/schemas/CallDisposition'
-            - description: |
-                Call disposition to filter results.  If omitted, returns only answered
-                 calls. Allowed values: `answered`, `noanswer`, `busy`,
-                  `failed`, `all`. Use `all` to return calls
-                   regardless of their disposition.
+          $ref: '#/components/schemas/CallDisposition'
+          description: |
+            Call disposition to filter results.  If omitted, returns only answered
+             calls. Allowed values: `answered`, `noanswer`, `busy`,
+              `failed`, `all`. Use `all` to return calls
+               regardless of their disposition.
+          type: string
         page:
           type: integer
           format: int32
@@ -12335,10 +12371,12 @@ components:
           description: Transcription request ID.
           example: e84f350f-6da7-4b56-80eb-41dec572626b
         language:
-          allOf:
-            - $ref: '#/components/schemas/TranscriptionLanguage'
-            - description: Transcription language.
-              example: en
+          $ref: '#/components/schemas/TranscriptionLanguage'
+          description: Transcription language.
+          example: en
+          type:
+            - string
+            - 'null'
         duration:
           type:
             - integer
@@ -12351,10 +12389,10 @@ components:
           description: Total transcription charge in USD.
           example: '0.01'
         status:
-          allOf:
-            - $ref: '#/components/schemas/TranscriptionStatus'
-            - description: Transcription status. Possible values are `completed`, `failed`.
-              example: completed
+          $ref: '#/components/schemas/TranscriptionStatus'
+          description: Transcription status. Possible values are `completed`, `failed`.
+          example: completed
+          type: string
         transcription_date:
           type: string
           description: Date and time of the transcription in ISO 8601 format.
@@ -12815,15 +12853,15 @@ components:
           description: WebSocket URL to stream the call.
           example: wss://examples.com/stream
         stream_type:
-          allOf:
-            - $ref: '#/components/schemas/CallStreamType'
           description: Direction of audio streamed to `stream_url`.
           example: twoway
+          $ref: '#/components/schemas/CallStreamType'
+          type: string
         stream_channel:
-          allOf:
-            - $ref: '#/components/schemas/CallStreamChannel'
           description: Audio channel streamed to `stream_url`.
           example: inbound
+          $ref: '#/components/schemas/CallStreamChannel'
+          type: string
     CallStreamCreateRequest:
       type: object
       additionalProperties: false
@@ -12838,15 +12876,15 @@ components:
           description: WebSocket URL for call streaming
           example: wss://examples.com/stream
         stream_type:
-          allOf:
-            - $ref: '#/components/schemas/CallStreamType'
           description: Direction of audio streamed to `stream_url`.
           example: twoway
+          $ref: '#/components/schemas/CallStreamType'
+          type: string
         stream_channel:
-          allOf:
-            - $ref: '#/components/schemas/CallStreamChannel'
           description: Audio channel streamed to `stream_url`.
           example: inbound
+          $ref: '#/components/schemas/CallStreamChannel'
+          type: string
     CallStreamResponse:
       type: object
       properties:
@@ -13800,10 +13838,10 @@ components:
           description: Registered legal name of the company that owns the Brand.
           example: Company
         entity_type:
-          allOf:
-            - $ref: '#/components/schemas/TenDLCBrandEntityType'
-            - description: Company entity type.
-              example: PRIVATE_PROFIT
+          $ref: '#/components/schemas/TenDLCBrandEntityType'
+          description: Company entity type.
+          example: PRIVATE_PROFIT
+          type: string
         vertical:
           type: string
           description: Industry vertical the Brand operates in.
@@ -13817,10 +13855,10 @@ components:
           description: ISO 3166-1 alpha-2 country code where the Tax ID was issued.
           example: US
         status:
-          allOf:
-            - $ref: '#/components/schemas/TenDLCBrandIdentityVerificationStatus'
-            - description: Brand identity verification status.
-              example: VERIFIED
+          $ref: '#/components/schemas/TenDLCBrandIdentityVerificationStatus'
+          description: Brand identity verification status.
+          example: VERIFIED
+          type: string
         website:
           type:
             - string
@@ -13936,6 +13974,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Pagination'
             - description: Pagination details
+          type: object
       description: A list of 10DLC Brands
       example:
         items:
@@ -14382,14 +14421,15 @@ components:
           additionalProperties: false
           description: An optional attributes that might be returned from TCR
         vetting_status:
-          allOf:
-            - $ref: '#/components/schemas/TenDLCBrandIdentityVerificationStatus'
-            - description: Brand Identity Verification appeal outcome
-              example: UNVERIFIED
+          $ref: '#/components/schemas/TenDLCBrandIdentityVerificationStatus'
+          description: Brand Identity Verification appeal outcome
+          example: UNVERIFIED
+          type: string
         feedback:
           allOf:
             - $ref: '#/components/schemas/TCRFeedback'
             - description: Brand Identity Verification appeal feedback, if any
+          type: object
     TenDLCBrandAppeal:
       title: TenDLCBrandAppeal
       required:
@@ -14425,6 +14465,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TenDLCBrandAppealOutcome'
             - description: The appeal outcome details
+          type: object
         status:
           type: string
           description: The appeal status
@@ -14670,6 +14711,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TenDLCBrandVettingAppealOutcomeReason'
             - description: The feedback provided by the external vetting provider
+          type: object
       example:
         vet_status: ACTIVE
         vet_score: 80
@@ -14704,6 +14746,7 @@ components:
                 feedback:
                   reasons:
                     - 'Company size as reported by government or business sources resulted in a score deduction: size range 6-10.'
+          type: object
         appeal_status:
           type: string
           description: Current status of the appeal, such as `PENDING` or `COMPLETE`.
@@ -15253,6 +15296,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Pagination'
             - description: Pagination metadata for the result set.
+          type: object
       description: Paginated list of 10DLC Campaigns.
       example:
         items:

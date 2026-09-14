@@ -2780,11 +2780,8 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/CallDisposition"
-                }
-              ]
+              "$ref": "#/components/schemas/CallDisposition",
+              "type": "string"
             }
           },
           {
@@ -3059,7 +3056,8 @@
                   {
                     "$ref": "#/components/schemas/CDRRetranscriptionRequest"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -6474,7 +6472,8 @@
                   {
                     "$ref": "#/components/schemas/OptOutCreateRequest"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -6568,7 +6567,8 @@
                       "tag": "Fall sale"
                     }
                   }
-                ]
+                ],
+                "type": "object"
               },
               "example": {
                 "from": "Wavix",
@@ -7949,7 +7949,8 @@
                   {
                     "description": "The appeal request"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -11322,7 +11323,8 @@
                   {
                     "description": "The nudge request"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -11463,11 +11465,8 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/PhoneNumberValidationType"
-                }
-              ]
+              "$ref": "#/components/schemas/PhoneNumberValidationType",
+              "type": "string"
             }
           }
         ],
@@ -11556,7 +11555,8 @@
                   {
                     "$ref": "#/components/schemas/PhoneValidationRequest"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -11779,7 +11779,8 @@
                   {
                     "description": "Scenario and contact details for the campaign."
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -11962,7 +11963,8 @@
                   {
                     "$ref": "#/components/schemas/ShortLinkCreateRequest"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -12939,11 +12941,8 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/TransactionType"
-                }
-              ]
+              "$ref": "#/components/schemas/TransactionType",
+              "type": "integer"
             }
           },
           {
@@ -13256,7 +13255,8 @@
                   {
                     "$ref": "#/components/schemas/ProfileUpdateRequest"
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -14657,7 +14657,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart."
+            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart.",
+            "type": "object"
           },
           "trunks": {
             "allOf": [
@@ -14665,7 +14666,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View, create, update, and delete SIP trunks and their settings."
+            "description": "View, create, update, and delete SIP trunks and their settings.",
+            "type": "object"
           },
           "calls": {
             "allOf": [
@@ -14673,7 +14675,8 @@
                 "$ref": "#/components/schemas/ApiKeyCallsScopePermission"
               }
             ],
-            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests."
+            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.",
+            "type": "object"
           },
           "messages": {
             "allOf": [
@@ -14681,7 +14684,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs."
+            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.",
+            "type": "object"
           },
           "recordings": {
             "allOf": [
@@ -14689,7 +14693,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "List, download, and delete call recordings."
+            "description": "List, download, and delete call recordings.",
+            "type": "object"
           },
           "campaigns": {
             "allOf": [
@@ -14697,7 +14702,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links."
+            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.",
+            "type": "object"
           },
           "two_fa": {
             "allOf": [
@@ -14705,7 +14711,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes."
+            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.",
+            "type": "object"
           },
           "validator": {
             "allOf": [
@@ -14713,7 +14720,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests."
+            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests.",
+            "type": "object"
           },
           "webhooks": {
             "allOf": [
@@ -14721,7 +14729,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "List, create, and delete webhooks."
+            "description": "List, create, and delete webhooks.",
+            "type": "object"
           },
           "embeddable": {
             "allOf": [
@@ -14729,7 +14738,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them."
+            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them.",
+            "type": "object"
           },
           "billing": {
             "allOf": [
@@ -14737,7 +14747,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates."
+            "description": "Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.",
+            "type": "object"
           },
           "account": {
             "allOf": [
@@ -14745,7 +14756,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View and update account profile information and timezone."
+            "description": "View and update account profile information and timezone.",
+            "type": "object"
           },
           "subaccounts": {
             "allOf": [
@@ -14753,7 +14765,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Manage subaccounts: list and view them, create, update, and suspend them."
+            "description": "Manage subaccounts: list and view them, create, update, and suspend them.",
+            "type": "object"
           }
         }
       },
@@ -14763,7 +14776,8 @@
           {
             "$ref": "#/components/schemas/ApiKey"
           }
-        ]
+        ],
+        "type": "object"
       },
       "ValidationErrorResponse": {
         "title": "ValidationErrorResponse",
@@ -14854,7 +14868,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart."
+            "description": "View, buy, release, and configure phone numbers, browse inventory, and manage the cart.",
+            "type": "object"
           },
           "trunks": {
             "allOf": [
@@ -14862,7 +14877,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View, create, update, and delete SIP trunks and their settings."
+            "description": "View, create, update, and delete SIP trunks and their settings.",
+            "type": "object"
           },
           "calls": {
             "allOf": [
@@ -14870,7 +14886,8 @@
                 "$ref": "#/components/schemas/ApiKeyCallsScopePermission"
               }
             ],
-            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests."
+            "description": "Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.",
+            "type": "object"
           },
           "messages": {
             "allOf": [
@@ -14878,7 +14895,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs."
+            "description": "Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.",
+            "type": "object"
           },
           "recordings": {
             "allOf": [
@@ -14886,7 +14904,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "List, download, and delete call recordings."
+            "description": "List, download, and delete call recordings.",
+            "type": "object"
           },
           "campaigns": {
             "allOf": [
@@ -14894,7 +14913,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links."
+            "description": "View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.",
+            "type": "object"
           },
           "two_fa": {
             "allOf": [
@@ -14902,7 +14922,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes."
+            "description": "View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.",
+            "type": "object"
           },
           "validator": {
             "allOf": [
@@ -14910,7 +14931,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests."
+            "description": "View number validation results and trigger single or bulk validation or HLR lookup requests.",
+            "type": "object"
           },
           "webhooks": {
             "allOf": [
@@ -14918,7 +14940,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "List, create, and delete webhooks."
+            "description": "List, create, and delete webhooks.",
+            "type": "object"
           },
           "embeddable": {
             "allOf": [
@@ -14926,7 +14949,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them."
+            "description": "Manage widget tokens, including listing, viewing, creating, updating, and deleting them.",
+            "type": "object"
           },
           "billing": {
             "allOf": [
@@ -14934,7 +14958,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates."
+            "description": "Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.",
+            "type": "object"
           },
           "account": {
             "allOf": [
@@ -14942,7 +14967,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "View and update account profile information and timezone."
+            "description": "View and update account profile information and timezone.",
+            "type": "object"
           },
           "subaccounts": {
             "allOf": [
@@ -14950,7 +14976,8 @@
                 "$ref": "#/components/schemas/ApiKeyScopePermission"
               }
             ],
-            "description": "Manage subaccounts: list and view them, create, update, and suspend them."
+            "description": "Manage subaccounts: list and view them, create, update, and suspend them.",
+            "type": "object"
           }
         }
       },
@@ -16746,14 +16773,9 @@
             "example": "99df5ffd-962a-410f-bcce-d08f1f7f328c"
           },
           "disposition": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallDisposition"
-              },
-              {
-                "description": "Call disposition to filter results.  If omitted, returns only answered\n calls. Allowed values: `answered`, `noanswer`, `busy`,\n  `failed`, `all`. Use `all` to return calls\n   regardless of their disposition.\n"
-              }
-            ]
+            "$ref": "#/components/schemas/CallDisposition",
+            "description": "Call disposition to filter results.  If omitted, returns only answered\n calls. Allowed values: `answered`, `noanswer`, `busy`,\n  `failed`, `all`. Use `all` to return calls\n   regardless of their disposition.\n",
+            "type": "string"
           },
           "page": {
             "type": "integer",
@@ -17526,14 +17548,12 @@
             "example": "e84f350f-6da7-4b56-80eb-41dec572626b"
           },
           "language": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TranscriptionLanguage"
-              },
-              {
-                "description": "Transcription language.",
-                "example": "en"
-              }
+            "$ref": "#/components/schemas/TranscriptionLanguage",
+            "description": "Transcription language.",
+            "example": "en",
+            "type": [
+              "string",
+              "null"
             ]
           },
           "duration": {
@@ -17551,15 +17571,10 @@
             "example": "0.01"
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TranscriptionStatus"
-              },
-              {
-                "description": "Transcription status. Possible values are `completed`, `failed`.",
-                "example": "completed"
-              }
-            ]
+            "$ref": "#/components/schemas/TranscriptionStatus",
+            "description": "Transcription status. Possible values are `completed`, `failed`.",
+            "example": "completed",
+            "type": "string"
           },
           "transcription_date": {
             "type": "string",
@@ -18121,22 +18136,16 @@
             "example": "wss://examples.com/stream"
           },
           "stream_type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallStreamType"
-              }
-            ],
             "description": "Direction of audio streamed to `stream_url`.",
-            "example": "twoway"
+            "example": "twoway",
+            "$ref": "#/components/schemas/CallStreamType",
+            "type": "string"
           },
           "stream_channel": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallStreamChannel"
-              }
-            ],
             "description": "Audio channel streamed to `stream_url`.",
-            "example": "inbound"
+            "example": "inbound",
+            "$ref": "#/components/schemas/CallStreamChannel",
+            "type": "string"
           }
         }
       },
@@ -18156,22 +18165,16 @@
             "example": "wss://examples.com/stream"
           },
           "stream_type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallStreamType"
-              }
-            ],
             "description": "Direction of audio streamed to `stream_url`.",
-            "example": "twoway"
+            "example": "twoway",
+            "$ref": "#/components/schemas/CallStreamType",
+            "type": "string"
           },
           "stream_channel": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallStreamChannel"
-              }
-            ],
             "description": "Audio channel streamed to `stream_url`.",
-            "example": "inbound"
+            "example": "inbound",
+            "$ref": "#/components/schemas/CallStreamChannel",
+            "type": "string"
           }
         }
       },
@@ -19369,15 +19372,10 @@
             "example": "Company"
           },
           "entity_type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenDLCBrandEntityType"
-              },
-              {
-                "description": "Company entity type.",
-                "example": "PRIVATE_PROFIT"
-              }
-            ]
+            "$ref": "#/components/schemas/TenDLCBrandEntityType",
+            "description": "Company entity type.",
+            "example": "PRIVATE_PROFIT",
+            "type": "string"
           },
           "vertical": {
             "type": "string",
@@ -19395,15 +19393,10 @@
             "example": "US"
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenDLCBrandIdentityVerificationStatus"
-              },
-              {
-                "description": "Brand identity verification status.",
-                "example": "VERIFIED"
-              }
-            ]
+            "$ref": "#/components/schemas/TenDLCBrandIdentityVerificationStatus",
+            "description": "Brand identity verification status.",
+            "example": "VERIFIED",
+            "type": "string"
           },
           "website": {
             "type": [
@@ -19551,7 +19544,8 @@
               {
                 "description": "Pagination details"
               }
-            ]
+            ],
+            "type": "object"
           }
         },
         "description": "A list of 10DLC Brands",
@@ -20080,15 +20074,10 @@
             "description": "An optional attributes that might be returned from TCR"
           },
           "vetting_status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenDLCBrandIdentityVerificationStatus"
-              },
-              {
-                "description": "Brand Identity Verification appeal outcome",
-                "example": "UNVERIFIED"
-              }
-            ]
+            "$ref": "#/components/schemas/TenDLCBrandIdentityVerificationStatus",
+            "description": "Brand Identity Verification appeal outcome",
+            "example": "UNVERIFIED",
+            "type": "string"
           },
           "feedback": {
             "allOf": [
@@ -20098,7 +20087,8 @@
               {
                 "description": "Brand Identity Verification appeal feedback, if any"
               }
-            ]
+            ],
+            "type": "object"
           }
         }
       },
@@ -20149,7 +20139,8 @@
               {
                 "description": "The appeal outcome details"
               }
-            ]
+            ],
+            "type": "object"
           },
           "status": {
             "type": "string",
@@ -20475,7 +20466,8 @@
               {
                 "description": "The feedback provided by the external vetting provider"
               }
-            ]
+            ],
+            "type": "object"
           }
         },
         "example": {
@@ -20524,7 +20516,8 @@
                   }
                 }
               }
-            ]
+            ],
+            "type": "object"
           },
           "appeal_status": {
             "type": "string",
@@ -21213,7 +21206,8 @@
               {
                 "description": "Pagination metadata for the result set."
               }
-            ]
+            ],
+            "type": "object"
           }
         },
         "description": "Paginated list of 10DLC Campaigns.",
