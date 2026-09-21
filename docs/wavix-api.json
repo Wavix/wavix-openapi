@@ -2174,7 +2174,7 @@
                           ],
                           "channels": 24,
                           "require_docs": [
-                            "1"
+                            "address"
                           ],
                           "documents": [
                             {
@@ -2183,7 +2183,7 @@
                               "did_number": "12565378257",
                               "doc_content_type": "image/png",
                               "doc_file_name": "Copy of ID.png",
-                              "doc_type_id": 1,
+                              "doc_type": "id",
                               "status": "approved",
                               "url": "https://api.wavix.com/v1/numbers/24882/papers/1"
                             }
@@ -2471,7 +2471,7 @@
                       ],
                       "channels": 24,
                       "require_docs": [
-                        "1"
+                        "address"
                       ],
                       "documents": [
                         {
@@ -2480,7 +2480,7 @@
                           "did_number": "12565378257",
                           "doc_content_type": "image/png",
                           "doc_file_name": "Copy of ID.png",
-                          "doc_type_id": 1,
+                          "doc_type": "id",
                           "status": "approved",
                           "url": "https://api.wavix.com/v1/numbers/24882/papers/1"
                         }
@@ -2648,7 +2648,7 @@
                     "format": "binary"
                   },
                   "doc_id": {
-                    "$ref": "#/components/schemas/DocumentTypeID"
+                    "$ref": "#/components/schemas/DocumentType"
                   }
                 }
               }
@@ -2676,7 +2676,7 @@
                         "did_number": "+14062355770",
                         "doc_content_type": "image/png",
                         "doc_file_name": "user-id-card.png",
-                        "doc_type_id": 1,
+                        "doc_type": "id",
                         "status": "pending",
                         "url": "https://api.wavix.com/v1/numbers/1001/papers/101"
                       },
@@ -2686,7 +2686,7 @@
                         "did_number": "+14062355771",
                         "doc_content_type": "application/pdf",
                         "doc_file_name": "driver-license.pdf",
-                        "doc_type_id": 2,
+                        "doc_type": "address",
                         "status": "approved",
                         "url": "https://api.wavix.com/v1/numbers/1002/papers/102"
                       }
@@ -15722,6 +15722,16 @@
           }
         }
       },
+      "DocumentType": {
+        "title": "DocumentType",
+        "type": "string",
+        "description": "Document type required to activate a phone number. One of: `id` - any form of ID,\n`address` - proof of address, `localaddress` - proof of local address within the country.",
+        "enum": [
+          "id",
+          "address",
+          "localaddress"
+        ]
+      },
       "AvailableNumber": {
         "title": "AvailableNumber",
         "required": [
@@ -15807,13 +15817,11 @@
           "require_docs": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/DocumentType"
             },
-            "description": "Documents required to activate the phone number.",
+            "description": "Documents to activate the number.",
             "example": [
-              1,
-              3
+              "address"
             ]
           },
           "sms_enabled": {
@@ -15856,8 +15864,9 @@
           }
         }
       },
-      "DocumentType": {
-        "title": "DocumentType",
+      "DocumentTypeInfo": {
+        "title": "DocumentTypeInfo",
+        "description": "Document type required to activate a phone number.",
         "required": [
           "id",
           "name",
@@ -15873,13 +15882,11 @@
             "example": 2
           },
           "name": {
-            "type": "string",
-            "description": "Document type name.",
-            "example": "address"
+            "$ref": "#/components/schemas/DocumentType"
           },
           "title": {
             "type": "string",
-            "description": "Human-readable document type name.",
+            "description": "Document type name.",
             "example": "Proof of address"
           }
         }
@@ -15903,7 +15910,7 @@
           "doc_types": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DocumentType"
+              "$ref": "#/components/schemas/DocumentTypeInfo"
             },
             "description": "Document types required to activate phone numbers."
           }
@@ -15982,21 +15989,6 @@
         },
         "description": "Inbound call destination"
       },
-      "DocumentTypeID": {
-        "title": "DocumentTypeID",
-        "enum": [
-          1,
-          2,
-          3
-        ],
-        "x-enum-varnames": [
-          "PROOF_OF_IDENTITY",
-          "PROOF_OF_ADDRESS",
-          "PROOF_OF_BUSINESS_REGISTRATION"
-        ],
-        "type": "integer",
-        "description": "Specifies the type of document required to activate the phone number.\nPossible values are: `1` - Proof of identity, `2` - Proof of address, `3` - Proof of business registration."
-      },
       "NumberDocument": {
         "title": "NumberDocument",
         "required": [
@@ -16005,7 +15997,7 @@
           "did_number",
           "doc_content_type",
           "doc_file_name",
-          "doc_type_id",
+          "doc_type",
           "status",
           "url"
         ],
@@ -16038,8 +16030,16 @@
             "description": "The uploaded document name",
             "example": "Copy of ID.png"
           },
-          "doc_type_id": {
-            "$ref": "#/components/schemas/DocumentTypeID"
+          "doc_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentType"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Document type."
           },
           "status": {
             "type": "string",
@@ -16058,7 +16058,7 @@
           "did_number": "12565378257",
           "doc_content_type": "image/png",
           "doc_file_name": "Copy of ID.png",
-          "doc_type_id": 1,
+          "doc_type": "id",
           "status": "approved",
           "url": "https://api.wavix.com/v1/numbers/24882/papers/1"
         }
@@ -16158,11 +16158,11 @@
           "require_docs": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/DocumentType"
             },
-            "description": "Documents required to activate the phone number.",
+            "description": "Documents to activate the number.",
             "example": [
-              "1"
+              "address"
             ]
           },
           "documents": {
@@ -16170,7 +16170,7 @@
             "items": {
               "$ref": "#/components/schemas/NumberDocument"
             },
-            "description": "Uploaded documents for the phone number."
+            "description": "Uploaded documents."
           },
           "domestic_cli": {
             "type": "boolean",
@@ -16278,7 +16278,7 @@
           "doc_types": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DocumentType"
+              "$ref": "#/components/schemas/DocumentTypeInfo"
             },
             "description": "Documents required to activate phone numbers."
           },

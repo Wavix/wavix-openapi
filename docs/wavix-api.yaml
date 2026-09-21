@@ -1487,14 +1487,14 @@ paths:
                             trunk_label: My trunk
                         channels: 24
                         require_docs:
-                          - '1'
+                          - address
                         documents:
                           - id: 423
                             allow_replace: false
                             did_number: '12565378257'
                             doc_content_type: image/png
                             doc_file_name: Copy of ID.png
-                            doc_type_id: 1
+                            doc_type: id
                             status: approved
                             url: https://api.wavix.com/v1/numbers/24882/papers/1
                         domestic_cli: true
@@ -1694,14 +1694,14 @@ paths:
                         trunk_label: My trunk
                     channels: 24
                     require_docs:
-                      - '1'
+                      - address
                     documents:
                       - id: 423
                         allow_replace: false
                         did_number: '12565378257'
                         doc_content_type: image/png
                         doc_file_name: Copy of ID.png
-                        doc_type_id: 1
+                        doc_type: id
                         status: approved
                         url: https://api.wavix.com/v1/numbers/24882/papers/1
                     domestic_cli: true
@@ -1825,7 +1825,7 @@ paths:
                   description: Document file to upload. Allowed formats are PNG, JPG, JPEG, TIFF, BMP, and PDF. Maximum size is 10 MB.
                   format: binary
                 doc_id:
-                  $ref: '#/components/schemas/DocumentTypeID'
+                  $ref: '#/components/schemas/DocumentType'
         required: false
       responses:
         '200':
@@ -1844,7 +1844,7 @@ paths:
                       did_number: '+14062355770'
                       doc_content_type: image/png
                       doc_file_name: user-id-card.png
-                      doc_type_id: 1
+                      doc_type: id
                       status: pending
                       url: https://api.wavix.com/v1/numbers/1001/papers/101
                     - id: 102
@@ -1852,7 +1852,7 @@ paths:
                       did_number: '+14062355771'
                       doc_content_type: application/pdf
                       doc_file_name: driver-license.pdf
-                      doc_type_id: 2
+                      doc_type: address
                       status: approved
                       url: https://api.wavix.com/v1/numbers/1002/papers/102
         '400':
@@ -10921,6 +10921,16 @@ components:
           description: Cities available for the requested country or region.
           items:
             $ref: '#/components/schemas/City'
+    DocumentType:
+      title: DocumentType
+      type: string
+      description: |-
+        Document type required to activate a phone number. One of: `id` - any form of ID,
+        `address` - proof of address, `localaddress` - proof of local address within the country.
+      enum:
+        - id
+        - address
+        - localaddress
     AvailableNumber:
       title: AvailableNumber
       required:
@@ -10993,12 +11003,10 @@ components:
         require_docs:
           type: array
           items:
-            type: integer
-            format: int32
-          description: Documents required to activate the phone number.
+            $ref: '#/components/schemas/DocumentType'
+          description: Documents to activate the number.
           example:
-            - 1
-            - 3
+            - address
         sms_enabled:
           type: boolean
           description: |-
@@ -11030,8 +11038,9 @@ components:
             $ref: '#/components/schemas/AvailableNumber'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    DocumentType:
-      title: DocumentType
+    DocumentTypeInfo:
+      title: DocumentTypeInfo
+      description: Document type required to activate a phone number.
       required:
         - id
         - name
@@ -11045,12 +11054,10 @@ components:
           description: Document type ID.
           example: 2
         name:
-          type: string
-          description: Document type name.
-          example: address
+          $ref: '#/components/schemas/DocumentType'
         title:
           type: string
-          description: Human-readable document type name.
+          description: Document type name.
           example: Proof of address
     CartResponse:
       title: CartResponse
@@ -11068,7 +11075,7 @@ components:
         doc_types:
           type: array
           items:
-            $ref: '#/components/schemas/DocumentType'
+            $ref: '#/components/schemas/DocumentTypeInfo'
           description: Document types required to activate phone numbers.
     InboundCallTransport:
       title: InboundCallTransport
@@ -11128,20 +11135,6 @@ components:
           description: A user-defined name of a SIP trunk on the platform. In cases when `transport:5`, otherwise, `null`
           example: My trunk
       description: Inbound call destination
-    DocumentTypeID:
-      title: DocumentTypeID
-      enum:
-        - 1
-        - 2
-        - 3
-      x-enum-varnames:
-        - PROOF_OF_IDENTITY
-        - PROOF_OF_ADDRESS
-        - PROOF_OF_BUSINESS_REGISTRATION
-      type: integer
-      description: |-
-        Specifies the type of document required to activate the phone number.
-        Possible values are: `1` - Proof of identity, `2` - Proof of address, `3` - Proof of business registration.
     NumberDocument:
       title: NumberDocument
       required:
@@ -11150,7 +11143,7 @@ components:
         - did_number
         - doc_content_type
         - doc_file_name
-        - doc_type_id
+        - doc_type
         - status
         - url
       type: object
@@ -11177,8 +11170,11 @@ components:
           type: string
           description: The uploaded document name
           example: Copy of ID.png
-        doc_type_id:
-          $ref: '#/components/schemas/DocumentTypeID'
+        doc_type:
+          anyOf:
+            - $ref: '#/components/schemas/DocumentType'
+            - type: 'null'
+          description: Document type.
         status:
           type: string
           description: Status of the uploaded document. Can be either `approved`, `pending`, or `rejected`
@@ -11193,7 +11189,7 @@ components:
         did_number: '12565378257'
         doc_content_type: image/png
         doc_file_name: Copy of ID.png
-        doc_type_id: 1
+        doc_type: id
         status: approved
         url: https://api.wavix.com/v1/numbers/24882/papers/1
     Number:
@@ -11277,15 +11273,15 @@ components:
         require_docs:
           type: array
           items:
-            type: string
-          description: Documents required to activate the phone number.
+            $ref: '#/components/schemas/DocumentType'
+          description: Documents to activate the number.
           example:
-            - '1'
+            - address
         documents:
           type: array
           items:
             $ref: '#/components/schemas/NumberDocument'
-          description: Uploaded documents for the phone number.
+          description: Uploaded documents.
         domestic_cli:
           type: boolean
           description: Indicates whether the number can be used as the Caller ID for local calls.
@@ -11368,7 +11364,7 @@ components:
         doc_types:
           type: array
           items:
-            $ref: '#/components/schemas/DocumentType'
+            $ref: '#/components/schemas/DocumentTypeInfo'
           description: Documents required to activate phone numbers.
         pagination:
           $ref: '#/components/schemas/Pagination'
