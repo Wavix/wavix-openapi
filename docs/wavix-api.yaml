@@ -10,7 +10,7 @@ info:
     name: Wavix
     url: https://wavix.com
     email: support@wavix.com
-  version: '1.0'
+  version: 1.1.1
 servers:
   - url: https://api.wavix.com
     description: https://api.wavix.com
