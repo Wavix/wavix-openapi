@@ -10015,7 +10015,7 @@ paths:
                     error_class: permanent
                     error_code: WAVIX_TEMPLATE_ALREADY_EXISTS
         '422':
-          description: Returns when the template components are structurally invalid.
+          description: Returns when the template components are structurally invalid or the category is not one of the allowed values.
           content:
             application/problem+json:
               schema:
@@ -10026,7 +10026,7 @@ paths:
                     type: https://wavix.com/problems/template-invalid
                     title: Template Invalid
                     status: 422
-                    detail: The template components are structurally invalid.
+                    detail: 'components[3].buttons[0]: unknown key "foo"'
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: invalid_template
                     error_code: WAVIX_TEMPLATE_INVALID
@@ -18231,6 +18231,255 @@ components:
           description: Templates registered for the sender.
           items:
             $ref: '#/components/schemas/WhatsAppTemplate'
+    WhatsAppTemplateButtonRequest:
+      title: WhatsAppTemplateButtonRequest
+      type: object
+      oneOf:
+        - title: WhatsAppTemplateQuickReplyButtonRequest
+          description: Button that sends its label back as a reply.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - text
+          properties:
+            type:
+              type: string
+              description: Button type.
+              const: QUICK_REPLY
+            text:
+              type: string
+              description: Button label.
+              example: Stop promotions
+        - title: WhatsAppTemplateUrlButtonRequest
+          description: Button that opens a URL.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - text
+            - url
+          properties:
+            type:
+              type: string
+              description: Button type.
+              const: URL
+            text:
+              type: string
+              description: Button label.
+              example: Track order
+            url:
+              type: string
+              description: Target URL, optionally ending in a `{{1}}` placeholder.
+              example: https://example.com/track/{{1}}
+            example:
+              type: array
+              description: Sample full URL for a `url` that ends in `{{1}}`.
+              minItems: 1
+              maxItems: 1
+              items:
+                type: string
+              example:
+                - https://example.com/track/1001
+        - title: WhatsAppTemplatePhoneNumberButtonRequest
+          description: Button that calls a phone number.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - text
+            - phone_number
+          properties:
+            type:
+              type: string
+              description: Button type.
+              const: PHONE_NUMBER
+            text:
+              type: string
+              description: Button label.
+              example: Call us
+            phone_number:
+              type: string
+              description: Phone number to call, in E.164 format.
+              example: '+31203692036'
+        - title: WhatsAppTemplateCopyCodeButtonRequest
+          description: Button that copies a code to the clipboard.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - example
+          properties:
+            type:
+              type: string
+              description: Button type.
+              const: COPY_CODE
+            example:
+              type: string
+              description: Sample code.
+              example: SAVE10
+    WhatsAppTemplateComponentRequest:
+      title: WhatsAppTemplateComponentRequest
+      type: object
+      oneOf:
+        - title: WhatsAppTemplateTextHeaderComponentRequest
+          description: Text header. Requires `text`.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - format
+            - text
+          properties:
+            type:
+              type: string
+              description: Component type.
+              const: HEADER
+            format:
+              type: string
+              description: Header content format.
+              const: TEXT
+            text:
+              type: string
+              description: Header text, with an optional `{{1}}` placeholder.
+              example: Order {{1}}
+            example:
+              type: object
+              description: Sample for the `{{1}}` placeholder.
+              additionalProperties: false
+              required:
+                - header_text
+              properties:
+                header_text:
+                  type: array
+                  description: Sample value for the `{{1}}` placeholder in the header text.
+                  minItems: 1
+                  maxItems: 1
+                  items:
+                    type: string
+                  example:
+                    - '#1001'
+        - title: WhatsAppTemplateMediaHeaderComponentRequest
+          description: Media header. Takes no `text`.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - format
+          properties:
+            type:
+              type: string
+              description: Component type.
+              const: HEADER
+            format:
+              type: string
+              description: Header content format.
+              enum:
+                - IMAGE
+                - VIDEO
+                - DOCUMENT
+              example: IMAGE
+            example:
+              type: object
+              description: Sample media file.
+              additionalProperties: false
+              required:
+                - header_handle
+              properties:
+                header_handle:
+                  type: array
+                  description: Public `http` or `https` URL of a sample media file. Meta's own API expects an upload handle here; Wavix sends the URL to the provider as the sample.
+                  minItems: 1
+                  maxItems: 1
+                  items:
+                    type: string
+                  example:
+                    - https://example.com/sample.png
+        - title: WhatsAppTemplateLocationHeaderComponentRequest
+          description: Location header. Takes neither `text` nor `example`.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - format
+          properties:
+            type:
+              type: string
+              description: Component type.
+              const: HEADER
+            format:
+              type: string
+              description: Header content format.
+              const: LOCATION
+        - title: WhatsAppTemplateBodyComponentRequest
+          description: Template body. Required, exactly once.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - text
+          properties:
+            type:
+              type: string
+              description: Component type.
+              const: BODY
+            text:
+              type: string
+              description: Body text, with positional `{{n}}` placeholders.
+              example: Hi {{1}}, your order {{2}} has shipped.
+            example:
+              type: object
+              additionalProperties: false
+              required:
+                - body_text
+              properties:
+                body_text:
+                  type: array
+                  description: One set of sample values, one value per placeholder in order.
+                  minItems: 1
+                  maxItems: 1
+                  items:
+                    type: array
+                    minItems: 1
+                    items:
+                      type: string
+                  example:
+                    - - Maria
+                      - '#1001'
+        - title: WhatsAppTemplateFooterComponentRequest
+          description: Template footer.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - text
+          properties:
+            type:
+              type: string
+              description: Component type.
+              const: FOOTER
+            text:
+              type: string
+              description: Footer text.
+              example: Reply STOP to unsubscribe.
+        - title: WhatsAppTemplateButtonsComponentRequest
+          description: Template buttons.
+          type: object
+          additionalProperties: false
+          required:
+            - type
+            - buttons
+          properties:
+            type:
+              type: string
+              description: Component type.
+              const: BUTTONS
+            buttons:
+              type: array
+              description: Buttons, in display order.
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/WhatsAppTemplateButtonRequest'
     WhatsAppTemplateCreateRequest:
       title: WhatsAppTemplateCreateRequest
       required:
@@ -18259,9 +18508,10 @@ components:
           example: utility
         components:
           type: array
-          description: Structural components of the template. Must include a `BODY` component.
+          description: Structural components of the template. Each component type can appear once, exactly one `BODY` component is required, and enum values are uppercase.
+          minItems: 1
           items:
-            $ref: '#/components/schemas/WhatsAppTemplateComponent'
+            $ref: '#/components/schemas/WhatsAppTemplateComponentRequest'
     WhatsAppTemplateResponse:
       title: WhatsAppTemplateResponse
       required:

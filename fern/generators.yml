@@ -37,7 +37,7 @@ groups:
         config:
           namespaceExport: Wavix
         github:
-          repository: Wavix/wavix-node-sdk
+          repository: wavix/wavix-node-sdk
           mode: pull-request
       - &ruby-sdk
         name: fern-ruby-sdk
@@ -46,7 +46,7 @@ groups:
           location: rubygems
           package-name: wavix-ruby-sdk
         github:
-          repository: Wavix/wavix-ruby-sdk
+          repository: wavix/wavix-ruby-sdk
           mode: pull-request
       - &python-sdk
         name: fern-python-sdk
@@ -58,13 +58,13 @@ groups:
         config:
           client_class_name: Wavix
         github:
-          repository: Wavix/wavix-python-sdk
+          repository: wavix/wavix-python-sdk
           mode: pull-request
       - &go-sdk
         name: fern-go-sdk
         version: *go-version
         github:
-          repository: Wavix/wavix-go-sdk
+          repository: wavix/wavix-go-sdk
           mode: pull-request
         config:
           module:
