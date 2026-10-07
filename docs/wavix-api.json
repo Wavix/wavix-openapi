@@ -14071,13 +14071,144 @@
         "deprecated": false
       }
     },
+    "/v1/whatsapp/senders": {
+      "get": {
+        "tags": [
+          "WhatsApp"
+        ],
+        "summary": "List WhatsApp senders",
+        "description": "Returns a paginated list of the WhatsApp senders in your account's WhatsApp Business Accounts, each with the WhatsApp Business Account it belongs to.\n\nEvery send needs a registered sender's number in `from`, and this is where that number comes from.\n\n**Behavior:** Senders are ordered from newest to oldest. When both `status` and `waba_id` are specified, a sender must match both filters.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
+        "operationId": "whatsapp_senders_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "whatsapp:read"
+            ]
+          }
+        ],
+        "x-fern-sdk-group-name": [
+          "whatsapp",
+          "senders"
+        ],
+        "x-fern-sdk-method-name": "list",
+        "x-fern-ignore": true,
+        "x-fern-pagination": {
+          "offset": "$request.page",
+          "results": "$response.senders"
+        },
+        "x-mcp": {
+          "readOnly": true,
+          "destructive": false,
+          "openWorld": false,
+          "expose": true
+        },
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filters senders by registration status. Possible values:\n\n- `banned` — The provider banned the sender.\n- `connected` — The sender can send messages within its messaging limit.\n- `deleted` — The sender was deleted.\n- `disconnected` — The sender is disconnected from the provider.\n- `flagged` — The sender's quality rating dropped to low. The status returns to `connected` if the rating returns to medium or high within seven days.\n- `migrated` — The sender was migrated.\n- `pending` — Registration with the provider is in progress.\n- `rate_limited` — The provider is rate limiting the sender.\n- `restricted` — The sender reached its messaging limit. It can't start new conversations until the 24-hour window resets, but it can still reply to customers who messaged it.\n- `unknown` — The provider hasn't reported a status.\n- `unverified` — The sender isn't verified.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "banned",
+                "connected",
+                "deleted",
+                "disconnected",
+                "flagged",
+                "migrated",
+                "pending",
+                "rate_limited",
+                "restricted",
+                "unknown",
+                "unverified"
+              ]
+            },
+            "example": "connected"
+          },
+          {
+            "name": "waba_id",
+            "in": "query",
+            "required": false,
+            "description": "Filters senders by the ID of the WhatsApp Business Account they belong to, as returned in `waba.id`.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "102290129340398"
+          },
+          {
+            "$ref": "#/components/parameters/WhatsAppPageParam"
+          },
+          {
+            "$ref": "#/components/parameters/WhatsAppPerPageParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list of WhatsApp senders.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppSenderListResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "One connected sender",
+                    "value": {
+                      "senders": [
+                        {
+                          "phone_number": "+14155550100",
+                          "display_name": "Acme Support",
+                          "status": "connected",
+                          "quality_rating": "high",
+                          "message_tier": "limit_2k",
+                          "waba": {
+                            "id": "102290129340398",
+                            "name": "Acme Support"
+                          }
+                        }
+                      ],
+                      "pagination": {
+                        "current_page": 1,
+                        "per_page": 25,
+                        "total": 1,
+                        "total_pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/WhatsAppForbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/WhatsAppChannelUnavailableResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/v1/whatsapp/senders/{number}": {
       "get": {
         "tags": [
           "WhatsApp"
         ],
         "summary": "Retrieve a WhatsApp sender",
-        "description": "Returns the WhatsApp sender registered for the given phone number on the authenticated account.",
+        "description": "Returns the WhatsApp sender registered on your account for the given phone number, including its status, quality rating, messaging limit tier, and WhatsApp Business Account.\n\nCreating a template needs a connected sender, and the sender's `status` shows whether it's connected.\n\n**Behavior:** Returns `404` when no sender on your account has this phone number.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
         "operationId": "whatsapp_senders_get",
         "security": [
           {
@@ -14103,11 +14234,12 @@
             "name": "number",
             "in": "path",
             "required": true,
-            "description": "Sender's phone number, digits only.",
+            "description": "Phone number of a sender on your account, in E.164 format, as returned in `phone_number` by `whatsapp_senders_list`. The leading `+` is optional.",
             "schema": {
               "type": "string",
-              "example": "14155550100"
-            }
+              "pattern": "^\\+?\\d{6,20}$"
+            },
+            "example": "14155550100"
           }
         ],
         "responses": {
@@ -14117,24 +14249,34 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WhatsAppSender"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "A connected sender",
+                    "value": {
+                      "phone_number": "+14155550100",
+                      "display_name": "Acme Support",
+                      "status": "connected",
+                      "quality_rating": "high",
+                      "message_tier": "limit_2k",
+                      "waba": {
+                        "id": "102290129340398",
+                        "name": "Acme Support"
+                      }
+                    }
+                  }
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/WhatsAppBadRequestResponse"
-          },
           "401": {
             "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
-          },
-          "402": {
-            "$ref": "#/components/responses/WhatsAppPaymentRequiredResponse"
           },
           "403": {
             "$ref": "#/components/responses/WhatsAppForbiddenResponse"
           },
           "404": {
-            "description": "Returns when WhatsApp is not available or not enabled for the account, or no sender matches `number`.",
+            "description": "WhatsApp isn't available for your account or isn't enabled yet, or `number` doesn't match one of your senders.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14159,7 +14301,7 @@
                       "type": "https://wavix.com/problems/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
-                      "detail": "The WhatsApp channel is not enabled for this account yet.",
+                      "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
@@ -14183,18 +14325,24 @@
           },
           "429": {
             "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
           }
         },
         "deprecated": false
       }
     },
-    "/v1/whatsapp/senders/{number}/templates": {
+    "/v1/whatsapp/templates": {
       "get": {
         "tags": [
           "WhatsApp"
         ],
         "summary": "List WhatsApp templates",
-        "description": "Returns the WhatsApp templates registered for the sender identified by `number`.",
+        "description": "Returns a paginated list of the WhatsApp templates in your account's WhatsApp Business Accounts, each with its review status and components.\n\nEvery send names a template by its `name` and `language`, and this is where those values come from.\n\n**Behavior:** Templates are ordered from newest to oldest. When several filters are specified, a template must match all of them. Returns `404` when `sender` doesn't match a sender on your account.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
         "operationId": "whatsapp_templates_list",
         "security": [
           {
@@ -14209,6 +14357,10 @@
         ],
         "x-fern-sdk-method-name": "list",
         "x-fern-ignore": true,
+        "x-fern-pagination": {
+          "offset": "$request.page",
+          "results": "$response.templates"
+        },
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
@@ -14217,41 +14369,138 @@
         },
         "parameters": [
           {
-            "name": "number",
-            "in": "path",
-            "required": true,
-            "description": "Sender's phone number, digits only.",
+            "name": "waba_id",
+            "in": "query",
+            "required": false,
+            "description": "Filters templates by the ID of the WhatsApp Business Account that owns them, as returned in `waba.id` by `whatsapp_senders_list`.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "102290129340398"
+          },
+          {
+            "name": "sender",
+            "in": "query",
+            "required": false,
+            "description": "Filters templates by the WhatsApp Business Account of the sender with this phone number, in E.164 format. The leading `+` is optional.",
             "schema": {
               "type": "string",
-              "example": "14155550100"
-            }
+              "pattern": "^\\+?\\d{6,20}$"
+            },
+            "example": "14155550100"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filters templates by review status. Possible values:\n\n- `draft` — The template is created but not yet submitted to the provider.\n- `pending` — The provider is reviewing the template.\n- `approved` — The template is approved and can be sent.\n- `rejected` — The provider rejected the template.\n- `paused` — The provider paused the template.\n- `flagged` — The provider flagged the template. It can still be sent.\n- `disabled` — The template is disabled and can't be sent.\n- `in_appeal` — An appeal of the review decision is in progress.\n- `pending_deletion` — The template is being deleted.\n- `deleted` — The template was deleted.\n- `unknown` — The provider reported a status that Wavix doesn't recognize.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "pending",
+                "approved",
+                "rejected",
+                "paused",
+                "flagged",
+                "disabled",
+                "in_appeal",
+                "pending_deletion",
+                "deleted",
+                "unknown"
+              ]
+            },
+            "example": "approved"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Filters templates by name.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "order_shipped"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "description": "Filters templates by language code.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en_US"
+          },
+          {
+            "$ref": "#/components/parameters/WhatsAppPageParam"
+          },
+          {
+            "$ref": "#/components/parameters/WhatsAppPerPageParam"
           }
         ],
         "responses": {
           "200": {
-            "description": "The sender's WhatsApp templates.",
+            "description": "A paginated list of WhatsApp templates.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WhatsAppTemplateListResponse"
+                  "$ref": "#/components/schemas/WhatsAppTemplatePageResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "One approved template",
+                    "value": {
+                      "templates": [
+                        {
+                          "uuid": "6b1f3c52-9e0a-4d7b-8a15-c2f4e9d07b38",
+                          "name": "order_shipped",
+                          "language": "en_US",
+                          "category": "utility",
+                          "status": "approved",
+                          "quality_rating": "high",
+                          "submitted_at": "2026-01-15T10:30:00Z",
+                          "components": [
+                            {
+                              "type": "body",
+                              "text": "Hi {{1}}, your order {{2}} has shipped.",
+                              "example": {
+                                "body_text": [
+                                  [
+                                    "Maria",
+                                    "#1001"
+                                  ]
+                                ]
+                              }
+                            }
+                          ],
+                          "waba": {
+                            "id": "102290129340398",
+                            "name": "Acme Support"
+                          },
+                          "created_at": "2026-01-15T10:30:00Z"
+                        }
+                      ],
+                      "pagination": {
+                        "current_page": 1,
+                        "per_page": 25,
+                        "total": 1,
+                        "total_pages": 1
+                      }
+                    }
+                  }
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/WhatsAppBadRequestResponse"
-          },
           "401": {
             "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
-          },
-          "402": {
-            "$ref": "#/components/responses/WhatsAppPaymentRequiredResponse"
           },
           "403": {
             "$ref": "#/components/responses/WhatsAppForbiddenResponse"
           },
           "404": {
-            "description": "Returns when WhatsApp is not available or not enabled for the account, or no sender matches `number`.",
+            "description": "WhatsApp isn't available for your account or isn't enabled yet, or `sender` isn't 6–20 digits or doesn't match one of your senders.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14276,7 +14525,7 @@
                       "type": "https://wavix.com/problems/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
-                      "detail": "The WhatsApp channel is not enabled for this account yet.",
+                      "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
@@ -14300,6 +14549,12 @@
           },
           "429": {
             "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
           }
         },
         "deprecated": false
@@ -14309,7 +14564,7 @@
           "WhatsApp"
         ],
         "summary": "Create a WhatsApp template",
-        "description": "Creates a WhatsApp template for the sender identified by `number` and submits it for provider review.",
+        "description": "Creates a WhatsApp template in one of your account's WhatsApp Business Accounts, submits it for review, and returns the new template.\n\nEvery WhatsApp message you send uses a template, so new message content starts with a new template.\n\n**Behavior:** Returns `201` with the new template. Poll `whatsapp_templates_get` for the review outcome. Returns `409` when the WhatsApp Business Account already has a template with the same `name` and `language`.\n\n**Requires:** Your account must have WhatsApp and its templates capability enabled, must have a subscription plan, and must not be blocked or suspended. The WhatsApp Business Account must have a connected sender; when your account has more than one WhatsApp Business Account, specify `waba_id` or `sender`.",
         "operationId": "whatsapp_templates_create",
         "security": [
           {
@@ -14330,24 +14585,42 @@
           "openWorld": false,
           "expose": true
         },
-        "parameters": [
-          {
-            "name": "number",
-            "in": "path",
-            "required": true,
-            "description": "Sender's phone number, digits only.",
-            "schema": {
-              "type": "string",
-              "example": "14155550100"
-            }
-          }
-        ],
+        "parameters": [],
         "requestBody": {
-          "description": "Attributes for the new template.",
+          "description": "Attributes of the template to create.",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WhatsAppTemplateCreateRequest"
+              },
+              "examples": {
+                "default": {
+                  "summary": "Order shipment template with a body and a footer",
+                  "value": {
+                    "name": "order_shipped",
+                    "language": "en_US",
+                    "category": "utility",
+                    "sender": "14155550100",
+                    "components": [
+                      {
+                        "type": "body",
+                        "text": "Hi {{1}}, your order {{2}} has shipped.",
+                        "example": {
+                          "body_text": [
+                            [
+                              "Maria",
+                              "#1001"
+                            ]
+                          ]
+                        }
+                      },
+                      {
+                        "type": "footer",
+                        "text": "Reply STOP to unsubscribe."
+                      }
+                    ]
+                  }
+                }
               }
             }
           },
@@ -14355,26 +14628,81 @@
         },
         "responses": {
           "201": {
-            "description": "The newly created WhatsApp template.",
+            "description": "The created WhatsApp template.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WhatsAppTemplateResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Created template",
+                    "value": {
+                      "template": {
+                        "uuid": "6b1f3c52-9e0a-4d7b-8a15-c2f4e9d07b38",
+                        "name": "order_shipped",
+                        "language": "en_US",
+                        "category": "utility",
+                        "status": "draft",
+                        "quality_rating": null,
+                        "components": [
+                          {
+                            "type": "body",
+                            "text": "Hi {{1}}, your order {{2}} has shipped.",
+                            "example": {
+                              "body_text": [
+                                [
+                                  "Maria",
+                                  "#1001"
+                                ]
+                              ]
+                            }
+                          },
+                          {
+                            "type": "footer",
+                            "text": "Reply STOP to unsubscribe."
+                          }
+                        ],
+                        "waba": {
+                          "id": "102290129340398",
+                          "name": "Acme Support"
+                        },
+                        "created_at": "2026-01-15T10:30:00Z"
+                      }
+                    }
+                  }
                 }
               }
             }
           },
           "400": {
-            "$ref": "#/components/responses/WhatsAppBadRequestResponse"
+            "description": "The body is invalid. The JSON is malformed, a required field is missing or empty, `sender` doesn't belong to `waba_id`, or you have several WhatsApp Business Accounts and specified neither `waba_id` nor `sender`. The `detail` field says which.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppProblem"
+                },
+                "examples": {
+                  "invalid-request": {
+                    "value": {
+                      "type": "https://wavix.com/problems/invalid-request",
+                      "title": "Invalid Request",
+                      "status": 400,
+                      "detail": "the account has several WhatsApp Business Accounts; pass waba_id or sender to choose one (list them with GET /v1/whatsapp/senders)",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_INVALID_REQUEST"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
           },
-          "402": {
-            "$ref": "#/components/responses/WhatsAppPaymentRequiredResponse"
-          },
           "403": {
-            "description": "Returns when WhatsApp is account-suspended, or the templates capability is not enabled for the account.",
+            "description": "Returns when the account is suspended, blocked, or has no subscription plan, the API key has no access to the endpoint, or the templates capability is not enabled for the account.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14384,13 +14712,13 @@
                   "account-suspended": {
                     "summary": "Account is suspended",
                     "value": {
-                      "type": "https://wavix.com/problems/account-suspended",
-                      "title": "Account Suspended",
+                      "type": "https://wavix.com/problems/access-denied",
+                      "title": "Access Denied",
                       "status": 403,
-                      "detail": "Please top up your balance.",
+                      "detail": "The account is suspended.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_ACCOUNT_SUSPENDED"
+                      "error_code": "WAVIX_ACCESS_DENIED"
                     }
                   },
                   "capability-missing": {
@@ -14410,7 +14738,7 @@
             }
           },
           "404": {
-            "description": "Returns when WhatsApp is not available or not enabled for the account, or no sender matches `number`.",
+            "description": "WhatsApp isn't available for your account or isn't enabled yet. Or `waba_id` isn't linked to your account, or you have no WhatsApp Business Account and omitted `waba_id`. Or `sender` isn't 6–20 digits, isn't a sender of your account, or isn't connected. Or the WhatsApp Business Account has no connected sender.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14435,19 +14763,43 @@
                       "type": "https://wavix.com/problems/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
-                      "detail": "The WhatsApp channel is not enabled for this account yet.",
+                      "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
                     }
                   },
+                  "waba-not-linked": {
+                    "summary": "The WhatsApp Business Account is not linked to the account",
+                    "value": {
+                      "type": "https://wavix.com/problems/waba-not-linked",
+                      "title": "WABA Not Linked",
+                      "status": 404,
+                      "detail": "WABA Not Linked",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_WABA_NOT_LINKED"
+                    }
+                  },
                   "sender-not-found": {
-                    "summary": "No sender matches the given number",
+                    "summary": "The sender isn't connected",
                     "value": {
                       "type": "https://wavix.com/problems/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
-                      "detail": "No sender was found for that number on this account.",
+                      "detail": "sender 14155550100 is not connected",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_SENDER_NOT_FOUND"
+                    }
+                  },
+                  "no-connected-sender": {
+                    "summary": "The WhatsApp Business Account has no connected sender",
+                    "value": {
+                      "type": "https://wavix.com/problems/sender-not-found",
+                      "title": "Sender Not Found",
+                      "status": 404,
+                      "detail": "no connected sender on WhatsApp Business Account 102290129340398",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_SENDER_NOT_FOUND"
@@ -14458,7 +14810,7 @@
             }
           },
           "409": {
-            "description": "Returns when a template with this name and language already exists.",
+            "description": "A template with this name and language already exists for the WhatsApp Business Account.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14470,7 +14822,7 @@
                       "type": "https://wavix.com/problems/template-already-exists",
                       "title": "Template Already Exists",
                       "status": 409,
-                      "detail": "A template with this name and language already exists.",
+                      "detail": "templates: order_shipped/en_US already exists for this sender with status approved",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_TEMPLATE_ALREADY_EXISTS"
@@ -14481,7 +14833,7 @@
             }
           },
           "422": {
-            "description": "Returns when the template components are structurally invalid or the category is not one of the allowed values.",
+            "description": "The template content is invalid. A component or button has an unknown or missing key or an unknown type, `components` is empty, or `name`, `language`, or `category` has an invalid value. The `detail` field names the field that's wrong.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14493,7 +14845,7 @@
                       "type": "https://wavix.com/problems/template-invalid",
                       "title": "Template Invalid",
                       "status": 422,
-                      "detail": "components[3].buttons[0]: unknown key \"foo\"",
+                      "detail": "components[0]: unknown key \"foo\"",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "invalid_template",
                       "error_code": "WAVIX_TEMPLATE_INVALID"
@@ -14505,6 +14857,165 @@
           },
           "429": {
             "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/whatsapp/templates/{uuid}": {
+      "get": {
+        "tags": [
+          "WhatsApp"
+        ],
+        "summary": "Retrieve a WhatsApp template",
+        "description": "Returns the WhatsApp template with the given ID, including its review status, components, and WhatsApp Business Account.\n\nA new template's review outcome isn't known when `whatsapp_templates_create` returns, so the `approved` or `rejected` status shows up here.\n\n**Behavior:** Returns `404` when no template with this ID belongs to your account's WhatsApp Business Accounts.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
+        "operationId": "whatsapp_templates_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "whatsapp:read"
+            ]
+          }
+        ],
+        "x-fern-sdk-group-name": [
+          "whatsapp",
+          "templates"
+        ],
+        "x-fern-sdk-method-name": "get",
+        "x-fern-ignore": true,
+        "x-mcp": {
+          "readOnly": true,
+          "destructive": false,
+          "openWorld": false,
+          "expose": true
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "ID of the template, as returned in `uuid` by `whatsapp_templates_create` or `whatsapp_templates_list`.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "6b1f3c52-9e0a-4d7b-8a15-c2f4e9d07b38"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested WhatsApp template.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppTemplateResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "An approved template",
+                    "value": {
+                      "template": {
+                        "uuid": "6b1f3c52-9e0a-4d7b-8a15-c2f4e9d07b38",
+                        "name": "order_shipped",
+                        "language": "en_US",
+                        "category": "utility",
+                        "status": "approved",
+                        "quality_rating": "high",
+                        "submitted_at": "2026-01-15T10:30:00Z",
+                        "components": [
+                          {
+                            "type": "body",
+                            "text": "Hi {{1}}, your order {{2}} has shipped.",
+                            "example": {
+                              "body_text": [
+                                [
+                                  "Maria",
+                                  "#1001"
+                                ]
+                              ]
+                            }
+                          }
+                        ],
+                        "waba": {
+                          "id": "102290129340398",
+                          "name": "Acme Support"
+                        },
+                        "created_at": "2026-01-15T10:30:00Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/WhatsAppForbiddenResponse"
+          },
+          "404": {
+            "description": "WhatsApp isn't available for your account or isn't enabled yet, or no template with this ID belongs to your account.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppProblem"
+                },
+                "examples": {
+                  "whatsapp-not-available": {
+                    "summary": "WhatsApp is not available for this account",
+                    "value": {
+                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "title": "WhatsApp Not Available",
+                      "status": 404,
+                      "detail": "WhatsApp is not available for this account.",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                    }
+                  },
+                  "channel-not-enabled": {
+                    "summary": "WhatsApp is not enabled yet for this account",
+                    "value": {
+                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "title": "Channel Not Enabled",
+                      "status": 404,
+                      "detail": "The WhatsApp channel is not enabled for this account.",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                    }
+                  },
+                  "template-not-found": {
+                    "summary": "No template matches the given ID",
+                    "value": {
+                      "type": "https://wavix.com/problems/template-not-found",
+                      "title": "Template Not Found",
+                      "status": 404,
+                      "detail": "No template was found for that ID.",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_TEMPLATE_NOT_FOUND"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
           }
         },
         "deprecated": false
@@ -14516,7 +15027,7 @@
           "WhatsApp"
         ],
         "summary": "Send a WhatsApp message",
-        "description": "Sends a WhatsApp template message from a registered sender to a recipient.",
+        "description": "Sends a WhatsApp template message from one of your registered senders to a recipient, and returns the message with its ID.\n\nThe API sends only template messages, so every send names one of your templates.\n\n**Behavior:** Returns `201` with the new message. Poll `whatsapp_messages_get` for the delivery outcome. A repeat send with the same `idempotency_key` returns `200` with the original message and sends nothing.\n\n**Requires:** Your account must have WhatsApp and its sending capability enabled, must have a subscription plan, and must not be blocked or suspended. `from` must be a sender registered on your account.",
         "operationId": "whatsapp_messages_send",
         "security": [
           {
@@ -14539,29 +15050,93 @@
         },
         "parameters": [],
         "requestBody": {
-          "description": "Attributes for the message to send.",
+          "description": "Attributes of the message to send.",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WhatsAppMessageSendRequest"
+              },
+              "examples": {
+                "default": {
+                  "summary": "Shipment notification from a template",
+                  "value": {
+                    "from": "+14155550100",
+                    "to": "+447537151866",
+                    "idempotency_key": "order-1001-shipped",
+                    "template": {
+                      "name": "order_shipped",
+                      "language": "en_US",
+                      "placeholders": [
+                        "Maria",
+                        "#1001"
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
           "required": true
         },
         "responses": {
-          "201": {
-            "description": "The submitted message, with its `uuid` and initial status.",
+          "200": {
+            "description": "The message created by the earlier send with the same `idempotency_key`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WhatsAppMessageSendResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Original message of a repeated send",
+                    "value": {
+                      "message": {
+                        "uuid": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                        "from": "+14155550100",
+                        "to": "+447537151866",
+                        "status": "delivered",
+                        "template": {
+                          "name": "order_shipped",
+                          "language": "en_US"
+                        },
+                        "created_at": "2026-01-15T10:30:00.123Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The new message, with its `uuid` and initial status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppMessageSendResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "New message",
+                    "value": {
+                      "message": {
+                        "uuid": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                        "from": "+14155550100",
+                        "to": "+447537151866",
+                        "status": "sent",
+                        "template": {
+                          "name": "order_shipped",
+                          "language": "en_US"
+                        },
+                        "created_at": "2026-01-15T10:30:00.123Z"
+                      }
+                    }
+                  }
                 }
               }
             }
           },
           "400": {
-            "description": "Returns when `from`/`to` are not valid phone numbers, or a button entry is malformed.",
+            "description": "The body is invalid. A required field is missing or unknown, `from` or `to` isn't a valid phone number, `idempotency_key` is longer than 128 characters, or a `header` or `buttons` entry has a missing or unsupported field.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14573,7 +15148,7 @@
                       "type": "https://wavix.com/problems/invalid-request",
                       "title": "Invalid Request",
                       "status": 400,
-                      "detail": "The request body is invalid.",
+                      "detail": "phone numbers must be 6-20 digits, with or without a leading +",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_INVALID_REQUEST"
@@ -14586,11 +15161,8 @@
           "401": {
             "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
           },
-          "402": {
-            "$ref": "#/components/responses/WhatsAppPaymentRequiredResponse"
-          },
           "403": {
-            "description": "Returns when WhatsApp is account-suspended, or the sending capability is not enabled for the account.",
+            "description": "Returns when the account is suspended, blocked, or has no subscription plan, the API key has no access to the endpoint, or the sending capability is not enabled for the account.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14600,13 +15172,13 @@
                   "account-suspended": {
                     "summary": "Account is suspended",
                     "value": {
-                      "type": "https://wavix.com/problems/account-suspended",
-                      "title": "Account Suspended",
+                      "type": "https://wavix.com/problems/access-denied",
+                      "title": "Access Denied",
                       "status": 403,
-                      "detail": "Please top up your balance.",
+                      "detail": "The account is suspended.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_ACCOUNT_SUSPENDED"
+                      "error_code": "WAVIX_ACCESS_DENIED"
                     }
                   },
                   "capability-missing": {
@@ -14626,7 +15198,7 @@
             }
           },
           "404": {
-            "description": "Returns when WhatsApp is not available or not enabled for the account, no sender matches `from`, or no approved template matches the given name and language.",
+            "description": "WhatsApp isn't available for your account or isn't enabled yet, or `from` doesn't match one of your senders.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14651,7 +15223,7 @@
                       "type": "https://wavix.com/problems/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
-                      "detail": "The WhatsApp channel is not enabled for this account yet.",
+                      "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
@@ -14663,45 +15235,10 @@
                       "type": "https://wavix.com/problems/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
-                      "detail": "No sender was found for that number on this account.",
+                      "detail": "no sender \"14155550100\" on channel \"whatsapp\"",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_SENDER_NOT_FOUND"
-                    }
-                  },
-                  "template-not-found": {
-                    "summary": "No approved template matches the given name and language",
-                    "value": {
-                      "type": "https://wavix.com/problems/template-not-found",
-                      "title": "Template Not Found",
-                      "status": 404,
-                      "detail": "No template was found for that name and language.",
-                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                      "error_class": "permanent",
-                      "error_code": "WAVIX_TEMPLATE_NOT_FOUND"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Returns when the template is not approved for sending.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WhatsAppProblem"
-                },
-                "examples": {
-                  "template-not-approved": {
-                    "value": {
-                      "type": "https://wavix.com/problems/template-not-approved",
-                      "title": "Template Not Approved",
-                      "status": 409,
-                      "detail": "The template is not approved for sending.",
-                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                      "error_class": "permanent",
-                      "error_code": "WAVIX_TEMPLATE_NOT_APPROVED"
                     }
                   }
                 }
@@ -14711,51 +15248,11 @@
           "429": {
             "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
           },
-          "502": {
-            "description": "Returns when the provider rejects the message permanently.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WhatsAppProblem"
-                },
-                "examples": {
-                  "provider-rejected": {
-                    "value": {
-                      "type": "https://wavix.com/problems/provider-rejected",
-                      "title": "Provider Rejected",
-                      "status": 502,
-                      "detail": "The provider rejected the message.",
-                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                      "error_class": "permanent",
-                      "error_code": "WAVIX_PROVIDER_REJECTED"
-                    }
-                  }
-                }
-              }
-            }
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
           },
           "503": {
-            "description": "Returns when the provider is temporarily unavailable; the request may be retried.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WhatsAppProblem"
-                },
-                "examples": {
-                  "provider-unavailable": {
-                    "value": {
-                      "type": "https://wavix.com/problems/provider-unavailable",
-                      "title": "Provider Unavailable",
-                      "status": 503,
-                      "detail": "The provider is temporarily unavailable.",
-                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                      "error_class": "retriable",
-                      "error_code": "WAVIX_PROVIDER_UNAVAILABLE"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
           }
         },
         "deprecated": false
@@ -14765,7 +15262,7 @@
           "WhatsApp"
         ],
         "summary": "List WhatsApp messages",
-        "description": "Returns a paginated list of WhatsApp messages for the authenticated account.",
+        "description": "Returns a paginated list of the WhatsApp messages your account sent and received, each with its direction, delivery status, and phone numbers.\n\nMessages that customers send to your senders appear here alongside the messages you sent.\n\n**Behavior:** Messages are ordered from newest to oldest. If `direction` isn't specified, the response includes both directions, and when several filters are specified, a message must match all of them. Returns `400` when `direction`, `from`, or `to` isn't valid.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
         "operationId": "whatsapp_messages_list",
         "security": [
           {
@@ -14780,6 +15277,10 @@
         ],
         "x-fern-sdk-method-name": "list",
         "x-fern-ignore": true,
+        "x-fern-pagination": {
+          "offset": "$request.page",
+          "results": "$response.messages"
+        },
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
@@ -14790,73 +15291,84 @@
           {
             "name": "direction",
             "in": "query",
-            "description": "Filters messages by direction.",
+            "required": false,
+            "description": "Filters messages by direction. Possible values:\n\n- `outbound` — The message was sent from your account to a recipient.\n- `inbound` — A customer sent the message to one of your senders.",
             "schema": {
               "type": "string",
               "enum": [
                 "outbound",
                 "inbound"
-              ],
-              "example": "outbound"
-            }
+              ]
+            },
+            "example": "outbound"
           },
           {
             "name": "status",
             "in": "query",
-            "description": "Filters messages by delivery status.",
+            "required": false,
+            "description": "Filters messages by delivery status. Inbound messages always have `delivered` status. Possible values:\n\n- `sent` — The message isn't delivered yet.\n- `delivered` — The message was delivered to the recipient.\n- `undelivered` — The message was sent but not delivered.\n- `expired` — The message expired before it was delivered.\n- `rejected` — The message was permanently rejected before or by the provider.\n- `unknown` — The provider hasn't reported a status.",
             "schema": {
               "type": "string",
               "enum": [
-                "failed",
                 "sent",
                 "delivered",
                 "undelivered",
                 "expired",
                 "rejected",
                 "unknown"
-              ],
-              "example": "delivered"
-            }
+              ]
+            },
+            "example": "delivered"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "description": "Filters messages by the `from` phone number, in E.164 format. The leading `+` is optional.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\+?\\d{6,20}$"
+            },
+            "example": "+14155550100"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "description": "Filters messages by the `to` phone number, in E.164 format. The leading `+` is optional.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\+?\\d{6,20}$"
+            },
+            "example": "+447537151866"
           },
           {
             "name": "from_date",
             "in": "query",
-            "description": "Filters to messages created on or after this date, in `YYYY-MM-DD` format.",
+            "required": false,
+            "description": "Filters messages to those created on or after the start of this date in your account's time zone, in `YYYY-MM-DD` format.",
             "schema": {
               "type": "string",
-              "format": "date",
-              "example": "2026-01-01"
-            }
+              "format": "date"
+            },
+            "example": "2026-01-01"
           },
           {
             "name": "to_date",
             "in": "query",
-            "description": "Filters to messages created on or before this date, in `YYYY-MM-DD` format.",
+            "required": false,
+            "description": "Filters messages to those created on or before the end of this date in your account's time zone, in `YYYY-MM-DD` format.",
             "schema": {
               "type": "string",
-              "format": "date",
-              "example": "2026-01-31"
-            }
+              "format": "date"
+            },
+            "example": "2026-01-31"
           },
           {
-            "name": "page",
-            "in": "query",
-            "description": "Page number to retrieve. Default `1`.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "example": 1
-            }
+            "$ref": "#/components/parameters/WhatsAppPageParam"
           },
           {
-            "name": "per_page",
-            "in": "query",
-            "description": "Number of records to return per page. Default `25`.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "example": 25
-            }
+            "$ref": "#/components/parameters/WhatsAppPerPageParam"
           }
         ],
         "responses": {
@@ -14866,6 +15378,39 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WhatsAppMessageListResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "One outbound and one inbound message",
+                    "value": {
+                      "messages": [
+                        {
+                          "uuid": "9d4e1c7a-2b86-4f3d-b5a0-71e8c3f6a924",
+                          "direction": "inbound",
+                          "status": "delivered",
+                          "from": "+447537151866",
+                          "to": "+14155550100",
+                          "country": "GB",
+                          "created_at": "2026-01-15T10:45:00.456Z"
+                        },
+                        {
+                          "uuid": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                          "direction": "outbound",
+                          "status": "delivered",
+                          "from": "+14155550100",
+                          "to": "+447537151866",
+                          "country": "GB",
+                          "created_at": "2026-01-15T10:30:00.123Z"
+                        }
+                      ],
+                      "pagination": {
+                        "current_page": 1,
+                        "per_page": 25,
+                        "total": 2,
+                        "total_pages": 1
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14876,50 +15421,20 @@
           "401": {
             "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
           },
-          "402": {
-            "$ref": "#/components/responses/WhatsAppPaymentRequiredResponse"
-          },
           "403": {
             "$ref": "#/components/responses/WhatsAppForbiddenResponse"
           },
           "404": {
-            "description": "Returns when WhatsApp is not available or not enabled for the account.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WhatsAppProblem"
-                },
-                "examples": {
-                  "whatsapp-not-available": {
-                    "summary": "WhatsApp is not available for this account",
-                    "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
-                      "title": "WhatsApp Not Available",
-                      "status": 404,
-                      "detail": "WhatsApp is not available for this account.",
-                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                      "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
-                    }
-                  },
-                  "channel-not-enabled": {
-                    "summary": "WhatsApp is not enabled yet for this account",
-                    "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
-                      "title": "Channel Not Enabled",
-                      "status": 404,
-                      "detail": "The WhatsApp channel is not enabled for this account yet.",
-                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                      "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/WhatsAppChannelUnavailableResponse"
           },
           "429": {
             "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
           }
         },
         "deprecated": false
@@ -14931,7 +15446,7 @@
           "WhatsApp"
         ],
         "summary": "Retrieve a WhatsApp message",
-        "description": "Returns the WhatsApp message identified by `uuid`, including its delivery status.",
+        "description": "Returns the WhatsApp message with the given ID, sent or received, including its direction and current delivery status.\n\nThe send response carries only the initial status, so the delivered or undelivered outcome shows up here.\n\n**Behavior:** Returns `404` when no message with this ID belongs to your account.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
         "operationId": "whatsapp_messages_get",
         "security": [
           {
@@ -14957,12 +15472,12 @@
             "name": "uuid",
             "in": "path",
             "required": true,
-            "description": "The unique ID of the message.",
+            "description": "ID of the message, as returned in `uuid` by `whatsapp_messages_send` or `whatsapp_messages_list`.",
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "example": "3a525ca2-6909-4c72-9399-905adf7f3a74"
-            }
+              "format": "uuid"
+            },
+            "example": "3a525ca2-6909-4c72-9399-905adf7f3a74"
           }
         ],
         "responses": {
@@ -14972,24 +15487,34 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WhatsAppMessageGetResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "A delivered outbound message",
+                    "value": {
+                      "message": {
+                        "uuid": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                        "direction": "outbound",
+                        "status": "delivered",
+                        "from": "+14155550100",
+                        "to": "+447537151866",
+                        "country": "GB",
+                        "created_at": "2026-01-15T10:30:00.123Z"
+                      }
+                    }
+                  }
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/WhatsAppBadRequestResponse"
-          },
           "401": {
             "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
-          },
-          "402": {
-            "$ref": "#/components/responses/WhatsAppPaymentRequiredResponse"
           },
           "403": {
             "$ref": "#/components/responses/WhatsAppForbiddenResponse"
           },
           "404": {
-            "description": "Returns when WhatsApp is not available or not enabled for the account, or no message matches `uuid`.",
+            "description": "WhatsApp isn't available for your account or isn't enabled yet, or no message with this ID belongs to your account.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -15014,7 +15539,7 @@
                       "type": "https://wavix.com/problems/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
-                      "detail": "The WhatsApp channel is not enabled for this account yet.",
+                      "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
@@ -15026,7 +15551,7 @@
                       "type": "https://wavix.com/problems/resource-not-found",
                       "title": "Resource Not Found",
                       "status": 404,
-                      "detail": "No message was found.",
+                      "detail": "Resource Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
                       "error_code": "WAVIX_RESOURCE_NOT_FOUND"
@@ -15038,6 +15563,12 @@
           },
           "429": {
             "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
           }
         },
         "deprecated": false
@@ -24607,11 +25138,41 @@
           }
         }
       },
+      "WhatsAppWaba": {
+        "title": "WhatsAppWaba",
+        "description": "A WhatsApp Business Account linked to your account, embedded in senders and templates.",
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the WhatsApp Business Account.",
+            "example": "102290129340398"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Name of the WhatsApp Business Account.",
+            "example": "Acme Support"
+          }
+        }
+      },
       "WhatsAppSender": {
         "title": "WhatsAppSender",
+        "description": "A WhatsApp sender, which is a phone number registered with WhatsApp in one of your account's WhatsApp Business Accounts. Returned by `whatsapp_senders_list` and `whatsapp_senders_get`.",
         "required": [
           "phone_number",
-          "status"
+          "display_name",
+          "status",
+          "quality_rating",
+          "message_tier",
+          "waba"
         ],
         "type": "object",
         "additionalProperties": false,
@@ -24627,11 +25188,11 @@
               "null"
             ],
             "description": "Sender's WhatsApp display name.",
-            "example": "Wavix"
+            "example": "Acme Support"
           },
           "status": {
             "type": "string",
-            "description": "Sender registration status with the provider.",
+            "description": "Sender registration status with the provider. Possible values:\n\n- `banned` — The provider banned the sender.\n- `connected` — The sender can send messages within its messaging limit.\n- `deleted` — The sender was deleted.\n- `disconnected` — The sender is disconnected from the provider.\n- `flagged` — The sender's quality rating dropped to low. The status returns to `connected` if the rating returns to medium or high within seven days.\n- `migrated` — The sender was migrated.\n- `pending` — Registration with the provider is in progress.\n- `rate_limited` — The provider is rate limiting the sender.\n- `restricted` — The sender reached its messaging limit. It can't start new conversations until the 24-hour window resets, but it can still reply to customers who messaged it.\n- `unknown` — The provider hasn't reported a status.\n- `unverified` — The sender isn't verified.",
             "enum": [
               "banned",
               "connected",
@@ -24652,7 +25213,7 @@
               "string",
               "null"
             ],
-            "description": "Sender's messaging quality rating.",
+            "description": "Sender's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:\n\n- `high` — High quality.\n- `medium` — Medium quality.\n- `low` — Low quality.\n- `unknown` — Not rated yet.",
             "enum": [
               "high",
               "medium",
@@ -24667,7 +25228,7 @@
               "string",
               "null"
             ],
-            "description": "Sender's 24-hour outbound messaging limit tier.",
+            "description": "Sender's 24-hour outbound messaging limit tier. Possible values:\n\n- `limit_na` — No limit is set.\n- `limit_250` — Up to 250 unique customers.\n- `limit_2k` — Up to 2,000 unique customers.\n- `limit_10k` — Up to 10,000 unique customers.\n- `limit_100k` — Up to 100,000 unique customers.\n- `unlimited` — No limit on unique customers.",
             "enum": [
               "limit_na",
               "limit_250",
@@ -24678,12 +25239,37 @@
               null
             ],
             "example": "limit_2k"
+          },
+          "waba": {
+            "$ref": "#/components/schemas/WhatsAppWaba"
+          }
+        }
+      },
+      "WhatsAppSenderListResponse": {
+        "title": "WhatsAppSenderListResponse",
+        "description": "Returned by `whatsapp_senders_list`.",
+        "required": [
+          "senders",
+          "pagination"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "senders": {
+            "type": "array",
+            "description": "Senders that match the request.",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppSender"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
           }
         }
       },
       "WhatsAppProblem": {
         "title": "WhatsAppProblem",
-        "description": "RFC 9457 problem document returned by WhatsApp endpoints as `application/problem+json`.",
+        "description": "An RFC 9457 problem document that describes an error from the WhatsApp API. Returned with the `application/problem+json` content type.",
         "required": [
           "type",
           "title",
@@ -24696,7 +25282,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "URI identifying the problem type.",
+            "description": "URI that identifies the problem type.",
             "example": "https://wavix.com/problems/whatsapp-not-available"
           },
           "title": {
@@ -24707,22 +25293,22 @@
           "status": {
             "type": "integer",
             "format": "int32",
-            "description": "HTTP status code.",
+            "description": "HTTP status code of the response.",
             "example": 404
           },
           "detail": {
             "type": "string",
-            "description": "Human-readable explanation specific to this occurrence of the problem.",
+            "description": "Human-readable explanation of this occurrence of the problem.",
             "example": "WhatsApp is not available for this account."
           },
           "instance": {
             "type": "string",
-            "description": "URI identifying this specific occurrence of the problem, such as the request ID.",
+            "description": "Request ID of this occurrence of the problem.",
             "example": "3a525ca2-6909-4c72-9399-905adf7f3a74"
           },
           "error_class": {
             "type": "string",
-            "description": "Machine-readable classification of the error.",
+            "description": "Machine-readable classification of the error. Possible values:\n\n- `permanent` — The request can't succeed as sent. Retrying doesn't help.\n- `retriable` — The failure is temporary. Retrying can succeed.\n- `rate_limited` — The request was rate limited. Retry later.\n- `invalid_template` — The template content is invalid.",
             "enum": [
               "permanent",
               "retriable",
@@ -24733,47 +25319,41 @@
           },
           "error_code": {
             "type": "string",
-            "description": "Stable machine-readable error code, derived from the problem slug.",
+            "description": "Stable machine-readable error code. It's the problem type slug in upper case with the `WAVIX_` prefix.",
             "example": "WAVIX_WHATSAPP_NOT_AVAILABLE"
           }
         }
       },
-      "WhatsAppTemplateComponent": {
-        "title": "WhatsAppTemplateComponent",
-        "description": "One structural component (header, body, footer, or buttons) of a WhatsApp message template.",
+      "WhatsAppTemplateResponseComponent": {
+        "title": "WhatsAppTemplateResponseComponent",
+        "description": "A component of a stored WhatsApp template. Returned inside templates by `whatsapp_templates_list`, `whatsapp_templates_get`, and `whatsapp_templates_create`. Section types other than header, body, footer, and buttons can carry fields of their own.",
         "required": [
           "type"
         ],
         "type": "object",
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "type": {
             "type": "string",
-            "description": "Component type.",
-            "enum": [
-              "HEADER",
-              "BODY",
-              "FOOTER",
-              "BUTTONS"
-            ],
-            "example": "BODY"
+            "description": "Component type: `header`, `body`, `footer`, `buttons`, or the lower-cased name of another section type carried over from an imported template, such as `carousel` or `limited_time_offer`.",
+            "example": "body"
           },
           "format": {
             "type": "string",
-            "description": "Header content format. Present on `HEADER` components only.",
+            "description": "Header content format. Present on `header` components only. Possible values:\n\n- `text` — Text header.\n- `image` — Image header.\n- `video` — Video header.\n- `document` — Document header.\n- `location` — Location header.",
             "enum": [
-              "TEXT",
-              "IMAGE",
-              "VIDEO",
-              "DOCUMENT",
-              "LOCATION"
+              "text",
+              "image",
+              "video",
+              "document",
+              "location"
             ],
-            "example": "TEXT"
+            "example": "text"
           },
           "text": {
             "type": "string",
             "description": "Component text, with `{{n}}` placeholders where applicable.",
-            "example": "Your order {{1}} has shipped."
+            "example": "Hi {{1}}, your order {{2}} has shipped."
           },
           "example": {
             "type": "object",
@@ -24782,7 +25362,7 @@
           },
           "buttons": {
             "type": "array",
-            "description": "Button definitions. Present on `BUTTONS` components only.",
+            "description": "Button definitions. Present on `buttons` components only.",
             "items": {
               "type": "object",
               "additionalProperties": true
@@ -24792,13 +25372,16 @@
       },
       "WhatsAppTemplate": {
         "title": "WhatsAppTemplate",
+        "description": "A WhatsApp message template with its review status and components. Returned by `whatsapp_templates_list`, `whatsapp_templates_get`, and `whatsapp_templates_create`.",
         "required": [
           "uuid",
           "name",
           "language",
           "category",
           "status",
+          "quality_rating",
           "components",
+          "waba",
           "created_at"
         ],
         "type": "object",
@@ -24807,8 +25390,8 @@
           "uuid": {
             "type": "string",
             "format": "uuid",
-            "description": "Template ID.",
-            "example": "3a525ca2-6909-4c72-9399-905adf7f3a74"
+            "description": "ID of the template. Pass it to `whatsapp_templates_get` to check the review outcome.",
+            "example": "6b1f3c52-9e0a-4d7b-8a15-c2f4e9d07b38"
           },
           "name": {
             "type": "string",
@@ -24822,7 +25405,7 @@
           },
           "category": {
             "type": "string",
-            "description": "Template category.",
+            "description": "Template category. Possible values:\n\n- `marketing` — Promotions, offers, and other marketing content.\n- `authentication` — One-time passcodes for verifying a user.\n- `utility` — Transactional updates about an order or an account.",
             "enum": [
               "marketing",
               "authentication",
@@ -24832,7 +25415,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Template review/approval status.",
+            "description": "Template review status. Possible values:\n\n- `draft` — The template is created but not yet submitted to the provider.\n- `pending` — The provider is reviewing the template.\n- `approved` — The template is approved and can be sent.\n- `rejected` — The provider rejected the template.\n- `paused` — The provider paused the template.\n- `flagged` — The provider flagged the template. It can still be sent.\n- `disabled` — The template is disabled and can't be sent.\n- `in_appeal` — An appeal of the review decision is in progress.\n- `pending_deletion` — The template is being deleted.\n- `deleted` — The template was deleted.\n- `unknown` — The provider reported a status that Wavix doesn't recognize.",
             "enum": [
               "draft",
               "pending",
@@ -24853,7 +25436,7 @@
               "string",
               "null"
             ],
-            "description": "Template's messaging quality rating.",
+            "description": "Template's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:\n\n- `high` — High quality.\n- `medium` — Medium quality.\n- `low` — Low quality.\n- `unknown` — Not rated yet.",
             "enum": [
               "high",
               "medium",
@@ -24864,388 +25447,477 @@
             "example": "high"
           },
           "submitted_at": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Date and time the template was submitted for review, in ISO 8601 format.",
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the template's state was last updated from WhatsApp, in ISO 8601 format.",
             "example": "2026-01-15T10:30:00Z"
           },
           "components": {
             "type": "array",
             "description": "Structural components of the template.",
             "items": {
-              "$ref": "#/components/schemas/WhatsAppTemplateComponent"
+              "$ref": "#/components/schemas/WhatsAppTemplateResponseComponent"
             }
+          },
+          "waba": {
+            "$ref": "#/components/schemas/WhatsAppWaba"
           },
           "created_at": {
             "type": "string",
+            "format": "date-time",
             "description": "Date and time the template was created, in ISO 8601 format.",
-            "example": "2026-01-10T09:00:00Z"
+            "example": "2026-01-15T10:30:00Z"
           }
         }
       },
-      "WhatsAppTemplateListResponse": {
-        "title": "WhatsAppTemplateListResponse",
+      "WhatsAppTemplatePageResponse": {
+        "title": "WhatsAppTemplatePageResponse",
+        "description": "Returned by `whatsapp_templates_list`.",
         "required": [
-          "templates"
+          "templates",
+          "pagination"
         ],
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "templates": {
             "type": "array",
-            "description": "Templates registered for the sender.",
+            "description": "Templates that match the request.",
             "items": {
               "$ref": "#/components/schemas/WhatsAppTemplate"
             }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
           }
         }
       },
-      "WhatsAppTemplateButtonRequest": {
-        "title": "WhatsAppTemplateButtonRequest",
+      "WhatsAppTemplateTextHeaderComponentRequest": {
+        "title": "WhatsAppTemplateTextHeaderComponentRequest",
+        "description": "Text header of a new WhatsApp template. Requires `text`. Consumed by `whatsapp_templates_create`.",
         "type": "object",
-        "oneOf": [
-          {
-            "title": "WhatsAppTemplateQuickReplyButtonRequest",
-            "description": "Button that sends its label back as a reply.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "text"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Button type.",
-                "const": "QUICK_REPLY"
-              },
-              "text": {
-                "type": "string",
-                "description": "Button label.",
-                "example": "Stop promotions"
-              }
-            }
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "format",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Component type.",
+            "const": "header"
           },
-          {
-            "title": "WhatsAppTemplateUrlButtonRequest",
-            "description": "Button that opens a URL.",
+          "format": {
+            "type": "string",
+            "description": "Header content format.",
+            "const": "text"
+          },
+          "text": {
+            "type": "string",
+            "description": "Header text, with an optional `{{1}}` placeholder.",
+            "example": "Order {{1}}"
+          },
+          "example": {
             "type": "object",
+            "description": "Sample for the `{{1}}` placeholder.",
             "additionalProperties": false,
             "required": [
-              "type",
-              "text",
-              "url"
+              "header_text"
             ],
             "properties": {
-              "type": {
-                "type": "string",
-                "description": "Button type.",
-                "const": "URL"
-              },
-              "text": {
-                "type": "string",
-                "description": "Button label.",
-                "example": "Track order"
-              },
-              "url": {
-                "type": "string",
-                "description": "Target URL, optionally ending in a `{{1}}` placeholder.",
-                "example": "https://example.com/track/{{1}}"
-              },
-              "example": {
+              "header_text": {
                 "type": "array",
-                "description": "Sample full URL for a `url` that ends in `{{1}}`.",
+                "description": "Sample value for the `{{1}}` placeholder in the header text.",
                 "minItems": 1,
                 "maxItems": 1,
                 "items": {
                   "type": "string"
                 },
                 "example": [
-                  "https://example.com/track/1001"
+                  "#1001"
                 ]
               }
             }
+          }
+        }
+      },
+      "WhatsAppTemplateMediaHeaderComponentRequest": {
+        "title": "WhatsAppTemplateMediaHeaderComponentRequest",
+        "description": "Media header of a new WhatsApp template. Takes no `text`. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "format"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Component type.",
+            "const": "header"
           },
-          {
-            "title": "WhatsAppTemplatePhoneNumberButtonRequest",
-            "description": "Button that calls a phone number.",
+          "format": {
+            "type": "string",
+            "description": "Header content format. Possible values:\n\n- `image` — Image header.\n- `video` — Video header.\n- `document` — Document header.",
+            "enum": [
+              "image",
+              "video",
+              "document"
+            ],
+            "example": "image"
+          },
+          "example": {
             "type": "object",
+            "description": "Sample media file.",
             "additionalProperties": false,
             "required": [
-              "type",
-              "text",
-              "phone_number"
+              "header_handle"
             ],
             "properties": {
-              "type": {
-                "type": "string",
-                "description": "Button type.",
-                "const": "PHONE_NUMBER"
-              },
-              "text": {
-                "type": "string",
-                "description": "Button label.",
-                "example": "Call us"
-              },
-              "phone_number": {
-                "type": "string",
-                "description": "Phone number to call, in E.164 format.",
-                "example": "+31203692036"
-              }
-            }
-          },
-          {
-            "title": "WhatsAppTemplateCopyCodeButtonRequest",
-            "description": "Button that copies a code to the clipboard.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "example"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Button type.",
-                "const": "COPY_CODE"
-              },
-              "example": {
-                "type": "string",
-                "description": "Sample code.",
-                "example": "SAVE10"
+              "header_handle": {
+                "type": "array",
+                "description": "Public `http` or `https` URL of a sample media file. Meta's own API expects an upload handle here; Wavix sends the URL to the provider as the sample.",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "https://example.com/sample.png"
+                ]
               }
             }
           }
-        ]
+        }
+      },
+      "WhatsAppTemplateLocationHeaderComponentRequest": {
+        "title": "WhatsAppTemplateLocationHeaderComponentRequest",
+        "description": "Location header of a new WhatsApp template. Takes neither `text` nor `example`. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "format"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Component type.",
+            "const": "header"
+          },
+          "format": {
+            "type": "string",
+            "description": "Header content format.",
+            "const": "location"
+          }
+        }
+      },
+      "WhatsAppTemplateHeaderComponentRequest": {
+        "title": "WhatsAppTemplateHeaderComponentRequest",
+        "description": "Header of a new WhatsApp template. Consumed by `whatsapp_templates_create`. The `format` field selects the variant.",
+        "type": "object",
+        "required": [
+          "type",
+          "format"
+        ],
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplateTextHeaderComponentRequest"
+          },
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplateMediaHeaderComponentRequest"
+          },
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplateLocationHeaderComponentRequest"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "format",
+          "mapping": {
+            "text": "#/components/schemas/WhatsAppTemplateTextHeaderComponentRequest",
+            "image": "#/components/schemas/WhatsAppTemplateMediaHeaderComponentRequest",
+            "video": "#/components/schemas/WhatsAppTemplateMediaHeaderComponentRequest",
+            "document": "#/components/schemas/WhatsAppTemplateMediaHeaderComponentRequest",
+            "location": "#/components/schemas/WhatsAppTemplateLocationHeaderComponentRequest"
+          }
+        }
+      },
+      "WhatsAppTemplateBodyComponentRequest": {
+        "title": "WhatsAppTemplateBodyComponentRequest",
+        "description": "Body of a new WhatsApp template. Required, exactly once. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Component type.",
+            "const": "body"
+          },
+          "text": {
+            "type": "string",
+            "description": "Body text, with positional `{{n}}` placeholders.",
+            "example": "Hi {{1}}, your order {{2}} has shipped."
+          },
+          "example": {
+            "type": "object",
+            "description": "Sample values for the placeholders in the body text.",
+            "additionalProperties": false,
+            "required": [
+              "body_text"
+            ],
+            "properties": {
+              "body_text": {
+                "type": "array",
+                "description": "One set of sample values, one value per placeholder in order.",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  [
+                    "Maria",
+                    "#1001"
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      },
+      "WhatsAppTemplateFooterComponentRequest": {
+        "title": "WhatsAppTemplateFooterComponentRequest",
+        "description": "Footer of a new WhatsApp template. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Component type.",
+            "const": "footer"
+          },
+          "text": {
+            "type": "string",
+            "description": "Footer text.",
+            "example": "Reply STOP to unsubscribe."
+          }
+        }
+      },
+      "WhatsAppTemplateQuickReplyButtonRequest": {
+        "title": "WhatsAppTemplateQuickReplyButtonRequest",
+        "description": "Button that sends its label back as a reply. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Button type.",
+            "const": "quick_reply"
+          },
+          "text": {
+            "type": "string",
+            "description": "Button label.",
+            "example": "Stop promotions"
+          }
+        }
+      },
+      "WhatsAppTemplateUrlButtonRequest": {
+        "title": "WhatsAppTemplateUrlButtonRequest",
+        "description": "Button that opens a URL. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "text",
+          "url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Button type.",
+            "const": "url"
+          },
+          "text": {
+            "type": "string",
+            "description": "Button label.",
+            "example": "Track order"
+          },
+          "url": {
+            "type": "string",
+            "description": "Target URL, optionally ending in a `{{1}}` placeholder.",
+            "example": "https://example.com/track/{{1}}"
+          },
+          "example": {
+            "type": "array",
+            "description": "Sample full URL for a `url` that ends in `{{1}}`.",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "https://example.com/track/1001"
+            ]
+          }
+        }
+      },
+      "WhatsAppTemplatePhoneNumberButtonRequest": {
+        "title": "WhatsAppTemplatePhoneNumberButtonRequest",
+        "description": "Button that calls a phone number. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "text",
+          "phone_number"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Button type.",
+            "const": "phone_number"
+          },
+          "text": {
+            "type": "string",
+            "description": "Button label.",
+            "example": "Call us"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Phone number to call, in E.164 format.",
+            "example": "+31203692036"
+          }
+        }
+      },
+      "WhatsAppTemplateCopyCodeButtonRequest": {
+        "title": "WhatsAppTemplateCopyCodeButtonRequest",
+        "description": "Button that copies a code to the clipboard. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "example"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Button type.",
+            "const": "copy_code"
+          },
+          "example": {
+            "type": "string",
+            "description": "Sample code.",
+            "example": "SAVE10"
+          }
+        }
+      },
+      "WhatsAppTemplateButtonRequest": {
+        "title": "WhatsAppTemplateButtonRequest",
+        "description": "A button in the `buttons` component of a new WhatsApp template. Consumed by `whatsapp_templates_create`. The `type` field selects the variant.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplateQuickReplyButtonRequest"
+          },
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplateUrlButtonRequest"
+          },
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplatePhoneNumberButtonRequest"
+          },
+          {
+            "$ref": "#/components/schemas/WhatsAppTemplateCopyCodeButtonRequest"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "quick_reply": "#/components/schemas/WhatsAppTemplateQuickReplyButtonRequest",
+            "url": "#/components/schemas/WhatsAppTemplateUrlButtonRequest",
+            "phone_number": "#/components/schemas/WhatsAppTemplatePhoneNumberButtonRequest",
+            "copy_code": "#/components/schemas/WhatsAppTemplateCopyCodeButtonRequest"
+          }
+        }
+      },
+      "WhatsAppTemplateButtonsComponentRequest": {
+        "title": "WhatsAppTemplateButtonsComponentRequest",
+        "description": "Buttons component of a new WhatsApp template. Consumed by `whatsapp_templates_create`.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "buttons"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Component type.",
+            "const": "buttons"
+          },
+          "buttons": {
+            "type": "array",
+            "description": "Buttons, in display order.",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppTemplateButtonRequest"
+            }
+          }
+        }
       },
       "WhatsAppTemplateComponentRequest": {
         "title": "WhatsAppTemplateComponentRequest",
+        "description": "A header, body, footer, or buttons component of a new WhatsApp template. Consumed by `whatsapp_templates_create`. The `type` field selects the variant, and a `header` component is further selected by `format`.",
         "type": "object",
+        "required": [
+          "type"
+        ],
         "oneOf": [
           {
-            "title": "WhatsAppTemplateTextHeaderComponentRequest",
-            "description": "Text header. Requires `text`.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "format",
-              "text"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Component type.",
-                "const": "HEADER"
-              },
-              "format": {
-                "type": "string",
-                "description": "Header content format.",
-                "const": "TEXT"
-              },
-              "text": {
-                "type": "string",
-                "description": "Header text, with an optional `{{1}}` placeholder.",
-                "example": "Order {{1}}"
-              },
-              "example": {
-                "type": "object",
-                "description": "Sample for the `{{1}}` placeholder.",
-                "additionalProperties": false,
-                "required": [
-                  "header_text"
-                ],
-                "properties": {
-                  "header_text": {
-                    "type": "array",
-                    "description": "Sample value for the `{{1}}` placeholder in the header text.",
-                    "minItems": 1,
-                    "maxItems": 1,
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "#1001"
-                    ]
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/WhatsAppTemplateHeaderComponentRequest"
           },
           {
-            "title": "WhatsAppTemplateMediaHeaderComponentRequest",
-            "description": "Media header. Takes no `text`.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "format"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Component type.",
-                "const": "HEADER"
-              },
-              "format": {
-                "type": "string",
-                "description": "Header content format.",
-                "enum": [
-                  "IMAGE",
-                  "VIDEO",
-                  "DOCUMENT"
-                ],
-                "example": "IMAGE"
-              },
-              "example": {
-                "type": "object",
-                "description": "Sample media file.",
-                "additionalProperties": false,
-                "required": [
-                  "header_handle"
-                ],
-                "properties": {
-                  "header_handle": {
-                    "type": "array",
-                    "description": "Public `http` or `https` URL of a sample media file. Meta's own API expects an upload handle here; Wavix sends the URL to the provider as the sample.",
-                    "minItems": 1,
-                    "maxItems": 1,
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "https://example.com/sample.png"
-                    ]
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/WhatsAppTemplateBodyComponentRequest"
           },
           {
-            "title": "WhatsAppTemplateLocationHeaderComponentRequest",
-            "description": "Location header. Takes neither `text` nor `example`.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "format"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Component type.",
-                "const": "HEADER"
-              },
-              "format": {
-                "type": "string",
-                "description": "Header content format.",
-                "const": "LOCATION"
-              }
-            }
+            "$ref": "#/components/schemas/WhatsAppTemplateFooterComponentRequest"
           },
           {
-            "title": "WhatsAppTemplateBodyComponentRequest",
-            "description": "Template body. Required, exactly once.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "text"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Component type.",
-                "const": "BODY"
-              },
-              "text": {
-                "type": "string",
-                "description": "Body text, with positional `{{n}}` placeholders.",
-                "example": "Hi {{1}}, your order {{2}} has shipped."
-              },
-              "example": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "body_text"
-                ],
-                "properties": {
-                  "body_text": {
-                    "type": "array",
-                    "description": "One set of sample values, one value per placeholder in order.",
-                    "minItems": 1,
-                    "maxItems": 1,
-                    "items": {
-                      "type": "array",
-                      "minItems": 1,
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "example": [
-                      [
-                        "Maria",
-                        "#1001"
-                      ]
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          {
-            "title": "WhatsAppTemplateFooterComponentRequest",
-            "description": "Template footer.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "text"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Component type.",
-                "const": "FOOTER"
-              },
-              "text": {
-                "type": "string",
-                "description": "Footer text.",
-                "example": "Reply STOP to unsubscribe."
-              }
-            }
-          },
-          {
-            "title": "WhatsAppTemplateButtonsComponentRequest",
-            "description": "Template buttons.",
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "type",
-              "buttons"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "Component type.",
-                "const": "BUTTONS"
-              },
-              "buttons": {
-                "type": "array",
-                "description": "Buttons, in display order.",
-                "minItems": 1,
-                "items": {
-                  "$ref": "#/components/schemas/WhatsAppTemplateButtonRequest"
-                }
-              }
-            }
+            "$ref": "#/components/schemas/WhatsAppTemplateButtonsComponentRequest"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "header": "#/components/schemas/WhatsAppTemplateHeaderComponentRequest",
+            "body": "#/components/schemas/WhatsAppTemplateBodyComponentRequest",
+            "footer": "#/components/schemas/WhatsAppTemplateFooterComponentRequest",
+            "buttons": "#/components/schemas/WhatsAppTemplateButtonsComponentRequest"
+          }
+        }
       },
       "WhatsAppTemplateCreateRequest": {
         "title": "WhatsAppTemplateCreateRequest",
+        "description": "Attributes of a new WhatsApp template. Consumed by `whatsapp_templates_create`.",
         "required": [
           "name",
           "language",
@@ -25257,17 +25929,17 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Template name.",
+            "description": "Template name, made of lowercase letters, digits, and underscores, up to 512 characters.",
             "example": "order_shipped"
           },
           "language": {
             "type": "string",
-            "description": "Template language code.",
+            "description": "Template language code, such as `en` or `en_US`.",
             "example": "en_US"
           },
           "category": {
             "type": "string",
-            "description": "Template category.",
+            "description": "Template category. Possible values:\n\n- `marketing` — Promotions, offers, and other marketing content.\n- `authentication` — One-time passcodes for verifying a user.\n- `utility` — Transactional updates about an order or an account.",
             "enum": [
               "marketing",
               "authentication",
@@ -25277,16 +25949,28 @@
           },
           "components": {
             "type": "array",
-            "description": "Structural components of the template. Each component type can appear once, exactly one `BODY` component is required, and enum values are uppercase.",
+            "description": "Structural components of the template. Each component type can appear once, exactly one `body` component is required, and `type` and `format` values must be lowercase.",
             "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/WhatsAppTemplateComponentRequest"
             }
+          },
+          "waba_id": {
+            "type": "string",
+            "description": "ID of the WhatsApp Business Account that owns the template, as returned in `waba.id` by `whatsapp_senders_list`. Required when your account has more than one, unless `sender` is set. When both are set, `sender` must belong to this WhatsApp Business Account.",
+            "example": "102290129340398"
+          },
+          "sender": {
+            "type": "string",
+            "description": "Phone number of a connected sender whose WhatsApp Business Account owns the template, as an alternative to `waba_id`. When both are set, the sender must belong to `waba_id`. The leading `+` is optional.",
+            "pattern": "^\\+?\\d{6,20}$",
+            "example": "14155550100"
           }
         }
       },
       "WhatsAppTemplateResponse": {
         "title": "WhatsAppTemplateResponse",
+        "description": "Returned by `whatsapp_templates_get` and `whatsapp_templates_create`.",
         "required": [
           "template"
         ],
@@ -25300,13 +25984,15 @@
       },
       "WhatsAppMessageListItem": {
         "title": "WhatsAppMessageListItem",
+        "description": "A WhatsApp message your account sent or received. Returned by `whatsapp_messages_list` and `whatsapp_messages_get`.",
         "required": [
           "uuid",
           "direction",
           "status",
           "created_at",
           "from",
-          "to"
+          "to",
+          "country"
         ],
         "type": "object",
         "additionalProperties": false,
@@ -25314,12 +26000,12 @@
           "uuid": {
             "type": "string",
             "format": "uuid",
-            "description": "Message ID.",
+            "description": "ID of the message.",
             "example": "3a525ca2-6909-4c72-9399-905adf7f3a74"
           },
           "direction": {
             "type": "string",
-            "description": "Message direction.",
+            "description": "Message direction. Possible values:\n\n- `outbound` — The message was sent from your account to a recipient.\n- `inbound` — A customer sent the message to one of your senders.",
             "enum": [
               "outbound",
               "inbound"
@@ -25328,9 +26014,8 @@
           },
           "status": {
             "type": "string",
-            "description": "Message delivery status.",
+            "description": "Message delivery status. Inbound messages always have `delivered` status. Possible values:\n\n- `sent` — The message isn't delivered yet.\n- `delivered` — The message was delivered to the recipient.\n- `undelivered` — The message was sent but not delivered.\n- `expired` — The message expired before it was delivered.\n- `rejected` — The message was permanently rejected before or by the provider.\n- `unknown` — The provider hasn't reported a status.",
             "enum": [
-              "failed",
               "sent",
               "delivered",
               "undelivered",
@@ -25342,31 +26027,33 @@
           },
           "from": {
             "type": "string",
-            "description": "For `outbound` messages, the sender's phone number. For `inbound`, the originating phone number.",
-            "example": "14155550100"
+            "description": "For `outbound` messages, the phone number of your sender. For `inbound`, the customer's phone number.",
+            "example": "+14155550100"
           },
           "to": {
             "type": "string",
-            "description": "For `outbound` messages, the recipient's phone number. For `inbound`, the sender's phone number.",
-            "example": "447537151866"
+            "description": "For `outbound` messages, the recipient's phone number. For `inbound`, the phone number of your sender that received it.",
+            "example": "+447537151866"
           },
           "country": {
             "type": [
               "string",
               "null"
             ],
-            "description": "Recipient's country, derived from the phone number.",
+            "description": "Country of the customer's phone number, as an ISO 3166-1 alpha-2 code, or `null` if the country can't be determined from the number.",
             "example": "GB"
           },
           "created_at": {
             "type": "string",
+            "format": "date-time",
             "description": "Date and time the message was created, in ISO 8601 format.",
-            "example": "2026-01-15T10:30:00Z"
+            "example": "2026-01-15T10:30:00.123Z"
           }
         }
       },
       "WhatsAppMessageListResponse": {
         "title": "WhatsAppMessageListResponse",
+        "description": "Returned by `whatsapp_messages_list`.",
         "required": [
           "messages",
           "pagination"
@@ -25386,8 +26073,176 @@
           }
         }
       },
+      "WhatsAppSendTemplateHeader": {
+        "title": "WhatsAppSendTemplateHeader",
+        "description": "Header content, required only when the template's `header` component needs one. Each `type` requires specific fields and rejects the others, as listed in the `type` description. Consumed in `template.header` by `whatsapp_messages_send`.",
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Header content type. Possible values:\n\n- `text` — Text header with a `{{1}}` placeholder. Requires `placeholder`.\n- `text_named_parameters` — Text header with a named placeholder. Requires `parameter_name` and `text`.\n- `image` — Image header. Requires `media_url`.\n- `video` — Video header. Requires `media_url`.\n- `document` — Document header. Requires `media_url` and `filename`.\n- `location` — Location header. Requires `latitude` and `longitude`.",
+            "enum": [
+              "text",
+              "text_named_parameters",
+              "image",
+              "video",
+              "document",
+              "location"
+            ],
+            "example": "text"
+          },
+          "placeholder": {
+            "type": "string",
+            "description": "Value for a `text` header's `{{1}}` placeholder.",
+            "example": "#1001"
+          },
+          "media_url": {
+            "type": "string",
+            "description": "Media URL for an `image`, `video`, or `document` header.",
+            "example": "https://example.com/media/order-1001.pdf"
+          },
+          "filename": {
+            "type": "string",
+            "description": "Filename for a `document` header.",
+            "example": "order-1001.pdf"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude for a `location` header.",
+            "example": 52.3676
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude for a `location` header.",
+            "example": 4.9041
+          },
+          "parameter_name": {
+            "type": "string",
+            "description": "Placeholder name for a `text_named_parameters` header.",
+            "example": "order_number"
+          },
+          "text": {
+            "type": "string",
+            "description": "Value for a `text_named_parameters` header.",
+            "example": "#1001"
+          }
+        }
+      },
+      "WhatsAppSendTemplateButton": {
+        "title": "WhatsAppSendTemplateButton",
+        "description": "Dynamic values for one button of the template. Each `type` requires specific fields and rejects the others, as listed in the `type` description. Consumed in `template.buttons` by `whatsapp_messages_send`.",
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Button type. Possible values:\n\n- `quick_reply` — Sends a predefined reply. Requires `parameter`.\n- `url` — Opens a URL. Requires `parameter`.\n- `copy_code` — Copies a code to the clipboard. Requires `parameter`.\n- `flow` — Opens a WhatsApp Flow. Accepts `flow_token` and `data`.\n- `catalog` — Opens the business catalog. Accepts `thumbnail_product_retailer_id`.\n- `multi_product` — Shows a message with several products. Requires `sections` and accepts `thumbnail_product_retailer_id`.\n- `order_details` — Shows order details. Requires `action`.\n- `voice_call` — Starts a voice call. Accepts `call_validity_period` and `call_context_payload`.",
+            "enum": [
+              "quick_reply",
+              "url",
+              "copy_code",
+              "flow",
+              "catalog",
+              "multi_product",
+              "order_details",
+              "voice_call"
+            ],
+            "example": "url"
+          },
+          "parameter": {
+            "type": "string",
+            "description": "Dynamic value of a `quick_reply`, `url`, or `copy_code` button. Required for those types.",
+            "example": "1001"
+          },
+          "flow_token": {
+            "type": "string",
+            "description": "Flow token of a `flow` button."
+          },
+          "data": {
+            "type": "object",
+            "description": "Initial data passed to the Flow of a `flow` button.",
+            "additionalProperties": true
+          },
+          "thumbnail_product_retailer_id": {
+            "type": "string",
+            "description": "Retailer ID of the product shown as the thumbnail of a `catalog` or `multi_product` button."
+          },
+          "sections": {
+            "type": "array",
+            "description": "Product sections of a `multi_product` button. Required for that type.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "action": {
+            "type": "object",
+            "description": "Order details of an `order_details` button. Required for that type.",
+            "additionalProperties": true
+          },
+          "call_validity_period": {
+            "type": "integer",
+            "description": "How long a `voice_call` button stays valid."
+          },
+          "call_context_payload": {
+            "type": "string",
+            "description": "Context payload returned with a call started from a `voice_call` button."
+          }
+        }
+      },
+      "WhatsAppSendTemplate": {
+        "title": "WhatsAppSendTemplate",
+        "description": "The template to send and the values for its dynamic parts. Consumed in `template` by `whatsapp_messages_send`.",
+        "required": [
+          "name",
+          "language"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the template to send, as returned by `whatsapp_templates_list`.",
+            "example": "order_shipped"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code of the template to send, as returned by `whatsapp_templates_list`.",
+            "example": "en_US"
+          },
+          "placeholders": {
+            "type": "array",
+            "description": "Values substituted into the template body's `{{n}}` placeholders, in order.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Maria",
+              "#1001"
+            ]
+          },
+          "header": {
+            "$ref": "#/components/schemas/WhatsAppSendTemplateHeader"
+          },
+          "buttons": {
+            "type": "array",
+            "description": "Dynamic values for the template's `buttons` component, one entry per button, matching the template's button order. Each entry accepts only the fields its `type` uses.",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppSendTemplateButton"
+            }
+          }
+        }
+      },
       "WhatsAppMessageSendRequest": {
         "title": "WhatsAppMessageSendRequest",
+        "description": "Attributes of a WhatsApp template message to send. Consumed by `whatsapp_messages_send`.",
         "required": [
           "from",
           "to",
@@ -25398,129 +26253,58 @@
         "properties": {
           "from": {
             "type": "string",
-            "description": "Sender's phone number, 6-20 digits.",
-            "pattern": "^\\d{6,20}$",
-            "example": "14155550100"
+            "description": "Phone number of a sender registered on your account, in E.164 format, as returned by `whatsapp_senders_list`. The leading `+` is optional.",
+            "pattern": "^\\+?\\d{6,20}$",
+            "example": "+14155550100"
           },
           "to": {
             "type": "string",
-            "description": "Recipient's phone number, 6-20 digits.",
-            "pattern": "^\\d{6,20}$",
-            "example": "447537151866"
+            "description": "Recipient's phone number in E.164 format. The leading `+` is optional.",
+            "pattern": "^\\+?\\d{6,20}$",
+            "example": "+447537151866"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "description": "Key that makes the send safe to retry, unique per account.",
+            "maxLength": 128,
+            "example": "order-1001-shipped"
           },
           "template": {
-            "type": "object",
-            "required": [
-              "name",
-              "language"
-            ],
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Approved template name.",
-                "example": "order_shipped"
-              },
-              "language": {
-                "type": "string",
-                "description": "Template language code.",
-                "example": "en_US"
-              },
-              "placeholders": {
-                "type": "array",
-                "description": "Values substituted into the template body's `{{n}}` placeholders, in order.",
-                "items": {
-                  "type": "string"
-                },
-                "example": [
-                  "123456"
-                ]
-              },
-              "header": {
-                "type": "object",
-                "description": "Header content, required only when the template's `HEADER` component needs one.",
-                "additionalProperties": false,
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "TEXT",
-                      "TEXT_NAMED_PARAMETERS",
-                      "IMAGE",
-                      "VIDEO",
-                      "DOCUMENT",
-                      "LOCATION"
-                    ],
-                    "example": "TEXT"
-                  },
-                  "placeholder": {
-                    "type": "string",
-                    "description": "Value for a `TEXT` header's `{{1}}` placeholder."
-                  },
-                  "mediaUrl": {
-                    "type": "string",
-                    "description": "Media URL for an `IMAGE`/`VIDEO`/`DOCUMENT` header."
-                  },
-                  "filename": {
-                    "type": "string",
-                    "description": "Filename for a `DOCUMENT` header."
-                  },
-                  "latitude": {
-                    "type": "number",
-                    "description": "Latitude for a `LOCATION` header."
-                  },
-                  "longitude": {
-                    "type": "number",
-                    "description": "Longitude for a `LOCATION` header."
-                  },
-                  "parameterName": {
-                    "type": "string",
-                    "description": "Placeholder name for a named-parameter `TEXT` header."
-                  },
-                  "text": {
-                    "type": "string",
-                    "description": "Value for a named-parameter `TEXT` header."
-                  }
-                }
-              },
-              "buttons": {
-                "type": "array",
-                "description": "Dynamic values for the template's `BUTTONS` component, one entry per button, matching the template's button order.",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "type"
-                  ],
-                  "additionalProperties": true,
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "QUICK_REPLY",
-                        "URL",
-                        "COPY_CODE",
-                        "FLOW",
-                        "CATALOG",
-                        "MULTI_PRODUCT",
-                        "ORDER_DETAILS",
-                        "VOICE_CALL"
-                      ],
-                      "example": "QUICK_REPLY"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/WhatsAppSendTemplate"
+          }
+        }
+      },
+      "WhatsAppMessageTemplate": {
+        "title": "WhatsAppMessageTemplate",
+        "description": "The template that a WhatsApp message was sent with. Returned in `template` by `whatsapp_messages_send`.",
+        "required": [
+          "name",
+          "language"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Template name.",
+            "example": "order_shipped"
+          },
+          "language": {
+            "type": "string",
+            "description": "Template language code.",
+            "example": "en_US"
           }
         }
       },
       "WhatsAppMessage": {
         "title": "WhatsAppMessage",
+        "description": "A WhatsApp message you sent. Returned by `whatsapp_messages_send`.",
         "required": [
           "uuid",
           "from",
           "to",
           "status",
+          "template",
           "created_at"
         ],
         "type": "object",
@@ -25529,24 +26313,23 @@
           "uuid": {
             "type": "string",
             "format": "uuid",
-            "description": "Message ID.",
+            "description": "ID of the message. Pass it to `whatsapp_messages_get` to check the delivery outcome.",
             "example": "3a525ca2-6909-4c72-9399-905adf7f3a74"
           },
           "from": {
             "type": "string",
-            "description": "Sender's phone number in E.164 digits.",
-            "example": "14155550100"
+            "description": "Sender's phone number in E.164 format.",
+            "example": "+14155550100"
           },
           "to": {
             "type": "string",
-            "description": "Recipient's phone number in E.164 digits.",
-            "example": "447537151866"
+            "description": "Recipient's phone number in E.164 format.",
+            "example": "+447537151866"
           },
           "status": {
             "type": "string",
-            "description": "Message delivery status.",
+            "description": "Message delivery status. Possible values:\n\n- `sent` — The message isn't delivered yet.\n- `delivered` — The message was delivered to the recipient.\n- `undelivered` — The message was sent but not delivered.\n- `expired` — The message expired before it was delivered.\n- `rejected` — The message was permanently rejected before or by the provider.\n- `unknown` — The provider hasn't reported a status.",
             "enum": [
-              "failed",
               "sent",
               "delivered",
               "undelivered",
@@ -25557,34 +26340,27 @@
             "example": "sent"
           },
           "template": {
-            "type": [
-              "object",
-              "null"
-            ],
-            "description": "Template used to send the message.",
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Template name.",
-                "example": "order_shipped"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WhatsAppMessageTemplate"
               },
-              "language": {
-                "type": "string",
-                "description": "Template language code.",
-                "example": "en_US"
+              {
+                "type": "null"
               }
-            }
+            ],
+            "description": "Template used to send the message."
           },
           "created_at": {
             "type": "string",
+            "format": "date-time",
             "description": "Date and time the message was created, in ISO 8601 format.",
-            "example": "2026-01-15T10:30:00Z"
+            "example": "2026-01-15T10:30:00.123Z"
           }
         }
       },
       "WhatsAppMessageSendResponse": {
         "title": "WhatsAppMessageSendResponse",
+        "description": "Returned by `whatsapp_messages_send`.",
         "required": [
           "message"
         ],
@@ -25598,6 +26374,7 @@
       },
       "WhatsAppMessageGetResponse": {
         "title": "WhatsAppMessageGetResponse",
+        "description": "Returned by `whatsapp_messages_get`.",
         "required": [
           "message"
         ],
@@ -26063,32 +26840,8 @@
           }
         }
       },
-      "WhatsAppBadRequestResponse": {
-        "description": "Returns when the request body or parameters are invalid.",
-        "headers": {},
-        "content": {
-          "application/problem+json": {
-            "schema": {
-              "$ref": "#/components/schemas/WhatsAppProblem"
-            },
-            "examples": {
-              "invalid-request": {
-                "value": {
-                  "type": "https://wavix.com/problems/invalid-request",
-                  "title": "Invalid Request",
-                  "status": 400,
-                  "detail": "The request body is invalid.",
-                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                  "error_class": "permanent",
-                  "error_code": "WAVIX_INVALID_REQUEST"
-                }
-              }
-            }
-          }
-        }
-      },
       "WhatsAppUnauthorizedResponse": {
-        "description": "Returns when the request is not authenticated.",
+        "description": "Authentication failed or wasn't provided.",
         "headers": {},
         "content": {
           "application/problem+json": {
@@ -26097,6 +26850,7 @@
             },
             "examples": {
               "authentication-required": {
+                "summary": "The API key or token is missing or isn't valid",
                 "value": {
                   "type": "https://wavix.com/problems/authentication-required",
                   "title": "Authentication Required",
@@ -26111,32 +26865,8 @@
           }
         }
       },
-      "WhatsAppPaymentRequiredResponse": {
-        "description": "Returns when the account balance is insufficient.",
-        "headers": {},
-        "content": {
-          "application/problem+json": {
-            "schema": {
-              "$ref": "#/components/schemas/WhatsAppProblem"
-            },
-            "examples": {
-              "payment-required": {
-                "value": {
-                  "type": "https://wavix.com/problems/payment-required",
-                  "title": "Payment Required",
-                  "status": 402,
-                  "detail": "Please top up your balance.",
-                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                  "error_class": "permanent",
-                  "error_code": "WAVIX_PAYMENT_REQUIRED"
-                }
-              }
-            }
-          }
-        }
-      },
       "WhatsAppForbiddenResponse": {
-        "description": "Returns when the account is suspended.",
+        "description": "Returns when the account is suspended, blocked, or has no subscription plan, or the API key has no access to the endpoint.",
         "headers": {},
         "content": {
           "application/problem+json": {
@@ -26146,13 +26876,60 @@
             "examples": {
               "account-suspended": {
                 "value": {
-                  "type": "https://wavix.com/problems/account-suspended",
-                  "title": "Account Suspended",
+                  "type": "https://wavix.com/problems/access-denied",
+                  "title": "Access Denied",
                   "status": 403,
-                  "detail": "Please top up your balance.",
+                  "detail": "The account is suspended.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_ACCOUNT_SUSPENDED"
+                  "error_code": "WAVIX_ACCESS_DENIED"
+                }
+              },
+              "access-denied": {
+                "value": {
+                  "type": "https://wavix.com/problems/access-denied",
+                  "title": "Access Denied",
+                  "status": 403,
+                  "detail": "The API key has no access to this resource.",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "permanent",
+                  "error_code": "WAVIX_ACCESS_DENIED"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WhatsAppChannelUnavailableResponse": {
+        "description": "WhatsApp isn't available for your account, or the WhatsApp channel isn't enabled for it yet.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/WhatsAppProblem"
+            },
+            "examples": {
+              "whatsapp-not-available": {
+                "summary": "WhatsApp is not available for this account",
+                "value": {
+                  "type": "https://wavix.com/problems/whatsapp-not-available",
+                  "title": "WhatsApp Not Available",
+                  "status": 404,
+                  "detail": "WhatsApp is not available for this account.",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "permanent",
+                  "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                }
+              },
+              "channel-not-enabled": {
+                "summary": "WhatsApp is not enabled yet for this account",
+                "value": {
+                  "type": "https://wavix.com/problems/channel-not-enabled",
+                  "title": "Channel Not Enabled",
+                  "status": 404,
+                  "detail": "The WhatsApp channel is not enabled for this account.",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "permanent",
+                  "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
                 }
               }
             }
@@ -26190,6 +26967,112 @@
             }
           }
         }
+      },
+      "WhatsAppInternalServerErrorResponse": {
+        "description": "Returns when an unexpected error occurs on the server; the request may be retried.",
+        "headers": {},
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/WhatsAppProblem"
+            },
+            "examples": {
+              "internal-error": {
+                "value": {
+                  "type": "https://wavix.com/problems/internal-error",
+                  "title": "Internal Error",
+                  "status": 500,
+                  "detail": "Internal Error",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "retriable",
+                  "error_code": "WAVIX_INTERNAL_ERROR"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WhatsAppServiceUnavailableResponse": {
+        "description": "Returns when the service is temporarily unavailable; the request may be retried.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/WhatsAppProblem"
+            },
+            "examples": {
+              "service-unavailable": {
+                "value": {
+                  "type": "https://wavix.com/problems/service-unavailable",
+                  "title": "Service Unavailable",
+                  "status": 503,
+                  "detail": "The service is temporarily unavailable.",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "retriable",
+                  "error_code": "WAVIX_SERVICE_UNAVAILABLE"
+                }
+              },
+              "provider-unavailable": {
+                "value": {
+                  "type": "https://wavix.com/problems/provider-unavailable",
+                  "title": "Provider Unavailable",
+                  "status": 503,
+                  "detail": "The provider is temporarily unavailable.",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "retriable",
+                  "error_code": "WAVIX_PROVIDER_UNAVAILABLE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WhatsAppBadRequestResponse": {
+        "description": "The `direction`, `from`, or `to` query parameter is invalid. The `detail` field says which one.",
+        "headers": {},
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/WhatsAppProblem"
+            },
+            "examples": {
+              "invalid-request": {
+                "value": {
+                  "type": "https://wavix.com/problems/invalid-request",
+                  "title": "Invalid Request",
+                  "status": 400,
+                  "detail": "direction must be inbound or outbound",
+                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                  "error_class": "permanent",
+                  "error_code": "WAVIX_INVALID_REQUEST"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "WhatsAppPageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "Page number to retrieve. Page numbering starts at 1. Defaults to 1.",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1
+        },
+        "example": 1
+      },
+      "WhatsAppPerPageParam": {
+        "name": "per_page",
+        "in": "query",
+        "description": "Number of records to return per page. Defaults to 25. Values above 100 are treated as 100.",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 25
+        },
+        "example": 25
       }
     }
   }
