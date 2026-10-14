@@ -872,7 +872,7 @@
           "SIP trunks"
         ],
         "summary": "Update a SIP trunk",
-        "description": "Replaces the configuration of the SIP trunk identified by `id`. Omitted fields revert to their defaults.",
+        "description": "Updates the SIP trunk identified by `id`. Only the provided fields are changed. On trial accounts, every update also applies the trial limits: a `call_limit` of at most 300 seconds (300 when omitted) and one concurrent call.",
         "operationId": "sip_trunks_update",
         "security": [
           {
@@ -887,7 +887,7 @@
         "x-fern-sdk-method-name": "update",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": false,
           "expose": true
         },
@@ -906,11 +906,10 @@
           }
         ],
         "requestBody": {
-          "description": "Full replacement of the SIP trunk. Omitted fields revert to their defaults.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SIPTrunkCreateRequest"
+                "$ref": "#/components/schemas/SIPTrunkUpdateRequest"
               }
             }
           },
@@ -3017,7 +3016,7 @@
           "CDRs"
         ],
         "summary": "Transcribe a call recording",
-        "description": "Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.",
+        "description": "Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. When it completes, the new transcription replaces any earlier one that the transcription endpoints return. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.",
         "operationId": "cdrs_retranscribe",
         "security": [
           {
@@ -3032,7 +3031,7 @@
         "x-fern-sdk-method-name": "retranscribe",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": false,
           "expose": true
         },
@@ -3065,7 +3064,7 @@
               }
             }
           },
-          "required": true
+          "required": false
         },
         "responses": {
           "200": {
@@ -4308,7 +4307,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -5140,7 +5139,7 @@
           "Call streaming"
         ],
         "summary": "Start call streaming",
-        "description": "Starts streaming the audio of the call identified by `call_id` to a WebSocket destination you supply, in the direction (`stream_type`) and channel (`stream_channel`) you configure. The destination can be any URL you specify — Wavix does not restrict it. Returns the `stream_id`.",
+        "description": "Starts streaming the audio of the call identified by `call_id` to the WebSocket destination in `stream_url`, in the direction (`stream_type`) and channel (`stream_channel`) you configure. The streamed audio can include the remote party's voice.",
         "operationId": "call_control_streams_create",
         "security": [
           {
@@ -13785,7 +13784,7 @@
           "Sub-accounts"
         ],
         "summary": "Update a sub-account",
-        "description": "Replaces the configuration of the sub-account identified by `id`. Omitted fields revert to their defaults.",
+        "description": "Updates the sub-account identified by `id`. Only the provided fields are changed.",
         "operationId": "sub_accounts_update",
         "security": [
           {
@@ -13800,7 +13799,7 @@
         "x-fern-sdk-method-name": "update",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": false,
           "expose": true
         },
@@ -13820,7 +13819,6 @@
           }
         ],
         "requestBody": {
-          "description": "Full replacement of the sub-account. Omitted fields revert to their defaults.",
           "content": {
             "application/json": {
               "schema": {
@@ -14071,6 +14069,227 @@
         "deprecated": false
       }
     },
+    "/v1/whatsapp/wabas": {
+      "get": {
+        "tags": [
+          "WhatsApp"
+        ],
+        "summary": "List WhatsApp Business Accounts",
+        "description": "Returns a paginated list of the WhatsApp Business Accounts linked to your account, each with its messaging limit and number of senders.\n\n**Behavior:** WhatsApp Business Accounts are ordered from newest to oldest.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
+        "operationId": "whatsapp_wabas_list",
+        "security": [
+          {
+            "bearerAuth": [
+              "whatsapp:read"
+            ]
+          }
+        ],
+        "x-fern-sdk-group-name": [
+          "whatsapp",
+          "wabas"
+        ],
+        "x-fern-sdk-method-name": "list",
+        "x-fern-ignore": true,
+        "x-fern-pagination": {
+          "offset": "$request.page",
+          "results": "$response.wabas"
+        },
+        "x-mcp": {
+          "readOnly": true,
+          "destructive": false,
+          "openWorld": false,
+          "expose": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WhatsAppPageParam"
+          },
+          {
+            "$ref": "#/components/parameters/WhatsAppPerPageParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list of WhatsApp Business Accounts.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppWabaListResponse"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "One WhatsApp Business Account",
+                    "value": {
+                      "wabas": [
+                        {
+                          "id": "102290129340398",
+                          "name": "Acme Support",
+                          "messaging_limit": "up_to_2k",
+                          "sender_count": 2
+                        }
+                      ],
+                      "pagination": {
+                        "current_page": 1,
+                        "per_page": 25,
+                        "total": 1,
+                        "total_pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/WhatsAppForbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/WhatsAppChannelUnavailableResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/whatsapp/wabas/{waba_id}": {
+      "get": {
+        "tags": [
+          "WhatsApp"
+        ],
+        "summary": "Retrieve a WhatsApp Business Account",
+        "description": "Returns the WhatsApp Business Account linked to your account with the given ID, including its messaging limit and number of senders.\n\n**Behavior:** Returns `404` when the WhatsApp Business Account isn't linked to your account.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
+        "operationId": "whatsapp_wabas_get",
+        "security": [
+          {
+            "bearerAuth": [
+              "whatsapp:read"
+            ]
+          }
+        ],
+        "x-fern-sdk-group-name": [
+          "whatsapp",
+          "wabas"
+        ],
+        "x-fern-sdk-method-name": "get",
+        "x-fern-ignore": true,
+        "x-mcp": {
+          "readOnly": true,
+          "destructive": false,
+          "openWorld": false,
+          "expose": true
+        },
+        "parameters": [
+          {
+            "name": "waba_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of a WhatsApp Business Account linked to your account, as returned in `id` by `whatsapp_wabas_list` or in `waba.id` on senders and templates.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "102290129340398"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested WhatsApp Business Account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppBusinessAccount"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "A WhatsApp Business Account",
+                    "value": {
+                      "id": "102290129340398",
+                      "name": "Acme Support",
+                      "messaging_limit": "up_to_2k",
+                      "sender_count": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/WhatsAppUnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/WhatsAppForbiddenResponse"
+          },
+          "404": {
+            "description": "WhatsApp isn't available for your account or isn't enabled yet, or `waba_id` doesn't match a WhatsApp Business Account linked to your account.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatsAppProblem"
+                },
+                "examples": {
+                  "whatsapp-not-available": {
+                    "summary": "WhatsApp is not available for this account",
+                    "value": {
+                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "title": "WhatsApp Not Available",
+                      "status": 404,
+                      "detail": "WhatsApp is not available for this account.",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                    }
+                  },
+                  "channel-not-enabled": {
+                    "summary": "WhatsApp is not enabled yet for this account",
+                    "value": {
+                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "title": "Channel Not Enabled",
+                      "status": 404,
+                      "detail": "The WhatsApp channel is not enabled for this account.",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                    }
+                  },
+                  "waba-not-linked": {
+                    "summary": "The WhatsApp Business Account is not linked to the account",
+                    "value": {
+                      "type": "https://wavix.com/problems/waba-not-linked",
+                      "title": "WABA Not Linked",
+                      "status": 404,
+                      "detail": "WABA Not Linked",
+                      "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
+                      "error_class": "permanent",
+                      "error_code": "WAVIX_WABA_NOT_LINKED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/WhatsAppTooManyRequestsResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/WhatsAppInternalServerErrorResponse"
+          },
+          "503": {
+            "$ref": "#/components/responses/WhatsAppServiceUnavailableResponse"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/v1/whatsapp/senders": {
       "get": {
         "tags": [
@@ -14161,7 +14380,6 @@
                           "display_name": "Acme Support",
                           "status": "connected",
                           "quality_rating": "high",
-                          "message_tier": "limit_2k",
                           "waba": {
                             "id": "102290129340398",
                             "name": "Acme Support"
@@ -14208,7 +14426,7 @@
           "WhatsApp"
         ],
         "summary": "Retrieve a WhatsApp sender",
-        "description": "Returns the WhatsApp sender registered on your account for the given phone number, including its status, quality rating, messaging limit tier, and WhatsApp Business Account.\n\nCreating a template needs a connected sender, and the sender's `status` shows whether it's connected.\n\n**Behavior:** Returns `404` when no sender on your account has this phone number.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
+        "description": "Returns the WhatsApp sender registered on your account for the given phone number, including its status, quality rating, and WhatsApp Business Account.\n\nCreating a template needs a connected sender, and the sender's `status` shows whether it's connected.\n\n**Behavior:** Returns `404` when no sender on your account has this phone number.\n\n**Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.",
         "operationId": "whatsapp_senders_get",
         "security": [
           {
@@ -14258,7 +14476,6 @@
                       "display_name": "Acme Support",
                       "status": "connected",
                       "quality_rating": "high",
-                      "message_tier": "limit_2k",
                       "waba": {
                         "id": "102290129340398",
                         "name": "Acme Support"
@@ -17084,6 +17301,151 @@
           }
         }
       },
+      "SIPTrunkUpdateRequest": {
+        "title": "SIPTrunkUpdateRequest",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "User-defined name of the SIP trunk",
+            "example": "My trunk"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password set for the SIP trunk. A strong password helps keep the trunk secure.",
+            "example": "4r=h;EaCB85QNtr2"
+          },
+          "host_request": {
+            "type": "object",
+            "description": "For SIP trunks with IP authentication, the SIP endpoint public static IP address. Wavix authenticates all SIP traffic originating from this IP address. Ignored when the trunk already has a host request that is pending or approved. Not supported on trial accounts.",
+            "additionalProperties": false,
+            "required": [
+              "host"
+            ],
+            "properties": {
+              "host": {
+                "type": "string",
+                "description": "SIP endpoint public static IP address",
+                "example": "127.0.0.1"
+              }
+            }
+          },
+          "callerid": {
+            "type": "string",
+            "description": "Caller ID associated with the SIP trunk. Must be an active or verified number on the account.",
+            "example": "13132847320"
+          },
+          "multiple_numbers": {
+            "type": "boolean",
+            "description": "Indicates whether any active or verified phone number on the account can be used as the Caller ID for the SIP trunk. Setting it to `true` clears the trunk's `callerid`; on a trunk with Caller ID passthrough (`passthrough`) enabled, `true` is ignored."
+          },
+          "ip_restrict": {
+            "type": "boolean",
+            "description": "Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. Set it to `true` only when the trunk has at least one allowed IP address, either already stored or sent in `allowed_ips`.",
+            "example": false
+          },
+          "allowed_ips": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Public static IP addresses to add to the list allowed to register with the SIP trunk. Addresses already on the list are kept.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "ip"
+              ],
+              "properties": {
+                "ip": {
+                  "type": "string",
+                  "description": "Public static IP address allowed to register with the SIP trunk.",
+                  "example": "127.0.0.1"
+                }
+              }
+            }
+          },
+          "didinfo_enabled": {
+            "type": "boolean",
+            "description": "Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests",
+            "example": true
+          },
+          "call_restrict": {
+            "type": "boolean",
+            "description": "Indicates whether a maximum call duration limit is enforced for the SIP trunk",
+            "example": true
+          },
+          "call_limit": {
+            "type": "integer",
+            "description": "Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.",
+            "format": "int32",
+            "example": 3600
+          },
+          "cost_limit": {
+            "type": "boolean",
+            "description": "Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.",
+            "example": true
+          },
+          "max_call_cost": {
+            "type": "number",
+            "format": "decimal",
+            "description": "Maximum cost for an outbound call, in USD",
+            "example": 0.18
+          },
+          "channels_restrict": {
+            "type": "boolean",
+            "description": "Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk",
+            "example": false
+          },
+          "max_channels": {
+            "type": "integer",
+            "description": "Maximum number of concurrent outbound calls for the SIP trunk. Must not exceed the outbound channel capacity set for the account. Ignored when `channels_restrict` is `false`.",
+            "format": "int32",
+            "example": 2
+          },
+          "rewrite_enabled": {
+            "type": "boolean",
+            "description": "Indicates whether a custom dial plan is activated for the SIP trunk",
+            "example": true
+          },
+          "rewrite_prefix": {
+            "type": "string",
+            "description": "Digits to automatically prepend to each dialed phone number",
+            "example": "1"
+          },
+          "rewrite_cond": {
+            "type": "string",
+            "description": "Number of leading digits to automatically remove from each dialed phone number"
+          },
+          "call_recording_enabled": {
+            "type": "boolean",
+            "description": "Indicates whether outbound call recording is enabled for the SIP trunk",
+            "example": true
+          },
+          "transcription_enabled": {
+            "type": "boolean",
+            "description": "Indicates whether automatic call transcription is enabled for the SIP trunk.\nAvailable for `Flex Pro` customers only.",
+            "example": true
+          },
+          "transcription_threshold": {
+            "type": "integer",
+            "description": "Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.\nAvailable for `Flex Pro` customers only.",
+            "format": "int32",
+            "example": 10
+          },
+          "machine_detection_enabled": {
+            "type": "boolean",
+            "description": "Indicates whether automatic voicemail detection is enabled for the SIP trunk.\nAvailable for `Flex Pro` customers only.",
+            "example": true
+          },
+          "encrypted_media": {
+            "type": "boolean",
+            "description": "Indicates whether SRTP media encryption is enabled for the SIP trunk.",
+            "example": true
+          }
+        }
+      },
       "Country": {
         "title": "Country",
         "required": [
@@ -19639,7 +20001,7 @@
           "stream_url": {
             "type": "string",
             "format": "uri",
-            "description": "WebSocket URL to stream the call.",
+            "description": "WebSocket URL (`ws://` or `wss://`) that receives the call's audio, which can include the caller's voice.",
             "example": "wss://examples.com/stream"
           },
           "stream_type": {
@@ -19668,7 +20030,7 @@
           "stream_url": {
             "type": "string",
             "format": "uri",
-            "description": "WebSocket URL for call streaming",
+            "description": "WebSocket URL (`ws://` or `wss://`) that receives the call's audio.",
             "example": "wss://examples.com/stream"
           },
           "stream_type": {
@@ -25022,7 +25384,7 @@
           "name": {
             "type": "string",
             "description": "Sub-account name.",
-            "maxLength": 255,
+            "maxLength": 75,
             "example": "Company name"
           },
           "default_destinations": {
@@ -25053,7 +25415,7 @@
           "name": {
             "type": "string",
             "description": "Sub-account name.",
-            "maxLength": 255,
+            "maxLength": 75,
             "example": "Updated Company Name"
           },
           "status": {
@@ -25138,19 +25500,20 @@
           }
         }
       },
-      "WhatsAppWaba": {
-        "title": "WhatsAppWaba",
-        "description": "A WhatsApp Business Account linked to your account, embedded in senders and templates.",
+      "WhatsAppBusinessAccount": {
+        "title": "WhatsAppBusinessAccount",
+        "description": "A WhatsApp Business Account linked to your account. Returned by `whatsapp_wabas_list` and `whatsapp_wabas_get`.",
         "required": [
           "id",
-          "name"
+          "name",
+          "sender_count"
         ],
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID of the WhatsApp Business Account.",
+            "description": "ID of the WhatsApp Business Account, as returned in `waba.id` on senders and templates.",
             "example": "102290129340398"
           },
           "name": {
@@ -25160,106 +25523,41 @@
             ],
             "description": "Name of the WhatsApp Business Account.",
             "example": "Acme Support"
+          },
+          "messaging_limit": {
+            "type": "string",
+            "description": "Maximum number of unique customers the WhatsApp Business Account can start conversations with in a rolling 24-hour period. Omitted when the limit isn't known yet. Possible values:\n\n- `up_to_250` — Up to 250 unique customers.\n- `up_to_2k` — Up to 2,000 unique customers.\n- `up_to_10k` — Up to 10,000 unique customers.\n- `up_to_100k` — Up to 100,000 unique customers.\n- `unlimited` — No limit on unique customers.",
+            "enum": [
+              "up_to_250",
+              "up_to_2k",
+              "up_to_10k",
+              "up_to_100k",
+              "unlimited"
+            ],
+            "example": "up_to_2k"
+          },
+          "sender_count": {
+            "type": "integer",
+            "description": "Number of senders registered in the WhatsApp Business Account.",
+            "example": 2
           }
         }
       },
-      "WhatsAppSender": {
-        "title": "WhatsAppSender",
-        "description": "A WhatsApp sender, which is a phone number registered with WhatsApp in one of your account's WhatsApp Business Accounts. Returned by `whatsapp_senders_list` and `whatsapp_senders_get`.",
+      "WhatsAppWabaListResponse": {
+        "title": "WhatsAppWabaListResponse",
+        "description": "Returned by `whatsapp_wabas_list`.",
         "required": [
-          "phone_number",
-          "display_name",
-          "status",
-          "quality_rating",
-          "message_tier",
-          "waba"
-        ],
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "phone_number": {
-            "type": "string",
-            "description": "Sender's phone number in E.164 format.",
-            "example": "+14155550100"
-          },
-          "display_name": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Sender's WhatsApp display name.",
-            "example": "Acme Support"
-          },
-          "status": {
-            "type": "string",
-            "description": "Sender registration status with the provider. Possible values:\n\n- `banned` — The provider banned the sender.\n- `connected` — The sender can send messages within its messaging limit.\n- `deleted` — The sender was deleted.\n- `disconnected` — The sender is disconnected from the provider.\n- `flagged` — The sender's quality rating dropped to low. The status returns to `connected` if the rating returns to medium or high within seven days.\n- `migrated` — The sender was migrated.\n- `pending` — Registration with the provider is in progress.\n- `rate_limited` — The provider is rate limiting the sender.\n- `restricted` — The sender reached its messaging limit. It can't start new conversations until the 24-hour window resets, but it can still reply to customers who messaged it.\n- `unknown` — The provider hasn't reported a status.\n- `unverified` — The sender isn't verified.",
-            "enum": [
-              "banned",
-              "connected",
-              "deleted",
-              "disconnected",
-              "flagged",
-              "migrated",
-              "pending",
-              "rate_limited",
-              "restricted",
-              "unknown",
-              "unverified"
-            ],
-            "example": "connected"
-          },
-          "quality_rating": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Sender's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:\n\n- `high` — High quality.\n- `medium` — Medium quality.\n- `low` — Low quality.\n- `unknown` — Not rated yet.",
-            "enum": [
-              "high",
-              "medium",
-              "low",
-              "unknown",
-              null
-            ],
-            "example": "high"
-          },
-          "message_tier": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Sender's 24-hour outbound messaging limit tier. Possible values:\n\n- `limit_na` — No limit is set.\n- `limit_250` — Up to 250 unique customers.\n- `limit_2k` — Up to 2,000 unique customers.\n- `limit_10k` — Up to 10,000 unique customers.\n- `limit_100k` — Up to 100,000 unique customers.\n- `unlimited` — No limit on unique customers.",
-            "enum": [
-              "limit_na",
-              "limit_250",
-              "limit_2k",
-              "limit_10k",
-              "limit_100k",
-              "unlimited",
-              null
-            ],
-            "example": "limit_2k"
-          },
-          "waba": {
-            "$ref": "#/components/schemas/WhatsAppWaba"
-          }
-        }
-      },
-      "WhatsAppSenderListResponse": {
-        "title": "WhatsAppSenderListResponse",
-        "description": "Returned by `whatsapp_senders_list`.",
-        "required": [
-          "senders",
+          "wabas",
           "pagination"
         ],
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "senders": {
+          "wabas": {
             "type": "array",
-            "description": "Senders that match the request.",
+            "description": "WhatsApp Business Accounts linked to your account.",
             "items": {
-              "$ref": "#/components/schemas/WhatsAppSender"
+              "$ref": "#/components/schemas/WhatsAppBusinessAccount"
             }
           },
           "pagination": {
@@ -25321,6 +25619,117 @@
             "type": "string",
             "description": "Stable machine-readable error code. It's the problem type slug in upper case with the `WAVIX_` prefix.",
             "example": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+          }
+        }
+      },
+      "WhatsAppWaba": {
+        "title": "WhatsAppWaba",
+        "description": "A WhatsApp Business Account linked to your account, embedded in senders and templates.",
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the WhatsApp Business Account. Pass it to `whatsapp_wabas_get` to retrieve the account.",
+            "example": "102290129340398"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Name of the WhatsApp Business Account.",
+            "example": "Acme Support"
+          }
+        }
+      },
+      "WhatsAppSender": {
+        "title": "WhatsAppSender",
+        "description": "A WhatsApp sender, which is a phone number registered with WhatsApp in one of your account's WhatsApp Business Accounts. Returned by `whatsapp_senders_list` and `whatsapp_senders_get`.",
+        "required": [
+          "phone_number",
+          "display_name",
+          "status",
+          "quality_rating",
+          "waba"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "phone_number": {
+            "type": "string",
+            "description": "Sender's phone number in E.164 format.",
+            "example": "+14155550100"
+          },
+          "display_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Sender's WhatsApp display name.",
+            "example": "Acme Support"
+          },
+          "status": {
+            "type": "string",
+            "description": "Sender registration status with the provider. Possible values:\n\n- `banned` — The provider banned the sender.\n- `connected` — The sender can send messages within its messaging limit.\n- `deleted` — The sender was deleted.\n- `disconnected` — The sender is disconnected from the provider.\n- `flagged` — The sender's quality rating dropped to low. The status returns to `connected` if the rating returns to medium or high within seven days.\n- `migrated` — The sender was migrated.\n- `pending` — Registration with the provider is in progress.\n- `rate_limited` — The provider is rate limiting the sender.\n- `restricted` — The sender reached its messaging limit. It can't start new conversations until the 24-hour window resets, but it can still reply to customers who messaged it.\n- `unknown` — The provider hasn't reported a status.\n- `unverified` — The sender isn't verified.",
+            "enum": [
+              "banned",
+              "connected",
+              "deleted",
+              "disconnected",
+              "flagged",
+              "migrated",
+              "pending",
+              "rate_limited",
+              "restricted",
+              "unknown",
+              "unverified"
+            ],
+            "example": "connected"
+          },
+          "quality_rating": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Sender's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:\n\n- `high` — High quality.\n- `medium` — Medium quality.\n- `low` — Low quality.\n- `unknown` — Not rated yet.",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "unknown",
+              null
+            ],
+            "example": "high"
+          },
+          "waba": {
+            "$ref": "#/components/schemas/WhatsAppWaba"
+          }
+        }
+      },
+      "WhatsAppSenderListResponse": {
+        "title": "WhatsAppSenderListResponse",
+        "description": "Returned by `whatsapp_senders_list`.",
+        "required": [
+          "senders",
+          "pagination"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "senders": {
+            "type": "array",
+            "description": "Senders that match the request.",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppSender"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
           }
         }
       },
