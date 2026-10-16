@@ -17342,7 +17342,7 @@
           },
           "ip_restrict": {
             "type": "boolean",
-            "description": "Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. Set it to `true` only when the trunk has at least one allowed IP address, either already stored or sent in `allowed_ips`.",
+            "description": "Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. It can be `true` only when the trunk has at least one allowed IP address, either already stored or sent in `allowed_ips`.",
             "example": false
           },
           "allowed_ips": {
@@ -19982,7 +19982,7 @@
           "outbound",
           "both"
         ],
-        "description": "Specifies which audio channel to stream. Use `inbound` to stream the incoming channel (to Wavix), `outbound` for the outbound channel (from Wavix), or `both` to stream both. For bidirectional call streaming, this setting is ignored and the inbound channel is only streamed."
+        "description": "Audio channel to stream: `inbound` streams the incoming channel (to Wavix), `outbound` the outbound channel (from Wavix), and `both` both channels. For bidirectional call streaming, this setting is ignored and only the inbound channel is streamed."
       },
       "CallAnswerRequest": {
         "type": "object",
@@ -20254,7 +20254,7 @@
             ],
             "minimum": 1,
             "default": 3600,
-            "description": "Time to live in seconds. Default `3600`. Pass `null` for no expiration.",
+            "description": "Time to live in seconds. Default `3600`; `null` means no expiration.",
             "example": 3600
           }
         }
@@ -21615,7 +21615,7 @@
               "string",
               "null"
             ],
-            "description": "State or province. For the United States, use 2 character codes.",
+            "description": "State or province. For the United States, it is a 2-character code.",
             "maxLength": 20,
             "example": "AL"
           },
@@ -21815,7 +21815,7 @@
               "string",
               "null"
             ],
-            "description": "State or province. For the United States, use 2 character codes.",
+            "description": "State or province. For the United States, it is a 2-character code.",
             "maxLength": 20,
             "example": "FL"
           },
@@ -23614,7 +23614,7 @@
         "properties": {
           "nudge_intent": {
             "type": "string",
-            "description": "Nudge intent. Allowed values: `REVIEW`, `APPEAL_REJECTION`. \nUse `nudge_intent` to specify the action: - `REVIEW`: Request review for a pending Campaign. - `APPEAL_REJECTION`: Appeal a rejected Campaign.",
+            "description": "Action the nudge requests: `REVIEW` requests review of a pending Campaign, and `APPEAL_REJECTION` appeals a rejected Campaign.",
             "example": "REVIEW"
           },
           "description": {
