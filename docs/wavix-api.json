@@ -15353,7 +15353,7 @@
             }
           },
           "400": {
-            "description": "The body is invalid. A required field is missing or unknown, `from` or `to` isn't a valid phone number, `idempotency_key` is longer than 128 characters, or a `header` or `buttons` entry has a missing or unsupported field.",
+            "description": "The body is invalid. A required field is missing or unknown, `from` or `to` isn't a valid phone number, `idempotency_key` is longer than 128 characters or begins with `campaign:`, or a `header` or `buttons` entry has a missing or unsupported field.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -26674,8 +26674,9 @@
           },
           "idempotency_key": {
             "type": "string",
-            "description": "Key that makes the send safe to retry, unique per account.",
+            "description": "Key that makes the send safe to retry, unique per account. Matching is exact, so case and accents are significant - `ORDER-1` and `order-1` are two different keys and both are sent. Printable ASCII only. Must not begin with `campaign:`, a prefix reserved for campaign messages. A request with a key in that namespace is rejected.",
             "maxLength": 128,
+            "pattern": "^[\\x20-\\x7e]*$",
             "example": "order-1001-shipped"
           },
           "template": {
