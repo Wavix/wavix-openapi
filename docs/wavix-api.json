@@ -13,7 +13,7 @@
       "url": "https://wavix.com",
       "email": "support@wavix.com"
     },
-    "version": "1.3.2"
+    "version": "1.4.0"
   },
   "servers": [
     {
@@ -2529,7 +2529,7 @@
           "My numbers"
         ],
         "summary": "Update a phone number",
-        "description": "Updates the phone number identified by `id`. Only the provided fields are changed.",
+        "description": "Updates the phone number identified by `id`. Only the provided fields are changed.\n\n**Behavior:** With `expected_sms_relay_url`, the `sms_relay_url` change is applied only while the number currently has that URL; an empty string matches a number with no `sms_relay_url`. Otherwise the call returns `409` and no field in the request is changed. Setting the URL the number already has succeeds. To clear `sms_relay_url`, send `null`, not an empty string. If the call returns a `Something went wrong` error, you can retry the request; repeating the `sms_relay_url` change is a no-op, so it is safe even if the first attempt already applied it.",
         "operationId": "my_numbers_update",
         "security": [
           {
@@ -2595,6 +2595,12 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFoundErrorResponse"
+          },
+          "409": {
+            "$ref": "#/components/responses/WebhookInUseErrorResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationErrorResponse"
           }
         },
         "deprecated": false
@@ -4495,7 +4501,7 @@
           "Call webhooks"
         ],
         "summary": "Create a call webhook",
-        "description": "Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a POST callback to the URL when the event occurs. Creates persistent configuration that forwards call metadata to the URL on every matching call until the webhook is deleted.",
+        "description": "Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a POST callback to the URL when the event occurs. Creates persistent configuration that forwards call metadata to the URL on every matching call until the webhook is deleted.\n\n**Behavior:** Without `expected_url`, the webhook is set to `url` whatever it was before. With `expected_url`, the webhook is set only while it currently has that URL; an empty string matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Setting the URL the webhook already has succeeds. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.",
         "operationId": "call_webhooks_create",
         "security": [
           {
@@ -4556,6 +4562,9 @@
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
           },
+          "409": {
+            "$ref": "#/components/responses/WebhookInUseErrorResponse"
+          },
           "422": {
             "$ref": "#/components/responses/ValidationErrorResponse"
           }
@@ -4567,7 +4576,7 @@
           "Call webhooks"
         ],
         "summary": "Delete a call webhook",
-        "description": "Removes the call webhook for the given event type. Wavix stops sending callbacks for that event.",
+        "description": "Removes the call webhook for the given event type. Wavix stops sending callbacks for that event.\n\n**Behavior:** Without `expected_url`, the webhook is cleared whatever URL it has. With `expected_url`, the webhook is cleared only while it currently has that URL; an empty value matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Clearing an unset webhook succeeds. Percent-encode the `expected_url` value in the query string. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.",
         "operationId": "call_webhooks_delete",
         "security": [
           {
@@ -4602,6 +4611,18 @@
               ],
               "example": "post-call"
             }
+          },
+          {
+            "name": "expected_url",
+            "in": "query",
+            "description": "Clears the webhook only if it currently has this URL. Percent-encode the value. An empty value clears only an unset webhook.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "https://your-site.com/webhook"
+            }
           }
         ],
         "responses": {
@@ -4631,6 +4652,9 @@
           },
           "403": {
             "$ref": "#/components/responses/ForbiddenErrorResponse"
+          },
+          "409": {
+            "$ref": "#/components/responses/WebhookInUseErrorResponse"
           },
           "422": {
             "$ref": "#/components/responses/ValidationErrorResponse"
@@ -14240,7 +14264,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -14252,7 +14276,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -14264,7 +14288,7 @@
                   "waba-not-linked": {
                     "summary": "The WhatsApp Business Account is not linked to the account",
                     "value": {
-                      "type": "https://wavix.com/problems/waba-not-linked",
+                      "type": "https://docs.wavix.com/errors/waba-not-linked",
                       "title": "WABA Not Linked",
                       "status": 404,
                       "detail": "WABA Not Linked",
@@ -14503,7 +14527,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -14515,7 +14539,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -14527,7 +14551,7 @@
                   "sender-not-found": {
                     "summary": "No sender matches the given number",
                     "value": {
-                      "type": "https://wavix.com/problems/sender-not-found",
+                      "type": "https://docs.wavix.com/errors/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
                       "detail": "No sender was found for that number on this account.",
@@ -14727,7 +14751,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -14739,7 +14763,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -14751,7 +14775,7 @@
                   "sender-not-found": {
                     "summary": "No sender matches the given number",
                     "value": {
-                      "type": "https://wavix.com/problems/sender-not-found",
+                      "type": "https://docs.wavix.com/errors/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
                       "detail": "No sender was found for that number on this account.",
@@ -14902,7 +14926,7 @@
                 "examples": {
                   "invalid-request": {
                     "value": {
-                      "type": "https://wavix.com/problems/invalid-request",
+                      "type": "https://docs.wavix.com/errors/invalid-request",
                       "title": "Invalid Request",
                       "status": 400,
                       "detail": "the account has several WhatsApp Business Accounts; pass waba_id or sender to choose one (list them with GET /v1/whatsapp/senders)",
@@ -14929,7 +14953,7 @@
                   "account-suspended": {
                     "summary": "Account is suspended",
                     "value": {
-                      "type": "https://wavix.com/problems/access-denied",
+                      "type": "https://docs.wavix.com/errors/access-denied",
                       "title": "Access Denied",
                       "status": 403,
                       "detail": "The account is suspended.",
@@ -14941,7 +14965,7 @@
                   "capability-missing": {
                     "summary": "The templates capability is not enabled",
                     "value": {
-                      "type": "https://wavix.com/problems/capability-missing",
+                      "type": "https://docs.wavix.com/errors/capability-missing",
                       "title": "Capability Missing",
                       "status": 403,
                       "detail": "The templates capability is not enabled for this account.",
@@ -14965,7 +14989,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -14977,7 +15001,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -14989,7 +15013,7 @@
                   "waba-not-linked": {
                     "summary": "The WhatsApp Business Account is not linked to the account",
                     "value": {
-                      "type": "https://wavix.com/problems/waba-not-linked",
+                      "type": "https://docs.wavix.com/errors/waba-not-linked",
                       "title": "WABA Not Linked",
                       "status": 404,
                       "detail": "WABA Not Linked",
@@ -15001,7 +15025,7 @@
                   "sender-not-found": {
                     "summary": "The sender isn't connected",
                     "value": {
-                      "type": "https://wavix.com/problems/sender-not-found",
+                      "type": "https://docs.wavix.com/errors/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
                       "detail": "sender 14155550100 is not connected",
@@ -15013,7 +15037,7 @@
                   "no-connected-sender": {
                     "summary": "The WhatsApp Business Account has no connected sender",
                     "value": {
-                      "type": "https://wavix.com/problems/sender-not-found",
+                      "type": "https://docs.wavix.com/errors/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
                       "detail": "no connected sender on WhatsApp Business Account 102290129340398",
@@ -15036,7 +15060,7 @@
                 "examples": {
                   "template-already-exists": {
                     "value": {
-                      "type": "https://wavix.com/problems/template-already-exists",
+                      "type": "https://docs.wavix.com/errors/template-already-exists",
                       "title": "Template Already Exists",
                       "status": 409,
                       "detail": "templates: order_shipped/en_US already exists for this sender with status approved",
@@ -15059,7 +15083,7 @@
                 "examples": {
                   "template-invalid": {
                     "value": {
-                      "type": "https://wavix.com/problems/template-invalid",
+                      "type": "https://docs.wavix.com/errors/template-invalid",
                       "title": "Template Invalid",
                       "status": 422,
                       "detail": "components[0]: unknown key \"foo\"",
@@ -15188,7 +15212,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -15200,7 +15224,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -15212,7 +15236,7 @@
                   "template-not-found": {
                     "summary": "No template matches the given ID",
                     "value": {
-                      "type": "https://wavix.com/problems/template-not-found",
+                      "type": "https://docs.wavix.com/errors/template-not-found",
                       "title": "Template Not Found",
                       "status": 404,
                       "detail": "No template was found for that ID.",
@@ -15362,7 +15386,7 @@
                 "examples": {
                   "invalid-request": {
                     "value": {
-                      "type": "https://wavix.com/problems/invalid-request",
+                      "type": "https://docs.wavix.com/errors/invalid-request",
                       "title": "Invalid Request",
                       "status": 400,
                       "detail": "phone numbers must be 6-20 digits, with or without a leading +",
@@ -15389,7 +15413,7 @@
                   "account-suspended": {
                     "summary": "Account is suspended",
                     "value": {
-                      "type": "https://wavix.com/problems/access-denied",
+                      "type": "https://docs.wavix.com/errors/access-denied",
                       "title": "Access Denied",
                       "status": 403,
                       "detail": "The account is suspended.",
@@ -15401,7 +15425,7 @@
                   "capability-missing": {
                     "summary": "The sending capability is not enabled",
                     "value": {
-                      "type": "https://wavix.com/problems/capability-missing",
+                      "type": "https://docs.wavix.com/errors/capability-missing",
                       "title": "Capability Missing",
                       "status": 403,
                       "detail": "The sending capability is not enabled for this account.",
@@ -15425,7 +15449,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -15437,7 +15461,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -15449,7 +15473,7 @@
                   "sender-not-found": {
                     "summary": "No sender matches `from`",
                     "value": {
-                      "type": "https://wavix.com/problems/sender-not-found",
+                      "type": "https://docs.wavix.com/errors/sender-not-found",
                       "title": "Sender Not Found",
                       "status": 404,
                       "detail": "no sender \"14155550100\" on channel \"whatsapp\"",
@@ -15741,7 +15765,7 @@
                   "whatsapp-not-available": {
                     "summary": "WhatsApp is not available for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/whatsapp-not-available",
+                      "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                       "title": "WhatsApp Not Available",
                       "status": 404,
                       "detail": "WhatsApp is not available for this account.",
@@ -15753,7 +15777,7 @@
                   "channel-not-enabled": {
                     "summary": "WhatsApp is not enabled yet for this account",
                     "value": {
-                      "type": "https://wavix.com/problems/channel-not-enabled",
+                      "type": "https://docs.wavix.com/errors/channel-not-enabled",
                       "title": "Channel Not Enabled",
                       "status": 404,
                       "detail": "The WhatsApp channel is not enabled for this account.",
@@ -15765,7 +15789,7 @@
                   "resource-not-found": {
                     "summary": "No message matches the given uuid",
                     "value": {
-                      "type": "https://wavix.com/problems/resource-not-found",
+                      "type": "https://docs.wavix.com/errors/resource-not-found",
                       "title": "Resource Not Found",
                       "status": 404,
                       "detail": "Resource Not Found",
@@ -18278,10 +18302,18 @@
             "description": "Inbound call routing destinations for the phone number."
           },
           "sms_relay_url": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "uri",
-            "description": "Callback URL for inbound messages.",
+            "description": "Callback URL for inbound messages. Pass `null` to clear it.",
             "example": "https://your-site.com/sms"
+          },
+          "expected_sms_relay_url": {
+            "type": "string",
+            "description": "Applies the `sms_relay_url` change only if the number currently has this URL. Pass an empty string to set it only while it is unset, or your own URL to clear or replace it. Requires `sms_relay_url`.",
+            "example": ""
           },
           "call_recording_enabled": {
             "type": "boolean",
@@ -18303,6 +18335,33 @@
             "format": "uri",
             "description": "Callback URL for call status updates.",
             "example": "https://your-site.com/calls"
+          }
+        }
+      },
+      "WebhookInUseErrorResponse": {
+        "title": "WebhookInUseErrorResponse",
+        "type": "object",
+        "required": [
+          "success",
+          "error",
+          "message"
+        ],
+        "description": "Error returned when a webhook change is rejected because the webhook no longer has the expected URL.",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Indicates whether the request was successful. Always `false` for this error.",
+            "example": false
+          },
+          "error": {
+            "type": "boolean",
+            "description": "Indicates that the request failed. Always `true` for this error.",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description of the conflict.",
+            "example": "Webhook already in use"
           }
         }
       },
@@ -19544,6 +19603,11 @@
               "post-call",
               "on-call"
             ]
+          },
+          "expected_url": {
+            "type": "string",
+            "description": "Applies the change only if the webhook currently has this URL. Pass an empty string to set the webhook only while it is unset, or your own URL to replace your webhook. Setting the URL the webhook already has always succeeds.",
+            "example": ""
           }
         }
       },
@@ -25581,7 +25645,7 @@
           "type": {
             "type": "string",
             "description": "URI that identifies the problem type.",
-            "example": "https://wavix.com/problems/whatsapp-not-available"
+            "example": "https://docs.wavix.com/errors/whatsapp-not-available"
           },
           "title": {
             "type": "string",
@@ -27231,6 +27295,17 @@
           }
         }
       },
+      "WebhookInUseErrorResponse": {
+        "description": "Request failed. The webhook has a different URL than `expected_url` or `expected_sms_relay_url`; nothing was changed.",
+        "headers": {},
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/WebhookInUseErrorResponse"
+            }
+          }
+        }
+      },
       "TooManyRequestsErrorResponse": {
         "description": "Too many requests",
         "headers": {
@@ -27262,7 +27337,7 @@
               "authentication-required": {
                 "summary": "The API key or token is missing or isn't valid",
                 "value": {
-                  "type": "https://wavix.com/problems/authentication-required",
+                  "type": "https://docs.wavix.com/errors/authentication-required",
                   "title": "Authentication Required",
                   "status": 401,
                   "detail": "Authentication is required to access this resource.",
@@ -27286,7 +27361,7 @@
             "examples": {
               "account-suspended": {
                 "value": {
-                  "type": "https://wavix.com/problems/access-denied",
+                  "type": "https://docs.wavix.com/errors/access-denied",
                   "title": "Access Denied",
                   "status": 403,
                   "detail": "The account is suspended.",
@@ -27297,7 +27372,7 @@
               },
               "access-denied": {
                 "value": {
-                  "type": "https://wavix.com/problems/access-denied",
+                  "type": "https://docs.wavix.com/errors/access-denied",
                   "title": "Access Denied",
                   "status": 403,
                   "detail": "The API key has no access to this resource.",
@@ -27321,7 +27396,7 @@
               "whatsapp-not-available": {
                 "summary": "WhatsApp is not available for this account",
                 "value": {
-                  "type": "https://wavix.com/problems/whatsapp-not-available",
+                  "type": "https://docs.wavix.com/errors/whatsapp-not-available",
                   "title": "WhatsApp Not Available",
                   "status": 404,
                   "detail": "WhatsApp is not available for this account.",
@@ -27333,7 +27408,7 @@
               "channel-not-enabled": {
                 "summary": "WhatsApp is not enabled yet for this account",
                 "value": {
-                  "type": "https://wavix.com/problems/channel-not-enabled",
+                  "type": "https://docs.wavix.com/errors/channel-not-enabled",
                   "title": "Channel Not Enabled",
                   "status": 404,
                   "detail": "The WhatsApp channel is not enabled for this account.",
@@ -27365,7 +27440,7 @@
             "examples": {
               "rate-limited": {
                 "value": {
-                  "type": "https://wavix.com/problems/rate-limited",
+                  "type": "https://docs.wavix.com/errors/rate-limited",
                   "title": "Rate Limited",
                   "status": 429,
                   "detail": "Too many requests. Try again later.",
@@ -27389,7 +27464,7 @@
             "examples": {
               "internal-error": {
                 "value": {
-                  "type": "https://wavix.com/problems/internal-error",
+                  "type": "https://docs.wavix.com/errors/internal-error",
                   "title": "Internal Error",
                   "status": 500,
                   "detail": "Internal Error",
@@ -27412,24 +27487,13 @@
             "examples": {
               "service-unavailable": {
                 "value": {
-                  "type": "https://wavix.com/problems/service-unavailable",
+                  "type": "https://docs.wavix.com/errors/service-unavailable",
                   "title": "Service Unavailable",
                   "status": 503,
                   "detail": "The service is temporarily unavailable.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "retriable",
                   "error_code": "WAVIX_SERVICE_UNAVAILABLE"
-                }
-              },
-              "provider-unavailable": {
-                "value": {
-                  "type": "https://wavix.com/problems/provider-unavailable",
-                  "title": "Provider Unavailable",
-                  "status": 503,
-                  "detail": "The provider is temporarily unavailable.",
-                  "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
-                  "error_class": "retriable",
-                  "error_code": "WAVIX_PROVIDER_UNAVAILABLE"
                 }
               }
             }
@@ -27447,7 +27511,7 @@
             "examples": {
               "invalid-request": {
                 "value": {
-                  "type": "https://wavix.com/problems/invalid-request",
+                  "type": "https://docs.wavix.com/errors/invalid-request",
                   "title": "Invalid Request",
                   "status": 400,
                   "detail": "direction must be inbound or outbound",
