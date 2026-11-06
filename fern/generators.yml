@@ -16,7 +16,7 @@ groups:
           location: local-file-system
           path: ../sdks/ruby
       - name: fern-python-sdk
-        version: &python-version 5.14.18
+        version: &python-version 5.41.17
         output:
           location: local-file-system
           path: ../sdks/python

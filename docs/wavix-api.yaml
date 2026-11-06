@@ -10,7 +10,7 @@ info:
     name: Wavix
     url: https://wavix.com
     email: support@wavix.com
-  version: 1.4.0
+  version: 1.5.0
 servers:
   - url: https://api.wavix.com
     description: https://api.wavix.com
@@ -13426,6 +13426,13 @@ components:
           type: string
           description: Sentiment detected in the speaker's text for this turn, such as `neutral`, `positive`, or `negative`.
           example: neutral
+        topics:
+          type: array
+          description: Topics detected in the speaker's text for this turn. Empty when no topic was detected.
+          items:
+            type: string
+          example:
+            - billing
       description: Represents a single turn in a call transcript. Each turn carries the text attributed to one speaker, with the start and end times for that text.
     TranscriptionStatus:
       title: TranscriptionStatus
