@@ -13,7 +13,7 @@
       "url": "https://wavix.com",
       "email": "support@wavix.com"
     },
-    "version": "1.6.0"
+    "version": "2.0.0"
   },
   "servers": [
     {
@@ -14274,7 +14274,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -14286,7 +14286,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "waba-not-linked": {
@@ -14298,7 +14298,7 @@
                       "detail": "WABA Not Linked",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WABA_NOT_LINKED"
+                      "error_code": "WABA_NOT_LINKED"
                     }
                   }
                 }
@@ -14537,7 +14537,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -14549,7 +14549,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "sender-not-found": {
@@ -14561,7 +14561,7 @@
                       "detail": "No sender was found for that number on this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_SENDER_NOT_FOUND"
+                      "error_code": "SENDER_NOT_FOUND"
                     }
                   }
                 }
@@ -14761,7 +14761,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -14773,7 +14773,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "sender-not-found": {
@@ -14785,7 +14785,7 @@
                       "detail": "No sender was found for that number on this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_SENDER_NOT_FOUND"
+                      "error_code": "SENDER_NOT_FOUND"
                     }
                   }
                 }
@@ -14936,7 +14936,7 @@
                       "detail": "the account has several WhatsApp Business Accounts; pass waba_id or sender to choose one (list them with GET /v1/whatsapp/senders)",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_REQUEST"
+                      "error_code": "INVALID_REQUEST"
                     }
                   }
                 }
@@ -14963,7 +14963,7 @@
                       "detail": "The templates capability is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CAPABILITY_MISSING"
+                      "error_code": "CAPABILITY_MISSING"
                     }
                   }
                 }
@@ -14987,7 +14987,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -14999,7 +14999,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "waba-not-linked": {
@@ -15011,7 +15011,7 @@
                       "detail": "WABA Not Linked",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WABA_NOT_LINKED"
+                      "error_code": "WABA_NOT_LINKED"
                     }
                   },
                   "sender-not-found": {
@@ -15023,7 +15023,7 @@
                       "detail": "sender 14155550100 is not connected",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_SENDER_NOT_FOUND"
+                      "error_code": "SENDER_NOT_FOUND"
                     }
                   },
                   "no-connected-sender": {
@@ -15035,7 +15035,7 @@
                       "detail": "no connected sender on WhatsApp Business Account 102290129340398",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_SENDER_NOT_FOUND"
+                      "error_code": "SENDER_NOT_FOUND"
                     }
                   }
                 }
@@ -15058,7 +15058,7 @@
                       "detail": "templates: order_shipped/en_US already exists for this sender with status approved",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_TEMPLATE_ALREADY_EXISTS"
+                      "error_code": "TEMPLATE_ALREADY_EXISTS"
                     }
                   }
                 }
@@ -15081,7 +15081,7 @@
                       "detail": "components[0]: unknown key \"foo\"",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "invalid_template",
-                      "error_code": "WAVIX_TEMPLATE_INVALID"
+                      "error_code": "TEMPLATE_INVALID"
                     }
                   }
                 }
@@ -15210,7 +15210,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -15222,7 +15222,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "template-not-found": {
@@ -15234,7 +15234,7 @@
                       "detail": "No template was found for that ID.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_TEMPLATE_NOT_FOUND"
+                      "error_code": "TEMPLATE_NOT_FOUND"
                     }
                   }
                 }
@@ -15398,7 +15398,7 @@
                       "detail": "phone numbers must be 6-20 digits, with or without a leading +",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_REQUEST"
+                      "error_code": "INVALID_REQUEST"
                     }
                   }
                 }
@@ -15425,7 +15425,7 @@
                       "detail": "The sending capability is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CAPABILITY_MISSING"
+                      "error_code": "CAPABILITY_MISSING"
                     }
                   }
                 }
@@ -15449,7 +15449,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -15461,7 +15461,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "sender-not-found": {
@@ -15473,7 +15473,7 @@
                       "detail": "no sender \"14155550100\" on channel \"whatsapp\"",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_SENDER_NOT_FOUND"
+                      "error_code": "SENDER_NOT_FOUND"
                     }
                   }
                 }
@@ -15497,7 +15497,7 @@
                       "detail": "The recipient hasn't messaged this sender in the last 24 hours. Send a template instead.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_SERVICE_WINDOW_CLOSED",
+                      "error_code": "SERVICE_WINDOW_CLOSED",
                       "service_window_closed_at": "2026-01-14T09:15:00.000Z"
                     }
                   }
@@ -15769,7 +15769,31 @@
                         "country": "GB",
                         "created_at": "2026-01-15T10:30:00.123Z",
                         "content": null,
-                        "service_window_open_until": "2026-01-16T10:45:00.456Z"
+                        "service_window_open_until": "2026-01-16T10:45:00.456Z",
+                        "error": null
+                      }
+                    }
+                  },
+                  "undelivered-template": {
+                    "summary": "An outbound message that wasn't delivered",
+                    "value": {
+                      "message": {
+                        "uuid": "5b8f2d4e-7a1c-4e9b-8d3f-6c2a9e1b4f70",
+                        "direction": "outbound",
+                        "status": "undelivered",
+                        "from": "+14155550100",
+                        "to": "+447537151866",
+                        "country": "GB",
+                        "created_at": "2026-01-15T11:02:00.000Z",
+                        "content": null,
+                        "service_window_open_until": null,
+                        "error": {
+                          "code": "DELIVERY_FAILED",
+                          "subcode": "TEMPLATE_INVALID",
+                          "message": "The template is invalid or doesn't match its approved version.",
+                          "action": "fix_and_resend",
+                          "docs_url": "https://docs.wavix.com/errors/delivery-failed"
+                        }
                       }
                     }
                   },
@@ -15821,7 +15845,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -15833,7 +15857,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "resource-not-found": {
@@ -15845,7 +15869,7 @@
                       "detail": "Resource Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_RESOURCE_NOT_FOUND"
+                      "error_code": "RESOURCE_NOT_FOUND"
                     }
                   }
                 }
@@ -15965,7 +15989,7 @@
                       "detail": "The request body has an unknown field: \"events\".",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_REQUEST"
+                      "error_code": "INVALID_REQUEST"
                     }
                   }
                 }
@@ -15995,7 +16019,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -16007,7 +16031,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   }
                 }
@@ -16031,7 +16055,7 @@
                       "detail": "Webhook Already Exists",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WEBHOOK_ALREADY_EXISTS"
+                      "error_code": "WEBHOOK_ALREADY_EXISTS"
                     }
                   }
                 }
@@ -16055,7 +16079,7 @@
                       "detail": "The request body is too large.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_PAYLOAD_TOO_LARGE"
+                      "error_code": "PAYLOAD_TOO_LARGE"
                     }
                   }
                 }
@@ -16079,7 +16103,7 @@
                       "detail": "The URL host resolves to an address that is not public or that Wavix does not allow.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_WEBHOOK_URL"
+                      "error_code": "INVALID_WEBHOOK_URL"
                     }
                   }
                 }
@@ -16105,7 +16129,7 @@
                       "detail": "The service is temporarily unavailable.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "retriable",
-                      "error_code": "WAVIX_SERVICE_UNAVAILABLE"
+                      "error_code": "SERVICE_UNAVAILABLE"
                     }
                   },
                   "webhook-url-unverified": {
@@ -16117,7 +16141,7 @@
                       "detail": "Webhook URL Unverified",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "retriable",
-                      "error_code": "WAVIX_WEBHOOK_URL_UNVERIFIED"
+                      "error_code": "WEBHOOK_URL_UNVERIFIED"
                     }
                   }
                 }
@@ -16230,7 +16254,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   }
                 }
@@ -16344,7 +16368,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "webhook-not-found": {
@@ -16356,7 +16380,7 @@
                       "detail": "Webhook Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WEBHOOK_NOT_FOUND"
+                      "error_code": "WEBHOOK_NOT_FOUND"
                     }
                   }
                 }
@@ -16487,7 +16511,7 @@
                       "detail": "The request body has an unknown field: \"group\".",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_REQUEST"
+                      "error_code": "INVALID_REQUEST"
                     }
                   }
                 }
@@ -16517,7 +16541,7 @@
                       "detail": "Webhook Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WEBHOOK_NOT_FOUND"
+                      "error_code": "WEBHOOK_NOT_FOUND"
                     }
                   }
                 }
@@ -16541,7 +16565,7 @@
                       "detail": "The request body is too large.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_PAYLOAD_TOO_LARGE"
+                      "error_code": "PAYLOAD_TOO_LARGE"
                     }
                   }
                 }
@@ -16565,7 +16589,7 @@
                       "detail": "The URL host resolves to an address that is not public or that Wavix does not allow.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_WEBHOOK_URL"
+                      "error_code": "INVALID_WEBHOOK_URL"
                     }
                   }
                 }
@@ -16591,7 +16615,7 @@
                       "detail": "The service is temporarily unavailable.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "retriable",
-                      "error_code": "WAVIX_SERVICE_UNAVAILABLE"
+                      "error_code": "SERVICE_UNAVAILABLE"
                     }
                   },
                   "webhook-url-unverified": {
@@ -16603,7 +16627,7 @@
                       "detail": "Webhook URL Unverified",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "retriable",
-                      "error_code": "WAVIX_WEBHOOK_URL_UNVERIFIED"
+                      "error_code": "WEBHOOK_URL_UNVERIFIED"
                     }
                   }
                 }
@@ -16679,7 +16703,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "webhook-not-found": {
@@ -16691,7 +16715,7 @@
                       "detail": "Webhook Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WEBHOOK_NOT_FOUND"
+                      "error_code": "WEBHOOK_NOT_FOUND"
                     }
                   }
                 }
@@ -16814,7 +16838,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -16826,7 +16850,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "webhook-not-found": {
@@ -16838,7 +16862,7 @@
                       "detail": "Webhook Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WEBHOOK_NOT_FOUND"
+                      "error_code": "WEBHOOK_NOT_FOUND"
                     }
                   }
                 }
@@ -17018,7 +17042,7 @@
                       "detail": "after: event not found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_INVALID_REQUEST"
+                      "error_code": "INVALID_REQUEST"
                     }
                   }
                 }
@@ -17139,7 +17163,7 @@
                       "detail": "WhatsApp is not available for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                      "error_code": "WHATSAPP_NOT_AVAILABLE"
                     }
                   },
                   "channel-not-enabled": {
@@ -17151,7 +17175,7 @@
                       "detail": "The WhatsApp channel is not enabled for this account.",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                      "error_code": "CHANNEL_NOT_ENABLED"
                     }
                   },
                   "resource-not-found": {
@@ -17163,7 +17187,7 @@
                       "detail": "Resource Not Found",
                       "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                       "error_class": "permanent",
-                      "error_code": "WAVIX_RESOURCE_NOT_FOUND"
+                      "error_code": "RESOURCE_NOT_FOUND"
                     }
                   }
                 }
@@ -17837,9 +17861,11 @@
                       },
                       "status": "undelivered",
                       "error": {
-                        "code": "WAVIX_DELIVERY_FAILED",
-                        "title": "The message wasn't delivered, and the cause isn't one of the other codes.",
-                        "docs_url": "https://docs.wavix.com/errors/delivery-failed"
+                        "code": "RECIPIENT_NOT_ON_WHATSAPP",
+                        "subcode": "BLOCKED_BY_OPERATOR",
+                        "message": "This number can't receive WhatsApp messages from businesses.",
+                        "action": "do_not_resend",
+                        "docs_url": "https://docs.wavix.com/errors/recipient-not-on-whatsapp"
                       }
                     }
                   }
@@ -27716,8 +27742,8 @@
           },
           "error_code": {
             "type": "string",
-            "description": "Stable machine-readable error code. It's the problem type slug in upper case with the `WAVIX_` prefix.",
-            "example": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+            "description": "Stable machine-readable error code. It's the problem type slug in upper case, with underscores in place of hyphens.",
+            "example": "WHATSAPP_NOT_AVAILABLE"
           },
           "service_window_closed_at": {
             "type": [
@@ -28552,6 +28578,70 @@
           }
         }
       },
+      "WhatsAppMessageError": {
+        "title": "WhatsAppMessageError",
+        "description": "Why a message you sent wasn't delivered. Returned in `whatsapp.message.failed` events and when you retrieve or list WhatsApp messages. Wavix retries temporary failures itself, so you get an error only after Wavix stops retrying.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message",
+          "action",
+          "docs_url"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `DELIVERY_FAILED`. Possible values:\n\n- `RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.\n- `RECIPIENT_OPTED_OUT` — The recipient turned off marketing messages or blocked your sender or template.\n- `SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.\n- `TEMPLATE_NOT_APPROVED` — The template is pending review, was rejected, or WhatsApp hasn't finished preparing it, so it can't be sent yet.\n- `TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.\n- `INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.\n- `MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.\n- `SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.\n- `SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.\n- `SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.\n- `SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.\n- `MESSAGE_EXPIRED` — The message expired before it was delivered.\n- `DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.",
+            "enum": [
+              "RECIPIENT_NOT_ON_WHATSAPP",
+              "RECIPIENT_OPTED_OUT",
+              "SERVICE_WINDOW_CLOSED",
+              "TEMPLATE_NOT_APPROVED",
+              "TEMPLATE_PAUSED_OR_DISABLED",
+              "INVALID_TEMPLATE_PARAMETERS",
+              "MARKETING_LIMIT_REACHED",
+              "SENDER_LIMIT_REACHED",
+              "SENDER_RATE_LIMITED",
+              "SENDER_UNAVAILABLE",
+              "SERVICE_UNAVAILABLE",
+              "MESSAGE_EXPIRED",
+              "DELIVERY_FAILED"
+            ],
+            "example": "RECIPIENT_NOT_ON_WHATSAPP"
+          },
+          "subcode": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Finer cause within `code`, or `null` when Wavix has no finer cause. Wavix can add values, so handle a value you don't recognize by `code` alone. Possible values:\n\n- `NOT_REGISTERED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The number isn't registered on WhatsApp.\n- `APP_UPDATE_REQUIRED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The recipient's WhatsApp app can't show the message. The recipient may need to update the app or accept the WhatsApp Terms of Service.\n- `DEVICE_UNSUPPORTED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The recipient's device doesn't support the message.\n- `BLOCKED_BY_OPERATOR` — With `RECIPIENT_NOT_ON_WHATSAPP`. This number can't receive WhatsApp messages from businesses.\n- `MARKETING_OPT_OUT` — With `RECIPIENT_OPTED_OUT`. The recipient turned off marketing messages in WhatsApp.\n- `TEMPLATE_BLOCKED_BY_RECIPIENT` — With `RECIPIENT_OPTED_OUT`. The recipient blocked this template.\n- `SENDER_BLOCKED_BY_RECIPIENT` — With `RECIPIENT_OPTED_OUT`. Messages from your sender to this recipient are blocked.\n- `TEMPLATE_NOT_ELIGIBLE` — With `TEMPLATE_NOT_APPROVED`. WhatsApp can't send this template from your sender. Contact Wavix support.\n- `PER_RECIPIENT_MARKETING_LIMIT` — With `MARKETING_LIMIT_REACHED`. The recipient got the maximum number of marketing messages from all businesses for now.\n- `DAILY_PROMOTIONAL_LIMIT` — With `MARKETING_LIMIT_REACHED`. The recipient reached the daily limit on promotional messages.\n- `UNIQUE_RECIPIENTS_LIMIT` — With `SENDER_LIMIT_REACHED`. Your sender reached the number of recipients it can message in 24 hours.\n- `RECIPIENT_MESSAGE_LIMIT` — With `SENDER_LIMIT_REACHED`. Your sender reached the number of messages it can send to this recipient.\n- `LOW_QUALITY_RATING` — With `SENDER_RATE_LIMITED`. The quality rating of your sender limits how many recipients it can reach.\n- `SENDER_NOT_REGISTERED` — With `SENDER_UNAVAILABLE`. Your sender isn't registered on WhatsApp.\n- `SENDER_RESTRICTED` — With `SENDER_UNAVAILABLE`. WhatsApp restricted what your sender can do.\n- `SENDER_MISCONFIGURED` — With `SENDER_UNAVAILABLE`. Your sender's setup doesn't allow this message. Contact Wavix support.\n- `TEMPLATE_INVALID` — With `DELIVERY_FAILED`. The template is invalid or doesn't match its approved version.\n- `MEDIA_UNSUPPORTED` — With `DELIVERY_FAILED`. WhatsApp doesn't support the media file or its format.\n- `MEDIA_INVALID` — With `DELIVERY_FAILED`. The media file couldn't be read or uploaded.\n- `CONTENT_BLOCKED` — With `DELIVERY_FAILED`. WhatsApp blocked the content for a policy violation.",
+            "example": "BLOCKED_BY_OPERATOR"
+          },
+          "message": {
+            "type": "string",
+            "description": "Short explanation for people, from the most specific of `subcode` and `code`. The text can change, so base your logic on `code`, `subcode`, and `action` instead.",
+            "example": "This number can't receive WhatsApp messages from businesses."
+          },
+          "action": {
+            "type": "string",
+            "description": "What to do about the message. Possible values:\n\n- `resend_later` — Send the message again later.\n- `fix_and_resend` — Change the message, template, or media, then send it again.\n- `do_not_resend` — Don't send the message again. It won't be delivered.\n- `contact_support` — Contact Wavix support.",
+            "enum": [
+              "resend_later",
+              "fix_and_resend",
+              "do_not_resend",
+              "contact_support"
+            ],
+            "example": "do_not_resend"
+          },
+          "docs_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Page for this code under `https://docs.wavix.com/errors/`. It explains the error, how to fix it, and whether sending the message again can help.",
+            "example": "https://docs.wavix.com/errors/recipient-not-on-whatsapp"
+          }
+        }
+      },
       "WhatsAppMessageListItem": {
         "title": "WhatsAppMessageListItem",
         "description": "A WhatsApp message your account sent or received. Returned by `whatsapp_messages_list` and `whatsapp_messages_get`.",
@@ -28639,6 +28729,17 @@
             "format": "date-time",
             "description": "End of the 24-hour window in which you may reply to the customer without a template. It's `null` when the customer hasn't written to the sender in the retained history. A value in the past means the window is closed.",
             "example": "2026-01-16T09:15:00.000Z"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WhatsAppMessageError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why an `outbound` message wasn't delivered. It's `null` unless `status` is `undelivered`, `expired`, or `rejected`."
           }
         }
       },
@@ -30934,50 +31035,6 @@
           }
         }
       },
-      "WhatsAppMessageError": {
-        "title": "WhatsAppMessageError",
-        "description": "Why a message you sent wasn't delivered. Returned in `whatsapp.message.failed` events and by [Retrieve a WhatsApp message](https://docs.wavix.com/api-reference/whatsapp/retrieve-a-whatsapp-message). The code and explanation come from a fixed Wavix list and don't depend on the provider.",
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "code",
-          "title",
-          "docs_url"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `WAVIX_DELIVERY_FAILED`. Possible values:\n\n- `WAVIX_RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.\n- `WAVIX_RECIPIENT_OPTED_OUT` — The recipient stopped marketing messages from your sender.\n- `WAVIX_SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.\n- `WAVIX_TEMPLATE_NOT_APPROVED` — The template is still pending review or was rejected, so it can't be sent yet.\n- `WAVIX_TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.\n- `WAVIX_INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.\n- `WAVIX_MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.\n- `WAVIX_SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.\n- `WAVIX_SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.\n- `WAVIX_SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.\n- `WAVIX_SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.\n- `WAVIX_MESSAGE_EXPIRED` — WhatsApp didn't confirm delivery before the message expired.\n- `WAVIX_DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.",
-            "enum": [
-              "WAVIX_RECIPIENT_NOT_ON_WHATSAPP",
-              "WAVIX_RECIPIENT_OPTED_OUT",
-              "WAVIX_SERVICE_WINDOW_CLOSED",
-              "WAVIX_TEMPLATE_NOT_APPROVED",
-              "WAVIX_TEMPLATE_PAUSED_OR_DISABLED",
-              "WAVIX_INVALID_TEMPLATE_PARAMETERS",
-              "WAVIX_MARKETING_LIMIT_REACHED",
-              "WAVIX_SENDER_LIMIT_REACHED",
-              "WAVIX_SENDER_RATE_LIMITED",
-              "WAVIX_SENDER_UNAVAILABLE",
-              "WAVIX_SERVICE_UNAVAILABLE",
-              "WAVIX_MESSAGE_EXPIRED",
-              "WAVIX_DELIVERY_FAILED"
-            ],
-            "example": "WAVIX_RECIPIENT_NOT_ON_WHATSAPP"
-          },
-          "title": {
-            "type": "string",
-            "description": "Explanation of `code` in plain language. It's the same for every message with this code and never contains the provider's own error text.",
-            "example": "The recipient's number isn't on WhatsApp or can't receive messages."
-          },
-          "docs_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Page for this code under `https://docs.wavix.com/errors/`. It explains the error, how to fix it, and whether sending the message again can help.",
-            "example": "https://docs.wavix.com/errors/recipient-not-on-whatsapp"
-          }
-        }
-      },
       "WhatsAppMessageFailedEventData": {
         "title": "WhatsAppMessageFailedEventData",
         "description": "Data of a `whatsapp.message.failed` event. It identifies the message and says why it wasn't delivered.",
@@ -32215,7 +32272,7 @@
                   "detail": "Authentication is required to access this resource.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_AUTHENTICATION_REQUIRED"
+                  "error_code": "AUTHENTICATION_REQUIRED"
                 }
               },
               "account-suspended": {
@@ -32227,7 +32284,7 @@
                   "detail": "The account is suspended.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_AUTHENTICATION_REQUIRED"
+                  "error_code": "AUTHENTICATION_REQUIRED"
                 }
               },
               "account-blocked": {
@@ -32239,7 +32296,7 @@
                   "detail": "The account is blocked.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_AUTHENTICATION_REQUIRED"
+                  "error_code": "AUTHENTICATION_REQUIRED"
                 }
               },
               "account-without-plan": {
@@ -32251,7 +32308,7 @@
                   "detail": "The account has no subscription plan.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_AUTHENTICATION_REQUIRED"
+                  "error_code": "AUTHENTICATION_REQUIRED"
                 }
               }
             }
@@ -32275,7 +32332,7 @@
                   "detail": "The API key has no access to this resource.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_ACCESS_DENIED"
+                  "error_code": "ACCESS_DENIED"
                 }
               }
             }
@@ -32299,7 +32356,7 @@
                   "detail": "WhatsApp is not available for this account.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_WHATSAPP_NOT_AVAILABLE"
+                  "error_code": "WHATSAPP_NOT_AVAILABLE"
                 }
               },
               "channel-not-enabled": {
@@ -32311,7 +32368,7 @@
                   "detail": "The WhatsApp channel is not enabled for this account.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_CHANNEL_NOT_ENABLED"
+                  "error_code": "CHANNEL_NOT_ENABLED"
                 }
               }
             }
@@ -32343,7 +32400,7 @@
                   "detail": "Too many requests. Try again later.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "rate_limited",
-                  "error_code": "WAVIX_RATE_LIMITED"
+                  "error_code": "RATE_LIMITED"
                 }
               }
             }
@@ -32367,7 +32424,7 @@
                   "detail": "Internal Error",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "retriable",
-                  "error_code": "WAVIX_INTERNAL_ERROR"
+                  "error_code": "INTERNAL_ERROR"
                 }
               }
             }
@@ -32390,7 +32447,7 @@
                   "detail": "The service is temporarily unavailable.",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "retriable",
-                  "error_code": "WAVIX_SERVICE_UNAVAILABLE"
+                  "error_code": "SERVICE_UNAVAILABLE"
                 }
               }
             }
@@ -32414,7 +32471,7 @@
                   "detail": "direction must be inbound or outbound",
                   "instance": "3a525ca2-6909-4c72-9399-905adf7f3a74",
                   "error_class": "permanent",
-                  "error_code": "WAVIX_INVALID_REQUEST"
+                  "error_code": "INVALID_REQUEST"
                 }
               }
             }

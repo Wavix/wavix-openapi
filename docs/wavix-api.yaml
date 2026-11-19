@@ -10,7 +10,7 @@ info:
     name: Wavix
     url: https://wavix.com
     email: support@wavix.com
-  version: 1.6.0
+  version: 2.0.0
 servers:
   - url: https://api.wavix.com
     description: https://api.wavix.com
@@ -9880,7 +9880,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -9890,7 +9890,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 waba-not-linked:
                   summary: The WhatsApp Business Account is not linked to the account
                   value:
@@ -9900,7 +9900,7 @@ paths:
                     detail: WABA Not Linked
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WABA_NOT_LINKED
+                    error_code: WABA_NOT_LINKED
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -10091,7 +10091,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -10101,7 +10101,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 sender-not-found:
                   summary: No sender matches the given number
                   value:
@@ -10111,7 +10111,7 @@ paths:
                     detail: No sender was found for that number on this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_SENDER_NOT_FOUND
+                    error_code: SENDER_NOT_FOUND
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -10268,7 +10268,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -10278,7 +10278,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 sender-not-found:
                   summary: No sender matches the given number
                   value:
@@ -10288,7 +10288,7 @@ paths:
                     detail: No sender was found for that number on this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_SENDER_NOT_FOUND
+                    error_code: SENDER_NOT_FOUND
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -10393,7 +10393,7 @@ paths:
                     detail: the account has several WhatsApp Business Accounts; pass waba_id or sender to choose one (list them with GET /v1/whatsapp/senders)
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_REQUEST
+                    error_code: INVALID_REQUEST
         '401':
           $ref: '#/components/responses/WhatsAppUnauthorizedResponse'
         '403':
@@ -10412,7 +10412,7 @@ paths:
                     detail: The templates capability is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CAPABILITY_MISSING
+                    error_code: CAPABILITY_MISSING
         '404':
           description: WhatsApp isn't available for your account or isn't enabled yet. Or `waba_id` isn't linked to your account, or you have no WhatsApp Business Account and omitted `waba_id`. Or `sender` isn't 6–20 digits, isn't a sender of your account, or isn't connected. Or the WhatsApp Business Account has no connected sender.
           content:
@@ -10429,7 +10429,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -10439,7 +10439,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 waba-not-linked:
                   summary: The WhatsApp Business Account is not linked to the account
                   value:
@@ -10449,7 +10449,7 @@ paths:
                     detail: WABA Not Linked
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WABA_NOT_LINKED
+                    error_code: WABA_NOT_LINKED
                 sender-not-found:
                   summary: The sender isn't connected
                   value:
@@ -10459,7 +10459,7 @@ paths:
                     detail: sender 14155550100 is not connected
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_SENDER_NOT_FOUND
+                    error_code: SENDER_NOT_FOUND
                 no-connected-sender:
                   summary: The WhatsApp Business Account has no connected sender
                   value:
@@ -10469,7 +10469,7 @@ paths:
                     detail: no connected sender on WhatsApp Business Account 102290129340398
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_SENDER_NOT_FOUND
+                    error_code: SENDER_NOT_FOUND
         '409':
           description: A template with this name and language already exists for the WhatsApp Business Account.
           content:
@@ -10485,7 +10485,7 @@ paths:
                     detail: 'templates: order_shipped/en_US already exists for this sender with status approved'
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_TEMPLATE_ALREADY_EXISTS
+                    error_code: TEMPLATE_ALREADY_EXISTS
         '422':
           description: The template content is invalid. A component or button has an unknown or missing key or an unknown type, `components` is empty, or `name`, `language`, or `category` has an invalid value. The `detail` field names the field that's wrong.
           content:
@@ -10501,7 +10501,7 @@ paths:
                     detail: 'components[0]: unknown key "foo"'
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: invalid_template
-                    error_code: WAVIX_TEMPLATE_INVALID
+                    error_code: TEMPLATE_INVALID
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -10595,7 +10595,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -10605,7 +10605,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 template-not-found:
                   summary: No template matches the given ID
                   value:
@@ -10615,7 +10615,7 @@ paths:
                     detail: No template was found for that ID.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_TEMPLATE_NOT_FOUND
+                    error_code: TEMPLATE_NOT_FOUND
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -10736,7 +10736,7 @@ paths:
                     detail: phone numbers must be 6-20 digits, with or without a leading +
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_REQUEST
+                    error_code: INVALID_REQUEST
         '401':
           $ref: '#/components/responses/WhatsAppUnauthorizedResponse'
         '403':
@@ -10755,7 +10755,7 @@ paths:
                     detail: The sending capability is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CAPABILITY_MISSING
+                    error_code: CAPABILITY_MISSING
         '404':
           description: WhatsApp isn't available for your account or isn't enabled yet, or `from` doesn't match one of your senders.
           content:
@@ -10772,7 +10772,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -10782,7 +10782,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 sender-not-found:
                   summary: No sender matches `from`
                   value:
@@ -10792,7 +10792,7 @@ paths:
                     detail: no sender "14155550100" on channel "whatsapp"
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_SENDER_NOT_FOUND
+                    error_code: SENDER_NOT_FOUND
         '422':
           description: The service window is closed. The recipient hasn't messaged this sender in the last 24 hours, so `content` can't be sent. Send a template instead.
           content:
@@ -10809,7 +10809,7 @@ paths:
                     detail: The recipient hasn't messaged this sender in the last 24 hours. Send a template instead.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_SERVICE_WINDOW_CLOSED
+                    error_code: SERVICE_WINDOW_CLOSED
                     service_window_closed_at: '2026-01-14T09:15:00.000Z'
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
@@ -11029,6 +11029,26 @@ paths:
                       created_at: '2026-01-15T10:30:00.123Z'
                       content: null
                       service_window_open_until: '2026-01-16T10:45:00.456Z'
+                      error: null
+                undelivered-template:
+                  summary: An outbound message that wasn't delivered
+                  value:
+                    message:
+                      uuid: 5b8f2d4e-7a1c-4e9b-8d3f-6c2a9e1b4f70
+                      direction: outbound
+                      status: undelivered
+                      from: '+14155550100'
+                      to: '+447537151866'
+                      country: GB
+                      created_at: '2026-01-15T11:02:00.000Z'
+                      content: null
+                      service_window_open_until: null
+                      error:
+                        code: DELIVERY_FAILED
+                        subcode: TEMPLATE_INVALID
+                        message: The template is invalid or doesn't match its approved version.
+                        action: fix_and_resend
+                        docs_url: https://docs.wavix.com/errors/delivery-failed
                 inbound-image:
                   summary: An image a customer sent
                   value:
@@ -11066,7 +11086,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -11076,7 +11096,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 resource-not-found:
                   summary: No message matches the given uuid
                   value:
@@ -11086,7 +11106,7 @@ paths:
                     detail: Resource Not Found
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_RESOURCE_NOT_FOUND
+                    error_code: RESOURCE_NOT_FOUND
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -11177,7 +11197,7 @@ paths:
                     detail: 'The request body has an unknown field: "events".'
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_REQUEST
+                    error_code: INVALID_REQUEST
         '401':
           $ref: '#/components/responses/WhatsAppUnauthorizedResponse'
         '403':
@@ -11198,7 +11218,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -11208,7 +11228,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
         '409':
           description: Your account already has a webhook for this group. Change its URL with [Update a WhatsApp webhook](https://docs.wavix.com/api-reference/whatsapp/update-a-whatsapp-webhook) instead.
           content:
@@ -11225,7 +11245,7 @@ paths:
                     detail: Webhook Already Exists
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WEBHOOK_ALREADY_EXISTS
+                    error_code: WEBHOOK_ALREADY_EXISTS
         '413':
           description: The request body is over 16 KiB.
           content:
@@ -11242,7 +11262,7 @@ paths:
                     detail: The request body is too large.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_PAYLOAD_TOO_LARGE
+                    error_code: PAYLOAD_TOO_LARGE
         '422':
           description: '`url` isn''t an `https` URL without credentials, is longer than 2,048 bytes, or has a host with no address, or resolves to an address that isn''t public or that Wavix doesn''t allow. The `detail` field says which.'
           content:
@@ -11259,7 +11279,7 @@ paths:
                     detail: The URL host resolves to an address that is not public or that Wavix does not allow.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_WEBHOOK_URL
+                    error_code: INVALID_WEBHOOK_URL
         '500':
           $ref: '#/components/responses/WhatsAppInternalServerErrorResponse'
         '503':
@@ -11277,7 +11297,7 @@ paths:
                     detail: The service is temporarily unavailable.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: retriable
-                    error_code: WAVIX_SERVICE_UNAVAILABLE
+                    error_code: SERVICE_UNAVAILABLE
                 webhook-url-unverified:
                   summary: Wavix couldn't resolve the host of the URL
                   value:
@@ -11287,7 +11307,7 @@ paths:
                     detail: Webhook URL Unverified
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: retriable
-                    error_code: WAVIX_WEBHOOK_URL_UNVERIFIED
+                    error_code: WEBHOOK_URL_UNVERIFIED
       deprecated: false
     get:
       tags:
@@ -11373,7 +11393,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
         '500':
           $ref: '#/components/responses/WhatsAppInternalServerErrorResponse'
         '503':
@@ -11458,7 +11478,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 webhook-not-found:
                   summary: No webhook matches the given uuid
                   value:
@@ -11468,7 +11488,7 @@ paths:
                     detail: Webhook Not Found
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WEBHOOK_NOT_FOUND
+                    error_code: WEBHOOK_NOT_FOUND
         '500':
           $ref: '#/components/responses/WhatsAppInternalServerErrorResponse'
         '503':
@@ -11566,7 +11586,7 @@ paths:
                     detail: 'The request body has an unknown field: "group".'
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_REQUEST
+                    error_code: INVALID_REQUEST
         '401':
           $ref: '#/components/responses/WhatsAppUnauthorizedResponse'
         '403':
@@ -11587,7 +11607,7 @@ paths:
                     detail: Webhook Not Found
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WEBHOOK_NOT_FOUND
+                    error_code: WEBHOOK_NOT_FOUND
         '413':
           description: The request body is over 16 KiB.
           content:
@@ -11604,7 +11624,7 @@ paths:
                     detail: The request body is too large.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_PAYLOAD_TOO_LARGE
+                    error_code: PAYLOAD_TOO_LARGE
         '422':
           description: '`url` isn''t an `https` URL without credentials, is longer than 2,048 bytes, or has a host with no address, or resolves to an address that isn''t public or that Wavix doesn''t allow. The `detail` field says which.'
           content:
@@ -11621,7 +11641,7 @@ paths:
                     detail: The URL host resolves to an address that is not public or that Wavix does not allow.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_WEBHOOK_URL
+                    error_code: INVALID_WEBHOOK_URL
         '500':
           $ref: '#/components/responses/WhatsAppInternalServerErrorResponse'
         '503':
@@ -11639,7 +11659,7 @@ paths:
                     detail: The service is temporarily unavailable.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: retriable
-                    error_code: WAVIX_SERVICE_UNAVAILABLE
+                    error_code: SERVICE_UNAVAILABLE
                 webhook-url-unverified:
                   summary: Wavix couldn't resolve the host of the URL
                   value:
@@ -11649,7 +11669,7 @@ paths:
                     detail: Webhook URL Unverified
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: retriable
-                    error_code: WAVIX_WEBHOOK_URL_UNVERIFIED
+                    error_code: WEBHOOK_URL_UNVERIFIED
       deprecated: false
     delete:
       tags:
@@ -11709,7 +11729,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 webhook-not-found:
                   summary: No webhook matches the given uuid
                   value:
@@ -11719,7 +11739,7 @@ paths:
                     detail: Webhook Not Found
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WEBHOOK_NOT_FOUND
+                    error_code: WEBHOOK_NOT_FOUND
         '500':
           $ref: '#/components/responses/WhatsAppInternalServerErrorResponse'
         '503':
@@ -11810,7 +11830,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -11820,7 +11840,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 webhook-not-found:
                   summary: No webhook matches the given uuid
                   value:
@@ -11830,7 +11850,7 @@ paths:
                     detail: Webhook Not Found
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WEBHOOK_NOT_FOUND
+                    error_code: WEBHOOK_NOT_FOUND
         '500':
           $ref: '#/components/responses/WhatsAppInternalServerErrorResponse'
         '503':
@@ -11964,7 +11984,7 @@ paths:
                     detail: 'after: event not found'
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_INVALID_REQUEST
+                    error_code: INVALID_REQUEST
         '401':
           $ref: '#/components/responses/WhatsAppUnauthorizedResponse'
         '403':
@@ -12053,7 +12073,7 @@ paths:
                     detail: WhatsApp is not available for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                    error_code: WHATSAPP_NOT_AVAILABLE
                 channel-not-enabled:
                   summary: WhatsApp is not enabled yet for this account
                   value:
@@ -12063,7 +12083,7 @@ paths:
                     detail: The WhatsApp channel is not enabled for this account.
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_CHANNEL_NOT_ENABLED
+                    error_code: CHANNEL_NOT_ENABLED
                 resource-not-found:
                   summary: No media matches the given ID
                   value:
@@ -12073,7 +12093,7 @@ paths:
                     detail: Resource Not Found
                     instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                     error_class: permanent
-                    error_code: WAVIX_RESOURCE_NOT_FOUND
+                    error_code: RESOURCE_NOT_FOUND
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -12573,9 +12593,11 @@ webhooks:
                       language: en_US
                     status: undelivered
                     error:
-                      code: WAVIX_DELIVERY_FAILED
-                      title: The message wasn't delivered, and the cause isn't one of the other codes.
-                      docs_url: https://docs.wavix.com/errors/delivery-failed
+                      code: RECIPIENT_NOT_ON_WHATSAPP
+                      subcode: BLOCKED_BY_OPERATOR
+                      message: This number can't receive WhatsApp messages from businesses.
+                      action: do_not_resend
+                      docs_url: https://docs.wavix.com/errors/recipient-not-on-whatsapp
               marketing-stopped:
                 summary: The contact stopped marketing messages
                 value:
@@ -20442,8 +20464,8 @@ components:
           example: permanent
         error_code:
           type: string
-          description: Stable machine-readable error code. It's the problem type slug in upper case with the `WAVIX_` prefix.
-          example: WAVIX_WHATSAPP_NOT_AVAILABLE
+          description: Stable machine-readable error code. It's the problem type slug in upper case, with underscores in place of hyphens.
+          example: WHATSAPP_NOT_AVAILABLE
         service_window_closed_at:
           type:
             - string
@@ -21150,6 +21172,102 @@ components:
           type: string
           description: Media type the file is served with, such as `image/jpeg`. Present only with `media_id`, and absent when the type isn't known.
           example: image/jpeg
+    WhatsAppMessageError:
+      title: WhatsAppMessageError
+      description: Why a message you sent wasn't delivered. Returned in `whatsapp.message.failed` events and when you retrieve or list WhatsApp messages. Wavix retries temporary failures itself, so you get an error only after Wavix stops retrying.
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - message
+        - action
+        - docs_url
+      properties:
+        code:
+          type: string
+          description: |-
+            Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `DELIVERY_FAILED`. Possible values:
+
+            - `RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.
+            - `RECIPIENT_OPTED_OUT` — The recipient turned off marketing messages or blocked your sender or template.
+            - `SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.
+            - `TEMPLATE_NOT_APPROVED` — The template is pending review, was rejected, or WhatsApp hasn't finished preparing it, so it can't be sent yet.
+            - `TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.
+            - `INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.
+            - `MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.
+            - `SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.
+            - `SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.
+            - `SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.
+            - `SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.
+            - `MESSAGE_EXPIRED` — The message expired before it was delivered.
+            - `DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.
+          enum:
+            - RECIPIENT_NOT_ON_WHATSAPP
+            - RECIPIENT_OPTED_OUT
+            - SERVICE_WINDOW_CLOSED
+            - TEMPLATE_NOT_APPROVED
+            - TEMPLATE_PAUSED_OR_DISABLED
+            - INVALID_TEMPLATE_PARAMETERS
+            - MARKETING_LIMIT_REACHED
+            - SENDER_LIMIT_REACHED
+            - SENDER_RATE_LIMITED
+            - SENDER_UNAVAILABLE
+            - SERVICE_UNAVAILABLE
+            - MESSAGE_EXPIRED
+            - DELIVERY_FAILED
+          example: RECIPIENT_NOT_ON_WHATSAPP
+        subcode:
+          type:
+            - string
+            - 'null'
+          description: |-
+            Finer cause within `code`, or `null` when Wavix has no finer cause. Wavix can add values, so handle a value you don't recognize by `code` alone. Possible values:
+
+            - `NOT_REGISTERED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The number isn't registered on WhatsApp.
+            - `APP_UPDATE_REQUIRED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The recipient's WhatsApp app can't show the message. The recipient may need to update the app or accept the WhatsApp Terms of Service.
+            - `DEVICE_UNSUPPORTED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The recipient's device doesn't support the message.
+            - `BLOCKED_BY_OPERATOR` — With `RECIPIENT_NOT_ON_WHATSAPP`. This number can't receive WhatsApp messages from businesses.
+            - `MARKETING_OPT_OUT` — With `RECIPIENT_OPTED_OUT`. The recipient turned off marketing messages in WhatsApp.
+            - `TEMPLATE_BLOCKED_BY_RECIPIENT` — With `RECIPIENT_OPTED_OUT`. The recipient blocked this template.
+            - `SENDER_BLOCKED_BY_RECIPIENT` — With `RECIPIENT_OPTED_OUT`. Messages from your sender to this recipient are blocked.
+            - `TEMPLATE_NOT_ELIGIBLE` — With `TEMPLATE_NOT_APPROVED`. WhatsApp can't send this template from your sender. Contact Wavix support.
+            - `PER_RECIPIENT_MARKETING_LIMIT` — With `MARKETING_LIMIT_REACHED`. The recipient got the maximum number of marketing messages from all businesses for now.
+            - `DAILY_PROMOTIONAL_LIMIT` — With `MARKETING_LIMIT_REACHED`. The recipient reached the daily limit on promotional messages.
+            - `UNIQUE_RECIPIENTS_LIMIT` — With `SENDER_LIMIT_REACHED`. Your sender reached the number of recipients it can message in 24 hours.
+            - `RECIPIENT_MESSAGE_LIMIT` — With `SENDER_LIMIT_REACHED`. Your sender reached the number of messages it can send to this recipient.
+            - `LOW_QUALITY_RATING` — With `SENDER_RATE_LIMITED`. The quality rating of your sender limits how many recipients it can reach.
+            - `SENDER_NOT_REGISTERED` — With `SENDER_UNAVAILABLE`. Your sender isn't registered on WhatsApp.
+            - `SENDER_RESTRICTED` — With `SENDER_UNAVAILABLE`. WhatsApp restricted what your sender can do.
+            - `SENDER_MISCONFIGURED` — With `SENDER_UNAVAILABLE`. Your sender's setup doesn't allow this message. Contact Wavix support.
+            - `TEMPLATE_INVALID` — With `DELIVERY_FAILED`. The template is invalid or doesn't match its approved version.
+            - `MEDIA_UNSUPPORTED` — With `DELIVERY_FAILED`. WhatsApp doesn't support the media file or its format.
+            - `MEDIA_INVALID` — With `DELIVERY_FAILED`. The media file couldn't be read or uploaded.
+            - `CONTENT_BLOCKED` — With `DELIVERY_FAILED`. WhatsApp blocked the content for a policy violation.
+          example: BLOCKED_BY_OPERATOR
+        message:
+          type: string
+          description: Short explanation for people, from the most specific of `subcode` and `code`. The text can change, so base your logic on `code`, `subcode`, and `action` instead.
+          example: This number can't receive WhatsApp messages from businesses.
+        action:
+          type: string
+          description: |-
+            What to do about the message. Possible values:
+
+            - `resend_later` — Send the message again later.
+            - `fix_and_resend` — Change the message, template, or media, then send it again.
+            - `do_not_resend` — Don't send the message again. It won't be delivered.
+            - `contact_support` — Contact Wavix support.
+          enum:
+            - resend_later
+            - fix_and_resend
+            - do_not_resend
+            - contact_support
+          example: do_not_resend
+        docs_url:
+          type: string
+          format: uri
+          description: Page for this code under `https://docs.wavix.com/errors/`. It explains the error, how to fix it, and whether sending the message again can help.
+          example: https://docs.wavix.com/errors/recipient-not-on-whatsapp
     WhatsAppMessageListItem:
       title: WhatsAppMessageListItem
       description: A WhatsApp message your account sent or received. Returned by `whatsapp_messages_list` and `whatsapp_messages_get`.
@@ -21232,6 +21350,11 @@ components:
           format: date-time
           description: End of the 24-hour window in which you may reply to the customer without a template. It's `null` when the customer hasn't written to the sender in the retained history. A value in the past means the window is closed.
           example: '2026-01-16T09:15:00.000Z'
+        error:
+          anyOf:
+            - $ref: '#/components/schemas/WhatsAppMessageError'
+            - type: 'null'
+          description: Why an `outbound` message wasn't delivered. It's `null` unless `status` is `undelivered`, `expired`, or `rejected`.
     WhatsAppMessageListResponse:
       title: WhatsAppMessageListResponse
       description: Returned by `whatsapp_messages_list`.
@@ -23091,58 +23214,6 @@ components:
           example: '2026-10-21T08:31:05.000000Z'
         data:
           $ref: '#/components/schemas/WhatsAppMessageStatusEventData'
-    WhatsAppMessageError:
-      title: WhatsAppMessageError
-      description: Why a message you sent wasn't delivered. Returned in `whatsapp.message.failed` events and by [Retrieve a WhatsApp message](https://docs.wavix.com/api-reference/whatsapp/retrieve-a-whatsapp-message). The code and explanation come from a fixed Wavix list and don't depend on the provider.
-      type: object
-      additionalProperties: false
-      required:
-        - code
-        - title
-        - docs_url
-      properties:
-        code:
-          type: string
-          description: |-
-            Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `WAVIX_DELIVERY_FAILED`. Possible values:
-
-            - `WAVIX_RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.
-            - `WAVIX_RECIPIENT_OPTED_OUT` — The recipient stopped marketing messages from your sender.
-            - `WAVIX_SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.
-            - `WAVIX_TEMPLATE_NOT_APPROVED` — The template is still pending review or was rejected, so it can't be sent yet.
-            - `WAVIX_TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.
-            - `WAVIX_INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.
-            - `WAVIX_MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.
-            - `WAVIX_SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.
-            - `WAVIX_SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.
-            - `WAVIX_SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.
-            - `WAVIX_SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.
-            - `WAVIX_MESSAGE_EXPIRED` — WhatsApp didn't confirm delivery before the message expired.
-            - `WAVIX_DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.
-          enum:
-            - WAVIX_RECIPIENT_NOT_ON_WHATSAPP
-            - WAVIX_RECIPIENT_OPTED_OUT
-            - WAVIX_SERVICE_WINDOW_CLOSED
-            - WAVIX_TEMPLATE_NOT_APPROVED
-            - WAVIX_TEMPLATE_PAUSED_OR_DISABLED
-            - WAVIX_INVALID_TEMPLATE_PARAMETERS
-            - WAVIX_MARKETING_LIMIT_REACHED
-            - WAVIX_SENDER_LIMIT_REACHED
-            - WAVIX_SENDER_RATE_LIMITED
-            - WAVIX_SENDER_UNAVAILABLE
-            - WAVIX_SERVICE_UNAVAILABLE
-            - WAVIX_MESSAGE_EXPIRED
-            - WAVIX_DELIVERY_FAILED
-          example: WAVIX_RECIPIENT_NOT_ON_WHATSAPP
-        title:
-          type: string
-          description: Explanation of `code` in plain language. It's the same for every message with this code and never contains the provider's own error text.
-          example: The recipient's number isn't on WhatsApp or can't receive messages.
-        docs_url:
-          type: string
-          format: uri
-          description: Page for this code under `https://docs.wavix.com/errors/`. It explains the error, how to fix it, and whether sending the message again can help.
-          example: https://docs.wavix.com/errors/recipient-not-on-whatsapp
     WhatsAppMessageFailedEventData:
       title: WhatsAppMessageFailedEventData
       description: Data of a `whatsapp.message.failed` event. It identifies the message and says why it wasn't delivered.
@@ -24132,7 +24203,7 @@ components:
                 detail: Authentication is required to access this resource.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_AUTHENTICATION_REQUIRED
+                error_code: AUTHENTICATION_REQUIRED
             account-suspended:
               summary: The account is suspended
               value:
@@ -24142,7 +24213,7 @@ components:
                 detail: The account is suspended.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_AUTHENTICATION_REQUIRED
+                error_code: AUTHENTICATION_REQUIRED
             account-blocked:
               summary: The account is blocked
               value:
@@ -24152,7 +24223,7 @@ components:
                 detail: The account is blocked.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_AUTHENTICATION_REQUIRED
+                error_code: AUTHENTICATION_REQUIRED
             account-without-plan:
               summary: The account has no subscription plan
               value:
@@ -24162,7 +24233,7 @@ components:
                 detail: The account has no subscription plan.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_AUTHENTICATION_REQUIRED
+                error_code: AUTHENTICATION_REQUIRED
     WhatsAppForbiddenResponse:
       description: Returns when the API key doesn't have the scope the operation needs, or the request isn't allowed for the account's region.
       headers: {}
@@ -24179,7 +24250,7 @@ components:
                 detail: The API key has no access to this resource.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_ACCESS_DENIED
+                error_code: ACCESS_DENIED
     WhatsAppChannelUnavailableResponse:
       description: WhatsApp isn't available for your account, or the WhatsApp channel isn't enabled for it yet.
       content:
@@ -24196,7 +24267,7 @@ components:
                 detail: WhatsApp is not available for this account.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_WHATSAPP_NOT_AVAILABLE
+                error_code: WHATSAPP_NOT_AVAILABLE
             channel-not-enabled:
               summary: WhatsApp is not enabled yet for this account
               value:
@@ -24206,7 +24277,7 @@ components:
                 detail: The WhatsApp channel is not enabled for this account.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_CHANNEL_NOT_ENABLED
+                error_code: CHANNEL_NOT_ENABLED
     WhatsAppTooManyRequestsResponse:
       description: Returns when the account has exceeded its request rate limit.
       headers:
@@ -24228,7 +24299,7 @@ components:
                 detail: Too many requests. Try again later.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: rate_limited
-                error_code: WAVIX_RATE_LIMITED
+                error_code: RATE_LIMITED
     WhatsAppInternalServerErrorResponse:
       description: Returns when an unexpected error occurs on the server; the request may be retried.
       headers: {}
@@ -24245,7 +24316,7 @@ components:
                 detail: Internal Error
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: retriable
-                error_code: WAVIX_INTERNAL_ERROR
+                error_code: INTERNAL_ERROR
     WhatsAppServiceUnavailableResponse:
       description: Returns when the service is temporarily unavailable; the request may be retried.
       content:
@@ -24261,7 +24332,7 @@ components:
                 detail: The service is temporarily unavailable.
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: retriable
-                error_code: WAVIX_SERVICE_UNAVAILABLE
+                error_code: SERVICE_UNAVAILABLE
     WhatsAppBadRequestResponse:
       description: The `direction`, `from`, or `to` query parameter is invalid. The `detail` field says which one.
       headers: {}
@@ -24278,7 +24349,7 @@ components:
                 detail: direction must be inbound or outbound
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
-                error_code: WAVIX_INVALID_REQUEST
+                error_code: INVALID_REQUEST
   parameters:
     WhatsAppPageParam:
       name: page
