@@ -13,7 +13,7 @@
       "url": "https://wavix.com",
       "email": "support@wavix.com"
     },
-    "version": "3.0.0"
+    "version": "3.1.0"
   },
   "servers": [
     {
@@ -8021,7 +8021,7 @@
         "x-fern-sdk-method-name": "create",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": true,
           "expose": true,
           "toolset": "messaging"
@@ -9232,7 +9232,7 @@
         "x-fern-sdk-method-name": "create",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": true,
           "expose": true,
           "toolset": "messaging"
@@ -11566,8 +11566,8 @@
         ],
         "x-fern-sdk-method-name": "get",
         "x-mcp": {
-          "readOnly": true,
-          "destructive": false,
+          "readOnly": false,
+          "destructive": true,
           "openWorld": true,
           "expose": true,
           "toolset": "verification"
@@ -11654,7 +11654,7 @@
           "Number validator"
         ],
         "summary": "Validate multiple numbers",
-        "description": "Validates a batch of phone numbers. When `async` is `true`, returns a `request_id` to poll for results instead of the validation details.",
+        "description": "Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details.",
         "operationId": "number_validator_create_bulk",
         "security": [
           {
@@ -11669,7 +11669,7 @@
         "x-fern-sdk-method-name": "createBulk",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": true,
           "expose": true,
           "toolset": "verification"
@@ -11693,7 +11693,7 @@
         },
         "responses": {
           "200": {
-            "description": "Returns the validation results, or a `request_id` when validation is asynchronous.",
+            "description": "Returns the validation results, or a `request_uuid` when validation is asynchronous.",
             "headers": {},
             "content": {
               "application/json": {
@@ -11728,6 +11728,12 @@
                           "error_code": "000"
                         }
                       ]
+                    }
+                  },
+                  "async": {
+                    "summary": "Asynchronous validation started",
+                    "value": {
+                      "request_uuid": "15323ba4-80c1-41be-b8e7-07bb435c7445"
                     }
                   }
                 }
@@ -11784,7 +11790,7 @@
           {
             "name": "request_id",
             "in": "path",
-            "description": "The `request_id` returned by the asynchronous bulk validation request.",
+            "description": "The `request_uuid` returned by the asynchronous bulk validation request.",
             "required": true,
             "style": "simple",
             "schema": {
@@ -12081,7 +12087,7 @@
         "x-fern-sdk-method-name": "create",
         "x-mcp": {
           "readOnly": false,
-          "destructive": false,
+          "destructive": true,
           "openWorld": true,
           "expose": true,
           "toolset": "messaging"
@@ -24775,7 +24781,9 @@
         "title": "TenDLCBrandVettingAppealCreateRequest",
         "required": [
           "appeal_categories",
-          "evidence"
+          "evidence",
+          "evp_id",
+          "vetting_id"
         ],
         "type": "object",
         "additionalProperties": false,
@@ -24813,12 +24821,12 @@
           },
           "evp_id": {
             "type": "string",
-            "description": "EVP ID.",
+            "description": "Code of the external vetting provider whose vetting is appealed, as returned in the Brand's vettings.",
             "example": "AEGIS"
           },
           "vetting_id": {
             "type": "string",
-            "description": "Vetting ID.",
+            "description": "ID of the external vetting to appeal, as returned in the Brand's vettings.",
             "example": "48c0ffaa-4e51-4d44-3982-08dcb9856232"
           }
         },
@@ -26083,8 +26091,8 @@
             "items": {
               "type": "string"
             },
-            "maxItems": 1000,
-            "description": "List of phone numbers to get detailed information about. Maximum 1000 numbers per request.",
+            "maxItems": 100000,
+            "description": "List of phone numbers to get detailed information about. Maximum 500 numbers per request, or 100000 when `async` is `true`.",
             "example": [
               "971501390098",
               "971504359195"
@@ -26286,11 +26294,14 @@
           {
             "type": "object",
             "title": "Async Request",
-            "description": "Returned when validation runs asynchronously; poll results using `request_id`.",
+            "description": "Returned when validation runs asynchronously; poll results using `request_uuid`.",
+            "required": [
+              "request_uuid"
+            ],
             "properties": {
-              "request_id": {
+              "request_uuid": {
                 "type": "string",
-                "description": "Request ID. Use to poll validation results when `async` is `true`.",
+                "description": "ID of the validation request. Pass it as `request_id` to retrieve the results when `async` is `true`.",
                 "example": "15323ba4-80c1-41be-b8e7-07bb435c7445"
               }
             }
