@@ -13,7 +13,7 @@
       "url": "https://wavix.com",
       "email": "support@wavix.com"
     },
-    "version": "3.1.0"
+    "version": "3.1.1"
   },
   "servers": [
     {
@@ -1657,7 +1657,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "numbers"
         },
@@ -1783,7 +1783,7 @@
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "numbers"
         },
@@ -1872,7 +1872,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "numbers"
         },
@@ -1960,7 +1960,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "numbers"
         },
@@ -2284,7 +2284,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "numbers"
         },
@@ -2656,7 +2656,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": false,
           "toolset": "numbers"
         },
@@ -3066,7 +3066,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "voice_history"
         },
@@ -4091,7 +4091,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": false,
           "toolset": "voice_history"
         },
@@ -4328,7 +4328,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "voice_history"
         },
@@ -4983,7 +4983,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "calls"
         },
@@ -5326,7 +5326,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "calls"
         },
@@ -5502,7 +5502,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "calls"
         },
@@ -7896,7 +7896,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -8167,7 +8167,7 @@
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -8331,7 +8331,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": false,
           "toolset": "messaging"
         },
@@ -8966,7 +8966,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -9103,7 +9103,7 @@
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -9371,7 +9371,7 @@
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -9530,7 +9530,7 @@
         "x-mcp": {
           "readOnly": true,
           "destructive": false,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -10513,7 +10513,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -10682,7 +10682,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "messaging"
         },
@@ -13391,7 +13391,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "account"
         },
@@ -13762,7 +13762,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "account"
         },
@@ -13955,7 +13955,7 @@
         "x-mcp": {
           "readOnly": false,
           "destructive": true,
-          "openWorld": false,
+          "openWorld": true,
           "expose": true,
           "toolset": "account"
         },

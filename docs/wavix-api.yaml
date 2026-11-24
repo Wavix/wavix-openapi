@@ -10,7 +10,7 @@ info:
     name: Wavix
     url: https://wavix.com
     email: support@wavix.com
-  version: 3.1.0
+  version: 3.1.1
 servers:
   - url: https://api.wavix.com
     description: https://api.wavix.com
@@ -1127,7 +1127,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: numbers
       parameters: []
@@ -1218,7 +1218,7 @@ paths:
       x-mcp:
         readOnly: true
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: numbers
       parameters: []
@@ -1279,7 +1279,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: numbers
       requestBody:
@@ -1337,7 +1337,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: numbers
       parameters: []
@@ -1566,7 +1566,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: numbers
       parameters:
@@ -1834,7 +1834,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: false
         toolset: numbers
       parameters: []
@@ -2126,7 +2126,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: voice_history
       parameters:
@@ -2861,7 +2861,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: false
         toolset: voice_history
       parameters: []
@@ -3027,7 +3027,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: voice_history
       parameters:
@@ -3478,7 +3478,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: calls
       parameters:
@@ -3703,7 +3703,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: calls
       parameters:
@@ -3819,7 +3819,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: calls
       parameters:
@@ -5489,7 +5489,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -5669,7 +5669,7 @@ paths:
       x-mcp:
         readOnly: true
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -5778,7 +5778,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: false
         toolset: messaging
       parameters:
@@ -6205,7 +6205,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -6299,7 +6299,7 @@ paths:
       x-mcp:
         readOnly: true
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -6478,7 +6478,7 @@ paths:
       x-mcp:
         readOnly: true
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -6586,7 +6586,7 @@ paths:
       x-mcp:
         readOnly: true
         destructive: false
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -7314,7 +7314,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -7439,7 +7439,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: messaging
       parameters:
@@ -9293,7 +9293,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: account
       parameters: []
@@ -9551,7 +9551,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: account
       parameters: []
@@ -9685,7 +9685,7 @@ paths:
       x-mcp:
         readOnly: false
         destructive: true
-        openWorld: false
+        openWorld: true
         expose: true
         toolset: account
       parameters:
