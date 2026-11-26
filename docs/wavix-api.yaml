@@ -10,7 +10,7 @@ info:
     name: Wavix
     url: https://wavix.com
     email: support@wavix.com
-  version: 3.1.1
+  version: 3.2.0
 servers:
   - url: https://api.wavix.com
     description: https://api.wavix.com
@@ -1249,6 +1249,8 @@ paths:
                         require_docs: []
                         sms_enabled: false
                         sms_price: 0
+                    unavailable_dids:
+                      - '541139862175'
                     doc_types:
                       - id: 1
                         name: id
@@ -1263,6 +1265,17 @@ paths:
           $ref: '#/components/responses/UnauthorizedErrorResponse'
         '403':
           $ref: '#/components/responses/ForbiddenErrorResponse'
+        '503':
+          description: Returns when the availability of the phone numbers in the cart can't be checked. The cart isn't changed; retry the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+              examples:
+                default:
+                  value:
+                    success: false
+                    message: Failed to load the cart. Please try again later.
       deprecated: false
     delete:
       tags:
@@ -1339,6 +1352,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: numbers
       parameters: []
       requestBody:
@@ -2128,6 +2142,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: voice_history
       parameters:
         - name: call_id
@@ -3184,6 +3199,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        confirm: true
         toolset: voice_config
       parameters: []
       requestBody:
@@ -3302,6 +3318,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: calls
       parameters: []
       requestBody:
@@ -4253,6 +4270,7 @@ paths:
         destructive: true
         openWorld: false
         expose: true
+        billable: true
         toolset: messaging
       parameters: []
       requestBody:
@@ -4564,7 +4582,7 @@ paths:
       tags:
         - SMS and MMS
       summary: Send a message
-      description: Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback. The recipient must be opted in to receive messages from the account; sending to an opted-out number fails.
+      description: Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback. The recipient must be opted in to receive messages from the account; sending to an opted-out number fails. Each message is charged to the account balance; `charge` in the response shows the amount.
       operationId: sms_and_mms_messages_send
       security:
         - bearerAuth:
@@ -4578,6 +4596,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: messaging
       parameters: []
       requestBody:
@@ -5193,6 +5212,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: messaging
       parameters: []
       requestBody:
@@ -6113,6 +6133,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: messaging
       parameters:
         - name: brand_id
@@ -8020,7 +8041,7 @@ paths:
       tags:
         - Number validator
       summary: Validate a number
-      description: Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below.
+      description: Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below. Each validation is charged to the account balance; `charge` in the response shows the amount.
       operationId: number_validator_get
       security:
         - bearerAuth:
@@ -8033,6 +8054,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: verification
       parameters:
         - name: phone_number
@@ -8095,7 +8117,7 @@ paths:
       tags:
         - Number validator
       summary: Validate multiple numbers
-      description: Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details.
+      description: Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details. Each number in the batch is charged to the account balance.
       operationId: number_validator_create_bulk
       security:
         - bearerAuth:
@@ -8108,6 +8130,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: verification
       parameters: []
       requestBody:
@@ -8273,6 +8296,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: calls
       parameters: []
       requestBody:
@@ -8580,6 +8604,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: verification
       parameters: []
       requestBody:
@@ -8750,7 +8775,7 @@ paths:
       tags:
         - 2FA
       summary: Resend a code
-      description: Resends the OTP for the verification identified by `session_id` over the specified channel. Previously sent codes are invalidated.
+      description: Resends the OTP for the verification identified by `session_id` over the specified channel. Previously sent codes are invalidated. Each code sent is charged to the account balance.
       operationId: two_fa_verification_resend
       security:
         - bearerAuth:
@@ -8764,6 +8789,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: verification
       parameters:
         - name: session_id
@@ -9687,6 +9713,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        confirm: true
         toolset: account
       parameters:
         - name: id
@@ -10455,6 +10482,7 @@ paths:
         destructive: false
         openWorld: true
         expose: true
+        confirm: true
         toolset: messaging
       parameters: []
       requestBody:
@@ -10770,7 +10798,7 @@ paths:
 
         **Behavior:** Returns `201` with the new message. Poll `whatsapp_messages_get` for the delivery outcome. A repeat send with the same `idempotency_key` returns `200` with the original message and sends nothing. Returns `422` when `content` is sent and the service window is closed. The response then carries `service_window_closed_at`.
 
-        **Requires:** Your account must have WhatsApp and its sending capability enabled, must have a subscription plan, and must not be blocked or suspended. `from` must be a sender registered on your account.
+        **Requires:** Your account must have WhatsApp and its sending capability enabled, must have a subscription plan, and must not be blocked or suspended. `from` must be a sender registered on your account, and if the message is charged, the available balance of your account must cover the message rate.
       operationId: whatsapp_messages_send
       security:
         - bearerAuth:
@@ -10785,6 +10813,7 @@ paths:
         destructive: true
         openWorld: true
         expose: true
+        billable: true
         toolset: messaging
       parameters: []
       requestBody:
@@ -10875,6 +10904,8 @@ paths:
                     error_code: INVALID_REQUEST
         '401':
           $ref: '#/components/responses/WhatsAppUnauthorizedResponse'
+        '402':
+          $ref: '#/components/responses/WhatsAppPaymentRequiredResponse'
         '403':
           description: Returns when the API key doesn't have the scope the endpoint needs, the request isn't allowed for the account's region, or the sending capability is not enabled for the account.
           content:
@@ -10930,7 +10961,7 @@ paths:
                     error_class: permanent
                     error_code: SENDER_NOT_FOUND
         '422':
-          description: The service window is closed. The recipient hasn't messaged this sender in the last 24 hours, so `content` can't be sent. Send a template instead.
+          description: The message can't be sent, and nothing is sent. Either the service window is closed (the recipient hasn't messaged this sender in the last 24 hours, so `content` can't be sent; send a template instead), or no WhatsApp rate is set for the recipient's country and the message category, so the message can't be charged.
           content:
             application/problem+json:
               schema:
@@ -10947,6 +10978,16 @@ paths:
                     error_class: permanent
                     error_code: SERVICE_WINDOW_CLOSED
                     service_window_closed_at: '2026-01-14T09:15:00.000Z'
+                destination-not-priced:
+                  summary: The destination has no rate
+                  value:
+                    type: https://docs.wavix.com/errors/destination-not-priced
+                    title: Destination Not Priced
+                    status: 422
+                    detail: No WhatsApp price is set for this destination and message category (no_price).
+                    instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
+                    error_class: permanent
+                    error_code: DESTINATION_NOT_PRICED
         '429':
           $ref: '#/components/responses/WhatsAppTooManyRequestsResponse'
         '500':
@@ -10963,7 +11004,7 @@ paths:
 
         Messages that customers send to your senders appear here alongside the messages you sent.
 
-        **Behavior:** Messages are ordered from newest to oldest. If `direction` isn't specified, the response includes both directions, and when several filters are specified, a message must match all of them. Returns `400` when `direction`, `from`, or `to` isn't valid.
+        **Behavior:** Messages are ordered from newest to oldest. If `direction` isn't specified, the response includes both directions, and when several filters are specified, a message must match all of them. Returns `400` when `direction`, `phone_number`, `sender`, `from`, or `to` isn't valid.
 
         **Requires:** Your account must have WhatsApp enabled, must have a subscription plan, and must not be blocked or suspended.
       operationId: whatsapp_messages_list
@@ -11023,6 +11064,22 @@ paths:
               - rejected
               - unknown
           example: delivered
+        - name: phone_number
+          in: query
+          required: false
+          description: Filters messages where this number is the sender or the recipient, in E.164 format. The leading `+` is optional.
+          schema:
+            type: string
+            pattern: ^\+?\d{6,20}$
+          example: '+447537151866'
+        - name: sender
+          in: query
+          required: false
+          description: Filters messages sent from or received by this sender of your account, in E.164 format. The leading `+` is optional.
+          schema:
+            type: string
+            pattern: ^\+?\d{6,20}$
+          example: '+14155550100'
         - name: from
           in: query
           required: false
@@ -11042,7 +11099,7 @@ paths:
         - name: from_date
           in: query
           required: false
-          description: Filters messages to those created on or after the start of this date in your account's time zone, in `YYYY-MM-DD` format.
+          description: Filters messages to those created on or after the start of this date in your account's time zone, in `YYYY-MM-DD` format. Defaults to 30 days before `to_date`, or before now.
           schema:
             type: string
             format: date
@@ -11279,6 +11336,7 @@ paths:
         destructive: false
         openWorld: true
         expose: true
+        confirm: true
         toolset: messaging
       parameters: []
       requestBody:
@@ -14259,9 +14317,16 @@ components:
       properties:
         dids:
           type: array
-          description: List of phone numbers in the cart.
+          description: Phone numbers in the cart that are available for purchase.
           items:
             $ref: '#/components/schemas/AvailableNumber'
+        unavailable_dids:
+          type: array
+          description: Phone numbers in the cart that are no longer available for purchase. Retrieving the cart doesn't remove them. Empty when every number is available.
+          items:
+            type: string
+          example:
+            - '541139862175'
         doc_types:
           type: array
           items:
@@ -21617,6 +21682,30 @@ components:
             - $ref: '#/components/schemas/WhatsAppMessageError'
             - type: 'null'
           description: Why an `outbound` message wasn't delivered. It's `null` unless `status` is `undelivered`, `expired`, or `rejected`.
+        charge:
+          type:
+            - string
+            - 'null'
+          description: Amount charged for the message in USD, such as `0.0950`. `0.0000` means the message wasn't charged. `null` means no amount is recorded, for example while the message isn't delivered yet. Returned for outbound messages, and only to users who can view prices.
+          example: '0.0950'
+        category:
+          type:
+            - string
+            - 'null'
+          description: |-
+            WhatsApp conversation category the message is billed in, or `null` if it isn't known. Returned for outbound messages, and only to users who can view prices. Possible values:
+
+            - `marketing` — Promotions, offers, and other marketing content.
+            - `utility` — Transactional updates about an order or an account.
+            - `authentication` — One-time passcodes for verifying a user.
+            - `service` — Replies sent within a customer service window.
+          enum:
+            - marketing
+            - utility
+            - authentication
+            - service
+            - null
+          example: marketing
     WhatsAppMessageListResponse:
       title: WhatsAppMessageListResponse
       description: Returned by `whatsapp_messages_list`.
@@ -24612,6 +24701,23 @@ components:
                 instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
                 error_class: permanent
                 error_code: INVALID_REQUEST
+    WhatsAppPaymentRequiredResponse:
+      description: The available balance of your account doesn't cover the message rate. A sub-account uses the balance of its master account. Nothing is sent or charged. Top up the balance, then send again.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/WhatsAppProblem'
+          examples:
+            payment-required:
+              summary: The balance doesn't cover the message
+              value:
+                type: https://docs.wavix.com/errors/payment-required
+                title: Payment Required
+                status: 402
+                detail: Insufficient funds
+                instance: 3a525ca2-6909-4c72-9399-905adf7f3a74
+                error_class: permanent
+                error_code: PAYMENT_REQUIRED
   parameters:
     WhatsAppPageParam:
       name: page
